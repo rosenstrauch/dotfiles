@@ -1,0 +1,57 @@
+# freshshell.com
+#
+# Examples:
+#
+#   fresh twe4ked/dotfiles shell/functions.sh
+#   fresh jasoncodes/dotfiles aliases/rails.sh
+#   fresh jasoncodes/dotfiles config/tmux.conf --file
+#
+# See http://freshshell.com/readme for documentation.
+
+# fresh
+
+fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+
+# git
+#fresh config/gitconfig.$(hostname) --file=~/.gitconfig
+fresh config/gitconfig --file
+fresh config/gitignore --file
+
+# bin commands no locals yez
+fresh-options --bin
+  fresh freshshell/fresh bin/fresh
+  fresh freshshell/fresh-open bin/fresh-open
+fresh-options
+fresh sivel/speedtest-cli speedtest_cli.py --bin=~/bin/speedtest
+
+# xchat - solarized
+fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
+
+# Config
+fresh-options --file
+  fresh config/gemrc
+  fresh jasoncodes/dotfiles config/inputrc
+  fresh jasoncodes/dotfiles config/tmux.conf
+fresh-options
+
+#fresh henrik/dotfiles rubyrc --file=~/.pryrc --filter='cat; echo include RubyRC'
+
+fresh nojhan/liquidprompt liquidprompt
+fresh twe4ked/dotfiles bin/gh --bin
+
+# https://github.com/revans/bash_it customization
+fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
+fresh bash-it/custom.bash --file=~/.bash_it/lib/custom.bash
+
+#add drush https://github.com/drush-ops/drush/blob/master/examples/example.bashrc
+fresh bash-it/drush.bash --file=~/.bash_it/lib/custom.bash
+fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
+
+# ~/.drush config
+fresh config/drushrc.php --file=~/.drush/drushrc.php
+fresh config/drush.ini --file=~/.drush/drush.ini
+
+# https://github.com/carlhuda/janus customization for vim
+fresh janus/gvimrc.after --file
+fresh janus/vimrc.after --file
+

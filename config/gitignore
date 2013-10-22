@@ -1,0 +1,12 @@
+### /home/discipolo/.gitignore-boilerplates/Global/Linux.gitignore
+
+.*
+!.gitignore
+*~
+
+
+### /home/discipolo/.gitignore-boilerplates/Jekyll.gitignore
+
+_site/
+
+

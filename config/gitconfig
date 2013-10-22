@@ -1,0 +1,70 @@
+# Set your name and email with the following:
+#   git config -f ~/.gitconfig.local user.name John Appleseed
+#   git config -f ~/.gitconfig.local user.email me@example.com
+[user]
+
+
+[include]
+path = .gitconfig.local
+
+[color]
+ui = auto
+
+[color "diff"]
+commit = yellow reverse
+
+[core]
+excludesfile = ~/.gitignore
+
+[push]
+default = matching
+
+[merge]
+log = true
+conflictstyle = diff3
+tool = vimdiff
+
+[mergetool]
+prompt = false
+
+[rebase]
+autosquash = true
+
+[url "git@github.com:"]
+insteadOf = "gh:"
+pushInsteadOf = "github:"
+pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+insteadOf = "gst:"
+pushInsteadOf = "gist:"
+pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+insteadOf = "gist:"
+
+[url "git@heroku.com:"]
+insteadOf = "heroku:"
+
+[git-up "bundler"]
+check = true
+
+[rerere]
+enabled = 1
+
+[gitflow "branch"]
+master = master
+develop = develop
+
+[gitflow "prefix"]
+feature = feature/
+release = release/
+hotfix = hotfix/
+support = support/
+versiontag =
+
+[git-up "rebase"]
+arguments = --preserve-merges
