@@ -9,11 +9,11 @@
 - vim-gnome
 
 # Components
-http://dotfiles.github.io/
-https://github.com/revans/bash-it
-https://github.com/carlhuda/janus
-https://github.com/robbyrussell/oh-my-zsh
 
+- http://dotfiles.github.io/
+- https://github.com/revans/bash-it
+- https://github.com/carlhuda/janus
+- https://github.com/robbyrussell/oh-my-zsh
 
 # Installation using fresh
 
@@ -32,7 +32,9 @@ bash-it and janus are configured for login shells
 https://github.com/carlhuda/janus#customization
 
 ## Bash-it
+
 some example bash-it commands to finde your way around
+
     $ bash-it show plugins
     $ bash-it show aliases
     $ bash-it help plugin ruby
@@ -40,22 +42,27 @@ some example bash-it commands to finde your way around
     $ bash-it help aliases git
 
 ### bashit customizations
+
 > https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions
+
 - overridden mcd function
 
 ## CLI Binaries/scripts:
-### https://github.com/sivel/speedtest-cli
-    speedtest
-### Github    
-usage: gh [<command>] [<number>]
 
-The following commands are performed on the current project.
+[Speedtest]https://github.com/sivel/speedtest-cli
+    $ speedtest
+    
+### Github
 
-Available commands:
+    gh [<command>] [<number>]
 
-    -i --issues [<number>] Open issues, optionally pass a number to open a specific issue
-    -p --pulls [<number>]  Open pull requests, optionally pass a number to open a specific pull request
-    -w --wiki              Open wiki
+    The following commands are performed on the current project.
+
+    Available commands:
+
+        -i --issues [<number>] Open issues, optionally pass a number to open a specific issue
+        -p --pulls [<number>]  Open pull requests, optionally pass a number to open a specific pull request
+        -w --wiki              Open wiki
 
 ## Shell enhancements:
 ###Drush
@@ -67,8 +74,8 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 
 
 ### Bash
-> @see http://wiki.ubuntuusers.de/Bash 
-> @see https://github.com/jasoncodes/dotfiles/blob/master/config/inputrc
+@see http://wiki.ubuntuusers.de/Bash
+@see https://github.com/jasoncodes/dotfiles/blob/master/config/inputrc
 
 - By default up/down are bound to previous-history and next-history respectively. The following does the same but gives the extra functionality where if you type any text (or more accurately, if there is any text between the start of the line and the cursor), the subset of the history starting with that text is searched (like 4dos for e.g.). Note to get rid of a line just Ctrl-C
 - mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
@@ -77,6 +84,17 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 - clear the screen with ctrl-l
 - Includes system wide settings which are ignored by default if one has their own .inputrc
 
-### liquidprompt
-https://github.com/nojhan/liquidprompt
+### [liquidprompt](https://github.com/nojhan/liquidprompt)
+
 - just use it
+
+# TODO:
+
+##integrate more
+
+- https://github.com/simonwhitaker/gitignore-boilerplates
+
+##investigate alternatives
+
+- https://github.com/skwp/dotfiles
+- https://github.com/sorin-ionescu/prezto
