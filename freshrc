@@ -46,6 +46,9 @@ fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xcha
 # terminator solarized sample config
 fresh ghuntley/terminator-solarized config --file=~/.config/terminator/config-solarized
 
+# solarize vim
+fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/
+
 #shell
 fresh jamesottaway/dotfiles shell/npm
 fresh jamesottaway/dotfiles shell/options
@@ -67,17 +70,20 @@ fresh Lokaltog/powerline powerline --file=~/.local/lib/python/powerline/
 fresh Lokaltog/powerline font --file=~/.fonts/
 fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
 fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
+fresh Lokaltog/vim-powerline . --file=~/.janus/vim-powerline/
 
 #vim
+#fresh mislav/vimfiles . --file=~/.vim/
 fresh tpope/vim-pathogen . --file=~/.vim/bundle/vim-pathogen/ # whole repository
 fresh gmarik/vundle . --file=~/.vim/bundle/vundle/
-fresh mislav/vimfiles . --file=~/.vim
 # https://github.com/carlhuda/janus customization for vim
-#fresh carlhuda/janus . --file=~/.vim/janus/
-#fresh janus/gvimrc.after --file
-#fresh janus/vimrc.after --file
-
-
+fresh carlhuda/janus . --file=~/.vim/janus/
+fresh janus/gvimrc.after --file
+fresh janus/vimrc.after --file
+# more vim plugins
+fresh tomtom/tcomment_vim . --file=~/.janus/tcomment/
+fresh tpope/vim-eunuch . --file=~/.janus/vim-eunuch/
+fresh http://git.drupal.org/project/vimrc.git . --file=~/.janus/vim-drush/
 # ------------other frameworks
 fresh jamesottaway/dotfiles lib/oh-my-zsh
 fresh-options --file=oh-my-zsh --marker
@@ -104,6 +110,10 @@ fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
 
 fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=vendor/zsh-syntax-highlighting.zsh
 fresh zsh-users/zsh-syntax-highlighting highlighters --file=vendor/highlighters/
+
+
+fresh kid-icarus/oh-my-drush . --file=~/.oh-my-zsh/plugins/drush/
+
 
 # https://github.com/revans/bash_it customization
 fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
