@@ -111,7 +111,8 @@ fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
 fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=vendor/zsh-syntax-highlighting.zsh
 fresh zsh-users/zsh-syntax-highlighting highlighters --file=vendor/highlighters/
 
-
+#custom zsh plugins
+fresh shell/sublime3.zsh --file=~/.oh-my-zsh/custom
 fresh kid-icarus/oh-my-drush . --file=~/.oh-my-zsh/plugins/drush/
 
 
