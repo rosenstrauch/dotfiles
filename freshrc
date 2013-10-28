@@ -8,36 +8,96 @@
 #
 # See http://freshshell.com/readme for documentation.
 
-# fresh
 
-fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
-
-# git
-#fresh config/gitconfig.$(hostname) --file=~/.gitconfig
-fresh config/gitconfig --file
-fresh config/gitignore --file
-
-# bin commands no locals yez
+# bin commands
 fresh-options --bin
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
+  fresh sivel/speedtest-cli speedtest_cli.py
+  fresh twe4ked/dotfiles bin/gh
+  fresh clvv/fasd fasd
+  fresh decrement/dotfiles bin/dfm
 fresh-options
-fresh sivel/speedtest-cli speedtest_cli.py --bin=~/bin/speedtest
 
-# xchat - solarized
-fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
+
+# sack stuff - https://github.com/sampson-chen/sack
+fresh sampson-chen/sack sack --bin
+fresh sampson-chen/sack sag --bin
+fresh sampson-chen/sack sgrep --bin
+fresh sampson-chen/sack .sackrc
 
 # Config
 fresh-options --file
   fresh config/gemrc
   fresh jasoncodes/dotfiles config/inputrc
   fresh jasoncodes/dotfiles config/tmux.conf
+  fresh freshrc
+  fresh config/gitconfig
+  fresh config/gitignore
+  fresh config/zshrc
 fresh-options
+fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 
+#colors
+
+# xchat - solarized
+fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
+
+# terminator solarized sample config
+fresh ghuntley/terminator-solarized config --file=~/.config/terminator/config-solarized
+
+#shell
+fresh jamesottaway/dotfiles shell/npm
+fresh jamesottaway/dotfiles shell/options
+fresh jamesottaway/dotfiles shell/zsh/completion
+fresh jamesottaway/dotfiles shell/zsh/history
+fresh jamesottaway/dotfiles shell/zsh/options
+
+# rubyrc in .pyrc
 #fresh henrik/dotfiles rubyrc --file=~/.pryrc --filter='cat; echo include RubyRC'
 
+#shell helpers
+fresh rupa/z z.sh
 fresh nojhan/liquidprompt liquidprompt
-fresh twe4ked/dotfiles bin/gh --bin
+fresh simonwhitaker/gitignore-boilerplates gibo --bin
+# powerline: the ultimate statusline
+fresh Lokaltog/powerline scripts/powerline --bin
+fresh Lokaltog/powerline powerline --file=~/.local/lib/python/powerline/
+#fresh config/powerline --file=~/.config/powerline/
+fresh Lokaltog/powerline font --file=~/.fonts/
+fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
+fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
+
+#vim
+fresh tpope/vim-pathogen . --file=~/.vim/bundle/vim-pathogen/ # whole repository
+fresh gmarik/vundle . --file=~/.vim/bundle/vundle/
+
+# ------------other frameworks
+fresh jamesottaway/dotfiles lib/oh-my-zsh
+fresh-options --file=oh-my-zsh --marker
+  fresh robbyrussell/oh-my-zsh lib/aliases.zsh
+  fresh robbyrussell/oh-my-zsh lib/completion.zsh
+  fresh robbyrussell/oh-my-zsh lib/directories.zsh
+  fresh robbyrussell/oh-my-zsh lib/edit-command-line.zsh
+  fresh robbyrussell/oh-my-zsh lib/git.zsh
+  fresh robbyrussell/oh-my-zsh lib/key-bindings.zsh
+  fresh robbyrussell/oh-my-zsh lib/misc.zsh
+  fresh robbyrussell/oh-my-zsh lib/spectrum.zsh
+  fresh robbyrussell/oh-my-zsh lib/theme-and-appearance.zsh
+  fresh robbyrussell/oh-my-zsh themes/muse.zsh-theme
+fresh-options
+
+fresh jamesottaway/dotfiles lib/zsh-completion-fpath
+fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+fresh zsh-users/zsh-completions src/_brew --file=completion/_brew
+fresh zsh-users/zsh-completions src/_gem --file=completion/_gem
+fresh zsh-users/zsh-completions src/_heroku --file=completion/_heroku
+fresh zsh-users/zsh-completions src/_rails --file=completion/_rails
+fresh zsh-users/zsh-completions src/_ssh-copy-id --file=completion/_ssh-copy-id
+fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+
+fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=vendor/zsh-syntax-highlighting.zsh
+fresh zsh-users/zsh-syntax-highlighting highlighters --file=vendor/highlighters/
 
 # https://github.com/revans/bash_it customization
 fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
@@ -52,6 +112,7 @@ fresh config/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush.ini --file=~/.drush/drush.ini
 
 # https://github.com/carlhuda/janus customization for vim
+fresh carlhuda/janus . --file=~/.vim/janus/
 fresh janus/gvimrc.after --file
 fresh janus/vimrc.after --file
 

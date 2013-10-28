@@ -7,6 +7,8 @@
 - ruby
 - rake
 - vim-gnome
+- zsh
+- silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
 
 # Components
 
@@ -41,19 +43,14 @@ some example bash-it commands to finde your way around
     $ bash-it show alias
     $ bash-it help aliases git
 
-### bashit customizations
+### highlights
 
-> https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions
-
-- overridden mcd function
-
-## CLI Binaries/scripts:
-
-[Speedtest]https://github.com/sivel/speedtest-cli
-    $ speedtest
-    
-### Github
-
+for moving around the terminal
+- https://github.com/clvv/fasd 
+- https://github.com/rupa/z
+- [liquidprompt](https://github.com/nojhan/liquidprompt)
+- [Speedtest](https://github.com/sivel/speedtest-cli)
+- github commands
     gh [<command>] [<number>]
 
     The following commands are performed on the current project.
@@ -63,6 +60,14 @@ some example bash-it commands to finde your way around
         -i --issues [<number>] Open issues, optionally pass a number to open a specific issue
         -p --pulls [<number>]  Open pull requests, optionally pass a number to open a specific pull request
         -w --wiki              Open wiki
+
+### bashit customizations
+
+> https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions
+
+- overridden mcd function
+
+
 
 ## Shell enhancements:
 ###Drush
@@ -84,9 +89,6 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 - clear the screen with ctrl-l
 - Includes system wide settings which are ignored by default if one has their own .inputrc
 
-### [liquidprompt](https://github.com/nojhan/liquidprompt)
-
-- just use it
 
 # TODO:
 
@@ -95,6 +97,10 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 - https://github.com/simonwhitaker/gitignore-boilerplates
 
 ##investigate alternatives
-
+- https://github.com/webflo/drush_zsh_completion
+- https://github.com/drush-ops/drush/blob/master/README.md#post-install
 - https://github.com/skwp/dotfiles
 - https://github.com/sorin-ionescu/prezto
+- https://github.com/Lokaltog/powerline
+# gibo
+fresh simonwhitaker/gitignore-boilerplates gibo --bin

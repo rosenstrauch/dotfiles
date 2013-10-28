@@ -2,7 +2,7 @@ require 'rake'
 require 'erb'
 
 desc "install the dot files into user's home directory"
-task :install do
+task :default do
   install_oh_my_zsh
   switch_to_zsh
   install_bashit
