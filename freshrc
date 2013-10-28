@@ -36,7 +36,7 @@ fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
 # terminator solarized sample config
-fresh ghuntley/terminator-solarized config --file=~/.config/terminator/config-solarized
+fresh config/terminator/config-terminator --file=~/.config/terminator/config
 
 # solarize vim
 fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/
