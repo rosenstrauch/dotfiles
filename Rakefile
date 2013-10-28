@@ -14,17 +14,18 @@ end
 def terminal_profiles
   unless File.exist?(File.join(ENV['HOME'], ".fresh/build/gnome-terminal.xml"))
     puts "no profiles to import"
+    exit
   end
 
   print "install terminal profiles? (recommended) [ynq] "
   case $stdin.gets.chomp
   when 'y'
     puts "importing xml"
-    system %Q{gconftool-2 --load '~/.fresh/build/gnome-terminal.xml'}
+    system %Q{gconftool-2 --load ~/.fresh/build/gnome-terminal-conf.xml}
   when 'q'
     exit
   else
-    puts "skipping zsh"
+    puts "skipping terminal profiles"
   end
 
 end
@@ -65,6 +66,7 @@ def install_oh_my_zsh
     end
   end
 end
+
 def install_bashit
   if File.exist?(File.join(ENV['HOME'], ".bashit"))
     puts "found ~/.bash-it"
@@ -83,10 +85,10 @@ def install_bashit
     end
   end
 end
+
 def install_janus
-  if File.exist?(File.join(ENV['HOME'], ".janus"))
-    puts "found ~/.vim"
-    system %Q{rake}
+  if File.exist?(File.join(ENV['HOME'], ".vim"))
+    puts "found ~/.vim, please run rake inside it"
   else
     print "install janus? [ynq] "
     case $stdin.gets.chomp

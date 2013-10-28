@@ -50,8 +50,8 @@ fresh jamesottaway/dotfiles shell/zsh/options
 
 # rubyrc in .pyrc
 #fresh henrik/dotfiles rubyrc --file=~/.pryrc --filter='cat; echo include RubyRC'
-# gnome terminal profiles
-fresh hdni/dotfiles gnome-terminal.xml
+# gnome terminal profiles (exported with $ gconftool-2 --dump '/apps/gnome-terminal' > gnome-terminal-conf.xml )
+fresh gnome-terminal-conf.xml --file
 
 
 #shell helpers
