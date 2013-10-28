@@ -71,6 +71,12 @@ fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.c
 #vim
 fresh tpope/vim-pathogen . --file=~/.vim/bundle/vim-pathogen/ # whole repository
 fresh gmarik/vundle . --file=~/.vim/bundle/vundle/
+fresh mislav/vimfiles . --file=~/.vim
+# https://github.com/carlhuda/janus customization for vim
+#fresh carlhuda/janus . --file=~/.vim/janus/
+#fresh janus/gvimrc.after --file
+#fresh janus/vimrc.after --file
+
 
 # ------------other frameworks
 fresh jamesottaway/dotfiles lib/oh-my-zsh
@@ -111,8 +117,5 @@ fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
 fresh config/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush.ini --file=~/.drush/drush.ini
 
-# https://github.com/carlhuda/janus customization for vim
-fresh carlhuda/janus . --file=~/.vim/janus/
-fresh janus/gvimrc.after --file
-fresh janus/vimrc.after --file
+
 
