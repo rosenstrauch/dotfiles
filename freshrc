@@ -25,6 +25,7 @@ fresh-options --file
   fresh jasoncodes/dotfiles config/inputrc
   fresh jasoncodes/dotfiles config/tmux.conf
   fresh freshrc
+  fresh conkyrc
   fresh config/gitconfig
   fresh config/gitignore
 fresh-options
