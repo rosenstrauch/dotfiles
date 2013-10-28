@@ -1,13 +1,4 @@
-# freshshell.com
-#
-# Examples:
-#
-#   fresh twe4ked/dotfiles shell/functions.sh
-#   fresh jasoncodes/dotfiles aliases/rails.sh
-#   fresh jasoncodes/dotfiles config/tmux.conf --file
-#
 # See http://freshshell.com/readme for documentation.
-
 
 # bin commands
 fresh-options --bin
@@ -17,6 +8,8 @@ fresh-options --bin
   fresh twe4ked/dotfiles bin/gh
   fresh clvv/fasd fasd
   fresh decrement/dotfiles bin/dfm
+  fresh git/git contrib/diff-highlight/diff-highlight
+  fresh https://gist.github.com/1209316.git gitio
 fresh-options
 
 
@@ -34,7 +27,6 @@ fresh-options --file
   fresh freshrc
   fresh config/gitconfig
   fresh config/gitignore
-  fresh config/zshrc
 fresh-options
 fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 
@@ -58,6 +50,9 @@ fresh jamesottaway/dotfiles shell/zsh/options
 
 # rubyrc in .pyrc
 #fresh henrik/dotfiles rubyrc --file=~/.pryrc --filter='cat; echo include RubyRC'
+# gnome terminal profiles
+fresh hdni/dotfiles gnome-terminal.xml
+
 
 #shell helpers
 fresh rupa/z z.sh
@@ -71,6 +66,9 @@ fresh Lokaltog/powerline font --file=~/.fonts/
 fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
 fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
 fresh Lokaltog/vim-powerline . --file=~/.janus/vim-powerline/
+fresh Lokaltog/powerline-fonts . --file=~/.powerline-fonts/
+
+
 
 #vim
 #fresh mislav/vimfiles . --file=~/.vim/
@@ -85,19 +83,33 @@ fresh tomtom/tcomment_vim . --file=~/.janus/tcomment/
 fresh tpope/vim-eunuch . --file=~/.janus/vim-eunuch/
 fresh http://git.drupal.org/project/vimrc.git . --file=~/.janus/vim-drush/
 # ------------other frameworks
-fresh jamesottaway/dotfiles lib/oh-my-zsh
-fresh-options --file=oh-my-zsh --marker
-  fresh robbyrussell/oh-my-zsh lib/aliases.zsh
-  fresh robbyrussell/oh-my-zsh lib/completion.zsh
-  fresh robbyrussell/oh-my-zsh lib/directories.zsh
-  fresh robbyrussell/oh-my-zsh lib/edit-command-line.zsh
-  fresh robbyrussell/oh-my-zsh lib/git.zsh
-  fresh robbyrussell/oh-my-zsh lib/key-bindings.zsh
-  fresh robbyrussell/oh-my-zsh lib/misc.zsh
-  fresh robbyrussell/oh-my-zsh lib/spectrum.zsh
-  fresh robbyrussell/oh-my-zsh lib/theme-and-appearance.zsh
-  fresh robbyrussell/oh-my-zsh themes/muse.zsh-theme
+#fresh jamesottaway/dotfiles lib/oh-my-zsh
+
+# .zshrc build
+fresh-options --file=~/.zshrc --marker
+  fresh shell/zsh/zshrc
 fresh-options
+
+# .zlogin build
+fresh-options --file=~/.zlogin --marker
+  fresh shell/zsh/zlogin
+fresh-options
+
+# oh-my-zsh
+fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
+
+#fresh-options --file=oh-my-zsh --marker
+#  fresh robbyrussell/oh-my-zsh lib/aliases.zsh
+#  fresh robbyrussell/oh-my-zsh lib/completion.zsh
+#  fresh robbyrussell/oh-my-zsh lib/directories.zsh
+#  fresh robbyrussell/oh-my-zsh lib/edit-command-line.zsh
+#  fresh robbyrussell/oh-my-zsh lib/git.zsh
+#  fresh robbyrussell/oh-my-zsh lib/key-bindings.zsh
+#  fresh robbyrussell/oh-my-zsh lib/misc.zsh
+#  fresh robbyrussell/oh-my-zsh lib/spectrum.zsh
+#  fresh robbyrussell/oh-my-zsh lib/theme-and-appearance.zsh
+#  fresh robbyrussell/oh-my-zsh themes/muse.zsh-theme
+#fresh-options
 
 fresh jamesottaway/dotfiles lib/zsh-completion-fpath
 fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh

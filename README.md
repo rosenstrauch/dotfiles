@@ -9,6 +9,7 @@
 - vim-gnome
 - zsh
 - silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
+- terminator
 
 # Components
 
@@ -16,6 +17,7 @@
 - https://github.com/revans/bash-it
 - https://github.com/carlhuda/janus
 - https://github.com/robbyrussell/oh-my-zsh
+- https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 
 # Installation using fresh
 

@@ -7,8 +7,27 @@ task :default do
   switch_to_zsh
   install_bashit
   install_janus
+  terminal_profiles
 end
 
+
+def terminal_profiles
+  unless File.exist?(File.join(ENV['HOME'], ".fresh/build/gnome-terminal.xml"))
+    puts "no profiles to import"
+  end
+
+  print "install terminal profiles? (recommended) [ynq] "
+  case $stdin.gets.chomp
+  when 'y'
+    puts "importing xml"
+    system %Q{gconftool-2 --load '~/.fresh/build/gnome-terminal.xml'}
+  when 'q'
+    exit
+  else
+    puts "skipping zsh"
+  end
+
+end
 
 def switch_to_zsh
   if ENV["SHELL"] =~ /zsh/
