@@ -10,44 +10,54 @@ fresh-options --bin
   fresh decrement/dotfiles bin/dfm
   fresh git/git contrib/diff-highlight/diff-highlight
   fresh https://gist.github.com/1209316.git gitio
+  #fresh pengwynn/dotfiles bin/gitio
+  fresh pengwynn/dotfiles bin/notes # notes: view notes in a file (ie todo/xxx/fixme)
 fresh-options
 
+# todo.txt: simple todo list
+fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
+fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
+fresh config/todo.cfg --file
 
 # sack stuff - https://github.com/sampson-chen/sack
 fresh sampson-chen/sack sack --bin
 fresh sampson-chen/sack sag --bin
 fresh sampson-chen/sack sgrep --bin
-fresh sampson-chen/sack .sackrc
+fresh sampson-chen/sack .sackrc --file
 
 # Config
 fresh-options --file
   fresh config/gemrc
-  fresh jasoncodes/dotfiles config/inputrc
-  fresh jasoncodes/dotfiles config/tmux.conf
-  fresh freshrc
+  #fresh jasoncodes/dotfiles config/inputrc
+  fresh inputrc
+  fresh bashrc
+  fresh config/tmux.conf
+  #fresh freshrc
   fresh conkyrc
   fresh config/gitconfig
   fresh config/gitignore
 fresh-options
-fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
+
+# more tmux
+#fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 
 #colors
 
 # xchat - solarized
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
-# terminator solarized sample config
+# terminator config
 fresh config/terminator/config-terminator --file=~/.config/terminator/config
 
 # solarize vim
 fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/
 
 #shell
-fresh jamesottaway/dotfiles shell/npm
-fresh jamesottaway/dotfiles shell/options
-fresh jamesottaway/dotfiles shell/zsh/completion
-fresh jamesottaway/dotfiles shell/zsh/history
-fresh jamesottaway/dotfiles shell/zsh/options
+#fresh jamesottaway/dotfiles shell/npm
+#fresh jamesottaway/dotfiles shell/options
+#fresh jamesottaway/dotfiles shell/zsh/completion
+#fresh jamesottaway/dotfiles shell/zsh/history
+#fresh jamesottaway/dotfiles shell/zsh/options
 
 # rubyrc in .pyrc
 #fresh henrik/dotfiles rubyrc --file=~/.pryrc --filter='cat; echo include RubyRC'
@@ -56,20 +66,20 @@ fresh gnome-terminal-conf.xml --file
 
 
 #shell helpers
-fresh rupa/z z.sh
-fresh nojhan/liquidprompt liquidprompt
-fresh simonwhitaker/gitignore-boilerplates gibo --bin
+#fresh rupa/z z.sh
+fresh nojhan/liquidprompt . --file=~/.liquidprompt/
+fresh config/liquidpromptrc --file=.config/liquidpromptrc
+#fresh simonwhitaker/gitignore-boilerplates gibo --bin
+
 # powerline: the ultimate statusline
-fresh Lokaltog/powerline scripts/powerline --bin
-fresh Lokaltog/powerline powerline --file=~/.local/lib/python/powerline/
+#fresh Lokaltog/powerline scripts/powerline --bin
+#fresh Lokaltog/powerline powerline --file=~/.local/lib/python/powerline/
 #fresh config/powerline --file=~/.config/powerline/
-fresh Lokaltog/powerline font --file=~/.fonts/
-fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
-fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
-fresh Lokaltog/vim-powerline . --file=~/.janus/vim-powerline/
-fresh Lokaltog/powerline-fonts . --file=~/.powerline-fonts/
-
-
+#fresh Lokaltog/powerline font --file=~/.fonts/
+#fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
+#fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
+#fresh Lokaltog/vim-powerline . --file=~/.janus/vim-powerline/
+#fresh Lokaltog/powerline-fonts . --file=~/.powerline-fonts/
 
 #vim
 #fresh mislav/vimfiles . --file=~/.vim/
@@ -112,34 +122,35 @@ fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
 #  fresh robbyrussell/oh-my-zsh themes/muse.zsh-theme
 #fresh-options
 
-fresh jamesottaway/dotfiles lib/zsh-completion-fpath
-fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
-fresh zsh-users/zsh-completions src/_brew --file=completion/_brew
-fresh zsh-users/zsh-completions src/_gem --file=completion/_gem
-fresh zsh-users/zsh-completions src/_heroku --file=completion/_heroku
-fresh zsh-users/zsh-completions src/_rails --file=completion/_rails
-fresh zsh-users/zsh-completions src/_ssh-copy-id --file=completion/_ssh-copy-id
-fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+#fresh jamesottaway/dotfiles lib/zsh-completion-fpath
+#fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=oh-my-zsh/completion/_fresh
+#fresh zsh-users/zsh-completions src/_brew --file=oh-my-zsh/completion/_brew
+#fresh zsh-users/zsh-completions src/_gem --file=oh-my-zsh/completion/_gem
+#fresh zsh-users/zsh-completions src/_heroku --file=oh-my-zsh/completion/_heroku
+#fresh zsh-users/zsh-completions src/_rails --file=oh-my-zsh/completion/_rails
+#fresh zsh-users/zsh-completions src/_ssh-copy-id --file=oh-my-zsh/completion/_ssh-copy-id
+#fresh zsh-users/zsh-completions src/_virtualbox --file=oh-my-zsh/completion/_virtualbox
 
-fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=vendor/zsh-syntax-highlighting.zsh
-fresh zsh-users/zsh-syntax-highlighting highlighters --file=vendor/highlighters/
+#fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=oh-my-zsh/vendor/zsh-syntax-highlighting.zsh
+#fresh zsh-users/zsh-syntax-highlighting highlighters --file=oh-my-zsh/vendor/highlighters/
 
 #custom zsh plugins
-fresh shell/sublime3.zsh --file=~/.oh-my-zsh/custom
-fresh kid-icarus/oh-my-drush . --file=~/.oh-my-zsh/plugins/drush/
-
+fresh shell/sublime3.zsh --file=oh-my-zsh/custom/sublime3.zsh
+fresh shell/echoaliases.zsh --file=oh-my-zsh/custom/echoaliases.zsh
+fresh kid-icarus/oh-my-drush . --file=oh-my-zsh/plugins/drush/
 
 # https://github.com/revans/bash_it customization
-fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
-fresh bash-it/custom.bash --file=~/.bash_it/lib/custom.bash
+fresh revans/bash-it . --file=~/.bash_it/
+fresh bash-it/custom.aliases.bash --file=bash_it/aliases/custom.aliases.bash
+fresh bash-it/custom.bash --file=bash_it/lib/custom.bash
+fresh bash-it/custom.plugins.bash --file=bash_it/plugins/custom.plugins.bash
+fresh bash-it/convertHTML5.bash --file=bash_it/custom/convertHTML5.bash
 
 #add drush https://github.com/drush-ops/drush/blob/master/examples/example.bashrc
-fresh bash-it/drush.bash --file=~/.bash_it/lib/custom.bash
-fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
+fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
+fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
+
 
 # ~/.drush config
 fresh config/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush.ini --file=~/.drush/drush.ini
-
-
-

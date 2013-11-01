@@ -30,6 +30,19 @@
     cursor_color = "#002b36"
 
 [layouts]
+  [[work]]
+    [[[child0]]]
+      position = 50:24
+      type = Window
+      order = 0
+      parent = ""
+      size = 735, 451
+    [[[terminal1]]]
+      profile = default
+      command = cd work
+      type = Terminal
+      order = 0
+      parent = child0
   [[default]]
     [[[child1]]]
       type = Terminal

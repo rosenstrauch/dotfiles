@@ -1,0 +1,66 @@
+# /etc/inputrc - global inputrc for libreadline
+# See readline(3readline) and `info rluserman' for more information.
+# http://wiki.ubuntuusers.de/Bash
+# https://wiki.ubuntu.com/Spec/EnhancedBash
+
+
+$include /etc/inputrc
+
+
+# vi mode everywhere :)
+set editing-mode vi
+
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+# To allow the use of 8bit-characters like the german umlauts, comment out
+# "set convert-meta off" below. However this supposedly makes the meta key not work as a meta key,
+# which is annoying to those which don't need to type in 8-bit characters.
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Use Alt/Meta + Delete to delete the preceding word
+"\e[3;3~": kill-word
+
+
+$if Bash
+  #do history expansion when space entered
+  Space: magic-space
+$endif
+
+
+# see /usr/share/doc/bash/inputrc.arrows for other codes of arrow keys
+
+#completion
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# List all matches in case multiple possible completions are possible
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Use the text that has already been typed as the prefix for searching through
+# commands (i.e. more intelligent Up/Down behavior)
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# Show all autocomplete results at once
+set page-completions off
+
+# If there are more than 200 possible completions for a word, ask to show them all
+set completion-query-items 200
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
