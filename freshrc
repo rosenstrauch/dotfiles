@@ -12,6 +12,7 @@ fresh-options --bin
   fresh https://gist.github.com/1209316.git gitio
   #fresh pengwynn/dotfiles bin/gitio
   fresh pengwynn/dotfiles bin/notes # notes: view notes in a file (ie todo/xxx/fixme)
+  fresh bin/\*
 fresh-options
 
 # todo.txt: simple todo list
@@ -39,7 +40,7 @@ fresh-options --file
 fresh-options
 
 # more tmux
-#fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
+fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 
 #colors
 
@@ -68,18 +69,18 @@ fresh gnome-terminal-conf.xml --file
 #shell helpers
 #fresh rupa/z z.sh
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
-fresh config/liquidpromptrc --file=.config/liquidpromptrc
-#fresh simonwhitaker/gitignore-boilerplates gibo --bin
+fresh config/liquidpromptrc --file=~/.config/liquidpromptrc
+fresh simonwhitaker/gitignore-boilerplates gibo --bin
 
 # powerline: the ultimate statusline
-#fresh Lokaltog/powerline scripts/powerline --bin
-#fresh Lokaltog/powerline powerline --file=~/.local/lib/python/powerline/
+fresh Lokaltog/powerline scripts/powerline --bin
+fresh Lokaltog/powerline powerline --file=~/.local/lib/python/powerline/
 #fresh config/powerline --file=~/.config/powerline/
-#fresh Lokaltog/powerline font --file=~/.fonts/
-#fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
-#fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
-#fresh Lokaltog/vim-powerline . --file=~/.janus/vim-powerline/
-#fresh Lokaltog/powerline-fonts . --file=~/.powerline-fonts/
+fresh Lokaltog/powerline font --file=~/.fonts/
+fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
+fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
+fresh Lokaltog/vim-powerline . --file=~/.janus/vim-powerline/
+fresh Lokaltog/powerline-fonts . --file=~/.powerline-fonts/
 
 #vim
 #fresh mislav/vimfiles . --file=~/.vim/
@@ -144,7 +145,7 @@ fresh revans/bash-it . --file=~/.bash_it/
 fresh bash-it/custom.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 fresh bash-it/custom.bash --file=bash_it/lib/custom.bash
 fresh bash-it/custom.plugins.bash --file=bash_it/plugins/custom.plugins.bash
-fresh bash-it/convertHTML5.bash --file=bash_it/custom/convertHTML5.bash
+
 
 #add drush https://github.com/drush-ops/drush/blob/master/examples/example.bashrc
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash

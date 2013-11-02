@@ -68,16 +68,16 @@ def install_oh_my_zsh
 end
 
 def install_bashit
-  if File.exist?(File.join(ENV['HOME'], ".bashit"))
-    puts "found ~/.bash-it"
+  if File.exist?(File.join(ENV['HOME'], ".bash_it"))
+    puts "found ~/.bash_it"
     system %Q{upgrade_bashit}
   else
     print "install bashit? [ynq] "
     case $stdin.gets.chomp
     when 'y'
       puts "installing bashit"
-      system %Q{git clone https://github.com/revans/bash-it.git "$HOME/.bash-it"}
-      system %Q{sh '~/.bash-it/install.sh'}
+      system %Q{git clone https://github.com/revans/bash-it.git "$HOME/.bash_it"}
+      system %Q{sh '~/.bash_it/install.sh'}
     when 'q'
       exit
     else

@@ -9,7 +9,7 @@ then
     duration=$(ffmpeg -i "$1" 2>&1 | grep Duration | awk '{print $2}' | tr -d ,)
     minutes=${duration%:*}
     hours=${minutes%:*}
-    minutes=${minutes##*:}
+    minutes=10#${minutes##*:}
     seconds=${duration##*:}
     seconds=${seconds%.*}
 
