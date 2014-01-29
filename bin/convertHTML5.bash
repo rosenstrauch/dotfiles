@@ -32,7 +32,7 @@ then
     echo "Finished webm"
 
     echo "Converting $filename to h264"
-    ffmpeg -i "$1" -acodec libfaac -ab 96k -vcodec libx264 -level 21 -refs 2 -b 345k -bt 345k -threads 0 "$directory/$filename.mp4"
+    ffmpeg -i "$1" -acodec libfaac -ab 96k -vcodec libx264 slow -vpre baseline -level 21 -refs 2 -b 345k -bt -threads 0 "$directory/$filename.mp4"
     echo "Finished h264"
 
     echo "Writing HTML..."

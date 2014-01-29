@@ -7,7 +7,7 @@ fresh-options --bin
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh twe4ked/dotfiles bin/gh
   fresh clvv/fasd fasd
-  fresh decrement/dotfiles bin/dfm
+  #fresh decrement/dotfiles bin/dfm
   fresh git/git contrib/diff-highlight/diff-highlight
   fresh https://gist.github.com/1209316.git gitio
   #fresh pengwynn/dotfiles bin/gitio
@@ -15,10 +15,17 @@ fresh-options --bin
   fresh bin/\*
 fresh-options
 
+#Helpful CLI Apps
+#--------------------
+
+
 # todo.txt: simple todo list
 fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
 fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
 fresh config/todo.cfg --file
+
+# gnome shell calendar
+fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/bin/gnome-shell-google-calendar
 
 # sack stuff - https://github.com/sampson-chen/sack
 fresh sampson-chen/sack sack --bin
