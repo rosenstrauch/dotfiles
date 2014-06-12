@@ -5,7 +5,7 @@ fresh-options --bin
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
   fresh sivel/speedtest-cli speedtest_cli.py
-  fresh twe4ked/dotfiles bin/gh
+  
   fresh clvv/fasd fasd
   #fresh decrement/dotfiles bin/dfm
   fresh git/git contrib/diff-highlight/diff-highlight
@@ -18,6 +18,8 @@ fresh-options
 #Helpful CLI Apps
 #--------------------
 
+# Commandline Fu installed via rakefile http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
+fresh samirahmed/fu . --file=~/fu/
 
 # todo.txt: simple todo list
 fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
@@ -25,7 +27,9 @@ fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
 fresh config/todo.cfg --file
 
 # gnome shell calendar
-fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/bin/gnome-shell-google-calendar
+#fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/gnome-shell-google-calendar/gnome-shell-google-calendar.py
+#fresh vintitres/gnome-shell-google-calendar . --file=~/gnome-shell-google-calendar/
+
 
 # sack stuff - https://github.com/sampson-chen/sack
 fresh sampson-chen/sack sack --bin
@@ -116,9 +120,10 @@ fresh-options
 
 # oh-my-zsh
 fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
+fresh zsh/aliases.zsh --file=oh-my-zsh/lib/aliases.zsh --marker
 
 #fresh-options --file=oh-my-zsh --marker
-#  fresh robbyrussell/oh-my-zsh lib/aliases.zsh
+#  fresh zsh/aliases.zsh
 #  fresh robbyrussell/oh-my-zsh lib/completion.zsh
 #  fresh robbyrussell/oh-my-zsh lib/directories.zsh
 #  fresh robbyrussell/oh-my-zsh lib/edit-command-line.zsh
@@ -146,7 +151,6 @@ fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
 fresh shell/sublime3.zsh --file=oh-my-zsh/custom/sublime3.zsh
 fresh shell/echoaliases.zsh --file=oh-my-zsh/custom/echoaliases.zsh
 fresh kid-icarus/oh-my-drush . --file=oh-my-zsh/plugins/drush/
-
 # https://github.com/revans/bash_it customization
 fresh revans/bash-it . --file=~/.bash_it/
 fresh bash-it/custom.aliases.bash --file=bash_it/aliases/custom.aliases.bash

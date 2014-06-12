@@ -1,6 +1,13 @@
 require 'rake'
 require 'erb'
 
+# Installs things that fresh cannot handle because they need to be built
+# OhMyZSH for shell
+# Janus for Vim
+# Bashit for bash
+# Terminal Profiles
+
+
 desc "install the dot files into user's home directory"
 task :default do
   install_oh_my_zsh
@@ -9,6 +16,8 @@ task :default do
   install_janus
   terminal_profiles
 end
+
+
 
 
 def terminal_profiles

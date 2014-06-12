@@ -50,3 +50,6 @@ source ~/.fresh/build/shell.sh
 
 # Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/discipolo/.rvm/bin
+
+. ~/oh-my-zsh/aliases.zsh
+
