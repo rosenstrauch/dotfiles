@@ -43,13 +43,13 @@ TERM="xterm-256color" # Fixes color issues
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git echoaliases drush command-not-found vundle vagrant tmux symfony2 sublime ssh-agent rvm ruby nvm npm nanoc git-flow fasd composer colorize bundler)
+plugins=(bower cap  common-aliases docker echoaliases drush command-not-found git gitfast git-extras git-flow gem vundle vagrant tmux symfony2 sublime ssh-agent rvm ruby nvm npm nanoc git-flow fasd composer colorize bundler)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.fresh/build/shell.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/discipolo/.rvm/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/discipolo/.rvm/bin:~/.fresh/source/rosenstrauch/git-achievements:~/bin
 
 . ~/oh-my-zsh/aliases.zsh
 

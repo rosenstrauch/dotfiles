@@ -8,6 +8,31 @@ case $- in
       *) return;;
 esac
 
+########
+# PATH #
+########
+
+# Add /usr/local/bin to PATH.
+export PATH="/usr/local/bin:${PATH}"
+export PATH="/usr/local/lib:${PATH}"
+
+#######
+# GIT #
+#######
+
+# Enable autocompletion for Git.
+# Requires /git/contrib/completion/git-completion.bash to be location in home directory.
+source ~/.git-completion.bash
+
+########
+# RUBY #
+########
+
+# Load RVM into a shell session *as a function*
+[[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm"
+
+
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -88,6 +113,10 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias grep='grep --colour=auto'
+alias ls="ls -laF"
+alias ps="ps aux"
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -112,6 +141,21 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+# In the same vein, keep environment variables defined
+# in a separate file.
+if [ -f ~/.bash_env_vars ]; then
+    . ~/.bash_env_vars
+fi
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 

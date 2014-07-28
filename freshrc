@@ -5,18 +5,29 @@ fresh-options --bin
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
   fresh sivel/speedtest-cli speedtest_cli.py
-  
   fresh clvv/fasd fasd
-  #fresh decrement/dotfiles bin/dfm
   fresh git/git contrib/diff-highlight/diff-highlight
   fresh https://gist.github.com/1209316.git gitio
-  #fresh pengwynn/dotfiles bin/gitio
-  fresh pengwynn/dotfiles bin/notes # notes: view notes in a file (ie todo/xxx/fixme)
   fresh bin/\*
 fresh-options
 
+# Gui apps
+
+fresh rnons/mikidown . --file=~/mikidown/
+fresh rnons/mikidown mikidown.py --bin
+
+# sublimetext 3 plugin for xiki, TODO: fresh needs to pull correct branch
+fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/User/SublimeXiki/ 
+
 #Helpful CLI Apps
 #--------------------
+
+# xiki installed via rvm an rakefile
+fresh trogdoro/xiki . --file=~/.src/xiki/
+
+# Git achievements
+fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/
+#fresh rosenstrauch/git-achievements git-achievements --bin
 
 # Commandline Fu installed via rakefile http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
 fresh samirahmed/fu . --file=~/fu/
@@ -40,7 +51,6 @@ fresh sampson-chen/sack .sackrc --file
 # Config
 fresh-options --file
   fresh config/gemrc
-  #fresh jasoncodes/dotfiles config/inputrc
   fresh inputrc
   fresh bashrc
   fresh config/tmux.conf
@@ -166,3 +176,11 @@ fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 # ~/.drush config
 fresh config/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush.ini --file=~/.drush/drush.ini
+
+
+# rvm 
+# Gems in the global gemset, will be added to the global gemset in every new Ruby you install. rake, rdoc and bundler are good examples of handy global gems. The gems in the default gemset are the gems included in every newly created gemset.
+
+fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
+fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
+fresh config/rvm/.rvmrc --file=~/.rvmrc

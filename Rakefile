@@ -15,6 +15,7 @@ task :default do
   install_bashit
   install_janus
   terminal_profiles
+  xiki_rvm
 end
 
 
@@ -93,6 +94,28 @@ def install_bashit
       puts "skipping bashit, you will need to change ~/.bash_profile"
     end
   end
+end
+
+
+
+def xiki_rvm
+  if File.exist?(File.join(ENV['HOME'], ".rvm"))
+    puts "not using rvm, quitting"
+    exit
+  end
+
+  print "install xiki? (recommended) [ynq] "
+  case $stdin.gets.chomp
+  when 'y'
+    puts "running bundle"
+    system %Q{bundle}
+    ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki
+  when 'q'
+    exit
+  else
+    puts "skipping xiki"
+  end
+
 end
 
 def install_janus
