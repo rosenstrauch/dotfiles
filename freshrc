@@ -26,8 +26,8 @@ fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --
 fresh trogdoro/xiki . --file=~/.src/xiki/
 
 # Git achievements
-fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/
-#fresh rosenstrauch/git-achievements git-achievements --bin
+fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=18286bd
+
 
 # Commandline Fu installed via rakefile http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
 fresh samirahmed/fu . --file=~/fu/
