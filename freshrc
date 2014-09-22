@@ -62,6 +62,19 @@ fresh-options
 # Prezto zsh config
 fresh sorin-ionescu/prezto . --file=~/.zprezto/
 
+
+fresh_after_build() {
+  if [ -z "${updated_submodules+1}" ]; then
+    cd ~/.fresh/source/sorin-ionescu/prezto/ && git pull && git submodule update --init --recursive
+    export updated_submodules=0
+  fi
+  if [ "$updated_submodules" -eq 0 ]; then
+    export updated_submodules=$[updated_submodules+1]
+    ~/bin/fresh
+  fi
+  unset updated_submodules
+}
+
 # Config
 
 fresh zsh/\* --file
