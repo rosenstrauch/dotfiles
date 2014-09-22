@@ -1,0 +1,26 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+# Source fresh shell
+if [[ -s "${ZDOTDIR:-$HOME}/.fresh/build/shell.sh" ]]; then
+source ~/.fresh/build/shell.sh
+fi
+
+
+
+# I've copied my aliases from ohmyzsh, need to check for overlaps with those defined by prezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/aliases.zsh" ]]; then
+source "${ZDOTDIR:-$HOME}/.zprezto/aliases.zsh"
+fi
+

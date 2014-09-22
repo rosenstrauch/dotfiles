@@ -10,7 +10,7 @@ require 'erb'
 
 desc "install the dot files into user's home directory"
 task :default do
-
+  install_oh_my_zsh
   switch_to_zsh
   install_bashit
   install_janus
@@ -109,7 +109,7 @@ def xiki_rvm
   when 'y'
     puts "running bundle"
     system %Q{bundle}
-    system %Q{ ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki}
+    ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki
   when 'q'
     exit
   else

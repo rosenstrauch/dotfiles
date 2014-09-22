@@ -6,7 +6,6 @@ fresh-options --bin
   fresh freshshell/fresh-open bin/fresh-open
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh clvv/fasd fasd
-  fresh git/git contrib/diff-highlight/diff-highlight
   fresh https://gist.github.com/1209316.git gitio
   fresh bin/\*
 fresh-options
@@ -26,7 +25,7 @@ fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --
 fresh trogdoro/xiki . --file=~/.src/xiki/
 
 # Git achievements
-fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=18286bd
+fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=048e3a1751f6516c770c3a1a14356ae00b67fc2a
 
 
 # Commandline Fu installed via rakefile http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
@@ -60,6 +59,14 @@ fresh-options --file
   fresh config/gitignore
 fresh-options
 
+# Prezto zsh config
+fresh sorin-ionescu/prezto . --file=~/.zprezto/
+
+# Config
+
+fresh zsh/\* --file
+
+
 # more tmux
 fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 
@@ -68,40 +75,24 @@ fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 # xchat - solarized
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
-# terminator config
-fresh config/terminator/config-terminator --file=~/.config/terminator/config
+
+#use own terminator config but keep it editable https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files
+ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
 
 # solarize vim
 fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/
 
-#shell
-#fresh jamesottaway/dotfiles shell/npm
-#fresh jamesottaway/dotfiles shell/options
-#fresh jamesottaway/dotfiles shell/zsh/completion
-#fresh jamesottaway/dotfiles shell/zsh/history
-#fresh jamesottaway/dotfiles shell/zsh/options
 
-# rubyrc in .pyrc
-#fresh henrik/dotfiles rubyrc --file=~/.pryrc --filter='cat; echo include RubyRC'
 # gnome terminal profiles (exported with $ gconftool-2 --dump '/apps/gnome-terminal' > gnome-terminal-conf.xml )
-fresh gnome-terminal-conf.xml --file
+# fresh gnome-terminal-conf.xml --file
 
 
 #shell helpers
-#fresh rupa/z z.sh
+
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
 fresh config/liquidpromptrc --file=~/.config/liquidpromptrc
 fresh simonwhitaker/gitignore-boilerplates gibo --bin
 
-# powerline: the ultimate statusline
-fresh Lokaltog/powerline scripts/powerline --bin
-fresh Lokaltog/powerline powerline --file=~/.local/lib/python/powerline/
-#fresh config/powerline --file=~/.config/powerline/
-fresh Lokaltog/powerline font --file=~/.fonts/
-fresh Lokaltog/powerline-fonts SourceCodePro --file=~/.fonts/
-fresh Lokaltog/powerline powerline/bindings/tmux/powerline.conf --file=~/.tmux.conf
-fresh Lokaltog/vim-powerline . --file=~/.janus/vim-powerline/
-fresh Lokaltog/powerline-fonts . --file=~/.powerline-fonts/
 
 #vim
 #fresh mislav/vimfiles . --file=~/.vim/
@@ -115,52 +106,7 @@ fresh janus/vimrc.after --file
 fresh tomtom/tcomment_vim . --file=~/.janus/tcomment/
 fresh tpope/vim-eunuch . --file=~/.janus/vim-eunuch/
 fresh http://git.drupal.org/project/vimrc.git . --file=~/.janus/vim-drush/
-# ------------other frameworks
-#fresh jamesottaway/dotfiles lib/oh-my-zsh
 
-# .zshrc build
-fresh-options --file=~/.zshrc --marker
-  fresh shell/zsh/zshrc
-fresh-options
-
-# .zlogin build
-fresh-options --file=~/.zlogin --marker
-  fresh shell/zsh/zlogin
-fresh-options
-
-# oh-my-zsh
-fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
-fresh zsh/aliases.zsh --file=oh-my-zsh/lib/aliases.zsh --marker
-
-#fresh-options --file=oh-my-zsh --marker
-#  fresh zsh/aliases.zsh
-#  fresh robbyrussell/oh-my-zsh lib/completion.zsh
-#  fresh robbyrussell/oh-my-zsh lib/directories.zsh
-#  fresh robbyrussell/oh-my-zsh lib/edit-command-line.zsh
-#  fresh robbyrussell/oh-my-zsh lib/git.zsh
-#  fresh robbyrussell/oh-my-zsh lib/key-bindings.zsh
-#  fresh robbyrussell/oh-my-zsh lib/misc.zsh
-#  fresh robbyrussell/oh-my-zsh lib/spectrum.zsh
-#  fresh robbyrussell/oh-my-zsh lib/theme-and-appearance.zsh
-#  fresh robbyrussell/oh-my-zsh themes/muse.zsh-theme
-#fresh-options
-
-#fresh jamesottaway/dotfiles lib/zsh-completion-fpath
-#fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=oh-my-zsh/completion/_fresh
-#fresh zsh-users/zsh-completions src/_brew --file=oh-my-zsh/completion/_brew
-#fresh zsh-users/zsh-completions src/_gem --file=oh-my-zsh/completion/_gem
-#fresh zsh-users/zsh-completions src/_heroku --file=oh-my-zsh/completion/_heroku
-#fresh zsh-users/zsh-completions src/_rails --file=oh-my-zsh/completion/_rails
-#fresh zsh-users/zsh-completions src/_ssh-copy-id --file=oh-my-zsh/completion/_ssh-copy-id
-#fresh zsh-users/zsh-completions src/_virtualbox --file=oh-my-zsh/completion/_virtualbox
-
-#fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=oh-my-zsh/vendor/zsh-syntax-highlighting.zsh
-#fresh zsh-users/zsh-syntax-highlighting highlighters --file=oh-my-zsh/vendor/highlighters/
-
-#custom zsh plugins
-fresh shell/sublime3.zsh --file=oh-my-zsh/custom/sublime3.zsh
-fresh shell/echoaliases.zsh --file=oh-my-zsh/custom/echoaliases.zsh
-fresh kid-icarus/oh-my-drush . --file=oh-my-zsh/plugins/drush/
 # https://github.com/revans/bash_it customization
 fresh revans/bash-it . --file=~/.bash_it/
 fresh bash-it/custom.aliases.bash --file=bash_it/aliases/custom.aliases.bash
@@ -181,6 +127,6 @@ fresh config/drush.ini --file=~/.drush/drush.ini
 # rvm 
 # Gems in the global gemset, will be added to the global gemset in every new Ruby you install. rake, rdoc and bundler are good examples of handy global gems. The gems in the default gemset are the gems included in every newly created gemset.
 
-fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
-fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
-fresh config/rvm/.rvmrc --file=~/.rvmrc
+#fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
+#fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
+#fresh config/rvm/.rvmrc --file=~/.rvmrc
