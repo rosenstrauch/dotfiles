@@ -15,7 +15,7 @@ esac
 # Add /usr/local/bin to PATH.
 export PATH="/usr/local/bin:${PATH}"
 export PATH="/usr/local/lib:${PATH}"
-
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 #######
 # GIT #
 #######
