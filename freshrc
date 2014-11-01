@@ -23,7 +23,7 @@ fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 fresh https://code.google.com/p/smart-highlighting-gedit src --ref=0695e1b8a1d4 --file=~/.local/share/gedit/plugins/smart-highlighting-gedit/
 fresh https://code.google.com/p/advanced-find src --ref=f5e97b5f3848 --file=~/.local/share/gedit/plugins/advanced-find/
-
+fresh git@gitorious.org:gedit-trailing-spaces/gedit-trailing-spaces.git . --file=~/.local/share/gedit/plugins/gedit-trailing-spaces/
 
 #Helpful CLI Apps
 #--------------------
