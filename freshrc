@@ -16,7 +16,11 @@ fresh rnons/mikidown . --file=~/mikidown/
 fresh rnons/mikidown mikidown.py --bin
 
 # sublimetext 3 plugin for xiki, TODO: fresh needs to pull correct branch
-fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/User/SublimeXiki/ 
+fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/User/SublimeXiki/
+
+# gedit plugins
+fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
+
 
 #Helpful CLI Apps
 #--------------------
