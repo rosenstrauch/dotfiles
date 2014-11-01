@@ -1,0 +1,46 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  always_split_with_profile = True
+  inactive_color_offset = 0.27
+[keybindings]
+[profiles]
+  [[default]]
+    login_shell = True
+    background_image = None
+    scroll_on_output = False
+    visible_bell = True
+    scrollback_infinite = True
+  [[rvm]]
+    background_image = None
+    login_shell = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+  [[Dev]]
+    [[[child0]]]
+      position = 0:27
+      type = Window
+      order = 0
+      parent = ""
+      size = 1920, 1014
+    [[[child1]]]
+      position = 962
+      type = HPaned
+      order = 0
+      parent = child0
+    [[[terminal3]]]
+      profile = default
+      type = Terminal
+      order = 1
+      parent = child1
+    [[[terminal2]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child1
+[plugins]
