@@ -20,6 +20,9 @@ fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --
 
 # gedit plugins
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
+fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
+fresh https://code.google.com/p/smart-highlighting-gedit src --ref=0695e1b8a1d4 --file=~/.local/share/gedit/plugins/smart-highlighting-gedit/
+fresh https://code.google.com/p/advanced-find src --ref=f5e97b5f3848 --file=~/.local/share/gedit/plugins/advanced-find/
 
 
 #Helpful CLI Apps
