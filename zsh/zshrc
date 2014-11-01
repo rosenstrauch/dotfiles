@@ -1,14 +1,30 @@
 #
 # Executes commands at the start of an interactive session.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# use .zshrc.local for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+if [[ -a ~/.zshrc.local ]]
+then
+source ~/.zshrc.local
 fi
+
+# https://github.com/sgeb/dotfiles/tree/master/zsh/functions
+# Autoload our custom functions before sourcing the other zsh files so that we
+# can use them there
+# Prepend all directories in $ZSH_DIR/functions to the fpath
+#fpath=($ZSH_DIR/functions/**/ $fpath)
+
+# and autoload all files in $ZSH_DIR/functions
+#autoload -U $ZSH_DIR/functions/**/*(.:t)
+
+# Source Prezto before our own zsh files so that we can override zsh settings
+# and aliases (or unalias awkward ones)
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+
 
 # Customize to your needs...
 
@@ -19,8 +35,32 @@ fi
 
 
 
-# I've copied my aliases from ohmyzsh, need to check for overlaps with those defined by prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/aliases.zsh" ]]; then
-source "${ZDOTDIR:-$HOME}/.zprezto/aliases.zsh"
-fi
+# Source all of our own zsh files (using an anonymous function)
+function
+{
+
+typeset -U config_files
+config_files=($(find $DOTFILES_DIR/zsh -maxdepth 2 -type f -name "*.zsh"))
+# load the path files
+for file in ${(M)config_files:#*/path.zsh}
+do
+source $file
+done
+# load everything but the path and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+do
+source $file
+done
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit; compinit
+# load every completion after autocomplete loads
+for file in ${(M)config_files:#*/completion.zsh}
+do
+source $file
+done
+}
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 

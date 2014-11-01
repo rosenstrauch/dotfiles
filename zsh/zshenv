@@ -1,9 +1,17 @@
 #
 # Defines environment variables.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+
+
+
 #
+# Some handy directories
+#
+export USR_DIR=$HOME
+export PROJECTS_DIR=$HOME/dev
+export DOTFILES_DIR=$USR_DIR/.dotfiles
+export ZSH_DIR=$DOTFILES_DIR/zsh
+export BRAINDUMP_DIR=$USR_DIR/braindump
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
