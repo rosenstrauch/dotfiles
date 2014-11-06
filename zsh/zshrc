@@ -13,10 +13,10 @@ fi
 # Autoload our custom functions before sourcing the other zsh files so that we
 # can use them there
 # Prepend all directories in $ZSH_DIR/functions to the fpath
-#fpath=($ZSH_DIR/functions/**/ $fpath)
+fpath=($ZSH_DIR/functions/**/ $fpath)
 
 # and autoload all files in $ZSH_DIR/functions
-#autoload -U $ZSH_DIR/functions/**/*(.:t)
+autoload -U $ZSH_DIR/functions/**/*(.:t)
 
 # Source Prezto before our own zsh files so that we can override zsh settings
 # and aliases (or unalias awkward ones)
@@ -35,12 +35,12 @@ fi
 
 
 
-# Source all of our own zsh files (using an anonymous function)
+# Source all of our own zsh files from ~/.fresh/build/zsh that arent already in ~/.fresh/build/shell.sh (using an anonymous function)
 function
 {
 
 typeset -U config_files
-config_files=($(find $DOTFILES_DIR/zsh -maxdepth 2 -type f -name "*.zsh"))
+config_files=($(find $ZSH_DIR -maxdepth 2 -type f -name "*.zsh"))
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}
 do

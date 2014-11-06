@@ -40,7 +40,6 @@ zstyle ':prezto:load' pmodule \
 'rsync' \
 'ruby' \
 'ssh' \
-'rvm' \
 'syntax-highlighting' \
 'history-substring-search' \
 'prompt'

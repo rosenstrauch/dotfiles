@@ -40,8 +40,14 @@ setopt prompt_subst
 # prompt
 # export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
 
-# load thoughtbot/dotfiles scripts
+# add bin to path just to be sure
 export PATH="$HOME/.bin:$PATH"
 
+## NPM
+PATH=node_modules/.bin:/usr/local/share/npm/bin:$PATH
+## Composer
+PATH=vendor/bin:$PATH:$HOME/.composer/vendor/bin
+## RVM
+PATH=$PATH:$HOME/.rvm/bin
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

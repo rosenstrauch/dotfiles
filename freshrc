@@ -21,11 +21,6 @@ fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --
 # gedit plugins
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
-fresh https://code.google.com/p/smart-highlighting-gedit src --ref=0695e1b8a1d4 --file=~/.local/share/gedit/plugins/smart-highlighting-gedit/
-fresh https://code.google.com/p/advanced-find src --ref=f5e97b5f3848 --file=~/.local/share/gedit/plugins/advanced-find/
-#fresh git@gitorious.org:gedit-trailing-spaces/gedit-trailing-spaces.git . --file=~/.local/share/gedit/plugins/gedit-trailing-spaces/
-
-# atom plugins
 
 #Helpful CLI Apps
 #--------------------
@@ -42,7 +37,6 @@ fresh samirahmed/fu . --file=~/fu/
 # todo.txt: simple todo list
 fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
 fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
-fresh config/todo.cfg --file
 
 # gnome shell calendar
 #fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/gnome-shell-google-calendar/gnome-shell-google-calendar.py
@@ -55,21 +49,29 @@ fresh sampson-chen/sack sag --bin
 fresh sampson-chen/sack sgrep --bin
 fresh sampson-chen/sack .sackrc --file
 
-# Config
+# Our own  Our own config files directly linked to home
+
 fresh-options --file
-  fresh config/gemrc
   fresh inputrc
   fresh bashrc
-  fresh config/tmux.conf
   #fresh freshrc
   fresh conkyrc
-  fresh config/gitconfig
-  fresh config/gitignore
+  fresh tmux.conf
+  fresh todo.cfg
+  fresh gitconfig
+  fresh gitignore
+  fresh gemrc
 fresh-options
+
+
+# some of my own zsh functions are autoloaded so we build them https://github.com/freshshell/fresh#building-files-without-symlinking 
+fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
+
+# other functions with the correct extension are loaded into shell.sh
+fresh twe4ked/dotfiles shell/functions/pubkey.sh
 
 # Prezto zsh config
 fresh sorin-ionescu/prezto . --file=~/.zprezto/
-
 
 fresh_after_build() {
   if [ -z "${updated_submodules+1}" ]; then
@@ -85,8 +87,11 @@ fresh_after_build() {
 
 # Config
 
+# our own zsh files forked from prezto
 fresh zsh/\* --file
 
+# our own zsh aliases sourced to shell.sh
+fresh shell/zsh/\*
 
 # more tmux
 fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
@@ -102,9 +107,9 @@ fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xcha
 ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
 
 # atom config
-ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.config/atom/keymap.cson
-ln -sf ~/.dotfiles/config/atom/styles.less ~/.config/atom/styles.less
-ln -sf ~/.dotfiles/config/atom/config.cson ~/.config/atom/config.cson
+ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
+ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
+ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
 # solarize vim
 fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/
@@ -147,8 +152,8 @@ fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 
 
 # ~/.drush config
-fresh config/drushrc.php --file=~/.drush/drushrc.php
-fresh config/drush.ini --file=~/.drush/drush.ini
+fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
+fresh config/drush/drush.ini --file=~/.drush/drush.ini
 
 
 # rvm 

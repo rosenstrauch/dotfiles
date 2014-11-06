@@ -1,4 +1,5 @@
 _-accept-line () {
+    $#BUFFER
     emulate -L zsh
     local -a WORDS
     WORDS=( ${(z)BUFFER} )

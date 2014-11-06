@@ -7,7 +7,7 @@
 5 error     <http://github.com/isaacs/npm/issues>
 5 error or email it to:
 5 error     <npm-@googlegroups.com>
-6 error System Linux 3.13.0-37-generic
+6 error System Linux 3.13.0-39-generic
 7 error command "/usr/bin/nodejs" "/usr/bin/npm" "completion"
 8 error cwd /home/discipolo/.dotfiles
 9 error node -v v0.10.25

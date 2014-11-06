@@ -10,7 +10,6 @@ require 'erb'
 
 desc "install the dot files into user's home directory"
 task :default do
-
   switch_to_zsh
   install_bashit
   install_janus
@@ -41,22 +40,20 @@ def atom_plugins
 end
 
 def terminal_profiles
-  unless File.exist?(File.join(ENV['HOME'], ".fresh/build/gnome-terminal.xml"))
-    puts "no profiles to import"
-    exit
-  end
-
-  print "install terminal profiles? (recommended) [ynq] "
-  case $stdin.gets.chomp
-  when 'y'
-    puts "importing xml"
-    system %Q{gconftool-2 --load ~/.fresh/build/gnome-terminal-conf.xml}
-  when 'q'
-    exit
+  if File.exist?(File.join(ENV['HOME'], ".fresh/build/gnome-terminal.xml"))
+    print "install terminal profiles? (recommended) [ynq] "
+    case $stdin.gets.chomp
+    when 'y'
+      puts "importing xml"
+      system %Q{gconftool-2 --load ~/.fresh/build/gnome-terminal-conf.xml}
+    when 'q'
+      exit
+    else
+      puts "skipping terminal profiles"
+    end
   else
-    puts "skipping terminal profiles"
+    puts "no profiles to import"    
   end
-
 end
 
 def switch_to_zsh
@@ -101,29 +98,29 @@ end
 
 def xiki_rvm
   if File.exist?(File.join(ENV['HOME'], ".rvm"))
-    puts "not using rvm, quitting"
-    exit
-  end
-
-  print "install xiki? (recommended) [ynq] "
-  case $stdin.gets.chomp
-  when 'y'
-    puts "running bundle"
-    system %Q{cd ~/.src/xiki/}
-    system %Q{gem install bundler}
-    system %Q{bundle}
-    system %Q{ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki}
-  when 'q'
-    exit
+    puts "found rvm"
+    print "install xiki? (recommended) [ynq] "
+    case $stdin.gets.chomp
+    when 'y'
+      puts "running bundle with rvm"
+      system %Q{cd ~/.src/xiki/}
+      system %Q{rvm use ruby-1.9.2-p330}
+      system %Q{gem install bundler}
+      system %Q{bundle}
+      system %Q{ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki}
+    when 'q'
+      exit
+    else
+      puts "skipping xiki"
+    end
   else
-    puts "skipping xiki"
+    puts "rvm missing, skipping xiki"
   end
-
 end
 
 def install_janus
   if File.exist?(File.join(ENV['HOME'], ".vim"))
-    puts "found ~/.vim, please run rake inside it"
+    puts "found ~/.vim, please run rake inside it to update janus"
   else
     print "install janus? [ynq] "
     case $stdin.gets.chomp

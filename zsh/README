@@ -1,1 +1,3 @@
-README
+any *.zsh file here is automatically run/sourced
+
+the other files are basically my zprezto fork
