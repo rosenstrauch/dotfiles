@@ -23,8 +23,23 @@ fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 fresh https://code.google.com/p/smart-highlighting-gedit src --ref=0695e1b8a1d4 --file=~/.local/share/gedit/plugins/smart-highlighting-gedit/
 fresh https://code.google.com/p/advanced-find src --ref=f5e97b5f3848 --file=~/.local/share/gedit/plugins/advanced-find/
-fresh git@gitorious.org:gedit-trailing-spaces/gedit-trailing-spaces.git . --file=~/.local/share/gedit/plugins/gedit-trailing-spaces/
+#fresh git@gitorious.org:gedit-trailing-spaces/gedit-trailing-spaces.git . --file=~/.local/share/gedit/plugins/gedit-trailing-spaces/
 
+# atom plugins
+fresh emmetio/emmet-atom . --file=~/.atom/packages/emmet-atom/
+fresh sindresorhus/atom-jshint . --file=~/.atom/packages/atom-jshint/
+fresh thomaslindstrom/color-picker . --file=~/.atom/packages/color-picker/
+fresh Glavin001/atom-beautify . --file=~/.atom/packages/atom-beautify/
+fresh nickclaw/atom-grunt-runner . --file=~/.atom/packages/atom-grunt-runner/
+fresh creynders/atom-grunt-configs . --file=~/.atom/packages/atom-grunt-configs/
+fresh noseglid/atom-build . --file=~/.atom/packages/atom-build/
+fresh nikhilkalige/git-log . --file=~/.atom/packages/git-log/
+fresh codingtwinky/atom-ungit . --file=~/.atom/packages/atom-ungit/
+fresh jakesankey/git-history . --file=~/.atom/packages/git-history/
+fresh phlco/copy-to-hipchat . --file=~/.atom/packages/copy-to-hipchat/
+fresh Blackshawk/behat-atom . --file=~/.atom/packages/behat-atom/
+fresh smashwilson/stacktrace . --file=~/.atom/packages/stacktrace/
+fresh webBoxio/atom-html-preview . --file=~/.atom/packages/atom-html-preview/
 #Helpful CLI Apps
 #--------------------
 
