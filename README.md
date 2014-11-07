@@ -23,10 +23,13 @@
 
     FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
 
-##install or update bashit, janus and oh-my-zsh
+## Initial setup
+there are two possibilities for initial setup. this only has to be run once after initial fresh install (not on updates) the rakefile lets you select each option, the setup script assumes you want everything
 
+### Via Rake
     cd ~/ && rake
-
+    or
+### Via setup.zsh
 > My dotfiles are managed by fresh.
 
 # Usage

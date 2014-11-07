@@ -26,31 +26,17 @@ fresh https://code.google.com/p/advanced-find src --ref=f5e97b5f3848 --file=~/.l
 #fresh git@gitorious.org:gedit-trailing-spaces/gedit-trailing-spaces.git . --file=~/.local/share/gedit/plugins/gedit-trailing-spaces/
 
 # atom plugins
-fresh emmetio/emmet-atom . --file=~/.atom/packages/emmet-atom/
-fresh sindresorhus/atom-jshint . --file=~/.atom/packages/atom-jshint/
-fresh thomaslindstrom/color-picker . --file=~/.atom/packages/color-picker/
-fresh Glavin001/atom-beautify . --file=~/.atom/packages/atom-beautify/
-fresh nickclaw/atom-grunt-runner . --file=~/.atom/packages/atom-grunt-runner/
-fresh creynders/atom-grunt-configs . --file=~/.atom/packages/atom-grunt-configs/
-fresh noseglid/atom-build . --file=~/.atom/packages/atom-build/
-fresh nikhilkalige/git-log . --file=~/.atom/packages/git-log/
-fresh codingtwinky/atom-ungit . --file=~/.atom/packages/atom-ungit/
-fresh jakesankey/git-history . --file=~/.atom/packages/git-history/
-fresh phlco/copy-to-hipchat . --file=~/.atom/packages/copy-to-hipchat/
-fresh Blackshawk/behat-atom . --file=~/.atom/packages/behat-atom/
-fresh smashwilson/stacktrace . --file=~/.atom/packages/stacktrace/
-fresh webBoxio/atom-html-preview . --file=~/.atom/packages/atom-html-preview/
+
 #Helpful CLI Apps
 #--------------------
 
-# xiki installed via rvm an rakefile
+# xiki installed via rvm and rakefile
 fresh trogdoro/xiki . --file=~/.src/xiki/
 
 # Git achievements
 fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=048e3a1751f6516c770c3a1a14356ae00b67fc2a
 
-
-# Commandline Fu installed via rakefile http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
+# Commandline Fu http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
 fresh samirahmed/fu . --file=~/fu/
 
 # todo.txt: simple todo list
@@ -110,9 +96,15 @@ fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
 # xchat - solarized
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
+#editable config files https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files
 
-#use own terminator config but keep it editable https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files
+#use own terminator config
 ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
+
+# atom config
+ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.config/atom/keymap.cson
+ln -sf ~/.dotfiles/config/atom/styles.less ~/.config/atom/styles.less
+ln -sf ~/.dotfiles/config/atom/config.cson ~/.config/atom/config.cson
 
 # solarize vim
 fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/

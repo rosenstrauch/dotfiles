@@ -16,10 +16,29 @@ task :default do
   install_janus
   terminal_profiles
   xiki_rvm
+  atom_plugins
 end
 
 
 
+def atom_plugins
+  unless File.exist?(File.join(ENV['HOME'], ".atom"))
+    puts "atom not installed"
+    exit
+  end
+
+  print "install atom plugins? (recommended) [ynq] "
+  case $stdin.gets.chomp
+  when 'y'
+    puts "importing text file"
+    system %Q{apm install --packages-file ~/.dotfiles/config/atom/atom-packages.json}
+  when 'q'
+    exit
+  else
+    puts "skipping atom plugins"
+  end
+
+end
 
 def terminal_profiles
   unless File.exist?(File.join(ENV['HOME'], ".fresh/build/gnome-terminal.xml"))
@@ -57,25 +76,7 @@ def switch_to_zsh
   end
 end
 
-def install_oh_my_zsh
-  if File.exist?(File.join(ENV['HOME'], ".oh-my-zsh"))
-    puts "found ~/.oh-my-zsh"
-    system %Q{upgrade_oh_my_zsh}
-  else
-    print "install oh-my-zsh? [ynq] "
-    case $stdin.gets.chomp
-    when 'y'
-      puts "installing oh-my-zsh"
-      system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"}
-      system %Q{cp ~/.zshrc ~/.zshrc.orig}
-      system %Q{cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc}
-    when 'q'
-      exit
-    else
-      puts "skipping oh-my-zsh, you will need to change ~/.zshrc"
-    end
-  end
-end
+
 
 def install_bashit
   if File.exist?(File.join(ENV['HOME'], ".bash_it"))
@@ -108,8 +109,10 @@ def xiki_rvm
   case $stdin.gets.chomp
   when 'y'
     puts "running bundle"
+    system %Q{cd ~/.src/xiki/}
+    system %Q{gem install bundler}
     system %Q{bundle}
-    system %Q{ ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki}
+    system %Q{ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki}
   when 'q'
     exit
   else
@@ -126,7 +129,7 @@ def install_janus
     case $stdin.gets.chomp
     when 'y'
       puts "installing janus"
-      system %Q{ curl -Lo- https://bit.ly/janus-bootstrap | bash}
+      system %Q{curl -Lo- https://bit.ly/janus-bootstrap | bash}
     when 'q'
       exit
     else
