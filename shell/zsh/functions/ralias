@@ -1,0 +1,2 @@
+# Searches for reverse alias
+alias | grep "$1"

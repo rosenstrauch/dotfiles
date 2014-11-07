@@ -8,7 +8,6 @@
 # Print the message.
 cat <<-EOF
 
-Thank you. Come again!
-  -- Dr. Apu Nahasapeemapetilon
+where are you going?
 EOF
 

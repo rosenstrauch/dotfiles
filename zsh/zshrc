@@ -9,6 +9,12 @@ then
 source ~/.zshrc.local
 fi
 
+#zsh completion wrapper for fresh
+fpath=(~/.fresh/build/completion $fpath)
+
+# This is where i place custom themes
+fpath=( "$ZSH_DIR/prompt" $fpath )
+
 # https://github.com/sgeb/dotfiles/tree/master/zsh/functions
 # Autoload our custom functions before sourcing the other zsh files so that we
 # can use them there
@@ -30,7 +36,7 @@ fi
 
 # Source fresh shell
 if [[ -s "${ZDOTDIR:-$HOME}/.fresh/build/shell.sh" ]]; then
-source ~/.fresh/build/shell.sh
+  source ~/.fresh/build/shell.sh
 fi
 
 
@@ -64,3 +70,5 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

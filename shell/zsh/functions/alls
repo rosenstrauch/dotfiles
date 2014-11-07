@@ -1,0 +1,3 @@
+# Searches for alias
+alias | sed -n -e "/^$1/p"
+

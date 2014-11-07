@@ -53,7 +53,6 @@ fresh sampson-chen/sack .sackrc --file
 
 fresh-options --file
   fresh inputrc
-  fresh bashrc
   #fresh freshrc
   fresh conkyrc
   fresh tmux.conf
@@ -63,9 +62,18 @@ fresh-options --file
   fresh gemrc
 fresh-options
 
+# BASHRC
+fresh-options --file=~/.bashrc --marker
+fresh shell/bash/bashrc
+fresh freshshell/fresh contrib/completion/fresh-completion.bash
+fresh bobthecow/git-flow-completion git-flow-completion.bash
+
+fresh-options
 
 # some of my own zsh functions are autoloaded so we build them https://github.com/freshshell/fresh#building-files-without-symlinking 
 fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
+fresh shell/zsh/functions/alls --file=zsh/functions/alls
+fresh shell/zsh/functions/ralias --file=zsh/functions/ralias
 
 # other functions with the correct extension are loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
@@ -90,8 +98,17 @@ fresh_after_build() {
 # our own zsh files forked from prezto
 fresh zsh/\* --file
 
+# my own prompt with alias suggestions
+fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
+
+# adding on to ZSHRC
+fresh-options --file=~/.zshrc --marker
+  fresh freshshell/fresh contrib/completion/fresh-completion.zsh
+  fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh
+fresh-options
+
 # our own zsh aliases sourced to shell.sh
-fresh shell/zsh/\*
+fresh shell/zsh/aliases/\*
 
 # more tmux
 fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
@@ -123,6 +140,8 @@ fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/
 
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
 fresh config/liquidpromptrc --file=~/.config/liquidpromptrc
+
+#git
 fresh simonwhitaker/gitignore-boilerplates gibo --bin
 
 
@@ -157,7 +176,10 @@ fresh config/drush/drush.ini --file=~/.drush/drush.ini
 
 
 # rvm 
-# Gems in the global gemset, will be added to the global gemset in every new Ruby you install. rake, rdoc and bundler are good examples of handy global gems. The gems in the default gemset are the gems included in every newly created gemset.
+# Gems in the global gemset, will be added to the global gemset 
+# in every new Ruby you install. 
+# rake, rdoc and bundler are good examples of handy global gems. 
+# The gems in the default gemset are the gems included in every newly created gemset.
 
 #fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
 #fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
