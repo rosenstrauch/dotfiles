@@ -5,6 +5,7 @@ atom-grunt-configs
 atom-html-preview
 atom-jshint
 atom-ungit
+atom-xikij
 behat-atom
 bootstrap3-snippets
 color-picker
@@ -30,3 +31,11 @@ terminal-status
 drupal
 language-todotxt
 todo-list
+notebook
+scrapfy
+refactor
+find-selection
+livereload
+atom-gist
+atom-copy-on-select
+sync-settings

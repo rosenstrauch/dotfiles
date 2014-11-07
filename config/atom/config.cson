@@ -9,41 +9,31 @@
     'layoutsDir': 'app/_layouts'
   'core':
     'disabledPackages': [
-      'term2'
       'atom-build'
       'atom-grunt-configs'
       'atom-grunt-runner'
       'behat-atom'
-      'jekyll'
       'project-manager'
       'welcome'
       'feedback'
       'emmet-atom'
-      'project-ring'
-      'atom-beautify'
       'stacktrace'
       'atom-jshint'
       'timecop'
       'linter'
-      'deprecation-cop'
-      'atom-html-preview'
-      'atom-ungit'
       'autosave'
       'background-tips'
       'bootstrap3-snippets'
-      'copy-to-hipchat'
       'dev-live-reload'
-      'drupal-info-file'
       'wrap-guide'
       'whitespace'
       'terminal-status'
       'terminal-runner'
-      'styleguide'
       'snippets'
-      'project-palette-finder'
       'open-on-github'
       'markdown-writer'
       'markdown-preview'
+      'jekyll'
     ]
     'themes': [
       'atom-dark-ui'
@@ -54,5 +44,11 @@
     'showIndentGuide': true
     'softWrapAtPreferredLineLength': true
     'invisibles': {}
+  'drupal':
+    'fileTypesPhp': 'module,install,inc,test'
+'.text.todotxt':
+  'editor': {}
+'.text.todo':
+  'editor': {}
 '.drupal.source':
   'editor': {}
