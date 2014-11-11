@@ -52,3 +52,15 @@
   'editor': {}
 '.drupal.source':
   'editor': {}
+'exception-reporting':
+  'userId': '2e5c55c1-120e-d137-8bdf-12d415546614'
+'welcome':
+  'showOnStartup': false
+'metrics':
+  'userId': '5afe01d925f56ca54ea8945b2cce677f8755be3a'
+'drupal':
+  'fileTypesPhp': 'module,install,inc,test'
+'core':
+  'disabledPackages': [
+    'notebook'
+  ]

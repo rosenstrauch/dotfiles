@@ -91,6 +91,18 @@ prompt_friendlinux_preexec () {
 }
 
 prompt_friendlinux_precmd () {
+  # git branch info
+ # Check for untracked files or updated submodules since vcs_info does not.
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    branch_format="(${_prompt_rosen_colors[1]}%b%f%u%c${_prompt_rosen_colors[4]}●%f)"
+  else
+    branch_format="(${_prompt_rosen_colors[1]}%b%f%u%c)"
+  fi
+
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+
+  vcs_info 'prompt'
+
     setopt localoptions noxtrace noksharrays unset
     local zero='%([BSUbfksu]|[FB]{*})' escape colno lineno
 
@@ -131,6 +143,7 @@ prompt_friendlinux_ps1 () {
     local -h eon="%(?.[.%20(?.[%U.%S[))" eoff="%(?.].%20(?.%u].]%s))"
 
     # Set up the components of the upper line
+    user="%{$fg[%h]%}%n$rs"
     host="%{$fg[%m]%}%m$rs"
     hist1="%9(v. . %{$fg[%h]%}$eon%7v$eoff$rs )"
     hist2=$'%9(v.\n'"%{$fg[%h]%}$eon%7v$eoff$rs.)"
@@ -140,22 +153,27 @@ prompt_friendlinux_ps1 () {
     time="%{$fg[%@]%}%@$rs"
 
     # This is just a tad silly ...
-    [[ $prompt_theme[1] = oliver ]] && PS1='[%h%0(?..:%?)]%# ' ||
+    [[ $prompt_theme[1] = rosen ]] && PS1='[%m%0(?..:%?)]%# ' ||
 	PS1=${PS1//$prompt_newline/$'\n'}
 
     # Assemble the new prompt
     ps1=( ${(f)PS1} )		# Split the existing prompt at newlines
     ps1=(
         "%$[COLUMNS-PSCOL]>..>"	# Begin truncation (upper left prompt)
-	"$host"
+        "$user"
+        "at"
+        "$host"
+        "$dir"
 	"$hist1"		# Empty when too wide for one line
-	"$dir"
+  "${vcs_info_msg_0_}" #vcs info
 	"%<<"			# End truncation (end upper left prompt)
 	"$space"		# Pad line to upper right position
 	"%$[COLUMNS-PSCOL-15](l. . $date)"
 	"%$[COLUMNS-PSCOL-7](l.. $time)"
 	"$hist2"		# Empty when $hist1 is not empty
 	$'\n'
+
+
 	$ps1[-1]		# Keep last line of the existing prompt
 	)
     PS1="${(j::)ps1}"
@@ -172,6 +190,33 @@ prompt_friendlinux_winch () {
 prompt_friendlinux_setup () {
     setopt localoptions nolocaltraps noksharrays unset
     typeset -gA fg
+
+# Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+
+  # Formats:
+  #   %b - branchname
+  #   %u - unstagedstr (see below)
+  #   %c - stagedstr (see below)
+  #   %a - action (e.g. rebase-i)
+  #   %R - repository path
+  #   %S - path in the repository
+  local branch_format="(${_prompt_rosen_colors[1]}%b%f%u%c)"
+  local action_format="(${_prompt_rosen_colors[5]}%a%f)"
+  local unstaged_format="${_prompt_rosen_colors[2]}●%f"
+  local staged_format="${_prompt_rosen_colors[5]}●%f"
+
+  # Set vcs_info parameters.
+  zstyle ':vcs_info:*' enable bzr git hg svn
+  zstyle ':vcs_info:*:prompt:*' check-for-changes true
+  zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
+  zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+  zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+
 
     # A few extra niceties ...
     repeat 1 case "$1:l" in
@@ -205,7 +250,7 @@ prompt_friendlinux_setup () {
     (($#RPS1 && $# > 4)) && RPS1="%F{$5}$RPS1%f"
 
     # Paste our special commands into precmd and TRAPWINCH
-    
+
     add-zsh-hook precmd prompt_friendlinux_precmd
     add-zsh-hook preexec prompt_friendlinux_preexec
     functions[TRAPWINCH]="${functions[TRAPWINCH]//prompt_friendlinux_winch}
