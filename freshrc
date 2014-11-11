@@ -59,6 +59,8 @@ fresh-options --file
   fresh todo.cfg
   fresh gitconfig
   fresh gitignore
+  fresh gitattributes
+
   fresh gemrc
 fresh-options
 
