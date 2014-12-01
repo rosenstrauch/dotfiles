@@ -16,9 +16,28 @@ task :default do
   terminal_profiles
   xiki_rvm
   atom_plugins
+  cheat
 end
 
+def cheat
+  unless File.exist?(File.join(ENV['HOME'], ".fresh/build/src/cheat"))
+    puts "run fresh update to get cheat"
+    exit
+  end
 
+  print "install cheat plugins? (recommended) [ynq] "
+  case $stdin.gets.chomp
+  when 'y'
+    puts "running sudo pip install cheat"
+    system %Q{cd ~/.fresh/build/src/cheat}
+    system %Q{sudo pip install cheat}
+  when 'q'
+    exit
+  else
+    puts "skipping cheat"
+  end
+
+end
 
 def atom_plugins
   unless File.exist?(File.join(ENV['HOME'], ".atom"))
@@ -103,11 +122,9 @@ def xiki_rvm
     case $stdin.gets.chomp
     when 'y'
       puts "running bundle with rvm"
-      system %Q{cd ~/.src/xiki/}
-      system %Q{rvm use ruby-1.9.2-p330}
-      system %Q{gem install bundler}
-      system %Q{bundle}
-      system %Q{ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki}
+# http://selfless-singleton.rickwinfrey.com/2013/01/14/using-rvm-in-rake-tasks/
+      sh "pwd"
+      system %Q{bash -i -c "cd ~/.fresh/source/trogdoro/xiki/ && pwd && rvm use default && gem install bundler && bundle && ruby etc/command/copy_xiki_command_to.rb ~/bin/xiki"}      
     when 'q'
       exit
     else

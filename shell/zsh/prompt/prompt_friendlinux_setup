@@ -153,24 +153,26 @@ prompt_friendlinux_ps1 () {
     time="%{$fg[%@]%}%@$rs"
 
     # This is just a tad silly ...
-    [[ $prompt_theme[1] = rosen ]] && PS1='[%m%0(?..:%?)]%# ' ||
+    [[ $prompt_theme[1] = rosen ]] && PS1='[%~%0(?..:%?)]%# ' ||
 	PS1=${PS1//$prompt_newline/$'\n'}
 
     # Assemble the new prompt
     ps1=( ${(f)PS1} )		# Split the existing prompt at newlines
     ps1=(
         "%$[COLUMNS-PSCOL]>..>"	# Begin truncation (upper left prompt)
-        "$user"
-        "at"
-        "$host"
-        "$dir"
+
 	"$hist1"		# Empty when too wide for one line
   "${vcs_info_msg_0_}" #vcs info
 	"%<<"			# End truncation (end upper left prompt)
+  "$user"
+  " at "
+  "$host"
+  
 	"$space"		# Pad line to upper right position
 	"%$[COLUMNS-PSCOL-15](l. . $date)"
 	"%$[COLUMNS-PSCOL-7](l.. $time)"
 	"$hist2"		# Empty when $hist1 is not empty
+  "$dir"
 	$'\n'
 
 

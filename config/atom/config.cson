@@ -29,7 +29,6 @@
       'whitespace'
       'terminal-status'
       'terminal-runner'
-      'snippets'
       'open-on-github'
       'markdown-writer'
       'markdown-preview'
@@ -47,21 +46,21 @@
     'fileTypesPhp': 'module,install,inc,test'
   'project-ring':
     'projectToLoadOnStartUp': 'hamcom-profile'
-'.drupal.source':
+'.text.todotxt':
   'editor': {}
 '.text.todo':
   'editor': {}
-'.text.todotxt':
+'.drupal.source':
   'editor': {}
-'exception-reporting':
-  'userId': '2e5c55c1-120e-d137-8bdf-12d415546614'
-'welcome':
-  'showOnStartup': false
-'metrics':
-  'userId': '5afe01d925f56ca54ea8945b2cce677f8755be3a'
-'drupal':
-  'fileTypesPhp': 'module,install,inc,test'
 'core':
   'disabledPackages': [
     'notebook'
   ]
+'drupal':
+  'fileTypesPhp': 'module,install,inc,test'
+'metrics':
+  'userId': '5afe01d925f56ca54ea8945b2cce677f8755be3a'
+'welcome':
+  'showOnStartup': false
+'exception-reporting':
+  'userId': '2e5c55c1-120e-d137-8bdf-12d415546614'

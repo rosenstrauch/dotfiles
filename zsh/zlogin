@@ -19,6 +19,13 @@ if (( $+commands[fortune] )); then
   fortune -a
   print
 fi
+
+# Print todos.
+if (( $+commands[todo] )); then
+  todo
+  print
+fi
+
 # adds the current branch name in green
 #git_prompt_info() {
 # ref=$(git symbolic-ref HEAD 2> /dev/null)
@@ -41,14 +48,18 @@ setopt prompt_subst
 # prompt
 # export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
 
-# add bin to path just to be sure
-export PATH="$HOME/.bin:$PATH"
 
+
+## RVM needs to be first
+#PATH=$HOME/.rvm/bin:$PATH
 ## NPM
-PATH=node_modules/.bin:/usr/local/share/npm/bin:$PATH
+#PATH=node_modules/.bin:/usr/local/share/npm/bin:$PATH
 ## Composer
-PATH=vendor/bin:$PATH:$HOME/.composer/vendor/bin
-## RVM
-PATH=$PATH:$HOME/.rvm/bin
+#PATH=vendor/bin:$PATH:$HOME/.composer/vendor/bin
+
+
+# add bin to path just to be sure
+
+#export PATH="$HOME/.bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

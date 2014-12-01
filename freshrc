@@ -12,7 +12,7 @@ fresh-options
 
 # Gui apps
 
-fresh rnons/mikidown . --file=~/mikidown/
+fresh rnons/mikidown . --file=src/mikidown/
 fresh rnons/mikidown mikidown.py --bin
 
 # sublimetext 3 plugin for xiki, TODO: fresh needs to pull correct branch
@@ -24,15 +24,16 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 
 #Helpful CLI Apps
 #--------------------
+fresh chrisallenlane/cheat . --file=src/cheat/
 
 # xiki installed via rvm and rakefile
-fresh trogdoro/xiki . --file=~/.src/xiki/
+fresh trogdoro/xiki . --file=src/xiki/
 
 # Git achievements
 fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=048e3a1751f6516c770c3a1a14356ae00b67fc2a
 
 # Commandline Fu http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
-fresh samirahmed/fu . --file=~/fu/
+fresh samirahmed/fu . --file=src/fu/
 
 # todo.txt: simple todo list
 fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo

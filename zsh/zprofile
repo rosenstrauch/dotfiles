@@ -44,11 +44,11 @@ typeset -gU cdpath fpath mailpath path
 
 
 # Set the list of directories that Zsh searches for programs.
-path=(
-  /usr/local/{bin,sbin}
-  ${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements
-  $path
-)
+#path=(
+#  /usr/local/{bin,sbin}
+#  ${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements
+#  $path
+#)
 
 #
 # Less

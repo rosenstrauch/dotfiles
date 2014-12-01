@@ -2,7 +2,7 @@ background yes
 use_xft yes
 xftfont Bitstream Vera Sans Mono:size=9
 xftalpha 0.8
-update_interval 5.0
+update_interval 15.0
 total_run_times 0
 own_window yes
 own_window_type normal
@@ -45,5 +45,7 @@ ${font Verdana:style=Bold:size=10}$color${alignc}==> Kernel Log <==
 $font$color${exec cat /var/log/kern.log | tail | cut -d"]" -f2-}
 ${font Verdana:style=Bold:size=10}$color${alignc}==>Favourite Bash commands<==
 $font$color${exec cat ~/.bash_history | awk 'BEGIN {FS="[ \t]+|\\|"} {print $1, $2}' | sort | uniq -c | sort -nr | head}
-${font Verdana:style=Bold:size=10}$color${alignc}==>ZSHistory favourites<==
-$font$color${exec cat ~/.zsh_history | awk 'BEGIN {FS="[ \t]+|\\|"} {print $2, $3}' | sort | cut -d ";" -f2- | uniq -c | sort -nr | head }
+${font Verdana:style=Bold:size=10}$color${alignc}==>habits<==
+$font$color${pre_exec habits}
+${font Verdana:style=Bold:size=10}$color${alignc}==>todos<==
+$font$color${exec todo lsa}

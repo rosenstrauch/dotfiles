@@ -26,6 +26,8 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 # setup powerline
 pip install git+git://github.com/Lokaltog/powerline.git
 pip install git+git://github.com/kovidgoyal/powerline-daemon.git
+# setup cheat
+pip install git+git://github.com/chrisallenlane/cheat.git
 
 # Install atom plugins
 apm install --packages-file ~/.dotfiles/config/atom/atom-packages.json

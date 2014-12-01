@@ -10,14 +10,14 @@
 - zsh
 - silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
 - terminator
+- python-pip
 
 # Components
 
 - http://dotfiles.github.io/
 - https://github.com/revans/bash-it
 - https://github.com/carlhuda/janus
-- https://github.com/robbyrussell/oh-my-zsh
-- https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
+- https://github.com/sorin-ionescu/prezto
 
 # Installation using fresh
 
@@ -105,7 +105,6 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 - https://github.com/webflo/drush_zsh_completion
 - https://github.com/drush-ops/drush/blob/master/README.md#post-install
 - https://github.com/skwp/dotfiles
-- https://github.com/sorin-ionescu/prezto
 - https://github.com/Lokaltog/powerline
 # gibo
 fresh simonwhitaker/gitignore-boilerplates gibo --bin

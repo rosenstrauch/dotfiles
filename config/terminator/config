@@ -1,18 +1,28 @@
 [global_config]
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   always_split_with_profile = True
   inactive_color_offset = 0.27
 [keybindings]
 [profiles]
   [[default]]
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     login_shell = True
-    background_image = None
-    scroll_on_output = False
     visible_bell = True
-    scrollback_infinite = True
-  [[rvm]]
     background_image = None
+    foreground_color = "#839496"
+    scroll_on_output = False
+    background_color = "#002b36"
+    scrollback_infinite = True
+  [[friendlinux]]
+    background_image = None
+  [[rvm]]
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
     login_shell = True
+    background_darkness = 0.84
+    background_type = transparent
+    background_image = None
+    foreground_color = "#839496"
+    background_color = "#002b36"
 [layouts]
   [[default]]
     [[[child1]]]

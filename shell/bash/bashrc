@@ -13,9 +13,9 @@ esac
 ########
 
 # Add /usr/local/bin to PATH.
-export PATH="/usr/local/bin:${PATH}"
-export PATH="/usr/local/lib:${PATH}"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
+#export PATH="/usr/local/bin:${PATH}"
+#export PATH="/usr/local/lib:${PATH}"
+#export PATH="$HOME/.composer/vendor/bin:$PATH"
 #######
 # GIT #
 #######
@@ -157,6 +157,6 @@ xterm*|rxvt*)
 esac
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 source ~/.fresh/build/shell.sh # source fresh rc for dotfile management
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
