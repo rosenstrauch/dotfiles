@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=gsettings set org.gnome.desktop.interface enable-animations false
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=disable_effects
+Name=disable_effects
+Comment[en_US]=workaround for https://bugzilla.gnome.org/show_bug.cgi?id=705448
+Comment=workaround for https://bugzilla.gnome.org/show_bug.cgi?id=705448

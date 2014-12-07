@@ -73,6 +73,6 @@ done
 #eval "$(pyenv virtualenv-init -)"
 
 
-#export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/opt/local/bin"
+export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/opt/local/bin"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

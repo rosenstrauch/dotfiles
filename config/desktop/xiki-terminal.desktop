@@ -1,0 +1,23 @@
+[Desktop Entry]
+Name=Xiki Terminal
+Comment=Use Xiki line
+TryExec=gnome-terminal
+Exec=gnome-terminal -e"xiki"
+Icon=utilities-terminal
+Type=Application
+X-GNOME-DocPath=gnome-terminal/index.html
+X-GNOME-Bugzilla-Bugzilla=GNOME
+X-GNOME-Bugzilla-Product=gnome-terminal
+X-GNOME-Bugzilla-Component=BugBuddyBugs
+X-GNOME-Bugzilla-Version=3.6.2
+Categories=GNOME;GTK;Utility;TerminalEmulator;
+StartupNotify=true
+OnlyShowIn=GNOME;Unity;
+Keywords=Run;
+Actions=New
+X-Ubuntu-Gettext-Domain=gnome-terminal
+Name[en_US]=xiki-terminal
+
+[Desktop Action New]
+Name=New Terminal
+Exec=gnome-terminal -e"xiki

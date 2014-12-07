@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Mutt
+GenericName=Mutt
+Comment=Mutt in term
+Exec=mutt
+Icon=/usr/share/pixmaps/mutt.xpm
+Terminal=true
+Type=Application
+StartupNotify=false
+OnlyShowIn=GNOME;XFCE;
+Name[en_US]=Mutt

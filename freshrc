@@ -22,6 +22,18 @@ fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 
+# Desktop and autostart
+#--------------------
+ln -sf ~/.dotfiles/config/autostart/ . ~/.config/autostart/
+# why cant i glob files like this? fresh config/desktop/\* --file=~/.local/share/applications/\*
+
+  ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
+  ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/Desktop/lynx.desktop
+  ln -sf ~/.dotfiles/config/desktop/mutt.desktop ~/.local/share/applications/mutt.desktop
+  ln -sf ~/.dotfiles/config/desktop/mutt.desktop ~/Desktop/mutt.desktop
+  ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applications/xiki-terminal.desktop
+  ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/Desktop/xiki-terminal.desktop
+
 #Helpful CLI Apps
 #--------------------
 fresh chrisallenlane/cheat . --file=src/cheat/
@@ -61,16 +73,14 @@ fresh-options --file
   fresh gitconfig
   fresh gitignore
   fresh gitattributes
-
   fresh gemrc
 fresh-options
 
 # BASHRC
 fresh-options --file=~/.bashrc --marker
-fresh shell/bash/bashrc
-fresh freshshell/fresh contrib/completion/fresh-completion.bash
-fresh bobthecow/git-flow-completion git-flow-completion.bash
-
+  fresh shell/bash/bashrc
+  fresh freshshell/fresh contrib/completion/fresh-completion.bash
+  fresh bobthecow/git-flow-completion git-flow-completion.bash
 fresh-options
 
 # some of my own zsh functions are autoloaded so we build them https://github.com/freshshell/fresh#building-files-without-symlinking 

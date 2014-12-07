@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Lynx
+Name[de]=Lynx
+GenericName=Lynx Browser
+GenericName[de]=Open Lynx in terminal
+Comment=Lynx in term
+Exec=gnome-terminal lynx
+Icon=/usr/share/pixmaps/Lynx.xpm
+Terminal=false
+Type=Application
+StartupNotify=true
+OnlyShowIn=GNOME;XFCE;

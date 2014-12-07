@@ -45,7 +45,7 @@
   'drupal':
     'fileTypesPhp': 'module,install,inc,test'
   'project-ring':
-    'projectToLoadOnStartUp': 'hamcom-profile'
+    'projectToLoadOnStartUp': 'msf_at_profile'
 '.text.todotxt':
   'editor': {}
 '.text.todo':
