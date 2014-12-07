@@ -29,3 +29,7 @@ ${ZDOTDIR:-$HOME}/.composer/vendor/bin
 $path
 /usr/local/{bin,sbin}
 )
+
+export DEFAULT_CHEAT_DIR=~/.cheat
+export CHEATPATH=~/.dotfiles/manual/cheat
+export CHEATCOLORS=true 	export CHEATCOLORS=true

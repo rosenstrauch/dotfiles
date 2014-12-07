@@ -45,3 +45,5 @@ bundle
 ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki
 cd
 
+# setup npm
+./setup-npm.zsh

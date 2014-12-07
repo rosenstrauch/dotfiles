@@ -1,0 +1,6 @@
+! To start out, create a new list:
+  $ boom <list-name>
+And then add something to your list!
+  $ boom <list-name> <item-name> <item-value>
+You can then grab your new item:
+  $ boom <item-name>

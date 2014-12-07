@@ -7,6 +7,7 @@ fresh-options --bin
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
+  fresh tj/bm bin/bm
   fresh bin/\*
 fresh-options
 
@@ -24,7 +25,7 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 
 # Desktop and autostart
 #--------------------
-ln -sf ~/.dotfiles/config/autostart/ . ~/.config/autostart/
+ln -sf ~/.dotfiles/config/autostart ~/.config/autostart
 # why cant i glob files like this? fresh config/desktop/\* --file=~/.local/share/applications/\*
 
   ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
@@ -195,6 +196,6 @@ fresh config/drush/drush.ini --file=~/.drush/drush.ini
 # rake, rdoc and bundler are good examples of handy global gems. 
 # The gems in the default gemset are the gems included in every newly created gemset.
 
-#fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
-#fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
+fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
+fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 #fresh config/rvm/.rvmrc --file=~/.rvmrc

@@ -117,6 +117,11 @@ set splitbelow
 "" session settings
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 
+set nocompatible
+filetype plugin on
+syntax on
+
+
 "" faster shortcut for commenting. Requires T-Comment plugin
 map ,c <c-_><c-_>
 

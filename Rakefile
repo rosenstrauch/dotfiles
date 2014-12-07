@@ -19,6 +19,7 @@ task :default do
   cheat
 end
 
+
 def cheat
   unless File.exist?(File.join(ENV['HOME'], ".fresh/build/src/cheat"))
     puts "run fresh update to get cheat"
