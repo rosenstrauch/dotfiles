@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>readme.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>readme.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'><p>Pure</p>
+
+</td><td class=code><div class=highlight><pre>
+
+&gt; Pretty, minimal and fast ZSH prompt
+
+!<span class="o">[</span>screenshot<span class="o">](</span>screenshot.png<span class="o">)</span>
+
+
+<span class="c">## Overview</span>
+
+Most prompts are cluttered, ugly and slow. I wanted something visually pleasing that stayed out of my way.
+
+<span class="c">### Why?</span>
+
+- Comes with the perfect prompt character.  
+  Author went through the whole Unicode range to find it.
+- Shows <span class="sb">`</span>git<span class="sb">`</span> branch and whether it<span class="s1">&#39;s dirty (with a `*`).</span>
+<span class="s1">- Indicates when you have unpushed/unpulled `git` commits with up/down arrows.</span>
+<span class="s1">- Prompt character turns red if the last command didn&#39;</span>t <span class="nb">exit </span>with <span class="sb">`</span>0<span class="sb">`</span>.
+- Command execution <span class="nb">time </span>will be displayed <span class="k">if</span> it exceeds the <span class="nb">set </span>threshold.
+- Username and host only displayed when in an SSH session.
+- Shows the current path in the title and the <span class="o">[</span>current folder <span class="p">&amp;</span> <span class="nb">command</span><span class="o">](</span>screenshot-title-cmd.png<span class="o">)</span> when a process is running.
+- Makes an excellent starting point <span class="k">for</span> your own custom prompt.
+
+
+<span class="c">## Install</span>
+
+Can be installed with <span class="sb">`</span>npm<span class="sb">`</span> or manually. Requires git 2.0.0+ and ZSH 5.0.0+.
+
+<span class="c">### npm</span>
+
+<span class="sb">```</span>sh
+<span class="nv">$ </span>npm install --global pure-prompt
+<span class="sb">```</span>
+
+That<span class="s1">&#39;s it. Skip to [Getting started](#getting-started).</span>
+
+<span class="s1">### Manually</span>
+
+<span class="s1">1. Either…</span>
+<span class="s1">  - Clone this repo</span>
+<span class="s1">  - add it as a submodule, or</span>
+<span class="s1">  - just download `pure.zsh`</span>
+
+<span class="s1">2. Symlink `pure.zsh` to somewhere in [`$fpath`](http://www.refining-linux.org/archives/46/ZSH-Gem-12-Autoloading-functions/) with the name `prompt_pure_setup`.</span>
+
+<span class="s1">#### Example</span>
+
+<span class="s1">```sh</span>
+<span class="s1">$ ln -s &quot;$PWD/pure.zsh&quot; /usr/local/share/zsh/site-functions/prompt_pure_setup</span>
+<span class="s1">```</span>
+<span class="s1">*Run `echo $fpath` to see possible locations.*</span>
+
+<span class="s1">For a user-specific installation (which would not require escalated privileges), simply add a directory to `$fpath` for that user:</span>
+
+<span class="s1">```sh</span>
+<span class="s1"># DIVIDER</span>
+<span class="s1">fpath=( &quot;$HOME/.zfunctions&quot; $fpath )</span>
+<span class="s1">```</span>
+
+<span class="s1">Then install the theme there:</span>
+
+<span class="s1">```sh</span>
+<span class="s1">$ ln -s &quot;$PWD/pure.zsh&quot; &quot;$HOME/.zfunctions/prompt_pure_setup&quot;</span>
+<span class="s1">```</span>
+
+
+<span class="s1">## Getting started</span>
+
+<span class="s1">Initialize the prompt system (if not so already) and choose `pure`:</span>
+
+<span class="s1">```sh</span>
+<span class="s1"># DIVIDER</span>
+<span class="s1">autoload -U promptinit &amp;&amp; promptinit</span>
+<span class="s1">prompt pure</span>
+<span class="s1">```</span>
+
+
+<span class="s1">## Options</span>
+
+<span class="s1">### `PURE_CMD_MAX_EXEC_TIME`</span>
+
+<span class="s1">The max execution time of a process before its run time is shown when it exits. Defaults to `5` seconds.</span>
+
+<span class="s1">### `PURE_GIT_PULL`</span>
+
+<span class="s1">Set `PURE_GIT_PULL=0` to prevent Pure from checking whether the current Git remote has been updated.</span>
+
+<span class="s1">### `PURE_GIT_UNTRACKED_DIRTY`</span>
+
+<span class="s1">Set `PURE_GIT_UNTRACKED_DIRTY=0` to not include untracked files in dirtiness check. Only really useful on extremely huge repos like the WebKit repo.</span>
+
+<span class="s1">## Example</span>
+
+<span class="s1">```sh</span>
+<span class="s1"># DIVIDER</span>
+
+<span class="s1">autoload -U promptinit &amp;&amp; promptinit</span>
+
+<span class="s1"># DIVIDER</span>
+<span class="s1">PURE_CMD_MAX_EXEC_TIME=10</span>
+
+<span class="s1">prompt pure</span>
+<span class="s1">```</span>
+
+
+<span class="s1">## Tips</span>
+
+<span class="s1">[Tomorrow Night Eighties](https://github.com/chriskempson/tomorrow-theme) theme with the [Droid Sans Mono](http://www.google.com/webfonts/specimen/Droid+Sans+Mono) font (15pt) is a beautiful combination, as seen in the screenshot above. Just make sure you have anti-aliasing enabled in your Terminal.</span>
+
+<span class="s1">To have commands colorized as seen in the screenshot install [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting).</span>
+
+
+<span class="s1">## Integration</span>
+
+<span class="s1">### [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)</span>
+
+<span class="s1">Symlink (or copy) `pure.zsh` to `~/.oh-my-zsh/custom/pure.zsh-theme` and add `ZSH_THEME=&quot;pure&quot;` to your `.zshrc` file.</span>
+
+<span class="s1">### [prezto](https://github.com/sorin-ionescu/prezto)</span>
+
+<span class="s1">Symlink (or copy) `pure.zsh` to `~/.zprezto/modules/prompt/functions/prompt_pure_setup` alongside Prezto&#39;</span>s other prompts. Then <span class="sb">`</span><span class="nb">set </span>zstyle <span class="s1">&#39;:prezto:module:prompt&#39;</span> theme <span class="s1">&#39;pure&#39;</span><span class="sb">`</span> in <span class="sb">`</span>~/.zpreztorc<span class="sb">`</span>.
+
+<span class="c">### [antigen](https://github.com/zsh-users/antigen)</span>
+
+Add <span class="sb">`</span>antigen bundle sindresorhus/pure<span class="sb">`</span> to your .zshrc file <span class="o">(</span><span class="k">do</span> not use the <span class="sb">`</span>antigen theme<span class="sb">`</span> <span class="k">function</span><span class="o">)</span>.
+
+
+<span class="c">## License</span>
+
+MIT © <span class="o">[</span>Sindre Sorhus<span class="o">](</span>http://sindresorhus.com<span class="o">)</span>
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>.zshenv or .zshrc</p>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>.zshrc</p>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>.zshrc</p>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>optionally define some options</p>
+
+</pre></div></td></tr><tr><td class=docs>
+
+</pre></div></td></tr><tr><td class=docs></td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

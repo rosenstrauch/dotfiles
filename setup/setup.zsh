@@ -23,6 +23,8 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 #ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 #done
 
+pip install Pygments
+
 # setup powerline
 pip install git+git://github.com/Lokaltog/powerline.git
 pip install git+git://github.com/kovidgoyal/powerline-daemon.git

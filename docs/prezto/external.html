@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>README.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>README.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'></pre></div></td></tr><tr><td class=docs>
+</td><td class=code><div class=highlight><pre>
+zsh-syntax-highlighting
+<span class="o">=======================</span>
+
+**<span class="o">[</span>Fish shell<span class="o">](</span>http://www.fishshell.com<span class="o">)</span> like syntax highlighting <span class="k">for</span> <span class="o">[</span>Zsh<span class="o">](</span>http://www.zsh.org<span class="o">)</span>.**
+
+*Requirements: zsh 4.3.17+.*
+
+
+How to install
+--------------
+
+<span class="c">### Using packages</span>
+
+* Arch Linux: <span class="o">[</span>community/zsh-syntax-highlighting<span class="o">](</span>https://www.archlinux.org/packages/zsh-syntax-highlighting<span class="o">)</span> / <span class="o">[</span>AUR/zsh-syntax-highlighting-git<span class="o">](</span>https://aur.archlinux.org/packages/zsh-syntax-highlighting-git<span class="o">)</span>
+* Gentoo: <span class="o">[</span>mv overlay<span class="o">](</span>http://gpo.zugaina.org/app-shells/zsh-syntax-highlighting<span class="o">)</span>
+
+<span class="c">### In your ~/.zshrc</span>
+
+* Download the script or clone this repository:
+
+git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+
+* Source the script **at the end** of <span class="sb">`</span>~/.zshrc<span class="sb">`</span>:
+
+<span class="nb">source</span> /path/to/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+* Source <span class="sb">`</span>~/.zshrc<span class="sb">`</span>  to take changes into account:
+
+<span class="nb">source</span> ~/.zshrc
+
+
+<span class="c">### With oh-my-zsh</span>
+
+* Download the script or clone this repository in <span class="o">[</span>oh-my-zsh<span class="o">](</span>http://github.com/robbyrussell/oh-my-zsh<span class="o">)</span> plugins directory:
+
+<span class="nb">cd</span> ~/.oh-my-zsh/custom/plugins
+git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+
+* Activate the plugin in <span class="sb">`</span>~/.zshrc<span class="sb">`</span> <span class="o">(</span>in **last** position<span class="o">)</span>:
+
+<span class="nv">plugins</span><span class="o">=(</span> <span class="o">[</span>plugins...<span class="o">]</span> zsh-syntax-highlighting<span class="o">)</span>
+
+* Source <span class="sb">`</span>~/.zshrc<span class="sb">`</span>  to take changes into account:
+
+<span class="nb">source</span> ~/.zshrc
+
+
+How to tweak
+------------
+
+Syntax highlighting is <span class="k">done</span> by pluggable highlighter scripts, see the <span class="o">[</span>highlighters directory<span class="o">](</span>highlighters<span class="o">)</span>
+<span class="k">for</span> documentation and configuration settings.</td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

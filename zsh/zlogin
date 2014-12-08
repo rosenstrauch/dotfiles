@@ -53,7 +53,7 @@ setopt prompt_subst
 ## RVM needs to be first
 #PATH=$HOME/.rvm/bin:$PATH
 ## NPM
-#PATH=node_modules/.bin:/usr/local/share/npm/bin:$PATH
+PATH=$PATH:node_modules/.bin:/usr/local/share/npm/bin
 ## Composer
 #PATH=vendor/bin:$PATH:$HOME/.composer/vendor/bin
 

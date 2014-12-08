@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>README.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>README.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'><p>Call this highlighter in SVN repositories</p>
+
+</td><td class=code><div class=highlight><pre>
+zsh-syntax-highlighting / <span class="nv">highlighters</span>
+<span class="o">======================================</span>
+
+Syntax highlighting is <span class="k">done</span> by pluggable highlighters:
+
+* <span class="o">[</span>***main***<span class="o">](</span>main<span class="o">)</span> - the base highlighter, and the only one active by default.
+* <span class="o">[</span>***brackets***<span class="o">](</span>brackets<span class="o">)</span> - matches brackets and parenthesis.
+* <span class="o">[</span>***pattern***<span class="o">](</span>pattern<span class="o">)</span> - matches user-defined patterns.
+* <span class="o">[</span>***cursor***<span class="o">](</span>cursor<span class="o">)</span> - matches the cursor position.
+* <span class="o">[</span>***root***<span class="o">](</span>root<span class="o">)</span> - triggered <span class="k">if</span> the current user is root.
+* <span class="o">[</span>***line***<span class="o">](</span>line<span class="o">)</span> - applied to the whole <span class="nb">command </span>line
+
+
+How to activate highlighters
+----------------------------
+
+To activate an highlighter, add it to the <span class="sb">`</span>ZSH_HIGHLIGHT_HIGHLIGHTERS<span class="sb">`</span> array in <span class="sb">`</span>~/.zshrc<span class="sb">`</span>, <span class="k">for</span> example:
+
+<span class="nv">ZSH_HIGHLIGHT_HIGHLIGHTERS</span><span class="o">=(</span>main brackets pattern cursor<span class="o">)</span>
+
+
+How to tweak highlighters
+-------------------------
+
+Highlighters look up styles from the <span class="sb">`</span>ZSH_HIGHLIGHT_STYLES<span class="sb">`</span> array. Navigate into each highlighter directory to see what styles it defines and how to configure it.
+
+
+How to implement a new highlighter
+----------------------------------
+
+To create your own ***myhighlighter*** highlighter:
+
+* Create your script at **highlighters/*myhighlighter*/*myhighlighter*-highlighter.zsh**.
+* Implement the <span class="sb">`</span>_zsh_highlight_myhighlighter_highlighter_predicate<span class="sb">`</span> <span class="k">function</span>. This <span class="k">function</span> must <span class="k">return</span> <span class="m">0</span> when the highlighter needs to be called, <span class="k">for</span> example:
+
+_zsh_highlight_myhighlighter_highlighter_predicate<span class="o">()</span> <span class="o">{</span>
+<span class="o">[[</span> -d .svn <span class="o">]]</span>
+        <span class="o">}</span>
+
+* Implement the <span class="sb">`</span>_zsh_highlight_myhighlighter_highlighter<span class="sb">`</span> <span class="k">function</span>. This <span class="k">function</span> does the actual syntax highlighting, by modifying <span class="sb">`</span>region_highlight<span class="sb">`</span>, <span class="k">for</span> example:
+
+        _zsh_highlight_myhighlighter_highlighter<span class="o">()</span> <span class="o">{</span>
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Colorize the whole buffer with blue background</p>
+
+</td><td class=code><div class=highlight><pre>
+          region_highlight+<span class="o">=(</span><span class="m">0</span> <span class="nv">$#BUFFER</span> <span class="nb">bg</span><span class="o">=</span>blue<span class="o">)</span>
+        <span class="o">}</span>
+
+* Activate your highlighter in <span class="sb">`</span>~/.zshrc<span class="sb">`</span>:
+
+        ZSH_HIGHLIGHT_HIGHLIGHTERS+<span class="o">=(</span>myhighlighter<span class="o">)</span>
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs></td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -30,6 +30,10 @@ $path
 /usr/local/{bin,sbin}
 )
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 export DEFAULT_CHEAT_DIR=~/.cheat
 export CHEATPATH=~/.dotfiles/manual/cheat
-export CHEATCOLORS=true 	export CHEATCOLORS=true
+export CHEATCOLORS=true

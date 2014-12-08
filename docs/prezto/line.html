@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>README.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>README.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'></pre></div></td></tr><tr><td class=docs>
+</td><td class=code><div class=highlight><pre>
+zsh-syntax-highlighting / highlighters / <span class="nv">line</span>
+<span class="o">=================================================</span>
+
+This is the ***line*** highlighter, that highlights the whole line.
+
+
+How to activate it
+------------------
+To activate it, add it to <span class="sb">`</span>ZSH_HIGHLIGHT_HIGHLIGHTERS<span class="sb">`</span>:
+
+<span class="nv">ZSH_HIGHLIGHT_HIGHLIGHTERS</span><span class="o">=(</span> <span class="o">[</span>...<span class="o">]</span> line<span class="o">)</span>
+
+
+How to tweak it
+---------------
+This highlighter defines the following styles:
+
+* <span class="sb">`</span>line<span class="sb">`</span> - the style <span class="k">for</span> the whole line
+
+To override one of those styles, change its entry in <span class="sb">`</span>ZSH_HIGHLIGHT_STYLES<span class="sb">`</span>, <span class="k">for</span> example in <span class="sb">`</span>~/.zshrc<span class="sb">`</span>:
+
+ZSH_HIGHLIGHT_STYLES<span class="o">[</span>line<span class="o">]=</span><span class="s1">&#39;bold&#39;</span>
+
+The syntax <span class="k">for</span> declaring styles is <span class="o">[</span>documented here<span class="o">](</span>http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#SEC135<span class="o">)</span>.</td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

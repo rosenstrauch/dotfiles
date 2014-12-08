@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>README.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>README.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'></pre></div></td></tr><tr><td class=docs>
+</td><td class=code><div class=highlight><pre>
+<span class="nv">Perl</span>
+<span class="o">====</span>
+
+Enables <span class="nb">local</span> <span class="o">[</span>Perl<span class="o">][</span>1<span class="o">]</span> module installation on Mac OS X and defines aliases.
+
+Local Module Installation
+-------------------------
+
+Perl versions older than 5.14 <span class="k">do</span> not support the <span class="nb">local </span>installation of Perl
+modules natively. This module allows <span class="k">for</span> <span class="nb">local </span>installation of Perl modules on
+Mac OS X in *~/Library/Perl/5.12* by altering the environment.
+
+<span class="c">### Usage</span>
+
+For Perl versions older than 5.14, install *local::lib*.
+
+curl -L -C - -O http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
+tar xvf <span class="nb">local</span>-lib-1.008004.tar.gz
+<span class="nb">cd local</span>-lib-1.008004
+perl Makefile.PL --bootstrap<span class="o">=</span><span class="nv">$HOME</span>/Library/Perl/5.12
+make <span class="o">&amp;&amp;</span> make <span class="nb">test</span> <span class="o">&amp;&amp;</span> make install
+
+Install *cpanminus*:
+
+curl -L http://cpanmin.us <span class="p">|</span> perl - --self-upgrade
+
+Perlbrew
+--------
+
+An alternative to the above is to use <span class="o">[</span>Perlbrew<span class="o">][</span>2<span class="o">]</span>, which allows <span class="k">for</span> the
+management of multiple, isolated Perl installations in the home directory.
+
+Aliases
+-------
+
+<span class="c">### General</span>
+
+- <span class="sb">`</span>pl<span class="sb">`</span> is short <span class="k">for</span> <span class="sb">`</span>perl<span class="sb">`</span>.
+- <span class="sb">`</span>pld<span class="sb">`</span> looks up Perl documentation <span class="o">(</span><span class="sb">`</span>perldoc<span class="sb">`</span><span class="o">)</span>.
+- <span class="sb">`</span>ple<span class="sb">`</span> executes a one line program in a loop <span class="o">(</span><span class="sb">`</span>perl -wlne<span class="sb">`</span><span class="o">)</span>.
+
+<span class="c">### Perlbrew</span>
+
+- <span class="sb">`</span>plb<span class="sb">`</span> manages Perl environments.
+- <span class="sb">`</span>plba<span class="sb">`</span> lists available Perl versions.
+- <span class="sb">`</span>plbi<span class="sb">`</span> installs a Perl version.
+- <span class="sb">`</span>plbl<span class="sb">`</span> lists installed Perl versions.
+- <span class="sb">`</span>plbo<span class="sb">`</span> temporarily turns off Perlbrew.
+- <span class="sb">`</span>plbO<span class="sb">`</span> turns off Perlbrew.
+- <span class="sb">`</span>plbs<span class="sb">`</span> switches to a Perl version.
+- <span class="sb">`</span>plbu<span class="sb">`</span> uninstalls a Perl version.
+- <span class="sb">`</span>plbx<span class="sb">`</span> temporarily sets the Perl version to use.
+
+Authors
+-------
+
+*The authors of this module should be contacted via the <span class="o">[</span>issue tracker<span class="o">][</span>3<span class="o">]</span>.*
+
+- <span class="o">[</span>Sorin Ionescu<span class="o">](</span>https://github.com/sorin-ionescu<span class="o">)</span>
+
+<span class="o">[</span>1<span class="o">]</span>: http://www.perl.org
+<span class="o">[</span>2<span class="o">]</span>: http://perlbrew.pl
+<span class="o">[</span>3<span class="o">]</span>: https://github.com/sorin-ionescu/prezto/issues</td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,4 +1,6 @@
-# Requirements
+# Dotfiles Documentation # {#mainpage}
+
+## Requirements ##
 
 - tmux
 - ack
@@ -11,34 +13,35 @@
 - silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
 - terminator
 - python-pip
+- python-pygments
 
-# Components
+## Components ##
 
 - http://dotfiles.github.io/
 - https://github.com/revans/bash-it
 - https://github.com/carlhuda/janus
 - https://github.com/sorin-ionescu/prezto
 
-# Installation using fresh
+## Installation using fresh ##
 
     FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
 
-## Initial setup
+### Initial setup ###
 there are two possibilities for initial setup. this only has to be run once after initial fresh install (not on updates) the rakefile lets you select each option, the setup script assumes you want everything
 
-### Via Rake
+### Via Rake ###
     cd ~/ && rake
     or
-### Via setup.zsh
+### Via setup.zsh ###
 > My dotfiles are managed by fresh.
 
-# Usage
+## Usage ##
 bash-it and janus are configured for login shells
 
-## Janus
+## Janus ##
 https://github.com/carlhuda/janus#customization
 
-## Bash-it
+## Bash-it ##
 
 some example bash-it commands to finde your way around
 
@@ -56,15 +59,7 @@ for moving around the terminal
 - [liquidprompt](https://github.com/nojhan/liquidprompt)
 - [Speedtest](https://github.com/sivel/speedtest-cli)
 - github commands
-    gh [<command>] [<number>]
 
-    The following commands are performed on the current project.
-
-    Available commands:
-
-        -i --issues [<number>] Open issues, optionally pass a number to open a specific issue
-        -p --pulls [<number>]  Open pull requests, optionally pass a number to open a specific pull request
-        -w --wiki              Open wiki
 
 ### bashit customizations
 
@@ -75,6 +70,7 @@ for moving around the terminal
 
 
 ## Shell enhancements:
+
 ###Drush
 - [drush.ini](https://github.com/drush-ops/drush/blob/master/examples/example.drush.ini)
 - [drushrc.php](https://github.com/drush-ops/drush/blob/master/examples/example.drushrc.php)

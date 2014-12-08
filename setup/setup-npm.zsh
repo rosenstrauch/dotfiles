@@ -10,13 +10,13 @@ npm install grunt-cli -g
 # npm install mongoskin -g
 # npm install nodemon -g
 # npm install npm -g
-npm install phantomjs -g
+#npm install phantomjs -g
 # npm install uglify-js -g
 # npm install uglifycss -g
 npm install bower -g
 npm install bunyan -g
 # https://www.npmjs.org/package/cheater
 npm install -g cheater
-# https://github.com/jashkenas/docco Docco is a quick-and-dirty, hundred-line-long, literate-programming-style
-# documentation generator. For more information, see:
+# Docco is a quick-and-dirty, hundred-line-long, literate-programming-style
+# documentation generator. For more information, see: https://github.com/jashkenas/docco 
 npm install -g docco

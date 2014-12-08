@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>zshenv</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>zshenv</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'><p>Defines environment variables.</p>
+
+</td><td class=code><div class=highlight><pre>
+
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Some handy directories</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="nb">export </span><span class="nv">USR_DIR</span><span class="o">=</span><span class="nv">$HOME</span>
+<span class="nb">export </span><span class="nv">PROJECTS_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/dev
+<span class="nb">export </span><span class="nv">DOTFILES_DIR</span><span class="o">=</span><span class="nv">$USR_DIR</span>/.dotfiles
+<span class="nb">export </span><span class="nv">BRAINDUMP_DIR</span><span class="o">=</span><span class="nv">$USR_DIR</span>/braindump
+<span class="nb">export </span><span class="nv">FRESH_DIR</span><span class="o">=</span><span class="nv">$USR_DIR</span>/.fresh
+<span class="nb">export </span><span class="nv">ZSH_DIR</span><span class="o">=</span><span class="nv">$FRESH_DIR</span>/build/zsh
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Ensure that a non-login, non-interactive shell has a defined environment.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$SHLVL</span><span class="s2">&quot;</span> -eq <span class="m">1</span> <span class="o">&amp;&amp;</span> ! -o LOGIN <span class="o">&amp;&amp;</span> -s <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.zprofile&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">source</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.zprofile&quot;</span>
+<span class="k">fi</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Set the list of directories that Zsh searches for programs.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="nv">path</span><span class="o">=(</span>
+
+<span class="c">#${ZDOTDIR:-$HOME}/{bin,sbin}</span>
+<span class="c">#${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements</span>
+<span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span>/.composer/vendor/bin
+<span class="nv">$path</span>
+/usr/local/<span class="o">{</span>bin,sbin<span class="o">}</span>
+<span class="o">)</span>
+
+<span class="nb">export </span><span class="nv">PYENV_ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.pyenv&quot;</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PYENV_ROOT</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>pyenv init -<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="nb">export </span><span class="nv">DEFAULT_CHEAT_DIR</span><span class="o">=</span>~/.cheat
+<span class="nb">export </span><span class="nv">CHEATPATH</span><span class="o">=</span>~/.dotfiles/manual/cheat
+<span class="nb">export </span><span class="nv">CHEATCOLORS</span><span class="o">=</span><span class="nb">true</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs></td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

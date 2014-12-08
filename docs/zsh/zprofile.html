@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>zprofile</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>zprofile</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'><p>Executes commands at login pre-zshrc.</p>
+
+<p>Authors:
+  Sorin Ionescu <a href="&#x6D;a&#x69;&#x6C;&#x74;&#111;:&#115;&#111;&#114;&#x69;n&#46;&#x69;o&#x6E;&#101;&#x73;c&#117;&#64;&#x67;m&#x61;&#105;&#108;&#x2E;&#x63;&#111;&#109;">&#115;&#111;&#114;&#x69;n&#46;&#x69;o&#x6E;&#101;&#x73;c&#117;&#64;&#x67;m&#x61;&#105;&#108;&#x2E;&#x63;&#111;&#109;</a></p>
+
+<p>Browser</p>
+
+</td><td class=code><div class=highlight><pre>
+
+
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$OSTYPE</span><span class="s2">&quot;</span> <span class="o">==</span> darwin* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">export </span><span class="nv">BROWSER</span><span class="o">=</span><span class="s1">&#39;open&#39;</span>
+<span class="k">fi</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Editors</p>
+
+</td><td class=code><div class=highlight><pre>
+
+<span class="nb">export </span><span class="nv">EDITOR</span><span class="o">=</span><span class="s1">&#39;nano&#39;</span>
+<span class="nb">export </span><span class="nv">VISUAL</span><span class="o">=</span><span class="s1">&#39;nano&#39;</span>
+<span class="nb">export </span><span class="nv">PAGER</span><span class="o">=</span><span class="s1">&#39;less&#39;</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Language</p>
+
+</td><td class=code><div class=highlight><pre>
+
+<span class="k">if</span> <span class="o">[[</span> -z <span class="s2">&quot;</span><span class="nv">$LANG</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">export </span><span class="nv">LANG</span><span class="o">=</span><span class="s1">&#39;en_US.UTF-8&#39;</span>
+<span class="k">fi</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Paths</p>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Ensure path arrays do not contain duplicates.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="nb">typeset</span> -gU cdpath fpath mailpath path
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Set the the list of directories that cd searches.</p>
+
+</td><td class=code><div class=highlight><pre>
+ <span class="nv">cdpath</span><span class="o">=(</span>
+   <span class="nv">$cdpath</span>
+ <span class="o">)</span>
+
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Set the list of directories that Zsh searches for programs.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="nv">path</span><span class="o">=(</span>
+<span class="nv">$path</span>
+  /usr/local/<span class="o">{</span>bin,sbin<span class="o">}</span>
+</pre></div></td></tr><tr><td class=docs>
+
+<p>${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="o">)</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Less</p>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Set the default Less options.
+Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
+Remove -X and -F (exit if the content fits on one screen) to enable it.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="nb">export </span><span class="nv">LESS</span><span class="o">=</span><span class="s1">&#39;-F -g -i -M -R -S -w -X -z-4&#39;</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Set the Less input preprocessor.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="k">if</span> <span class="o">((</span> <span class="nv">$+</span>commands<span class="o">[</span>lesspipe.sh<span class="o">]</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">export </span><span class="nv">LESSOPEN</span><span class="o">=</span><span class="s1">&#39;| /usr/bin/env lesspipe.sh %s 2&gt;&amp;-&#39;</span>
+<span class="k">fi</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Temporary Files</p>
+
+</td><td class=code><div class=highlight><pre>
+
+<span class="k">if</span> <span class="o">[[</span> ! -d <span class="s2">&quot;</span><span class="nv">$TMPDIR</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">export </span><span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">&quot;/tmp/</span><span class="nv">$USER</span><span class="s2">&quot;</span>
+  mkdir -p -m <span class="m">700</span> <span class="s2">&quot;</span><span class="nv">$TMPDIR</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="nv">TMPPREFIX</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TMPDIR</span><span class="p">%/</span><span class="si">}</span><span class="s2">/zsh&quot;</span>
+<span class="k">if</span> <span class="o">[[</span> ! -d <span class="s2">&quot;</span><span class="nv">$TMPPREFIX</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  mkdir -p <span class="s2">&quot;</span><span class="nv">$TMPPREFIX</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs></td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

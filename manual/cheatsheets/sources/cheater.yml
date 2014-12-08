@@ -1,0 +1,24 @@
+
+
+---
+meta: True
+title: cheater
+subtitle: cheatsheets
+author: hangtwenty
+homepage: https://github.com/hangtwenty/cheater-ade
+
+---
+subject: cheater --help
+tip: 
+code: cheater --help |
+---
+subject: Create a blank cheat sheet skeleton
+code: cheater init -o foo.yml | 
+
+---
+subject: Fill out the contents of your cheat sheet in this YAML file.
+code: cheater -i foo.yml |
+---
+subject: https://github.com/hangtwenty/cheater-ade#multiple-files-no-problem
+tip: If you find your data file is getting too long to be manageable, go ahead and split it into multiple YAML files. cheater can take a directory as its -i/--in argument
+code: cheater -i foo/

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>README.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>README.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'></pre></div></td></tr><tr><td class=docs>
+</td><td class=code><div class=highlight><pre>
+<span class="nv">SSH</span>
+<span class="o">===</span>
+
+Provides <span class="k">for</span> an easier use of <span class="o">[</span>SSH<span class="o">][</span>1<span class="o">]</span> by setting up <span class="o">[</span>ssh-agent<span class="o">][</span>2<span class="o">]</span>.
+
+This module is disabled on Mac OS X due to custom Apple SSH support rendering it
+unnecessary. Use <span class="sb">`</span>ssh-add -K<span class="sb">`</span> to store identities in Keychain<span class="p">;</span> they will be
+added to <span class="sb">`</span>ssh-agent<span class="sb">`</span> automatically and persist between reboots.
+
+Settings
+--------
+
+<span class="c">### Identities</span>
+
+To load multiple identities, add the following line to *zpreztorc*:
+
+zstyle <span class="s1">&#39;:prezto:module:ssh:load&#39;</span> identities <span class="s1">&#39;id_rsa&#39;</span> <span class="s1">&#39;id_dsa&#39;</span> <span class="s1">&#39;id_github&#39;</span>
+
+Authors
+-------
+
+*The authors of this module should be contacted via the <span class="o">[</span>issue tracker<span class="o">][</span>3<span class="o">]</span>.*
+
+- <span class="o">[</span>Sorin Ionescu<span class="o">](</span>https://github.com/sorin-ionescu<span class="o">)</span>
+
+<span class="o">[</span>1<span class="o">]</span>: http://www.openssh.com
+<span class="o">[</span>2<span class="o">]</span>: http://www.openbsd.org/cgi-bin/man.cgi?query<span class="o">=</span>ssh-agent<span class="p">&amp;</span><span class="nv">sektion</span><span class="o">=</span>1
+<span class="o">[</span>3<span class="o">]</span>: https://github.com/sorin-ionescu/prezto/issues</td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

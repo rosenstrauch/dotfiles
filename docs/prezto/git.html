@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>README.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>README.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'></pre></div></td></tr><tr><td class=docs>
+</td><td class=code><div class=highlight><pre>
+<span class="nv">Git</span>
+<span class="o">===</span>
+
+Enhances the <span class="o">[</span>Git<span class="o">][</span>1<span class="o">]</span> distributed version control system by providing aliases,
+functions and by exposing repository status information to prompts.
+
+Git **1.7.2** is the <span class="o">[</span>minimum required version<span class="o">][</span>7<span class="o">]</span>.
+
+Settings
+--------
+
+<span class="c">### Log</span>
+
+The format of the <span class="o">[</span>git-log<span class="o">][</span>8<span class="o">]</span> output is configurable via the following style,
+where context is *brief*, *oneline*, and *medium*, which will be passed to the
+<span class="sb">`</span>--pretty<span class="o">=</span>format:<span class="sb">`</span> switch.
+
+zstyle <span class="s1">&#39;:prezto:module:git:log:context&#39;</span> format <span class="s1">&#39;&#39;</span>
+
+<span class="c">### Status</span>
+
+Retrieving the status of a repository with submodules can take a long time.
+Submodules may be ignored when they are *dirty*, *untracked*, *all*, or *none*.
+
+zstyle <span class="s1">&#39;:prezto:module:git:status:ignore&#39;</span> submodules <span class="s1">&#39;all&#39;</span>
+
+This setting affects all aliases and functions that call <span class="sb">`</span>git-status<span class="sb">`</span>.
+
+Aliases
+-------
+
+<span class="c">### Git</span>
+
+- <span class="sb">`</span>g<span class="sb">`</span> is short <span class="k">for</span> <span class="sb">`</span>git<span class="sb">`</span>.
+
+<span class="c">### Branch</span>
+
+- <span class="sb">`</span>gb<span class="sb">`</span> lists, creates, renames, and deletes branches.
+- <span class="sb">`</span>gbc<span class="sb">`</span> creates a new branch.
+- <span class="sb">`</span>gbl<span class="sb">`</span> lists branches and their commits.
+- <span class="sb">`</span>gbL<span class="sb">`</span> lists <span class="nb">local </span>and remote branches and their commits.
+- <span class="sb">`</span>gbs<span class="sb">`</span> lists branches and their commits with ancestry graphs.
+- <span class="sb">`</span>gbS<span class="sb">`</span> lists <span class="nb">local </span>and remote branches and their commits with ancestry
+graphs.
+- <span class="sb">`</span>gbx<span class="sb">`</span> deletes a branch.
+- <span class="sb">`</span>gbX<span class="sb">`</span> deletes a branch irrespective of its merged status.
+- <span class="sb">`</span>gbm<span class="sb">`</span> renames a branch.
+- <span class="sb">`</span>gbM<span class="sb">`</span> renames a branch even <span class="k">if</span> the new branch name already exists.
+
+
+<span class="c">### Commit</span>
+
+- <span class="sb">`</span>gc<span class="sb">`</span> records changes to the repository.
+- <span class="sb">`</span>gca<span class="sb">`</span> stages all modified and deleted files.
+- <span class="sb">`</span>gcm<span class="sb">`</span> records changes to the repository with the given message.
+- <span class="sb">`</span>gco<span class="sb">`</span> checks out a branch or paths to work tree.
+- <span class="sb">`</span>gcO<span class="sb">`</span> checks out hunks from the index or the tree interactively.
+- <span class="sb">`</span>gcf<span class="sb">`</span> amends the tip of the current branch using the same log message as
+*HEAD*.
+- <span class="sb">`</span>gcF<span class="sb">`</span> amends the tip of the current branch.
+- <span class="sb">`</span>gcp<span class="sb">`</span> applies changes introduced by existing commits.
+- <span class="sb">`</span>gcP<span class="sb">`</span> applies changes introduced by existing commits without committing.
+- <span class="sb">`</span>gcr<span class="sb">`</span> reverts existing commits by reverting patches and recording new
+commits.
+- <span class="sb">`</span>gcR<span class="sb">`</span> removes the *HEAD* commit.
+- <span class="sb">`</span>gcs<span class="sb">`</span> displays various types of objects.
+- <span class="sb">`</span>gcl<span class="sb">`</span> lists lost commits.
+
+<span class="c">### Conflict</span>
+
+- <span class="sb">`</span>gCl<span class="sb">`</span> lists unmerged files.
+- <span class="sb">`</span>gCa<span class="sb">`</span> adds unmerged file contents to the index.
+- <span class="sb">`</span>gCe<span class="sb">`</span> executes merge-tool on all unmerged file.
+- <span class="sb">`</span>gCo<span class="sb">`</span> checks out our changes <span class="k">for</span> unmerged paths.
+- <span class="sb">`</span>gCO<span class="sb">`</span> checks out our changes <span class="k">for</span> all unmerged paths.
+- <span class="sb">`</span>gCt<span class="sb">`</span> checks out their changes <span class="k">for</span> unmerged paths.
+- <span class="sb">`</span>gCT<span class="sb">`</span> checks out their changes <span class="k">for</span> all unmerged paths.
+
+<span class="c">### Data</span>
+
+- <span class="sb">`</span>gd<span class="sb">`</span> displays information about files in the index and the work tree.
+- <span class="sb">`</span>gdc<span class="sb">`</span> lists cached files.
+- <span class="sb">`</span>gdx<span class="sb">`</span> lists deleted files.
+- <span class="sb">`</span>gdm<span class="sb">`</span> lists modified files.
+- <span class="sb">`</span>gdu<span class="sb">`</span> lists untracked files.
+- <span class="sb">`</span>gdk<span class="sb">`</span> lists killed files.
+- <span class="sb">`</span>gdi<span class="sb">`</span> lists ignored files.
+
+<span class="c">### Fetch</span>
+
+- <span class="sb">`</span>gf<span class="sb">`</span> downloads objects and references from another repository.
+- <span class="sb">`</span>gfc<span class="sb">`</span> clones a repository into a new directory.
+- <span class="sb">`</span>gfm<span class="sb">`</span> fetches from and merges with another repository or <span class="nb">local </span>branch.
+- <span class="sb">`</span>gfr<span class="sb">`</span> fetches from and rebases on another repository or <span class="nb">local </span>branch.
+
+<span class="c">### Grep</span>
+
+- <span class="sb">`</span>gg<span class="sb">`</span> displays lines matching a pattern.
+- <span class="sb">`</span>ggi<span class="sb">`</span> displays lines matching a pattern ignoring <span class="k">case</span>.
+- <span class="sb">`</span>ggl<span class="sb">`</span> lists files matching a pattern.
+- <span class="sb">`</span>ggL<span class="sb">`</span> lists files that are not matching a pattern.
+- <span class="sb">`</span>ggv<span class="sb">`</span> displays lines not matching a pattern.
+- <span class="sb">`</span>ggw<span class="sb">`</span> displays lines matching a pattern at word boundary.
+
+<span class="c">### Index</span>
+
+- <span class="sb">`</span>gia<span class="sb">`</span> adds file contents to the index.
+- <span class="sb">`</span>giA<span class="sb">`</span> adds file contents to the index interactively.
+- <span class="sb">`</span>giu<span class="sb">`</span> adds file contents to the index <span class="o">(</span>updates only known files<span class="o">)</span>.
+- <span class="sb">`</span>gid<span class="sb">`</span> displays changes between the index and a named commit <span class="o">(</span>diff<span class="o">)</span>.
+- <span class="sb">`</span>giD<span class="sb">`</span> displays changes between the index and a named commit <span class="o">(</span>word diff<span class="o">)</span>.
+- <span class="sb">`</span>gir<span class="sb">`</span> resets the current HEAD to the specified state.
+- <span class="sb">`</span>giR<span class="sb">`</span> resets the current index interactively.
+- <span class="sb">`</span>gix<span class="sb">`</span> removes files/directories from the index <span class="o">(</span>recursively<span class="o">)</span>.
+- <span class="sb">`</span>giX<span class="sb">`</span> removes files/directories from the index <span class="o">(</span>recursively and forced<span class="o">)</span>.
+
+<span class="c">### Log</span>
+
+- <span class="sb">`</span>gl<span class="sb">`</span> displays the log.
+- <span class="sb">`</span>gls<span class="sb">`</span> displays the stats log.
+- <span class="sb">`</span>gld<span class="sb">`</span> displays the diff log.
+- <span class="sb">`</span>glo<span class="sb">`</span> displays the one line log.
+- <span class="sb">`</span>glg<span class="sb">`</span> displays the graph log.
+- <span class="sb">`</span>glb<span class="sb">`</span> displays the brief commit log.
+- <span class="sb">`</span>glc<span class="sb">`</span> displays the commit count <span class="k">for</span> each contributor in descending order.
+
+<span class="c">### Merge</span>
+
+- <span class="sb">`</span>gm<span class="sb">`</span> joins two or more development histories together.
+- <span class="sb">`</span>gmC<span class="sb">`</span> joins two or more development histories together but does not commit.
+- <span class="sb">`</span>gmF<span class="sb">`</span> joins two or more development histories together but does not commit
+generating a merge commit even <span class="k">if</span> the merge resolved as a fast-forward.
+- <span class="sb">`</span>gma<span class="sb">`</span> aborts the conflict resolution, and reconstructs the pre-merge state.
+- <span class="sb">`</span>gmt<span class="sb">`</span> runs the merge conflict resolution tools to resolve conflicts.
+
+<span class="c">### Push</span>
+
+- <span class="sb">`</span>gp<span class="sb">`</span> updates remote refs along with associated objects.
+- <span class="sb">`</span>gpf<span class="sb">`</span> forcefully updates remote refs along with associated objects.
+- <span class="sb">`</span>gpa<span class="sb">`</span> updates remote branches along with associated objects.
+- <span class="sb">`</span>gpA<span class="sb">`</span> updates remote branches and tags along with associated objects.
+- <span class="sb">`</span>gpt<span class="sb">`</span> updates remote tags along with associated objects.
+- <span class="sb">`</span>gpc<span class="sb">`</span> updates remote refs along with associated objects and adds *origin*
+as an upstream reference <span class="k">for</span> the current branch.
+- <span class="sb">`</span>gpp<span class="sb">`</span> pulls and pushes from origin to origin.
+
+<span class="c">### Rebase</span>
+
+- <span class="sb">`</span>gr<span class="sb">`</span> forward-ports <span class="nb">local </span>commits to the updated upstream head.
+- <span class="sb">`</span>gra<span class="sb">`</span> aborts the rebase.
+- <span class="sb">`</span>grc<span class="sb">`</span> continues the rebase after merge conflicts are resolved.
+- <span class="sb">`</span>gri<span class="sb">`</span> makes a list of commits to be rebased and opens the editor.
+- <span class="sb">`</span>grs<span class="sb">`</span> skips the current patch.
+
+<span class="c">### Remote</span>
+
+- <span class="sb">`</span>gR<span class="sb">`</span> manages tracked repositories.
+- <span class="sb">`</span>gRl<span class="sb">`</span> lists remote names and their URLs.
+- <span class="sb">`</span>gRa<span class="sb">`</span> adds a new remote.
+- <span class="sb">`</span>gRx<span class="sb">`</span> removes a remote.
+- <span class="sb">`</span>gRm<span class="sb">`</span> renames a remote.
+- <span class="sb">`</span>gRu<span class="sb">`</span> fetches remotes updates.
+- <span class="sb">`</span>gRp<span class="sb">`</span> prunes all stale remote tracking branches.
+- <span class="sb">`</span>gRs<span class="sb">`</span> displays information about a given remote.
+- <span class="sb">`</span>gRb<span class="sb">`</span> opens a remote on <span class="o">[</span>GitHub<span class="o">][</span>3<span class="o">]</span> in the default browser.
+
+<span class="c">### Stash</span>
+
+- <span class="sb">`</span>gs<span class="sb">`</span> stashes the changes of the dirty working directory.
+- <span class="sb">`</span>gsa<span class="sb">`</span> applies the changes recorded in a stash to the working directory.
+- <span class="sb">`</span>gsx<span class="sb">`</span> drops a stashed state.
+- <span class="sb">`</span>gsX<span class="sb">`</span> drops all the stashed states.
+- <span class="sb">`</span>gsl<span class="sb">`</span> lists stashed states.
+- <span class="sb">`</span>gsL<span class="sb">`</span> lists dropped stashed states.
+- <span class="sb">`</span>gsd<span class="sb">`</span> displays changes between the stash and its original parent.
+- <span class="sb">`</span>gsp<span class="sb">`</span> removes and applies a single stashed state from the stash list.
+- <span class="sb">`</span>gsr<span class="sb">`</span> recovers a given stashed state.
+- <span class="sb">`</span>gss<span class="sb">`</span> stashes the changes of the dirty working directory, including untracked.
+- <span class="sb">`</span>gsS<span class="sb">`</span> stashes the changes of the dirty working directory interactively.
+- <span class="sb">`</span>gsw<span class="sb">`</span> stashes the changes of the dirty working directory retaining the index.
+
+<span class="c">### Submodule</span>
+
+- <span class="sb">`</span>gS<span class="sb">`</span> initializes, updates, or inspects submodules.
+- <span class="sb">`</span>gSa<span class="sb">`</span> adds given a repository as a submodule.
+- <span class="sb">`</span>gSf<span class="sb">`</span> evaluates a shell <span class="nb">command </span>in each of checked out submodules.
+- <span class="sb">`</span>gSi<span class="sb">`</span> initializes submodules.
+- <span class="sb">`</span>gSI<span class="sb">`</span> initializes and clones submodules recursively.
+- <span class="sb">`</span>gSl<span class="sb">`</span> lists the commits of all submodules.
+- <span class="sb">`</span>gSm<span class="sb">`</span> moves a submodule.
+- <span class="sb">`</span>gSs<span class="sb">`</span> synchronizes submodules<span class="s1">&#39; remote URL to the value specified in</span>
+<span class="s1">.gitmodules.</span>
+<span class="s1">- `gSu` fetches and merges the latest changes for all submodule.</span>
+<span class="s1">- `gSx` removes a submodule.</span>
+
+<span class="s1">### Working directory</span>
+
+<span class="s1">- `gws` displays working-tree status in the short format.</span>
+<span class="s1">- `gwS` displays working-tree status.</span>
+<span class="s1">- `gwd` displays changes between the working tree and the index (diff).</span>
+<span class="s1">- `gwD` displays changes between the working tree and the index (word diff).</span>
+<span class="s1">- `gwr` resets the current HEAD to the specified state, does not touch the</span>
+<span class="s1">index nor the working tree.</span>
+<span class="s1">- `gwR` resets the current HEAD, index and working tree to the specified state.</span>
+<span class="s1">- `gwc` removes untracked files from the working tree (dry-run).</span>
+<span class="s1">- `gwC` removes untracked files from the working tree.</span>
+<span class="s1">- `gwx` removes files from the working tree and from the index recursively.</span>
+<span class="s1">- `gwX` removes files from the working tree and from the index recursively and</span>
+<span class="s1">forcefully.</span>
+
+<span class="s1">### Shadows</span>
+
+<span class="s1">The following aliases may shadow system commands:</span>
+
+<span class="s1">- `gpt` shadows the [GUID partition table maintenance utility][4].</span>
+<span class="s1">- `gs` shadows the [Ghostscript][5].</span>
+
+<span class="s1">If you frequently use the above commands, you may wish to remove said aliases</span>
+<span class="s1">from this module or to disable them at the bottom of the zshrc with `unalias`.</span>
+
+<span class="s1">You can temporarily bypass an alias by prefixing it with a backward slash:</span>
+<span class="s1">`\gpt`.</span>
+
+<span class="s1">Functions</span>
+<span class="s1">---------</span>
+
+<span class="s1">- `git-branch-current` displays the current branch.</span>
+<span class="s1">- `git-commit-lost` lists lost commits.</span>
+<span class="s1">- `git-dir` displays the path to the Git directory.</span>
+<span class="s1">- `git-hub-browse` opens the [GitHub][3] repository in the default browser.</span>
+<span class="s1">- `git-hub-shorten-url` shortens GitHub URLs.</span>
+<span class="s1">- `git-info` exposes repository information via the `$git_info` associative</span>
+<span class="s1">array.</span>
+<span class="s1">- `git-root` displays the path to the working tree root.</span>
+<span class="s1">- `git-stash-clear-interactive` asks for confirmation before clearing the stash.</span>
+<span class="s1">- `git-stash-dropped` lists dropped stashed states.</span>
+<span class="s1">- `git-stash-recover` recovers given dropped stashed states.</span>
+<span class="s1">- `git-submodule-move` moves a submodule.</span>
+<span class="s1">- `git-submodule-remove` removes a submodule.</span>
+
+<span class="s1">Theming</span>
+<span class="s1">-------</span>
+
+<span class="s1">To display information about the current repository in a prompt, define the</span>
+<span class="s1">following styles in the `prompt_name_setup` function, where the syntax for</span>
+<span class="s1">setting a style is as follows.</span>
+
+<span class="s1">zstyle &#39;</span>:prezto:module:git:info:context:subcontext<span class="s1">&#39; format &#39;</span>string<span class="s1">&#39;</span>
+
+<span class="s1">### Main Contexts</span>
+
+<span class="s1">| Name      | Format Code | Description</span>
+<span class="s1">| --------- | :---------: | ---------------------------------------------------</span>
+<span class="s1">| action    |     %s      | Special action name</span>
+<span class="s1">| ahead     |     %A      | Commits ahead of remote count</span>
+<span class="s1">| behind    |     %B      | Commits behind of remote count</span>
+<span class="s1">| branch    |     %b      | Branch name</span>
+<span class="s1">| commit    |     %c      | Commit hash</span>
+<span class="s1">| position  |     %p      | Commits from the nearest tag count</span>
+<span class="s1">| remote    |     %R      | Remote name</span>
+<span class="s1">| stashed   |     %S      | Stashed states count</span>
+
+<span class="s1">### Concise Contexts</span>
+
+<span class="s1">| Name      | Format Code | Description</span>
+<span class="s1">| --------- | :---------: | ---------------------------------------------------</span>
+<span class="s1">| clean     |     %C      | Clean state</span>
+<span class="s1">| dirty     |     %D      | Dirty files count</span>
+<span class="s1">| indexed   |     %i      | Indexed files count</span>
+<span class="s1">| unindexed |     %I      | Unindexed files count</span>
+<span class="s1">| untracked |     %u      | Untracked files count</span>
+
+<span class="s1">The following contexts must be enabled with the following zstyle:</span>
+
+<span class="s1">zstyle &#39;</span>:prezto:module:git:info<span class="s1">&#39; verbose &#39;</span>yes<span class="s1">&#39;</span>
+
+<span class="s1">### Verbose Contexts</span>
+
+<span class="s1">| Name      | Format Code | Description</span>
+<span class="s1">| --------- | :---------: | ---------------------------------------------------</span>
+<span class="s1">| added     |     %a      | Added files count</span>
+<span class="s1">| clean     |     %C      | Clean state</span>
+<span class="s1">| deleted   |     %d      | Deleted files count</span>
+<span class="s1">| dirty     |     %D      | Dirty files count</span>
+<span class="s1">| modified  |     %m      | Modified files count</span>
+<span class="s1">| renamed   |     %r      | Renamed files count</span>
+<span class="s1">| unmerged  |     %U      | Unmerged files count</span>
+<span class="s1">| untracked |     %u      | Untracked files count</span>
+
+<span class="s1">### Special Action Contexts</span>
+
+<span class="s1">| Name                 |   Format    | Description</span>
+<span class="s1">| -------------------- | :---------: | -----------------------------------------</span>
+<span class="s1">| apply                |    value    | Applying patches</span>
+<span class="s1">| bisect               |    value    | Binary searching for changes</span>
+<span class="s1">| cherry-pick          |    value    | Cherry picking</span>
+<span class="s1">| cherry-pick-sequence |    value    | Cherry picking sequence</span>
+<span class="s1">| merge                |    value    | Merging</span>
+<span class="s1">| rebase               |    value    | Rebasing</span>
+<span class="s1">| rebase-interactive   |    value    | Rebasing interactively</span>
+<span class="s1">| rebase-merge         |    value    | Rebasing merge</span>
+
+<span class="s1">First, format the repository state attributes. For example, to format the branch</span>
+<span class="s1">and remote names, define the following styles.</span>
+
+<span class="s1">zstyle &#39;</span>:prezto:module:git:info:branch<span class="s1">&#39; format &#39;</span>branch:%b<span class="s1">&#39;</span>
+<span class="s1">zstyle &#39;</span>:prezto:module:git:info:remote<span class="s1">&#39; format &#39;</span>remote:%R<span class="s1">&#39;</span>
+
+<span class="s1">Second, format how the above attributes are displayed in prompts.</span>
+
+<span class="s1">zstyle &#39;</span>:prezto:module:git:info:keys<span class="s1">&#39; format \</span>
+<span class="s1">&#39;</span>prompt<span class="s1">&#39;  &#39;</span> git<span class="o">(</span>%b<span class="o">)</span><span class="s1">&#39; \</span>
+<span class="s1">&#39;</span>rprompt<span class="s1">&#39; &#39;</span><span class="o">[</span>%R<span class="o">]</span><span class="err">&#39;</span>
+
+Last, add <span class="sb">`</span><span class="nv">$git_info</span><span class="o">[</span>prompt<span class="o">]</span><span class="sb">`</span> to <span class="sb">`</span><span class="nv">$PROMPT</span><span class="sb">`</span> and <span class="sb">`</span><span class="nv">$git_info</span><span class="o">[</span>rprompt<span class="o">]</span><span class="sb">`</span> to
+<span class="sb">`</span><span class="nv">$RPROMPT</span><span class="sb">`</span> respectively and call <span class="sb">`</span>git-info<span class="sb">`</span> in the <span class="sb">`</span>prompt_name_preexec<span class="sb">`</span> hook
+<span class="k">function</span>.
+
+Authors
+-------
+
+*The authors of this module should be contacted via the <span class="o">[</span>issue tracker<span class="o">][</span>6<span class="o">]</span>.*
+
+- <span class="o">[</span>Sorin Ionescu<span class="o">](</span>https://github.com/sorin-ionescu<span class="o">)</span>
+- <span class="o">[</span>Colin Hebert<span class="o">](</span>https://github.com/ColinHebert<span class="o">)</span>
+
+<span class="o">[</span>1<span class="o">]</span>: http://www.git-scm.com
+<span class="o">[</span>2<span class="o">]</span>: https://github.com/defunkt/hub
+<span class="o">[</span>3<span class="o">]</span>: https://www.github.com
+<span class="o">[</span>4<span class="o">]</span>: http://www.manpagez.com/man/8/gpt/
+<span class="o">[</span>5<span class="o">]</span>: http://linux.die.net/man/1/gs
+<span class="o">[</span>6<span class="o">]</span>: https://github.com/sorin-ionescu/prezto/issues
+<span class="o">[</span>7<span class="o">]</span>: https://github.com/sorin-ionescu/prezto/issues/219
+<span class="o">[</span>8<span class="o">]</span>: http://www.kernel.org/pub/software/scm/git/docs/git-log.html</td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

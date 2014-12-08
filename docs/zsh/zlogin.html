@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>zlogin</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>zlogin</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'><p>Executes commands at login post-zshrc.</p>
+
+<p>Authors:
+  Sorin Ionescu <a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;:&#115;&#111;&#114;&#x69;&#110;&#x2E;&#105;&#x6F;&#110;&#x65;&#115;&#99;&#117;&#64;&#103;&#109;&#x61;&#105;&#108;&#x2E;c&#111;&#109;">&#115;&#111;&#114;&#x69;&#110;&#x2E;&#105;&#x6F;&#110;&#x65;&#115;&#99;&#117;&#64;&#103;&#109;&#x61;&#105;&#108;&#x2E;c&#111;&#109;</a></p>
+
+<p>Execute code that does not affect the current session in the background.</p>
+
+</td><td class=code><div class=highlight><pre>
+
+<span class="o">{</span>
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Compile the completion dump to increase startup speed.</p>
+
+</td><td class=code><div class=highlight><pre>
+  <span class="nv">zcompdump</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.zcompdump&quot;</span>
+  <span class="k">if</span> <span class="o">[[</span> -s <span class="s2">&quot;</span><span class="nv">$zcompdump</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="o">(</span>! -s <span class="s2">&quot;</span><span class="si">${</span><span class="nv">zcompdump</span><span class="si">}</span><span class="s2">.zwc&quot;</span> <span class="o">||</span> <span class="s2">&quot;</span><span class="nv">$zcompdump</span><span class="s2">&quot;</span> -nt <span class="s2">&quot;</span><span class="si">${</span><span class="nv">zcompdump</span><span class="si">}</span><span class="s2">.zwc&quot;</span><span class="o">)</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    zcompile <span class="s2">&quot;</span><span class="nv">$zcompdump</span><span class="s2">&quot;</span>
+  <span class="k">fi</span>
+<span class="o">}</span> <span class="p">&amp;</span>!
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Print a random, hopefully interesting, adage.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="k">if</span> <span class="o">((</span> <span class="nv">$+</span>commands<span class="o">[</span>fortune<span class="o">]</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
+  fortune -a
+  print
+<span class="k">fi</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>Print todos.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="k">if</span> <span class="o">((</span> <span class="nv">$+</span>commands<span class="o">[</span>todo<span class="o">]</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
+  todo
+  print
+<span class="k">fi</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>adds the current branch name in green</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="c">#git_prompt_info() {</span>
+</pre></div></td></tr><tr><td class=docs>
+
+<p>ref=$(git symbolic-ref HEAD 2> /dev/null)
+if [[ -n $ref ]]; then
+echo "[%{$fg<em>bold[green]%}${ref#refs/heads/}%{$reset</em>color%}]"
+fi</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="c">#}</span>
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>makes color constants available</p>
+
+</td><td class=code><div class=highlight><pre>
+autoload -U colors
+colors
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>enable colored output from ls, etc</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="nb">export </span><span class="nv">CLICOLOR</span><span class="o">=</span>1
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>expand functions in the prompt</p>
+
+</td><td class=code><div class=highlight><pre>
+setopt prompt_subst
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>prompt
+export PS1='$(git<em>prompt</em>info)[${SSH<em>CONNECTION+"%{$fg</em>bold[green]%}%n@%m:"}%{$fg<em>bold[blue]%}%~%{$reset</em>color%}] '</p>
+
+</td><td class=code><div class=highlight><pre>
+
+
+
+<span class="c">## RVM needs to be first</span>
+<span class="c">#PATH=$HOME/.rvm/bin:$PATH</span>
+<span class="c">## NPM</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:node_modules/.bin:/usr/local/share/npm/bin
+<span class="c">## Composer</span>
+<span class="c">#PATH=vendor/bin:$PATH:$HOME/.composer/vendor/bin</span>
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+<p>add bin to path just to be sure</p>
+
+</td><td class=code><div class=highlight><pre>
+
+<span class="c">#export PATH=&quot;$HOME/.bin:$PATH&quot;</span>
+
+<span class="o">[[</span> -s <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.rvm/scripts/rvm&quot;</span> <span class="c"># Load RVM into a shell session *as a function*</span>
+
+</pre></div></td></tr><tr><td class=docs>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs></td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

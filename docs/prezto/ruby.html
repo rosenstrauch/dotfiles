@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <title>README.md</title>
+    <link rel=stylesheet href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id=container>
+    <div id=background></div>
+    <table cellspacing=0 cellpadding=0>
+    <thead>
+      <tr>
+        <th class=docs><h1>README.md</h1></th>
+        <th class=code></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr><td class='docs'><p>%v - ruby version.</p>
+
+</td><td class=code><div class=highlight><pre>
+<span class="nv">Ruby</span>
+<span class="o">====</span>
+
+Configures <span class="o">[</span>Ruby<span class="o">][</span>1<span class="o">]</span> <span class="nb">local </span>gem installation, loads version managers, and defines
+aliases.
+
+Local Gem Installation
+----------------------
+
+When a Ruby version manager is not detected, <span class="nb">local </span>gems are installed in
+*~/.gems*<span class="p">;</span> otherwise, they are installed according to the manager.
+
+RVM
+---
+
+An alternative to the above is to use <span class="o">[</span>The Ruby Version Manager <span class="o">(</span>RVM<span class="o">)][</span>2<span class="o">]</span>, which
+allows <span class="k">for</span> managing multiple, isolated Ruby installations and gem sets in the
+home directory.
+
+Since RVM is loaded into the shell and is known to override shell commands, it
+may conflict with shell scripts.
+
+Load this module as late as possible when using RVM since RVM will complain <span class="k">if</span>
+it is not first in <span class="sb">`</span><span class="nv">$PATH</span><span class="sb">`</span>.
+
+rbenv
+-----
+
+An alternative RVM is to use <span class="o">[</span>rbenv<span class="o">][</span>3<span class="o">]</span>, which allows <span class="k">for</span> switching between
+multiple, isolated Ruby installations in the home directory.
+
+While it is not as feature rich as RVM, it is not loaded into the shell and is
+not known to cause conflicts with shell scripts.
+
+chruby
+------
+
+Yet another alternative is <span class="o">[</span>chruby<span class="o">][</span>6<span class="o">]</span>, which is simpler than both RVM and
+rbenv.
+
+<span class="c">### Settings</span>
+
+<span class="c">#### Auto-Switch</span>
+
+To <span class="nb">enable </span>auto switching the Ruby version on directory change based on the
+.ruby-version file, add the following line to *zpreztorc*:
+
+zstyle <span class="s1">&#39;:prezto:module:ruby:chruby&#39;</span> auto-switch <span class="s1">&#39;yes&#39;</span>
+
+Bundler
+-------
+
+Manage gems that are not meant to be used as commands, such as application
+dependencies, with <span class="o">[</span>Bundler<span class="o">][</span>4<span class="o">]</span>.
+
+Aliases
+-------
+
+<span class="c">### General</span>
+
+- <span class="sb">`</span>rb<span class="sb">`</span> is short <span class="k">for</span> <span class="sb">`</span>ruby<span class="sb">`</span>.
+
+<span class="c">### Bundler</span>
+
+- <span class="sb">`</span>rbb<span class="sb">`</span> manages ruby dependencies <span class="o">(</span><span class="sb">`</span>bundle<span class="sb">`</span><span class="o">)</span>.
+- <span class="sb">`</span>rbbe<span class="sb">`</span> executes a script in the context of the current bundle.
+- <span class="sb">`</span>rbbi<span class="sb">`</span> installs the gems specified in the *Gemfile* in *vendor/bundle*.
+- <span class="sb">`</span>rbbI<span class="sb">`</span> installs the following:
+- gems specified in the *Gemfile* in *vendor/bundle*.
+- packages the gems into *vendor/cache*.
+- appends bundler directories to  *.gitignore*.
+- <span class="sb">`</span>rbbl<span class="sb">`</span> lists all gems in the current bundle.
+- <span class="sb">`</span>rbbo<span class="sb">`</span> opens an installed gem in the editor.
+- <span class="sb">`</span>rbbp<span class="sb">`</span> packages gem files into *vendor/cache*.
+- <span class="sb">`</span>rbbu<span class="sb">`</span> updates gems to their latest version.
+
+Functions
+---------
+
+- <span class="sb">`</span>ruby-app-root<span class="sb">`</span> displays the path to the Ruby application root directory.
+- <span class="sb">`</span>ruby-info<span class="sb">`</span> exposes information about the Ruby environment via the
+<span class="sb">`</span><span class="nv">$ruby_info</span><span class="sb">`</span> associative array.
+
+Theming
+-------
+
+To display the name of the current Ruby version in a prompt, define the
+following style in the <span class="sb">`</span>prompt_name_setup<span class="sb">`</span> <span class="k">function</span>.
+
+zstyle <span class="s1">&#39;:prezto:module:ruby:info:version&#39;</span> format <span class="s1">&#39;version:%v&#39;</span>
+
+Then add <span class="sb">`</span><span class="nv">$ruby_info</span><span class="o">[</span>version<span class="o">]</span><span class="sb">`</span> to <span class="sb">`</span><span class="nv">$PROMPT</span><span class="sb">`</span> or <span class="sb">`</span><span class="nv">$RPROMPT</span><span class="sb">`</span> and call
+<span class="sb">`</span>ruby-info<span class="sb">`</span> in the <span class="sb">`</span>prompt_name_preexec<span class="sb">`</span> hook <span class="k">function</span>.
+
+Authors
+-------
+
+*The authors of this module should be contacted via the <span class="o">[</span>issue tracker<span class="o">][</span>5<span class="o">]</span>.*
+
+  - <span class="o">[</span>Sorin Ionescu<span class="o">](</span>https://github.com/sorin-ionescu<span class="o">)</span>
+
+<span class="o">[</span>1<span class="o">]</span>: http://www.ruby-lang.org
+<span class="o">[</span>2<span class="o">]</span>: https://rvm.io
+<span class="o">[</span>3<span class="o">]</span>: https://github.com/sstephenson/rbenv
+<span class="o">[</span>4<span class="o">]</span>: http://gembundler.com
+<span class="o">[</span>5<span class="o">]</span>: https://github.com/sorin-ionescu/prezto/issues
+<span class="o">[</span>6<span class="o">]</span>: https://github.com/postmodern/chruby
+
+
+</pre></div></td></tr><tr><td class=docs>
+
+</td><td class=code><div class=highlight><pre>
+
+</pre></div></td></tr><tr><td class=docs></td><td class='code'></td></tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>

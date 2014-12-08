@@ -68,11 +68,10 @@ done
 
 # http://stackoverflow.com/a/27204087
 #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
-#export PATH="$PATH:$HOME/.pyenv/bin"
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
+export PATH="$PATH:$HOME/.pyenv/bin"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 
 export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/opt/local/bin"
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
