@@ -40,7 +40,7 @@ ln -sf ~/.dotfiles/config/autostart ~/.config/autostart
 #Helpful CLI Apps
 #--------------------
 fresh chrisallenlane/cheat . --file=src/cheat/
-
+fresh pickhardt/betty . --file=src/betty/
 # xiki installed via rvm and rakefile
 fresh trogdoro/xiki . --file=src/xiki/
 
