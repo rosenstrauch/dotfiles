@@ -24,11 +24,12 @@
     font = NanumMyeongjo 15
     background_color = "#b9b9b9"
   [[multitail]]
-    use_custom_command = True
     background_image = None
-    foreground_color = "#e53c00"
-    scrollback_infinite = True
     custom_command = multitail
+    foreground_color = "#5b5700"
+    exit_action = hold
+    background_color = "#b9b9b9"
+    scrollback_infinite = True
   [[rvm]]
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
     login_shell = True
@@ -42,10 +43,11 @@
     [[[child1]]]
       type = Terminal
       parent = window0
+      profile = default
     [[[window0]]]
       type = Window
       parent = ""
-  [[logs]]
+  [[multitail]]
     [[[child0]]]
       position = 1920:27
       type = Window

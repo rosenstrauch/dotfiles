@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=~/scripts/start-on-workspace 2 terminator --geometry=200x200+0+0
+Exec=start-on-workspace.sh 2 terminator --geometry=500x500+0+0
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=t2
+Name[en_US]=terminator2
 Name=t2
 Comment[en_US]=terminal on workspace 2
 Comment=terminal on workspace 2
