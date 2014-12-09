@@ -32,3 +32,5 @@ done
 # commands and cheatsheets
 
 # configurations and settings
+
+# gems and npms

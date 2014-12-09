@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=conky -c ~/.conkyrc
+Exec=terminator --geometry=1366x730 -e ~/scripts/start-terminator.sh &
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=conky
-Name=conky
+Name[en_US]=terminator
+Name=terminator
 Comment[en_US]=
 Comment=

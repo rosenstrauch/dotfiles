@@ -16,9 +16,19 @@
     background_color = "#b9b9b9"
     use_theme_colors = True
   [[friendlinux]]
+    use_system_font = False
+    background_darkness = 0.75
+    background_type = transparent
     background_image = None
-    background_color = "#b9b9b9"
     foreground_color = "#5b5700"
+    font = NanumMyeongjo 15
+    background_color = "#b9b9b9"
+  [[multitail]]
+    use_custom_command = True
+    background_image = None
+    foreground_color = "#e53c00"
+    scrollback_infinite = True
+    custom_command = multitail
   [[rvm]]
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
     login_shell = True
@@ -35,6 +45,19 @@
     [[[window0]]]
       type = Window
       parent = ""
+  [[logs]]
+    [[[child0]]]
+      position = 1920:27
+      type = Window
+      order = 0
+      parent = ""
+      size = 1920, 993
+    [[[terminal1]]]
+      profile = friendlinux
+      command = multitail
+      type = Terminal
+      order = 0
+      parent = child0
   [[Dev]]
     [[[child0]]]
       position = 0:27
@@ -57,4 +80,16 @@
       type = Terminal
       order = 0
       parent = child1
+  [[friendlinux]]
+    [[[child0]]]
+      position = 1927:61
+      type = Window
+      order = 0
+      parent = ""
+      size = 658, 431
+    [[[terminal1]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child0
 [plugins]

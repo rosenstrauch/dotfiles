@@ -12,6 +12,9 @@ fresh-options --bin
   fresh rtomayko/shocco Markdown.pl
   fresh bin/\*
 fresh-options
+#scripts
+
+fresh scripts/ . --file=~/scripts/
 
 # Gui apps
 
@@ -27,7 +30,7 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 
 # Desktop and autostart
 #--------------------
-ln -sf ~/.dotfiles/config/autostart ~/.config/autostart
+ln -sf ~/.dotfiles/config/autostart ~/.config
 # why cant i glob files like this? fresh config/desktop/\* --file=~/.local/share/applications/\*
 
   ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
