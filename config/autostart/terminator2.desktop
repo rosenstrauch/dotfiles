@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=start-on-workspace.sh 2 terminator --geometry=500x500+0+0
+Exec=start-on-workspace.sh 2 terminator --geometry=1366x730
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true

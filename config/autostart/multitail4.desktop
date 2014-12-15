@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=start-on-workspace.sh 3 terminator -p multitail  -l multitail -m -b
+Exec=start-on-workspace.sh 2 terminator -l multitail -p multitail -m -b --geometry=1366x730
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
