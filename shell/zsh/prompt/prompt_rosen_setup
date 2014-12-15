@@ -65,7 +65,7 @@ function prompt_rosen_precmd {
   if (( $+functions[ralias] )); then
   echo 'use aliases!'
   ralias "${PSCMD:=$history[$[HISTCMD-1]]}"
-  echo 'you ran' "${PSCMD:=$history[$[HISTCMD-1]]}"
+  echo 'you ran 'whatis "${PSCMD:=$history[$[HISTCMD-1]]}"
   fi
 }
 

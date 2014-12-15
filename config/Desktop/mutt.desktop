@@ -2,7 +2,7 @@
 Name=Mutt
 GenericName=Mutt
 Comment=Mutt in term
-Exec=mutt
+Exec=start-on-workspace.sh 1 terminator -l mutt -p mutt -m -b 
 Icon=/usr/share/pixmaps/mutt.xpm
 Terminal=true
 Type=Application

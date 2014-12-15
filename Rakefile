@@ -17,8 +17,28 @@ task :default do
   xiki_rvm
   atom_plugins
   cheat
+  go
 end
 
+def cheat
+  unless File.exist?("/usr/local/go/bin/bin")
+    puts "where is your go PATH?"
+    exit
+  end
+
+  print "install go commands? (recommended) [ynq]"
+  case $stdin.gets.chomp
+  when 'y'
+    puts "get going"
+    system %Q{go get github.com/monochromegane/vagrant-global-status/cmd/vagrant-global-status}
+    system %Q{go get github.com/peco/peco/cmd/peco}
+  when 'q'
+    exit
+  else
+    puts "skipping go"
+  end
+
+end
 
 def cheat
   unless File.exist?(File.join(ENV['HOME'], ".fresh/build/src/cheat"))

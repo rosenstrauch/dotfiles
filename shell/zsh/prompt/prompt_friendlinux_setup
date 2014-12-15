@@ -109,7 +109,7 @@ prompt_friendlinux_precmd () {
     : "${PSCMD:=$history[$[HISTCMD-1]]}"	# Default to history text
 
     # Using psvar here protects against unwanted promptsubst expansions.
-
+    # show what the last command was http://www.makeuseof.com/tag/4-ways-teach-terminal-commands-linux-si/
     psvar[7]="$PSCMD"
     psvar[8]=''		# No padding until we compute it
     psvar[9]=()

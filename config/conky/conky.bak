@@ -1,0 +1,4 @@
+
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>Favourite Bash commands<==
+$font$color${exec cat ~/.bash_history | awk 'BEGIN {FS="[ \t]+|\\|"} {print $1, $2}' | sort | uniq -c | sort -nr | head}

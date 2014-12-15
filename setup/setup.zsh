@@ -23,6 +23,9 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 #ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 #done
 
+go get github.com/monochromegane/vagrant-global-status/...
+go get github.com/peco/peco/cmd/peco
+
 pip install Pygments
 
 # setup powerline

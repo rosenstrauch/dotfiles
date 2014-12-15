@@ -4,6 +4,9 @@
       "urls": [
         {
           "github": "https://github.com"
+        },
+        {
+          "zsh-compgen": "http://superuser.com/questions/604812/how-to-execute-a-function-in-bash-or-zsh-on-every-letter-being-typed-into-prompt"
         }
       ]
     }

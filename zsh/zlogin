@@ -20,6 +20,14 @@ if (( $+commands[fortune] )); then
   print
 fi
 
+# add tipp of the day
+echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
+
+#echo "and remember:"; $(compgen -ac | shuf -n 1) -h
+
+# or cowsay tip of the day
+# cowsay -f $(ls /usr/share/cowsay/cows | shuf -n 1 | cut -d. -f1) $(whatis $(ls /bin) 2>/dev/null | shuf -n 1)
+
 # Print todos.
 if (( $+commands[todo] )); then
   todo
@@ -46,7 +54,7 @@ export CLICOLOR=1
 setopt prompt_subst
 
 # prompt
-# export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+ export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
 
 
 

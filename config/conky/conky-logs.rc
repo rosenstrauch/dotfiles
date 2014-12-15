@@ -29,25 +29,18 @@ no_buffers yes
 uppercase no
 cpu_avg_samples 1
 net_avg_samples 1
-override_utf8_locale yes
+override_utf8_locale no
 use_spacer right
 
 TEXT
-${font Verdana:style=Bold:size=16}${color #009bf9}${alignc}sysname
-
 ${font Verdana:style=Bold:size=16}${color #009bf9}${alignc}${time %a %d. %b %k:%M}
 $font$color${alignc} $kernel
-$font$color${alignc} ${pre_exec lsb_release -d | cut -f 2| tr "[:upper:]" "[:lower:]"}
 ${color #009bf9}$stippled_hr
 
-${font Verdana:style=Bold:size=10}$color${alignc}==>todos<==
-$font$color${execi 600 todo listall}
+${font Verdana:style=Bold:size=10}$color${alignc}==>DEBUG.LOG<==
+$font$color${tail /var/log/syslog 3 | cut -d"]" -f2-}
+${font Verdana:style=Bold:size=10}$color${alignc}==>DPKG.LOG<==
+$font$color${tail /var/log/dpkg.log 3}
 
-${font Verdana:style=Bold:size=10}$color${alignc}==>npm<==
-$font$color${execi 600 npm la}
-
-${font Verdana:style=Bold:size=10}$color${alignc}==>gems<==
-$font$color${execi 1600 gem list}
-${font Verdana:style=Bold:size=10}$color${alignc}==>tipoftheday<==
-
-
+${font Verdana:style=Bold:size=10}$color${alignc}==> Kernel Log <==
+$font$color${exec cat /var/log/kern.log | tail | cut -d"]" -f2-}
