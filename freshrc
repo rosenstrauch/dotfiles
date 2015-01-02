@@ -127,7 +127,7 @@ fresh_after_build() {
 
 # our own zsh files forked from prezto
 fresh zsh/\* --file
-
+fresh config/parcelliterc --file=~/.config/parcelliterc
 # my own prompt with alias suggestions
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
