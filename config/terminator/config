@@ -1,21 +1,43 @@
 [global_config]
+  window_state = maximise
+  hide_on_lose_focus = True
+  handle_size = 0
   title_hide_sizetext = True
   always_split_with_profile = True
+  focus = system
+  sticky = True
   title_inactive_fg_color = "#03008d"
-  inactive_color_offset = 0.87
+  always_on_top = True
   enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  hide_from_taskbar = True
+  inactive_color_offset = 0.46
 [keybindings]
+  new_tab = <Primary>t
+  hide_window = KP_Delete
 [profiles]
   [[default]]
     background_image = None
     login_shell = True
     visible_bell = True
-    background_darkness = 0.8
+    background_darkness = 0.48
     foreground_color = "#5b5700"
     scroll_on_output = False
     scrollback_infinite = True
     background_color = "#b9b9b9"
     use_theme_colors = True
+  [[vagrant]]
+    background_image = None
+    background_color = "#b9b9b9"
+    cursor_color = "#d52f2f"
+    foreground_color = "#5b5700"
+  [[rvm]]
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+    login_shell = True
+    background_darkness = 0.84
+    background_type = transparent
+    background_image = None
+    foreground_color = "#5b5700"
+    background_color = "#b9b9b9"
   [[friendlinux]]
     use_system_font = False
     background_darkness = 0.75
@@ -29,12 +51,13 @@
     copy_on_selection = True
     alternate_screen_scroll = False
     visible_bell = True
-    background_darkness = 0.87
+    background_darkness = 0.78
     urgent_bell = True
     background_type = transparent
     background_image = None
     foreground_color = "#5b5700"
     scroll_on_output = False
+    use_theme_colors = True
     exit_action = hold
     custom_command = multitail
     scroll_on_keystroke = False
@@ -48,14 +71,8 @@
     background_color = "#b9b9b9"
     exit_action = hold
     foreground_color = "#5b5700"
-  [[rvm]]
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
-    login_shell = True
-    background_darkness = 0.84
-    background_type = transparent
+  [[ssh]]
     background_image = None
-    foreground_color = "#5b5700"
-    background_color = "#b9b9b9"
 [layouts]
   [[default]]
     [[[child1]]]
