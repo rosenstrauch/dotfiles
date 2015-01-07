@@ -34,6 +34,11 @@ fresh rnons/mikidown mikidown.py --bin
 # sublimetext 3 plugin for xiki, TODO: fresh needs to pull correct branch
 fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/User/SublimeXiki/
 
+ln -sf ~/.dotfiles/config/.xikij ~/
+
+ln -sf ~/.dotfiles/config/sublime-text-3/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
+
+
 # gedit plugins
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
@@ -53,10 +58,15 @@ ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applicati
 # Helpful CLI Apps
 #--------------------
 
+
 fresh chrisallenlane/cheat . --file=src/cheat/
 fresh pickhardt/betty . --file=src/betty/
 # xiki installed via rvm and rakefile
 fresh trogdoro/xiki . --file=src/xiki/
+# emacs and rvm
+fresh senny/rvm.el rvm.el --file=~/.emacs.d/rvm/rvm.el
+
+
 # Commandline Fu http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
 fresh samirahmed/fu . --file=src/fu/
 
@@ -64,8 +74,17 @@ fresh samirahmed/fu . --file=src/fu/
 fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=048e3a1751f6516c770c3a1a14356ae00b67fc2a
 
 # todo.txt: simple todo list
+# and addons https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory
 fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
 fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
+fresh the1ts/todo.txt-plugins actions/projectview/projectview --file=~/.todo.actions.d/projectview --filter="chmod +x"
+fresh mgarrido/todo.txt-cli todo.actions.d/note --ref=6b29f6fcc9ab --file=~/.todo.actions.d/note
+fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgp --file=~/.todo.actions.d/lsgp
+fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions.d/lsgc
+fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
+fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
+
+fresh config/todo/todo.cfg --file=~/.todo/config
 
 # gnome shell calendar
 #fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/gnome-shell-google-calendar/gnome-shell-google-calendar.py
@@ -83,10 +102,10 @@ fresh-options --file
   fresh inputrc
   #fresh freshrc
   fresh tmux.conf
-  fresh config/todo/todo.cfg
-  fresh config/git/gitconfig
-  fresh config/git/gitignore
-  fresh config/git/gitattributes
+  fresh emacs
+  fresh gitconfig
+  fresh gitignore
+  fresh gitattributes
   fresh config/rvm/gemrc
 fresh-options
 
