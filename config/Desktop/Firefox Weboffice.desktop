@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -P Annonymous -no-remote
+Exec=firefox -P Weboffice -no-remote
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=Firefox
+Name[en_US]=Firefox Weboffice
 Name=Firefox
 Comment[en_US]=
 Comment=

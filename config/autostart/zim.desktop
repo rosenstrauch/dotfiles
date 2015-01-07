@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=sh -c "zim --server --port 1234 discipolos_commands & firefox -P friendlifox -no-remote --geometry=1366x730"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=zim
+Name=t2
+Comment[en_US]=zim commands
+Comment=commands 

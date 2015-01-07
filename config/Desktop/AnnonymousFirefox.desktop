@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=sleep 10s && ~/bin/start_conky
+Exec=firefox -P Annonymous -no-remote
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=conky
-Name=conky
+Name[en_US]=AnnonymousFirefox
+Name=Firefox
 Comment[en_US]=
 Comment=
