@@ -1,15 +1,12 @@
 [global_config]
   window_state = maximise
-  hide_on_lose_focus = True
-  handle_size = 0
+  handle_size = 1
   title_hide_sizetext = True
   always_split_with_profile = True
   focus = system
   sticky = True
   title_inactive_fg_color = "#03008d"
-  always_on_top = True
   enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  hide_from_taskbar = True
   inactive_color_offset = 0.46
 [keybindings]
   new_tab = <Primary>t
@@ -44,8 +41,8 @@
     background_type = transparent
     background_image = None
     foreground_color = "#5b5700"
-    font = Nimbus Mono L 15
-    background_color = "#b9b9b9"
+    font = Nimbus Mono L Bold 15
+    background_color = "#caffc8"
   [[multitail]]
     use_system_font = False
     copy_on_selection = True
@@ -71,6 +68,10 @@
     background_color = "#b9b9b9"
     exit_action = hold
     foreground_color = "#5b5700"
+  [[mutt]]
+    background_image = None
+    background_color = "#b9b9b9"
+    foreground_color = "#5b5700"
   [[ssh]]
     background_image = None
 [layouts]
@@ -82,6 +83,28 @@
     [[[window0]]]
       type = Window
       parent = ""
+  [[Dev]]
+    [[[child0]]]
+      position = 0:27
+      type = Window
+      order = 0
+      parent = ""
+      size = 1920, 1014
+    [[[child1]]]
+      position = 962
+      type = HPaned
+      order = 0
+      parent = child0
+    [[[terminal3]]]
+      profile = default
+      type = Terminal
+      order = 1
+      parent = child1
+    [[[terminal2]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child1
   [[friendlinux]]
     [[[child0]]]
       position = 1927:61
@@ -131,26 +154,37 @@
       order = 0
       parent = child1
       command = xiki
-  [[Dev]]
+  [[mutt]]
     [[[child0]]]
-      position = 0:27
+      position = 960:30
       type = Window
       order = 0
       parent = ""
-      size = 1920, 1014
+      size = 943, 1000
     [[[child1]]]
-      position = 962
+      position = 471
       type = HPaned
       order = 0
       parent = child0
-    [[[terminal3]]]
-      profile = default
-      type = Terminal
+    [[[child3]]]
+      position = 500
+      type = VPaned
       order = 1
       parent = child1
     [[[terminal2]]]
-      profile = default
+      profile = mutt
+      command = mutt
       type = Terminal
       order = 0
       parent = child1
+    [[[terminal5]]]
+      profile = mutt
+      type = Terminal
+      order = 1
+      parent = child3
+    [[[terminal4]]]
+      profile = mutt
+      type = Terminal
+      order = 0
+      parent = child3
 [plugins]

@@ -1,0 +1,24 @@
+{
+	"create_window_at_startup": false,
+	"default_post_categories":
+	[
+		"materials"
+	],
+	"default_post_layout": "",
+	"default_post_published": true,
+	"default_post_syntax": "Markdown",
+	"default_post_tags":
+	[
+	],
+	"drafts_path": "",
+	"font_size": 11,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"insert_date_format": "%Y-%m-%d",
+	"insert_datetime_format": "%Y-%m-%d %H:%M:%S",
+	"open_files_in_new_window": false,
+	"posts_path": "/home/discipolo/jekyll/_posts",
+	"translate_tabs_to_spaces": true
+}

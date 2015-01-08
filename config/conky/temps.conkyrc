@@ -26,4 +26,5 @@ override_utf8_locale yes
 use_spacer no
 minimum_size 1915 20
 TEXT
-${goto 5}Kernel: ${color1}${font purisa:size=14}$kernel${color}${font} Uptime: ${color1}${uptime_short}${color}${alignr} Temps: CPU:${color1}${if_existing /sys/class/hwmon/hwmon0/temp1_input}${hwmon 0 temp 1}${else}${hwmon 1 temp 1}${endif}°C ${color}Case:${color1}${if_existing /sys/class/hwmon/hwmon0/temp2_input}${hwmon 0 temp 2}${else}${hwmon 1 temp 2}${endif}°C ${color}GPU:${color1}${nvidia temp}°C ${color}HDD:${color1}${hddtemp /dev/sda}°C
+${goto 5}Kernel: ${color1}${font purisa:size=14}$kernel${color}${font} Uptime: ${color1}${uptime_short}${color}
+Temps: CPU:${color1}${if_existing /sys/class/hwmon/hwmon0/temp1_input}${hwmon 0 temp 1}${else}${hwmon 1 temp 1}${endif}°C ${color}Case:${color1}${if_existing /sys/class/hwmon/hwmon0/device/temp2_input}${hwmon 0 temp 2}${else}${hwmon 1 temp 2}${endif}°C ${color}GPU:${color1}${execi 120 nvidia-settings -query GPUCoreTemp | grep Attribute | cut -c46-47}°C ${color}HDD:${color1}${hddtemp /dev/sda}°C

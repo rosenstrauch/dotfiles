@@ -77,14 +77,19 @@ fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --re
 # and addons https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory
 fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
 fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
-fresh the1ts/todo.txt-plugins actions/projectview/projectview --file=~/.todo.actions.d/projectview --filter="chmod +x"
+fresh the1ts/todo.txt-plugins actions/projectview/projectview --file=~/.todo.actions.d/projectview
 fresh mgarrido/todo.txt-cli todo.actions.d/note --ref=6b29f6fcc9ab --file=~/.todo.actions.d/note
 fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgp --file=~/.todo.actions.d/lsgp
 fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions.d/lsgc
 fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
 fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
 
+
+
+
 fresh config/todo/todo.cfg --file=~/.todo/config
+fresh taskrc --file=~/.taskrc
+fresh bugwarriorrc --file=~/.bugwarriorrc
 
 # gnome shell calendar
 #fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/gnome-shell-google-calendar/gnome-shell-google-calendar.py
@@ -118,7 +123,7 @@ fresh-options --file=~/.bashrc --marker
   fresh bobthecow/git-flow-completion git-flow-completion.bash
 fresh-options
 
-# some of my own zsh functions are autoloaded so we build them https://github.com/freshshell/fresh#building-files-without-symlinking 
+# some of my own zsh functions are autoloaded so we build them https://github.com/freshshell/fresh#building-files-without-symlinking
 fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
 fresh shell/zsh/functions/alls --file=zsh/functions/alls
 fresh shell/zsh/functions/ralias --file=zsh/functions/ralias
@@ -232,10 +237,10 @@ fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 
 
-# rvm 
-# Gems in the global gemset, will be added to the global gemset 
-# in every new Ruby you install. 
-# rake, rdoc and bundler are good examples of handy global gems. 
+# rvm
+# Gems in the global gemset, will be added to the global gemset
+# in every new Ruby you install.
+# rake, rdoc and bundler are good examples of handy global gems.
 # The gems in the default gemset are the gems included in every newly created gemset.
 
 fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems

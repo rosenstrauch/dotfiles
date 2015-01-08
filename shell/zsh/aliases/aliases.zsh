@@ -6,3 +6,6 @@ alias ...='nocorrect cd ../../'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias betty="~/.fresh/build/src/betty/main.rb"
+alias zcp='zmv -C'
+alias zln='zmv -L'
+alias vg='vagrant'

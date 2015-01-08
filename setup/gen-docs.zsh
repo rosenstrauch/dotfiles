@@ -25,6 +25,8 @@ for file in "${ZDOTDIR:-$HOME}"/.fresh/source/**/**/*(#ia2)readme.*; do
   shocco -t "${file:t}" ${file} > "${ZDOTDIR:-$HOME}/.dotfiles/docs/${file:h:t}/${file:h:t}.html"
 done
 
+# System Hardware
+inxi -Fxz > "${ZDOTDIR:-$HOME}/.dotfiles/docs/system.inxi"
 
 
 # Sources and their readmes

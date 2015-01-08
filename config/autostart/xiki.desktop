@@ -3,7 +3,7 @@ Type=Application
 Exec=start-on-workspace.sh 1 terminator -l Xiki -p Xiki --geometry=1366x730
 Hidden=false
 NoDisplay=false
-X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-enabled=false
 Name[en_US]=xiki
 Name=t2
 Comment[en_US]=xiki on workspace 2

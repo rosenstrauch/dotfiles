@@ -24,3 +24,15 @@
 #  'cmd-right': 'pane:split-right'
 #body':
 #  'alt-x': 'pane:close'
+'.workspace':
+  'alt-shitft-S': 'timekeeper:start'
+  'alt-shift-right': 'term2:open-split-right'
+  'alt-right': 'pane:split-right'
+  'alt-shift-up': 'term2:open-split-up'
+  'alt-up': 'pane:split-up'
+  'alt-shift-down': 'term2:open-split-down'
+  'alt-down': 'pane:split-down'
+  'alt-shift-left': 'term2:open-split-left'
+  'alt-left': 'pane:split-left'
+  'shift-alt-D': 'timekeeper:dashboard'
+  'shift-alt-L': 'livereload:toggle'

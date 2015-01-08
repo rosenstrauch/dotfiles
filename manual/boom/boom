@@ -7,6 +7,12 @@
         },
         {
           "zsh-compgen": "http://superuser.com/questions/604812/how-to-execute-a-function-in-bash-or-zsh-on-every-letter-being-typed-into-prompt"
+        },
+        {
+          "conky": "https://github.com/brndnmtthws/conky/issues/57"
+        },
+        {
+          "conky_hddtemp": "http://ubuntuforums.org/showthread.php?t=282353"
         }
       ]
     }

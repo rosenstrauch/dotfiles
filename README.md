@@ -93,9 +93,12 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 
 # TODO:
 
-##integrate more
+    
+$ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home"
+  35 add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home
+  TODO: 35 added.
+  
 
-- https://github.com/simonwhitaker/gitignore-boilerplates
 
 ##investigate alternatives
 - https://github.com/webflo/drush_zsh_completion
