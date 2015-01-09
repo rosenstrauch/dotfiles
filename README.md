@@ -6,15 +6,21 @@
 - ack
 - ctags
 - git
-- ruby
+- ruby (with rvm)
 - rake
-- vim-gnome
 - zsh
-- silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
 - terminator
 - python-pip
-- python-pygments
 
+## Recomendations ##
+- silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
+- vim-gnome
+
+
+
+## Installation Via setup.zsh ##
+
+> My dotfiles are managed by fresh.
 ## Components ##
 
 - http://dotfiles.github.io/
@@ -22,18 +28,6 @@
 - https://github.com/carlhuda/janus
 - https://github.com/sorin-ionescu/prezto
 
-## Installation using fresh ##
-
-    FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
-
-### Initial setup ###
-there are two possibilities for initial setup. this only has to be run once after initial fresh install (not on updates) the rakefile lets you select each option, the setup script assumes you want everything
-
-### Via Rake ###
-    cd ~/ && rake
-    or
-### Via setup.zsh ###
-> My dotfiles are managed by fresh.
 
 ## Usage ##
 bash-it and janus are configured for login shells
