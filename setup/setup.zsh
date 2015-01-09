@@ -9,7 +9,7 @@ mkdir -p ~/bin
 #git clone https://github.com/freshshell/fresh.git ~/.fresh/source/freshshell/fresh
 #ln -s ~/.fresh/build/.freshrc ~/.freshrc
 #~/.fresh/source/freshshell/fresh/bin/fresh
-
+FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
 # run dot file manager - replaced by fresh
 #~/.dotfiles/bin/dfm install
 
