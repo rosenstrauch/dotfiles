@@ -26,21 +26,21 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 go get github.com/monochromegane/vagrant-global-status/...
 go get github.com/peco/peco/cmd/peco
 
-pip install Pygments
+sudo pip install Pygments
 easy_install bugwarrior
 # setup powerline
-pip install git+git://github.com/Lokaltog/powerline.git
-pip install git+git://github.com/kovidgoyal/powerline-daemon.git
+sudo pip install git+git://github.com/Lokaltog/powerline.git
+sudo pip install git+git://github.com/kovidgoyal/powerline-daemon.git
 # setup cheat
-pip install git+git://github.com/chrisallenlane/cheat.git
+sudo pip install git+git://github.com/chrisallenlane/cheat.git
 # bitbucket-issues-cli needs https://bitbucket.org/jsmits/bitbucket-issues-cli/pull-request/2/patched-to-include-git-repositories-fixes/diff
-pip install -e hg+https://bitbucket.org/jsmits/bitbucket-issues-cli#egg=bbi
+sudo pip install -e hg+https://bitbucket.org/jsmits/bitbucket-issues-cli#egg=bbi
 
 # Install atom plugins
 apm install --packages-file ~/.dotfiles/config/atom/atom-packages.json
 
 # import terminal profiles
-gconftool-2 --load ~/.fresh/build/gnome-terminal-conf.xml
+#gconftool-2 --load ~/.fresh/build/gnome-terminal-conf.xml
 
 # switch to zsh
 chsh -s 'which zsh'
