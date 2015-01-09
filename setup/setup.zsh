@@ -46,7 +46,7 @@ apm install --packages-file ~/.dotfiles/config/atom/atom-packages.json
 chsh -s 'which zsh'
 
 # install xiki
-cd ~/.src/xiki
+cd ~/src/xiki
 gem install bundler
 bundle
 ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki
