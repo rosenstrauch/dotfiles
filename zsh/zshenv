@@ -13,7 +13,7 @@ export DOTFILES_DIR=$USR_DIR/.dotfiles
 export BRAINDUMP_DIR=$USR_DIR/braindump
 export FRESH_DIR=$USR_DIR/.fresh
 export ZSH_DIR=$FRESH_DIR/build/zsh
-
+export FRESH_BUILD_PATH=$FRESH_DIR/build
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
@@ -26,6 +26,7 @@ path=(
 #${ZDOTDIR:-$HOME}/{bin,sbin}
 #${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements
 ${ZDOTDIR:-$HOME}/.composer/vendor/bin
+${ZDOTDIR:-$HOME}/scripts
 $path
 /usr/local/{bin,sbin}
 )

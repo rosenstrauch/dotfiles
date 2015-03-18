@@ -11,6 +11,8 @@ fresh-options --bin
   fresh rtomayko/shocco shocco.sh
   fresh rtomayko/shocco Markdown.pl
   #fresh monochromegane/vagrant-peco
+  fresh klausi/pareviewsh pareview.sh
+  fresh lucasdemarchi/codespell codespell.py
   fresh bin/\*
 fresh-options
 
@@ -25,6 +27,9 @@ fresh-options
 
 # our scripts  bin path?
 fresh scripts/\* --bin
+
+
+
 
 # Gui apps
 
@@ -71,7 +76,7 @@ fresh senny/rvm.el rvm.el --file=~/.emacs.d/rvm/rvm.el
 fresh samirahmed/fu . --file=src/fu/
 
 # Git achievements
-fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=048e3a1751f6516c770c3a1a14356ae00b67fc2a
+fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=gh-pages
 
 # todo.txt: simple todo list
 # and addons https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory
@@ -179,7 +184,7 @@ fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xcha
 ## Editable config files https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files
 ############
 
-ln -sf ~/.dotfiles/manual/boom/boom  ~/.boom
+ln -sf ~/.dotfiles/manual/boom/boom ~/.boom
 
 
 #use own terminator config
@@ -235,7 +240,17 @@ fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 # ~/.drush config
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
+fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
 
+# pareview
+# https://github.com/klausi/pareviewsh
+
+fresh  squizlabs/PHP_CodeSniffer . --file=PHP_CodeSniffer/ --filter="chmod +x ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs"
+fresh  git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
+fresh  http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
+fresh  http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
+#fresh  squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
+ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
 # rvm
 # Gems in the global gemset, will be added to the global gemset

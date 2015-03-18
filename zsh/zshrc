@@ -71,7 +71,6 @@ do
 source $file
 done
 }
-
 # http://stackoverflow.com/a/27204087
 #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
