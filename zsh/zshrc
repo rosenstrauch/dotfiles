@@ -75,7 +75,6 @@ function
     source $file
   done
 }
-
 # http://stackoverflow.com/a/27204087
 #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
@@ -90,18 +89,6 @@ export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/b
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # export system ruby path
 export PATH="$PATH:/root/.gem/ruby/2.1.0/bin"
-
-
-# Persist dirstack across sessions http://chneukirchen.org/blog/archive/2012/02/10-new-zsh-tricks-you-may-not-know.html
-# DIRSTACKSIZE=9
-# DIRSTACKFILE=~/.zdirs
-# if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-#   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-#   [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
-# fi
-# chpwd() {
-#   print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
-# }
 
 # Keybindings in zsh https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 # create a zkbd compatible hash;
@@ -144,3 +131,4 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
