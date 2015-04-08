@@ -1,76 +1,94 @@
 # See http://freshshell.com/readme for documentation.
 
-# bin commands
+##############
+# commands from others
+##############
+
 fresh-options --bin
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
-  fresh sivel/speedtest-cli speedtest_cli.py
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
   fresh tj/bm bin/bm
   fresh rtomayko/shocco shocco.sh
   fresh rtomayko/shocco Markdown.pl
   #fresh monochromegane/vagrant-peco
-  fresh bin/\*
+  fresh pi3ch/taskboy taskboy
+  fresh simonwhitaker/gitignore-boilerplates gibo
+  fresh sivel/speedtest-cli speedtest_cli.py
+
 fresh-options
 
-#fresh https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
+#########
+# own scripts and commands
+#########
 
+##http://askubuntu.com/questions/349385/how-to-start-terminator-with-a-custom-command-per-window
+##http://askubuntu.com/questions/158159/how-do-i-get-terminator-to-start-up-with-my-custom-layout
 
-# scripts
-#--------------------
+fresh-options --bin
+  fresh bin/\*
+  fresh scripts/\*
+fresh-options
 
-## http://askubuntu.com/questions/349385/how-to-start-terminator-with-a-custom-command-per-window
-## http://askubuntu.com/questions/158159/how-do-i-get-terminator-to-start-up-with-my-custom-layout
-
-# our scripts  bin path?
-fresh scripts/\* --bin
-
-# Gui apps
+##########
+# Gui apps and plugins
+##########
 
 fresh rnons/mikidown . --file=src/mikidown/
 fresh rnons/mikidown mikidown.py --bin
 
 # sublimetext 3 plugin for xiki, TODO: fresh needs to pull correct branch
-fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/User/SublimeXiki/
+fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/SublimeXiki/
 
-ln -sf ~/.dotfiles/config/.xikij ~/
+#ln -sf ~/.dotfiles/config/.xikij ~/
 
-ln -sf ~/.dotfiles/config/sublime-text-3/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
-
+ln -sf ~/.dotfiles/config/sublime-text-3/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/Preferences.sublime-settings
 
 # gedit plugins
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 
+#######################
 # Desktop and autostart
-#--------------------
-ln -sf ~/.dotfiles/config/autostart ~/.config
+#######################
 
-# why cant i glob files like this? fresh config/desktop/\* --file=~/.local/share/applications/\*
+ln -sf ~/.dotfiles/config/autostart ~/.config
 ln -sf ~/.dotfiles/config/Desktop ~/
 
-# do i need the launchers in local share
+##########################
+# launchers in local share
+##########################
+
 ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
 ln -sf ~/.dotfiles/config/desktop/mutt.desktop ~/.local/share/applications/mutt.desktop
 ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applications/xiki-terminal.desktop
 
-# Helpful CLI Apps
-#--------------------
+#################
+# CLI Apps
+#################
 
 
-fresh chrisallenlane/cheat . --file=src/cheat/
-fresh pickhardt/betty . --file=src/betty/
+
 # xiki installed via rvm and rakefile
-fresh trogdoro/xiki . --file=src/xiki/
-# emacs and rvm
-fresh senny/rvm.el rvm.el --file=~/.emacs.d/rvm/rvm.el
+fresh trogdoro/xiki . --file=~/src/xiki/
 
 
-# Commandline Fu http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/
+# Commandline Fu
+# find cli commands
+# <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
 fresh samirahmed/fu . --file=src/fu/
 
+# Cheat
+# cheatsheets
+#
+fresh chrisallenlane/cheat . --file=src/cheat/
+
+
 # Git achievements
+# icefox/git-achievements
+# Aquire achievements while using git.
+
 fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=048e3a1751f6516c770c3a1a14356ae00b67fc2a
 
 # todo.txt: simple todo list
@@ -84,12 +102,10 @@ fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions
 fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
 fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
 
+fresh pickhardt/betty . --file=src/betty/
 
-
-
-fresh config/todo/todo.cfg --file=~/.todo/config
-fresh taskrc --file=~/.taskrc
-fresh bugwarriorrc --file=~/.bugwarriorrc
+#fresh yyuu/pyenv/ . --file=~/.pyenv/
+fresh nojhan/liquidprompt . --file=~/.liquidprompt/
 
 # gnome shell calendar
 #fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/gnome-shell-google-calendar/gnome-shell-google-calendar.py
@@ -101,27 +117,6 @@ fresh sampson-chen/sack sag --bin
 fresh sampson-chen/sack sgrep --bin
 fresh sampson-chen/sack .sackrc --file
 
-# Our own  Our own config files directly linked to home
-
-fresh-options --file
-  fresh inputrc
-  #fresh freshrc
-  fresh tmux.conf
-  fresh emacs
-  fresh gitconfig
-  fresh gitignore
-  fresh gitattributes
-  fresh config/rvm/gemrc
-fresh-options
-
-fresh config/conky --file=~/.conky/
-
-# BASHRC
-fresh-options --file=~/.bashrc --marker
-  fresh shell/bash/bashrc
-  fresh freshshell/fresh contrib/completion/fresh-completion.bash
-  fresh bobthecow/git-flow-completion git-flow-completion.bash
-fresh-options
 
 # some of my own zsh functions are autoloaded so we build them https://github.com/freshshell/fresh#building-files-without-symlinking
 fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
@@ -130,6 +125,119 @@ fresh shell/zsh/functions/ralias --file=zsh/functions/ralias
 
 # other functions with the correct extension are loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
+
+########
+# Config
+########
+
+# Our own  Our own config files directly linked to home
+
+fresh-options --file
+  fresh inputrc
+  #fresh freshrc
+  fresh tmux.conf
+  fresh gitconfig
+  fresh gitignore
+  fresh gitattributes
+  fresh config/rvm/gemrc
+fresh-options
+
+
+
+# various config files
+fresh config/liquidpromptrc --file=~/.config/liquidpromptrc
+fresh config/conky --file=~/.conky/
+fresh config/parcelliterc --file=~/.config/parcelliterc
+fresh config/todo/todo.cfg --file=~/.todo/config
+fresh taskrc --file=~/.taskrc
+fresh bugwarriorrc --file=~/.bugwarriorrc
+# xchat - solarized
+fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
+
+
+#########################
+# compiled configurations
+# <https://github.com/freshshell/fresh#a-single-config-file-built-from-multiple-sources>
+#########################
+
+# BASHRC
+
+fresh-options --file=~/.bashrc --marker
+  fresh shell/bash/bashrc
+  fresh freshshell/fresh contrib/completion/fresh-completion.bash
+  fresh bobthecow/git-flow-completion git-flow-completion.bash
+  fresh tmuxinator/tmuxinator completion/tmuxinator.bash
+fresh-options
+
+# TMUX.conf
+
+# use powerline for statusbar <https://github.com/foobacca/dotfiles/blob/master/tmux/statusbar>
+#fresh-options --file=~/.tmux.conf --marker
+#  fresh foobacca/dotfiles tmux/statusbar
+#fresh-options
+
+# adding on to ZSHRC
+
+fresh-options --file=~/.zshrc --marker
+  fresh freshshell/fresh contrib/completion/fresh-completion.zsh
+#  fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh
+fresh-options
+
+
+
+## VIMRC
+# using a minimal .vimrc file loading plugins via pathogen plugin updates managed by fresh
+fresh tpope/vim-pathogen autoload/pathogen.vim --file=~/.vim/autoload/pathogen.vim
+# custom color scheme for vim
+fresh vim/friendlyvim.vim --file=~/.vim/colors/friendlyvim.vim --marker='"'
+
+fresh-options --file=~/.vimrc --marker='"'
+  fresh vim/vimrc
+  # style settings
+  fresh vim/style.vim
+  # loading basic settings as plugin
+  fresh vim/basic.vim
+  # key remappings
+  fresh vim/keymaps.vim
+fresh-options
+
+## Vim Plugins
+# vimwiki
+fresh vim-scripts/vimwiki . --file=~/.vim/bundle/vimwiki/
+
+# Fasd vim
+# https://github.com/clvv/fasd/wiki/Vim-Integration
+# using https://github.com/simonair/vim-fasd/blob/master/plugin/vim-fasd.vim
+fresh simonair/vim-fasd/ plugin/vim-fasd.vim --file=~/.vim/bundle/vim-fasd/
+
+fresh http://git.drupal.org/project/vimrc.git . --file=~/.drush/vimrc/ --ref=7.x-1.x
+ln -sf ~/.drush/vimrc/bundle/vim-plugin-for-drupal ~/.vim/bundle/vim-plugin-for-drupal
+
+fresh tpope/vim-fugitive .  --file=~/.vim/bundle/vim-fugitive/
+
+fresh scrooloose/syntastic . --file=~/.vim/bundle/vim-syntastic/
+
+fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
+
+#fresh mutt --file=~/.mutt/
+
+#######
+# SHELL
+#######
+
+# our own Shell Files sourced to
+# /home/rosenstrauch/.fresh/build/shell.sh
+# https://github.com/freshshell/fresh#shell-files
+
+# Aliases
+fresh shell/zsh/aliases/\*
+# our own zsh files forked from prezto
+fresh zsh/\* --file
+
+# ZSH PROMPT
+# my own prompt with alias suggestions
+fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
+fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
 # Prezto zsh config
 fresh sorin-ionescu/prezto . --file=~/.zprezto/
@@ -145,104 +253,58 @@ fresh_after_build() {
   fi
   unset updated_submodules
 }
-########
-# Config
-########
-
-# our own zsh files forked from prezto
-fresh zsh/\* --file
-fresh config/parcelliterc --file=~/.config/parcelliterc
-# my own prompt with alias suggestions
-fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
-fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
-
-# adding on to ZSHRC
-fresh-options --file=~/.zshrc --marker
-  fresh freshshell/fresh contrib/completion/fresh-completion.zsh
-#  fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh
-fresh-options
-
-# our own zsh aliases sourced to shell.sh
-fresh shell/zsh/aliases/\*
-
-# more tmux
-fresh foobacca/dotfiles tmux/statusbar --file=~/tmux.conf
-
-#fresh yyuu/pyenv/ . --file=~/.pyenv/
-
-#colors
-
-# xchat - solarized
-fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
-
-############
-## Editable config files https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files
-############
-
-ln -sf ~/.dotfiles/manual/boom/boom  ~/.boom
 
 
-#use own terminator config
-ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
-
-# atom config
-ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
-ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
-ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
-
-# solarize vim
-fresh altercation/vim-colors-solarized . --file=~/.janus/vim-colors-solarized/
-
-
-# gnome terminal profiles (exported with $ gconftool-2 --dump '/apps/gnome-terminal' > gnome-terminal-conf.xml )
-# fresh gnome-terminal-conf.xml --file
-
-
-#shell helpers
-
-fresh nojhan/liquidprompt . --file=~/.liquidprompt/
-fresh config/liquidpromptrc --file=~/.config/liquidpromptrc
-
-#git
-fresh simonwhitaker/gitignore-boilerplates gibo --bin
-
-
-#vim
-#fresh mislav/vimfiles . --file=~/.vim/
-fresh tpope/vim-pathogen . --file=~/.vim/bundle/vim-pathogen/ # whole repository
-fresh gmarik/vundle . --file=~/.vim/bundle/vundle/
-# https://github.com/carlhuda/janus customization for vim
-fresh carlhuda/janus . --file=~/.vim/janus/
-fresh janus/gvimrc.after --file
-fresh janus/vimrc.after --file
-# more vim plugins
-fresh tomtom/tcomment_vim . --file=~/.janus/tcomment/
-fresh tpope/vim-eunuch . --file=~/.janus/vim-eunuch/
-fresh http://git.drupal.org/project/vimrc.git . --file=~/.janus/vim-drush/
-
+# BASH-IT
 # https://github.com/revans/bash_it customization
-fresh revans/bash-it . --file=~/.bash_it/
 fresh bash-it/custom.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 fresh bash-it/custom.bash --file=bash_it/lib/custom.bash
 fresh bash-it/custom.plugins.bash --file=bash_it/plugins/custom.plugins.bash
 
 
-#add drush https://github.com/drush-ops/drush/blob/master/examples/example.bashrc
+#add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
 fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 
 
 # ~/.drush config
+# Modifying the PHP or PHP configuration that drush runs under
+# <https://www.drupal.org/node/1302418>
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 
 
 # rvm
+# https://rvm.io/gemsets/global
 # Gems in the global gemset, will be added to the global gemset
 # in every new Ruby you install.
 # rake, rdoc and bundler are good examples of handy global gems.
 # The gems in the default gemset are the gems included in every newly created gemset.
+#NOTE: A little bit about where the default and global gemsets differ. If you don't use a gemset at all, you get the gems in the 'default' set. If you use a specific gemset (say @testing), it will inherit gems from that ruby's @global. The 'global' gemset is to allow you to share gems to all your gemsets. The word 'default' quite literally says it all, eg. the gemset used without selecting one for a specific installed ruby.
 
 fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
 fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 #fresh config/rvm/.rvmrc --file=~/.rvmrc
+
+############
+# Editable config files
+# <https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files>
+############
+
+# emacs and rvm
+fresh senny/rvm.el rvm.el --file=~/.emacs.d/rvm/rvm.el
+ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
+
+# tmuxinator projects
+# https://github.com/tmuxinator/tmuxinator#create-a-project
+ln -sf ~/.dotfiles/config/tmuxinator/* ~/.tmuxinator/
+# boom Links
+ln -sf ~/.dotfiles/manual/boom/boom  ~/.boom
+# cheatsheets
+ln -sf ~/.dotfiles/manual/cheat/*  ~/.cheat/
+# terminator
+ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
+# atom
+ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
+ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
+ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
