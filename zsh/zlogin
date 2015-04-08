@@ -1,6 +1,5 @@
 #
 # Executes commands at login post-zshrc.
-#
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
@@ -21,7 +20,13 @@ if (( $+commands[fortune] )); then
 fi
 
 # add tipp of the day
-echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
+#echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
+
+# inform about which shell we are using
+ps $$
+
+# list tmux projects
+tmuxinator list
 
 #echo "and remember:"; $(compgen -ac | shuf -n 1) -h
 
@@ -29,18 +34,28 @@ echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
 # cowsay -f $(ls /usr/share/cowsay/cows | shuf -n 1 | cut -d. -f1) $(whatis $(ls /bin) 2>/dev/null | shuf -n 1)
 
 # Print todos.
-if (( $+commands[todo] )); then
-  todo
-  print
-fi
+#if (( $+commands[todo] )); then
+#  echo TODO.TXT Projects
+#  todo lsprj
+#  print
+#fi
+
+# taskwarrior sync and project list
+
+#if (( $+commands[task] )); then
+#  echo Taskwarrior Projects
+#  task projects
+#  print
+#  task synchronize
+#fi
 
 # adds the current branch name in green
-git_prompt_info() {
- ref=$(git symbolic-ref HEAD 2> /dev/null)
- if [[ -n $ref ]]; then
- echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
-fi
-}
+#git_prompt_info() {
+# ref=$(git symbolic-ref HEAD 2> /dev/null)
+# if [[ -n $ref ]]; then
+# echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
+#  fi
+#}
 
 
 # makes color constants available
@@ -54,20 +69,16 @@ export CLICOLOR=1
 setopt prompt_subst
 
 # prompt
- export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
-
-
+#export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
 
 ## RVM needs to be first
 #PATH=$HOME/.rvm/bin:$PATH
 ## NPM
 PATH=$PATH:node_modules/.bin:/usr/local/share/npm/bin
 ## Composer
-#PATH=vendor/bin:$PATH:$HOME/.composer/vendor/bin
-
+PATH=vendor/bin:$PATH:$HOME/.composer/vendor/bin
 
 # add bin to path just to be sure
-
 #export PATH="$HOME/.bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

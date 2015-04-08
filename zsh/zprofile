@@ -16,10 +16,13 @@ fi
 #
 # Editors
 #
+# make sure that if a program wants you to edit
+# text, that Vim is going to be there for you
 
-export EDITOR='nano'
-export VISUAL='nano'
+export VISUAL='emacs'
 export PAGER='less'
+export EDITOR='vim'
+export USE_EDITOR="$EDITOR"
 
 #
 # Language
@@ -47,7 +50,7 @@ typeset -gU cdpath fpath mailpath path
 path=(
 $path
   /usr/local/{bin,sbin}
-#  ${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements
+${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements
 )
 
 #
@@ -77,4 +80,3 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
-

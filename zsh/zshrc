@@ -35,50 +35,112 @@ autoload -U zmv
 
 # Customize to your needs...
 
+export EDITOR='emacs'
+
 # Locale settings (utf-8)
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Source fresh shell
+# https://github.com/freshshell/fresh#installation
 if [[ -s "${ZDOTDIR:-$HOME}/.fresh/build/shell.sh" ]]; then
   source ~/.fresh/build/shell.sh
 fi
 
-
-
 # Source all of our own zsh files from ~/.fresh/build/zsh that arent already in ~/.fresh/build/shell.sh (using an anonymous function)
 function
 {
+  typeset -U config_files
+  config_files=($(find $ZSH_DIR -maxdepth 2 -type f -name "*.zsh"))
 
-typeset -U config_files
-config_files=($(find $ZSH_DIR -maxdepth 2 -type f -name "*.zsh"))
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
-source $file
-done
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
-do
-source $file
-done
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit; compinit
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
-do
-source $file
-done
+  # load the path files
+  for file in ${(M)config_files:#*/path.zsh}
+  do
+    source $file
+  done
+
+  # load everything but the path and completion files
+  for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+  do
+    source $file
+  done
+
+  # initialize autocomplete here, otherwise functions won't be loaded
+  autoload -U compinit; compinit
+
+  # load every completion after autocomplete loads
+  for file in ${(M)config_files:#*/completion.zsh}
+  do
+    source $file
+  done
 }
 
 # http://stackoverflow.com/a/27204087
 #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
+# Pyenv
 export PATH="$PATH:$HOME/.pyenv/bin"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-
 export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/opt/local/bin"
+
+# Ruby
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export system ruby path
+export PATH="$PATH:/root/.gem/ruby/2.1.0/bin"
+
+
+# Persist dirstack across sessions http://chneukirchen.org/blog/archive/2012/02/10-new-zsh-tricks-you-may-not-know.html
+# DIRSTACKSIZE=9
+# DIRSTACKFILE=~/.zdirs
+# if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+#   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+#   [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+# fi
+# chpwd() {
+#   print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+# }
+
+# Keybindings in zsh https://wiki.archlinux.org/index.php/Zsh#Key_bindings
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -A key
+
+key[Home]=${terminfo[khome]}
+
+key[End]=${terminfo[kend]}
+key[Insert]=${terminfo[kich1]}
+key[Delete]=${terminfo[kdch1]}
+key[Up]=${terminfo[kcuu1]}
+key[Down]=${terminfo[kcud1]}
+key[Left]=${terminfo[kcub1]}
+key[Right]=${terminfo[kcuf1]}
+key[PageUp]=${terminfo[kpp]}
+key[PageDown]=${terminfo[knp]}
+
+# setup key accordingly
+[[ -n "${key[Home]}"     ]]  && bindkey  "${key[Home]}"     beginning-of-line
+[[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
+[[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
+[[ -n "${key[Delete]}"   ]]  && bindkey  "${key[Delete]}"   delete-char
+[[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       up-line-or-history
+[[ -n "${key[Down]}"     ]]  && bindkey  "${key[Down]}"     down-line-or-history
+[[ -n "${key[Left]}"     ]]  && bindkey  "${key[Left]}"     backward-char
+[[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
+[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-buffer-or-history
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    function zle-line-init () {
+        printf '%s' "${terminfo[smkx]}"
+    }
+    function zle-line-finish () {
+        printf '%s' "${terminfo[rmkx]}"
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
+fi
