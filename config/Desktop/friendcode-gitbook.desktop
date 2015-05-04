@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=GitBook
+GenericName=Code Editor
+Comment=Code Editor
+Exec=bash /home/rosenstrauch/.gitbook/start.sh
+Icon= /home/rosenstrauch/.gitbook/icon.png
+Categories=Development;Utilities;TextEditor
+Terminal=false

@@ -1,51 +1,53 @@
-'*':
-  'metrics': false
-  'exception-reporting':
-    'userId': '1efb5cc8-a86b-9769-acbe-5035473f8e3c'
-  'welcome':
-    'showOnStartup': false
-  'jekyll':
-    'includesDir': 'app/_includes'
-    'layoutsDir': 'app/_layouts'
-  'core':
-    'disabledPackages': [
-      'atom-build'
-      'atom-grunt-configs'
-      'atom-grunt-runner'
-      'wakatime'
-      'atom-copy-on-select'
+"*":
+  metrics: false
+  "exception-reporting":
+    userId: "1efb5cc8-a86b-9769-acbe-5035473f8e3c"
+  welcome:
+    showOnStartup: false
+  jekyll:
+    includesDir: "app/_includes"
+    layoutsDir: "app/_layouts"
+  core:
+    disabledPackages: [
+      "atom-build"
+      "atom-grunt-configs"
+      "atom-grunt-runner"
+      "wakatime"
+      "atom-copy-on-select"
     ]
-    'themes': [
-      'atom-dark-ui'
-      'base16-tomorrow-dark-theme'
+    themes: [
+      "atom-dark-ui"
+      "base16-tomorrow-dark-theme"
     ]
-    'projectHome': '/media/discipolo/DATA/DEV/Projectrepos/'
-  'editor':
-    'fontSize': 26
-    'showInvisibles': true
-    'showIndentGuide': true
-    'softWrap': true
-    'softWrapAtPreferredLineLength': true
-    'invisibles': {}
-  'drupal':
-    'fileTypesPhp': 'module,install,inc,test'
-  'find-and-replace':
-    'openProjectFindResultsInRightPane': true
-  'project-ring':
-    'projectToLoadOnStartUp': 'TTTM'
-    'doNotSaveAndRestoreOpenProjectFiles': true
-  'wakatime':
-    'ignore': [
-      '^/var/'
-      '^/tmp/'
-      '^/private/'
+    projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
+  editor:
+    fontSize: 17
+    showInvisibles: true
+    showIndentGuide: true
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+    invisibles: {}
+  drupal:
+    fileTypesPhp: "module,install,inc,test"
+  "find-and-replace":
+    openProjectFindResultsInRightPane: true
+  "project-ring":
+    projectToLoadOnStartUp: "TTTM"
+    doNotSaveAndRestoreOpenProjectFiles: true
+  wakatime:
+    ignore: [
+      "^/var/"
+      "^/tmp/"
+      "^/private/"
     ]
-  'linter': {}
-'exception-reporting':
-  'userId': '65a586aa-48c1-3dad-6dd6-09489ae80c7e'
-'welcome':
-  'showOnStartup': false
-'metrics':
-  'userId': '5afe01d925f56ca54ea8945b2cce677f8755be3a'
-'drupal':
-  'fileTypesPhp': 'module,install,inc,test'
+  linter: {}
+  "atom-beautify":
+    _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
+"exception-reporting":
+  userId: "65a586aa-48c1-3dad-6dd6-09489ae80c7e"
+welcome:
+  showOnStartup: false
+metrics:
+  userId: "5afe01d925f56ca54ea8945b2cce677f8755be3a"
+drupal:
+  fileTypesPhp: "module,install,inc,test"

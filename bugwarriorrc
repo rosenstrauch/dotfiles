@@ -62,10 +62,10 @@ annotation_links = True
 # "sticky" options have any effect on Linux with pynotify.  They only work
 # for growlnotify.
 [notifications]
-# notifications = True
-# backend = growlnotify
-# finished_querying_sticky = False
-# task_crud_sticky = True
+ notifications = True
+ backend = growlnotify
+ finished_querying_sticky = False
+ task_crud_sticky = True
 
 [rosenstrauch_bitbucket]
 service = bitbucket
@@ -87,7 +87,7 @@ add_tags = open_source
 # to the 'ralphbean' github account.  See the note below about
 # 'github.username' and 'github.login'.  They are different, and you need
 # both.
-github.username = rosenstrauch
+username = rosenstrauch
 
 # I want taskwarrior to include issues from all my repos, except these
 # two because they're spammy or something.
@@ -104,9 +104,8 @@ github.username = rosenstrauch
 #   login as.  Set it to your account.
 # - 'github.username' is the github entity you want to pull
 #   issues for.  It could be you, or some other user entirely.
-github.login = rosenstrauch
-github.password = @oracle:ask_password
-interactive=True
+login = rosenstrauch
+passw = @oracle:use_keyring
 
 # Here's an example of a jira project. The ``jira-python`` module is
 # a bit particular, and jira deployments, like Bugzilla, tend to be
@@ -125,4 +124,4 @@ jira.query = assignee = luis.rosenstrauch and status != closed and status != res
 # the dashboard.
 # TODO: test if it works with V6 anyway
 jira.version = 6
-add_tags = enterprisey work
+add_tags = enterprise work

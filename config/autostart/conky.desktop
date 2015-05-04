@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=sleep 10s && ~/bin/start_conky
+Exec=sh "/home/rosenstrauch/.conky/conky-startup.sh"
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=conky
-Name=conky
-Comment[en_US]=
+Name[en_IN]=Conky
+Name=Conky
+Comment[en_IN]=
 Comment=

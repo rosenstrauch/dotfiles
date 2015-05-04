@@ -1,0 +1,65 @@
+# ~/.tmuxinator/friendlimux.yml
+
+name: friendlimux
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+pre_window: rvm use 2
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - Wiki:
+      layout: main-vertical
+      panes:
+        - vim ~/.dotfiles/manual/vimwiki/index.wiki
+        - emacs -nw ~/org/home.org
+        - bty
+  - Web:
+      layout: main-vertical
+      panes:
+        - lynx
+        - #empty
+  - Tasks:
+      layout: main-vertical
+      panes:
+        - task:
+          - task synchronize
+          - task project
+        - task help | less
+        - #empty
+  - Browse: mc
+  - News: newsbeuter
+  - Communication:
+      panes:
+        - irssi
+        - mutt
+  - Servers:
+      panes:
+        - gollum ~/org --config ~/gollum/config.rb
+        - #empty
+  - stats:
+      layout: main-vertical
+      panes:
+        - htop
+        - tail -f logs.txt
+  - Docs:
+      panes:
+        - commands:
+          - cheat --help
+          - boom help
+          - bindkey
+        - sleep 30s && lynx http://localhost:4567
+        - sleep 30s && lynx http://localhost:1234
+        - sleep 30s && lynx http://dashboard.rosenstrauch.com
+        - #empty

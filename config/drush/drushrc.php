@@ -1,5 +1,5 @@
 <?php
-
+$options['include'] = array('~/.vim/bundle/vim-plugin-for-drupal');
 /**
 * Examples of valid statements for a Drush runtime config (drushrc) file.
 * Use this file to cut down on typing out lengthy and repetitive command line

@@ -16,9 +16,8 @@ fresh-options --bin
   fresh pi3ch/taskboy taskboy
   fresh simonwhitaker/gitignore-boilerplates gibo
   fresh sivel/speedtest-cli speedtest_cli.py
-  fresh klausi/pareviewsh pareview.sh
+  fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
   fresh lucasdemarchi/codespell codespell.py
-  fresh bin/\*
 fresh-options
 
 #fresh https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
@@ -282,12 +281,12 @@ fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --f
 # pareview
 # https://github.com/klausi/pareviewsh
 
-fresh  squizlabs/PHP_CodeSniffer . --file=PHP_CodeSniffer/ --filter="chmod +x ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs"
+fresh  squizlabs/PHP_CodeSniffer . --file=PHP_CodeSniffer/ --filter="chmod +x ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs"
 fresh  git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
 fresh  http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
 fresh  http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
 #fresh  squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
-ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
+#ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
 # rvm
 # https://rvm.io/gemsets/global

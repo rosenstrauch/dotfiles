@@ -1,0 +1,50 @@
+background yes
+alignment tr
+gap_x 920
+use_xft yes
+xftfont Bitstream Vera Sans Mono:size=9
+xftalpha 0.8
+update_interval 15.0
+total_run_times 0
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_colour black
+own_window_hints undecorated, below, sticky, skip_taskbar, skip_pager
+#own_window_hints undecorated,skip_pager,skip_taskbar
+double_buffer yes
+minimum_size 260 5
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+stippled_borders 0
+border_width 0
+default_color white
+default_shade_color black
+default_outline_color black
+alignment top_right
+gap_y 120
+no_buffers yes
+uppercase no
+cpu_avg_samples 1
+net_avg_samples 1
+override_utf8_locale yes
+use_spacer right
+
+TEXT
+
+${if_existing /proc/net/route enp8s0}${voffset 5}${font Droid Sans:style=Bold:size=8}enp8s0${font}${goto 45}Addr:${goto 85}${font Droid Sans:style=Bold:size=8}${addr enp8s0}${font}
+${goto 45}Down:${goto 85}${font Droid Sans:style=Bold:size=8}${downspeed enp8s0}${font}${alignr}${downspeedgraph enp8s0 8,50 EEEEEE}
+${goto 45}Up:${goto 85}${font Droid Sans:style=Bold:size=8}${upspeed enp8s0}${font}${alignr}${upspeedgraph enp8s0 8,50 EEEEEE}
+${goto 45}Total:${goto 85}${font Droid Sans:style=Bold:size=8}${totaldown enp8s0}${font} / ${font Droid Sans:style=Bold:size=8}${totalup enp8s0}${font}${else}${font Droid Sans:style=Bold:size=8}enp8s0${font}${goto 45}Not Connected${endif}
+
+${color2}Download ${color0}${alignr}${downspeedf enp8s0} KiB/s
+${downspeedgraph enp8s0 80,}
+${color2}Upload ${color0}${alignr}${upspeedf enp8s0} KiB/s
+${upspeedgraph enp8s0 80,}
+${color2}Local${color0}${alignr}${addrs}
+${color2}Public${color0}${alignr}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
+
+# use this to monitor status of an ip
+#${execi 10 ~/.pingtest.sh XXX.XXX.XXX.XXX}

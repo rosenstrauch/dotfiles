@@ -6,5 +6,5 @@ NoDisplay=false
 X-GNOME-Autostart-enabled=true
 Name[en_US]=friendlinux terminator
 Name=friendlinux terminator
-Comment[en_US]=borderless fullsize with profile
-Comment=borderless fullsize with profile
+Comment[en_US]=borderless fullsize
+Comment=borderless fullsize

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=terminator --new-tab -T Develop
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=devterm
+Name=t2
+Comment[en_US]=terminal on workspace 2
+Comment=terminal on workspace 2

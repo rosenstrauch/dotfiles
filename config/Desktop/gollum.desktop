@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=gollum ~/org --config ~/gollum/config.rb
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=false
+Name[en_US]=gollum
+Name=gollum
+Comment[en_US]=gollum
+Comment=gollum

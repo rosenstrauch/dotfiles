@@ -1,0 +1,60 @@
+background yes
+alignment tl
+gap_x 920
+use_xft yes
+xftfont Bitstream Vera Sans Mono:size=9
+xftalpha 0.8
+update_interval 15.0
+total_run_times 0
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_colour black
+own_window_hints undecorated, below, sticky, skip_taskbar, skip_pager
+#own_window_hints undecorated,skip_pager,skip_taskbar
+double_buffer yes
+minimum_size 260 5
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+stippled_borders 0
+border_width 0
+default_color white
+default_shade_color black
+default_outline_color black
+alignment top_right
+gap_y 12
+no_buffers yes
+uppercase no
+cpu_avg_samples 1
+net_avg_samples 1
+override_utf8_locale yes
+use_spacer right
+
+TEXT
+
+$font$color${alignc} ${pre_exec lsb_release -d | cut -f 2| tr "[:upper:]" "[:lower:]"}
+${color #009bf9}$stippled_hr
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>Listing globally installed NPM packages and version<==
+$font$color${pre_exec npm list -g --depth=0}
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>gems<==
+$font$color${pre_exec gem list}
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>RVM Global<==
+$font$color${pre_exec rvm @global do gem list}
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>tipoftheday<==
+${pre_exec fortune -s | fold -s -w36}
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>failed services<==
+
+${pre_exec systemctl --failed}
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>smartd<==
+
+${pre_exec journalctl -u smartd}
+
+${color grey}cheat:${scroll 20 20 %{cat ~/.cheat/zim | fold}}

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=terminator --geometry=1366x730 -e ~/scripts/start-terminator.sh &
+Exec=terminator --new-tab --geometry=1366x730
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
@@ -8,3 +8,4 @@ Name[en_US]=terminator
 Name=terminator
 Comment[en_US]=
 Comment=
+Icon=/usr/share/icons/gnome-colors-common/32x32/apps/tilda.png

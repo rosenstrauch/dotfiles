@@ -18,8 +18,8 @@
 === Header3 ===
 
 *bold* -- bold 
-_italic_ -- italic 
+[[_italic_]] -- italic 
 
 [[wiki link]] -- link with spaces
 [[wiki link|description]] -- link with description
-test
+

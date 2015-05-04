@@ -7,6 +7,8 @@
   sticky = True
   title_inactive_fg_color = "#03008d"
   enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  title_receive_bg_color = "#16c900"
+  dbus = True
   inactive_color_offset = 0.46
 [keybindings]
   new_tab = <Primary>t
@@ -22,6 +24,9 @@
     scrollback_infinite = True
     background_color = "#b9b9b9"
     use_theme_colors = True
+  [[friendlimux]]
+    background_image = None
+    cursor_color = "#00b902"
   [[vagrant]]
     background_image = None
     background_color = "#b9b9b9"
@@ -41,8 +46,10 @@
     background_type = transparent
     background_image = None
     foreground_color = "#5b5700"
+    scroll_on_output = False
     font = Nimbus Mono L Bold 15
-    background_color = "#caffc8"
+    background_color = "#ffffff"
+    scrollback_infinite = True
   [[multitail]]
     use_system_font = False
     copy_on_selection = True
@@ -72,8 +79,6 @@
     background_image = None
     background_color = "#b9b9b9"
     foreground_color = "#5b5700"
-  [[ssh]]
-    background_image = None
 [layouts]
   [[default]]
     [[[child1]]]
@@ -83,6 +88,30 @@
     [[[window0]]]
       type = Window
       parent = ""
+  [[friendlimux]]
+    [[[child0]]]
+      position = 1920:0
+      type = Window
+      order = 0
+      parent = ""
+      size = 1920, 1034
+    [[[child1]]]
+      position = 960
+      type = HPaned
+      order = 0
+      parent = child0
+    [[[terminal3]]]
+      profile = friendlimux
+      command = ""
+      type = Terminal
+      order = 1
+      parent = child1
+    [[[terminal2]]]
+      profile = friendlimux
+      command = tmuxinator start friendlimux
+      type = Terminal
+      order = 0
+      parent = child1
   [[Dev]]
     [[[child0]]]
       position = 0:27
@@ -107,16 +136,52 @@
       parent = child1
   [[friendlinux]]
     [[[child0]]]
-      position = 1927:61
+      position = 1920:0
       type = Window
       order = 0
       parent = ""
-      size = 658, 431
-    [[[terminal1]]]
-      profile = default
-      type = Terminal
+      size = 1920, 1080
+    [[[child1]]]
+      labels = None, None, None
+      type = Notebook
       order = 0
       parent = child0
+    [[[child3]]]
+      position = 652
+      type = VPaned
+      order = 1
+      parent = child1
+    [[[child6]]]
+      position = 1240
+      type = HPaned
+      order = 2
+      parent = child1
+    [[[terminal2]]]
+      profile = friendlinux
+      type = Terminal
+      order = 0
+      parent = child1
+      command = /bin/bash bty
+    [[[terminal5]]]
+      profile = friendlinux
+      type = Terminal
+      order = 1
+      parent = child3
+    [[[terminal4]]]
+      profile = friendlinux
+      type = Terminal
+      order = 0
+      parent = child3
+    [[[terminal7]]]
+      profile = friendlinux
+      type = Terminal
+      order = 0
+      parent = child6
+    [[[terminal8]]]
+      profile = friendlinux
+      type = Terminal
+      order = 1
+      parent = child6
   [[multitail]]
     [[[child0]]]
       position = 1920:27
@@ -130,30 +195,6 @@
       type = Terminal
       order = 0
       parent = child0
-  [[Xiki]]
-    [[[child0]]]
-      position = 0:33
-      type = Window
-      order = 0
-      parent = ""
-      size = 1920, 1011
-    [[[child1]]]
-      position = 1346
-      type = HPaned
-      order = 0
-      parent = child0
-    [[[terminal3]]]
-      profile = Xiki
-      type = Terminal
-      order = 1
-      parent = child1
-      command = ""
-    [[[terminal2]]]
-      profile = Xiki
-      type = Terminal
-      order = 0
-      parent = child1
-      command = xiki
   [[mutt]]
     [[[child0]]]
       position = 960:30
@@ -187,4 +228,5 @@
       type = Terminal
       order = 0
       parent = child3
+      command = ""
 [plugins]

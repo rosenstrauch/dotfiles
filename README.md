@@ -16,8 +16,6 @@
 - silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
 - vim-gnome
 
-
-
 ## Installation Via setup.zsh ##
 
 > My dotfiles are managed by fresh.
@@ -25,15 +23,11 @@
 
 - http://dotfiles.github.io/
 - https://github.com/revans/bash-it
-- https://github.com/carlhuda/janus
 - https://github.com/sorin-ionescu/prezto
 
 
 ## Usage ##
-bash-it and janus are configured for login shells
-
-## Janus ##
-https://github.com/carlhuda/janus#customization
+bash-it configured for login shells
 
 ## Bash-it ##
 
@@ -48,11 +42,10 @@ some example bash-it commands to finde your way around
 ### highlights
 
 for moving around the terminal
-- https://github.com/clvv/fasd 
-- https://github.com/rupa/z
+- https://github.com/clvv/fasd
+
+customized prompts
 - [liquidprompt](https://github.com/nojhan/liquidprompt)
-- [Speedtest](https://github.com/sivel/speedtest-cli)
-- github commands
 
 
 ### bashit customizations
@@ -65,7 +58,7 @@ for moving around the terminal
 
 ## Shell enhancements:
 
-###Drush
+### Drush
 - [drush.ini](https://github.com/drush-ops/drush/blob/master/examples/example.drush.ini)
 - [drushrc.php](https://github.com/drush-ops/drush/blob/master/examples/example.drushrc.php)
 
@@ -87,11 +80,11 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 
 # TODO:
 
-    
+#fresh https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
 $ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home"
   35 add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home
   TODO: 35 added.
-  
+
 
 
 ##investigate alternatives
@@ -101,3 +94,5 @@ $ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfile
 - https://github.com/Lokaltog/powerline
 # gibo
 fresh simonwhitaker/gitignore-boilerplates gibo --bin
+http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
+http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/

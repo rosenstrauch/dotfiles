@@ -1,7 +1,6 @@
 atom-beautify
 atom-bootstrap3
 atom-color-highlight
-atom-grunt-configs
 atom-html-preview
 atom-jshint
 atom-ungit
@@ -25,7 +24,6 @@ project-manager
 project-palette-finder
 project-ring
 stacktrace
-term2
 terminal-runner
 terminal-status
 drupal

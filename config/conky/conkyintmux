@@ -1,0 +1,5 @@
+out_to_x no
+out_to_console yes
+total_run_times 1
+TEXT
+${time %H:%M}|free space:${fs_free /}|$loadavg|free mem:$memeasyfree

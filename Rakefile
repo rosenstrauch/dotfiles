@@ -3,7 +3,6 @@ require 'erb'
 
 # Installs things that fresh cannot handle because they need to be built
 # OhMyZSH for shell
-# Janus for Vim
 # Bashit for bash
 # Terminal Profiles
 
@@ -12,7 +11,7 @@ desc "install the dot files into user's home directory"
 task :default do
   switch_to_zsh
   install_bashit
-  install_janus
+  install_betty
   terminal_profiles
   xiki_rvm
   atom_plugins
@@ -20,7 +19,7 @@ task :default do
   go
 end
 
-def cheat
+def go
   unless File.exist?("/usr/local/go/bin/bin")
     puts "where is your go PATH?"
     exit
@@ -92,7 +91,7 @@ def terminal_profiles
       puts "skipping terminal profiles"
     end
   else
-    puts "no profiles to import"    
+    puts "no profiles to import"
   end
 end
 
@@ -125,7 +124,7 @@ def install_bashit
     when 'y'
       puts "installing bashit"
       system %Q{git clone https://github.com/revans/bash-it.git "$HOME/.bash_it"}
-      system %Q{sh '~/.bash_it/install.sh'}
+      system %Q{sh "$HOME/.bash_it/install.sh"}
     when 'q'
       exit
     else
@@ -145,7 +144,7 @@ def xiki_rvm
       puts "running bundle with rvm"
 # http://selfless-singleton.rickwinfrey.com/2013/01/14/using-rvm-in-rake-tasks/
       sh "pwd"
-      system %Q{bash -i -c "cd ~/.fresh/source/trogdoro/xiki/ && pwd && rvm use default && gem install bundler && bundle && ruby etc/command/copy_xiki_command_to.rb ~/bin/xiki"}      
+      system %Q{bash -i -c "cd ~/.fresh/source/trogdoro/xiki/ && pwd && rvm use default && gem install bundler && bundle && ruby etc/command/copy_xiki_command_to.rb ~/bin/xiki"}
     when 'q'
       exit
     else
@@ -155,20 +154,20 @@ def xiki_rvm
     puts "rvm missing, skipping xiki"
   end
 end
-
-def install_janus
-  if File.exist?(File.join(ENV['HOME'], ".vim"))
-    puts "found ~/.vim, please run rake inside it to update janus"
+def install_betty
+  if File.exist?(File.join(ENV['HOME'], ".betty"))
+    puts "found ~/.betty"
   else
-    print "install janus? [ynq] "
+    print "install betty? [ynq] "
     case $stdin.gets.chomp
     when 'y'
-      puts "installing janus"
-      system %Q{curl -Lo- https://bit.ly/janus-bootstrap | bash}
+      puts "installing betty"
+        sh "pwd"
+        system %Q{cp -rf ~/.fresh/source/pickhardt/betty /root/betty/}
     when 'q'
       exit
     else
-      puts "skipping janus"
+      puts "skipping betty, you will need to change ~/.<shell>rc"
     end
   end
 end

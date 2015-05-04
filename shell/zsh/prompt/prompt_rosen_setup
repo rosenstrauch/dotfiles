@@ -35,6 +35,8 @@ jobtexts  PSCMD=$jobtexts[$cmd[1]]
   PSCMD=$history[$HISTCMD]
     fi
     return 0
+
+node-info
 }
 
 function prompt_rosen_precmd {
@@ -130,13 +132,25 @@ function prompt_rosen_setup {
   
   # Set ruby-info parameters.
   zstyle ':prezto:module:ruby:info:version' format '%F{white}%v%f'
-  
 
+  # editor keymap parameters
+  zstyle ':prezto:module:editor:info:keymap:primary' format '>>>'
+  zstyle ':prezto:module:editor:info:keymap:primary:insert' format 'I'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format 'O'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format '<<<'
+  zstyle ':prezto:module:editor:info:completing' format '...'
+
+  # nodejs
+  zstyle ':prezto:module:node:info:version' format 'version:%v'
+  
   # Define prompts.
   PROMPT="
   ${todo[lsa]}
+$editor_info[keymap]
+$editor_info[insert]
+$editor_info[overwrite]
 
-
+$node_info[version]
 ${_prompt_rosen_colors[3]}%n%f at ${_prompt_rosen_colors[2]}%m%f in ${_prompt_rosen_colors[5]}%~%f "'${vcs_info_msg_0_}'"
 "'$python_info[virtualenv]'"$ "
   RPROMPT="${ruby_info[version]}"

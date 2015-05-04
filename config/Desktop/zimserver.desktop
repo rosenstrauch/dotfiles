@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=zim --server --port=1234 --gui discipolos_commands
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=zim commands server
+Name=zim server
+Comment[en_US]=zim commands server
+Comment=borderless zim commands server
+Icon=/usr/share/icons/AwOken/clear/128x128/apps/zim-panel.png

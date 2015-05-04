@@ -1,0 +1,6 @@
+"" keep vimrc clean, use plugins loaded by pathogen
+
+colorscheme friendlyvim
+set guifont=Fixed:h13
+
+execute pathogen#infect()

@@ -1,6 +1,6 @@
 background yes
-alignment tl
-gap_x 1920
+alignment br
+gap_x 120
 use_xft yes
 xftfont Bitstream Vera Sans Mono:size=9
 xftalpha 0.8
@@ -24,30 +24,35 @@ default_color white
 default_shade_color black
 default_outline_color black
 alignment top_right
-gap_y 12
+gap_y 120
 no_buffers yes
 uppercase no
 cpu_avg_samples 1
 net_avg_samples 1
 override_utf8_locale yes
 use_spacer right
+minimum_size 520 920
 
 TEXT
-${font Verdana:style=Bold:size=16}${color #009bf9}${alignc}sysname
-
-${font Verdana:style=Bold:size=16}${color #009bf9}${alignc}${time %a %d. %b %k:%M}
-$font$color${alignc} $kernel
-$font$color${alignc} ${pre_exec lsb_release -d | cut -f 2| tr "[:upper:]" "[:lower:]"}
-${color #009bf9}$stippled_hr
-
-${font Verdana:style=Bold:size=10}$color${alignc}==>todos<==
-$font$color${execi 600 todo listall}
-
-${font Verdana:style=Bold:size=10}$color${alignc}==>npm<==
-$font$color${execi 600 npm la}
-
-${font Verdana:style=Bold:size=10}$color${alignc}==>gems<==
-$font$color${execi 1600 gem list}
-${font Verdana:style=Bold:size=10}$color${alignc}==>tipoftheday<==
-
-
+${goto 5}Kernel: ${color1}${font purisa:size=14}$kernel${color}${font} Uptime: ${color1}${uptime_short}${color}
+${font Verdana:style=Bold:size=10}$color${alignc}==>Projects<==
+${execpi 3600 task projects}
+${font Verdana:style=Bold:size=10}$color${alignc}==>tmux<==
+$font$color${execpi 3600 tmux ls }
+${user_terms}
+tmuxinator open
+${font Verdana:style=Bold:size=10}$color${alignc}==>updates<==
+${execpi 86400 checkupdates | wc -l}
+Super+_${tab 40}Main Menu
+Super+\t${tab 40}Client Menu
+Super+r${tab 40}Run Dialog
+Super+t${tab 40}Terminal
+Super+f${tab 40}File Manager
+Super+e${tab 40}Editor
+Super+m${tab 40}Media Player
+Super+w${tab 40}Web Browser
+Super+g${tab 40}Graphics Editor
+Super+l${tab 40}Lock Screen
+Super+u${tab 40}System Update
+Super+v${tab 40}Volume
+Super+x${tab 40}Logout
