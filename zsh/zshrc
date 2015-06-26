@@ -9,6 +9,11 @@ then
 source ~/.zshrc.local
 fi
 
+if [[ -a ~/.xsh ]]
+then
+source ~/.xsh
+fi
+
 #zsh completion wrapper for fresh
 fpath=(~/.fresh/build/completion $fpath)
 

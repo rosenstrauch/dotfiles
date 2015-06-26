@@ -1,27 +1,50 @@
 #!/usr/bin/env zsh
-
-# setup script kindly borrowed from dfm and adjusted for our purposes as alternative to rake to augment fresh
+# remember dir for using other scripts
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 # make bin directory in home if it doesn't already exist
-mkdir -p ~/bin
+[ ! -d $HOME/bin ] && mkdir -p $HOME/bin
+
 
 # setup fresh
 #git clone https://github.com/freshshell/fresh.git ~/.fresh/source/freshshell/fresh
 #ln -s ~/.fresh/build/.freshrc ~/.freshrc
 #~/.fresh/source/freshshell/fresh/bin/fresh
-FRESH_LOCAL_SOURCE=~/.dotfiles bash <(curl -sL get.freshshell.com)
-# run dot file manager - replaced by fresh
-#~/.dotfiles/bin/dfm install
-cp -rf ~/.fresh/source/pickhardt/betty /root/betty/
-# setup vundle
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+if command -v fresh >/dev/null 2>&1; then
+    echo fresh installed...OK
+    #echo updating fresh ...
+    #fresh update
+else
+  echo installing fresh...
+  FRESH_LOCAL_SOURCE=~rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
+  echo fresh installed...OK
+fi
+
+# install betty if its not already installed
+if [ ! -d /opt/betty ]
+then
+    echo initialising betty...
+    cp -rf ~/.fresh/source/pickhardt/betty /opt/betty/
+else
+    echo betty is initialized...OK
+fi
+
+# setup vundle (now via pacman or vimrc)
+# git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 # use evil pyenv installer see https://github.com/yyuu/pyenv
-curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+#curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 #install cask
 
-curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+#curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+
+#go get github.com/monochromegane/vagrant-global-status/...
+#go get github.com/peco/peco/cmd/peco
+
+
 
 # setup prezto - this is done by fresh
 #git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
@@ -30,44 +53,74 @@ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 #ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 #done
 
-#go get github.com/monochromegane/vagrant-global-status/...
-#go get github.com/peco/peco/cmd/peco
+install_atom()
+{
+  echo -n "Install atom plugins?"
+  read ATOM
 
-sudo pip install Pygments
-#sudo easy_install bugwarrior
-# setup powerline
-sudo pip install git+git://github.com/Lokaltog/powerline.git
-sudo pip install git+git://github.com/kovidgoyal/powerline-daemon.git
-# setup cheat
-sudo pip install git+git://github.com/chrisallenlane/cheat.git
-# bitbucket-issues-cli needs https://bitbucket.org/jsmits/bitbucket-issues-cli/pull-request/2/patched-to-include-git-repositories-fixes/diff
-sudo pip install -e hg+https://bitbucket.org/jsmits/bitbucket-issues-cli#egg=bbi
-
-#sudo pip install gcalcli
-
-# taskwarrior addons
-sudo pip install git+git://github.com/burnison/tasksync.git
-# taskwarrior hooks
-mkdir -p ~/.task/hooks
-sudo pip install taskwarrior-time-tracking-hook
-ln -s `which taskwarrior_time_tracking_hook` ~/.task/hooks/on-modify.timetracking
-
-
-# Install atom plugins
-#apm install --packages-file ~/.dotfiles/config/atom/atom-packages.json
+  if [[ $ATOM =~ ^[Yy]$ ]]
+  then
+  echo "atom plugins"
+  . "$DIR/atomplugins.sh"
+  fi
+}
 
 # import terminal profiles
-gconftool-2 --load ~/.dotfiles/gnome-terminal/gnome-terminal-conf.xml
 
-# switch to zsh
-chsh -s "which zsh"
+install_terminal_profiles()
+{
+  echo -n "Install terminal profiles?"
+  read terminal
+
+  if [[ $terminal =~ ^[Yy]$ ]]
+  then
+  echo "terminal profiles imported"
+  gconftool-2 --load ~/.dotfiles/config/gnome-terminal/gnome-terminal-conf.xml
+  fi
+}
+
 
 # install xiki
-cd ~/src/xiki
-gem install bundler
-bundle
-ruby etc/command/copy_xiki_command_to.rb /usr/local/bin/xiki
-cd
+install_xiki()
+{
+  echo -n "Install xiki?"
+  read XIKI
 
-# setup npm
+  if [[ $XIKI =~ ^[Yy]$ ]]
+  then
+  echo "XIKI"
+  cd ~; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
+  fi
+}
+# install npm
+install_npm()
+{
+  echo -n "Install NPM apps?"
+  read NPM
+  if [[ $NPM =~ ^[Yy]$ ]]
+  then
+  echo "NPM"
+  . "$DIR/setup-npm.zsh"
+  fi
+}
+install_atom
+install_terminal_profiles
+install_xiki
+install_npm
+if [[ $SHELL == $(which zsh) ]]
+  then echo "shell is $SHELL...OK"
+else
+  # switch to zsh
+  chsh -s $(which zsh)
+fi
+
+# optional setup Python apps
+# cd
+#./python-pip.zsh
+
+
+
 #./setup-npm.zsh
+
+#References:
+#https://github.com/darol100/lazydubuntu/blob/master/lazydubuntu.sh

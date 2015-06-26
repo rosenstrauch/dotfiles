@@ -210,6 +210,10 @@ if [ -f ~/.bash_env_vars ]; then
     . ~/.bash_env_vars
 fi
 
+if [ -f ~/.xsh ]; then
+    . ~/.xsh
+fi
+
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)

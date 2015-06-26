@@ -19,6 +19,7 @@
 ## Installation Via setup.zsh ##
 
 > My dotfiles are managed by fresh.
+
 ## Components ##
 
 - http://dotfiles.github.io/
