@@ -22,7 +22,7 @@
     ]
     projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
   editor:
-    fontSize: 17
+    fontSize: 28
     showInvisibles: true
     showIndentGuide: true
     softWrap: true
