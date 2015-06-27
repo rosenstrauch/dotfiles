@@ -1,0 +1,12 @@
+# generate with
+# pacman -Qm
+
+arj 3.10.22-10
+atom-editor-bin 0.211.0-1
+libui-dialog-perl 1.09-1
+macchanger-gtk 1.1-4
+netkit-bsd-finger 0.17-9
+obex-data-server 0.4.6-10
+pandoc-bin 1.13.2-2
+thunderbird-lightning-bin 4.0.0.1-1
+vundle 0.10.2-1

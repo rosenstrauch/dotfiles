@@ -1,0 +1,7 @@
+while read line; do
+# skip comments
+   ${line:0:1} == "#"  && continue
+# skip empty lines
+   -z "${line}"  && continue
+  eval ${line}
+done < "${CONFIG_FILE}"

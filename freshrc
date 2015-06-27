@@ -185,8 +185,6 @@ fresh-options --file=~/.zshrc --marker
 #  fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh
 fresh-options
 
-
-
 ## VIMRC
 # using a minimal .vimrc file loading plugins via pathogen plugin updates managed by fresh
 fresh tpope/vim-pathogen autoload/pathogen.vim --file=~/.vim/autoload/pathogen.vim
@@ -232,6 +230,7 @@ fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
 # our own Shell Files sourced to
 # /home/rosenstrauch/.fresh/build/shell.sh
 # https://github.com/freshshell/fresh#shell-files
+fresh shell/allshells/\*
 
 # Aliases
 fresh shell/zsh/aliases/\*
@@ -245,6 +244,10 @@ fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendl
 
 # Prezto zsh config
 fresh sorin-ionescu/prezto . --file=~/.zprezto/
+# zsh substring history search
+# <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
+fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
+
 
 fresh_after_build() {
   if [ -z "${updated_submodules+1}" ]; then

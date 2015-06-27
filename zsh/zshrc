@@ -84,9 +84,12 @@ function
 #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
 # Pyenv
-export PATH="$PATH:$HOME/.pyenv/bin"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [ -d "${ZDOTDIR:-$HOME}/.pyenv/bin" ]; then
+  export PATH="$PATH:$HOME/.pyenv/bin"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 
 export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/opt/local/bin"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Sets your user account as the owner of the /usr/local directory to avoid managing packages with sudo
-sudo chown -R $USER /usr/local
+sudo chown -R $USER:"$(id -g -n $USER)" /usr/local
 npm update
 npm install brewer -g
 npm install coffee-script -g

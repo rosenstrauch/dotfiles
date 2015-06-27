@@ -1,9 +1,17 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
+
+# setup script meant to be run once on clean arch install (worry about other distros later).
+#
+#References:
+
+#https://github.com/darol100/lazydubuntu/blob/master/lazydubuntu.sh
+
+
 # remember dir for using other scripts
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-# make bin directory in home if it doesn't already exist
+# make bin directory in users home if it doesn't already exist for user commands
 [ ! -d $HOME/bin ] && mkdir -p $HOME/bin
 
 
@@ -18,7 +26,7 @@ if command -v fresh >/dev/null 2>&1; then
     #fresh update
 else
   echo installing fresh...
-  FRESH_LOCAL_SOURCE=~rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
+  FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
   echo fresh installed...OK
 fi
 
@@ -52,6 +60,24 @@ fi
 #for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 #ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 #done
+
+
+install_bashit()
+{
+  echo -n "Install bashit?"
+  read BASH
+  if [[ $BASH =~ ^[Yy]$ ]]
+  then
+    if [ ! -d $HOME/.bash_it ]
+    then
+    echo "INSTALLING BASHIT"
+    git clone https://github.com/revans/bash-it.git "$HOME/.bash_it"
+    sh "$HOME/.bash_it/install.sh"
+    else
+      "$HOME/.bash_it/upgrade_bashit"
+    fi
+  fi
+}
 
 install_atom()
 {
@@ -107,20 +133,12 @@ install_atom
 install_terminal_profiles
 install_xiki
 install_npm
+install_bashit
+
+# make sure zsh is the default shell
 if [[ $SHELL == $(which zsh) ]]
   then echo "shell is $SHELL...OK"
 else
   # switch to zsh
   chsh -s $(which zsh)
 fi
-
-# optional setup Python apps
-# cd
-#./python-pip.zsh
-
-
-
-#./setup-npm.zsh
-
-#References:
-#https://github.com/darol100/lazydubuntu/blob/master/lazydubuntu.sh
