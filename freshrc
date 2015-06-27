@@ -182,7 +182,7 @@ fresh-options
 
 fresh-options --file=~/.zshrc --marker
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh
-  fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh
+#  fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh
 fresh-options
 
 ## VIMRC
@@ -230,6 +230,7 @@ fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
 # our own Shell Files sourced to
 # /home/rosenstrauch/.fresh/build/shell.sh
 # https://github.com/freshshell/fresh#shell-files
+fresh shell/allshells/\*
 
 # Aliases
 fresh shell/zsh/aliases/\*

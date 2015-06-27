@@ -1,6 +1,9 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
+# setup script meant to be run once on clean arch install (worry about other distros later).
+#
 #References:
+
 #https://github.com/darol100/lazydubuntu/blob/master/lazydubuntu.sh
 
 
@@ -8,7 +11,7 @@
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-# make bin directory in home if it doesn't already exist
+# make bin directory in users home if it doesn't already exist for user commands
 [ ! -d $HOME/bin ] && mkdir -p $HOME/bin
 
 
@@ -23,7 +26,7 @@ if command -v fresh >/dev/null 2>&1; then
     #fresh update
 else
   echo installing fresh...
-  FRESH_LOCAL_SOURCE=~rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
+  FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
   echo fresh installed...OK
 fi
 
