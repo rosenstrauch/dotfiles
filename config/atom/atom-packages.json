@@ -1,16 +1,12 @@
 atom-beautify
-atom-bootstrap3
 atom-color-highlight
 atom-html-preview
 atom-jshint
 atom-ungit
 atom-xikij
 behat-atom
-bootstrap3-snippets
 color-picker
-copy-to-hipchat
 drupal-info-file
-erb-snippets
 git-history
 git-log
 git-plus
@@ -36,5 +32,4 @@ refactor
 find-selection
 livereload
 atom-gist
-atom-copy-on-select
 sync-settings

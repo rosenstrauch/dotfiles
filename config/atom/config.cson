@@ -15,6 +15,9 @@
       "wakatime"
       "atom-copy-on-select"
       "atom-xikij"
+      "atom-bootstrap3"
+      "bootstrap3-snippets"
+      "notebook"
     ]
     themes: [
       "atom-dark-ui"
@@ -22,7 +25,7 @@
     ]
     projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
   editor:
-    fontSize: 17
+    fontSize: 27
     showInvisibles: true
     showIndentGuide: true
     softWrap: true
@@ -44,6 +47,9 @@
   "atom-beautify":
     _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
   "atom-xikij": {}
+  notebook:
+    removeEmptyNotepadsAutomatically: false
+  "autocomplete-plus": {}
 drupal:
   fileTypesPhp: "module,install,inc,test"
 metrics:

@@ -36,3 +36,4 @@
   'alt-left': 'pane:split-left'
   'shift-alt-D': 'timekeeper:dashboard'
   'shift-alt-L': 'livereload:toggle'
+  'ctrl-alt-n': 'notebook:new-notepad'
