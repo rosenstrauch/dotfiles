@@ -127,12 +127,15 @@ fresh sampson-chen/sack .sackrc --file
 fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
 fresh shell/zsh/functions/alls --file=zsh/functions/alls
 fresh shell/zsh/functions/ralias --file=zsh/functions/ralias
+fresh shell/zsh/functions/a --file=zsh/functions/a
+fresh shell/zsh/functions/zman --file=zsh/functions/zman
+
 
 # other functions with the correct extension are loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
 
 # some scripts only meant to be used by other scripts
-ln -sf shell/lib/ ~/scripts/lib/
+ln -sf ~/.dotfiles/shell/lib ~/scripts
 
 ########
 # Config

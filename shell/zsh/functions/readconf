@@ -1,8 +1,0 @@
-while read -r line; do
-  # skip comments
-   [[ $line = \#* ]] && continue
-   # skip empty lines
-      -z "${line}"  && continue
-     eval ${line}
-   printf '%s\n' "$line"
-done < "$file"
