@@ -17,3 +17,5 @@ vlc
 php-composer
 logwatch
 conky
+vagrant
+virtualbox
