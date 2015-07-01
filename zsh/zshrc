@@ -95,6 +95,7 @@ export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/b
 
 # Ruby
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
 # export system ruby path
 export PATH="$PATH:/root/.gem/ruby/2.1.0/bin"
 
@@ -139,4 +140,3 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

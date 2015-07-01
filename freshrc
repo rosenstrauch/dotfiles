@@ -19,6 +19,8 @@ fresh-options --bin
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
   fresh lucasdemarchi/codespell codespell.py
+  fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
+  fresh erichs/composure composure.sh
 fresh-options
 
 #fresh https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin

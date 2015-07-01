@@ -81,19 +81,16 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 
 # TODO:
 
-#fresh https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
-$ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home"
-  35 add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home
-  TODO: 35 added.
+ https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
+$ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home
 
-
-
-##investigate alternatives
 - https://github.com/webflo/drush_zsh_completion
 - https://github.com/drush-ops/drush/blob/master/README.md#post-install
 - https://github.com/skwp/dotfiles
 - https://github.com/Lokaltog/powerline
-# gibo
+gibo
 fresh simonwhitaker/gitignore-boilerplates gibo --bin
 http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
+composure
+shocco from repo
