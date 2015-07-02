@@ -1,26 +1,23 @@
 atom-beautify
-# needs alternative or reupload
-# atom-color-highlight
 atom-html-preview # ctrl+p
 atom-jshint
 atom-ungit
 atom-xikij
 #behat-atom
-color-picker#set trigger
+color-picker #set trigger
 atom-drupal
 git-history
 git-log
 git-plus#test pull
-gitignore-snippets#type gig-templatename into new gitignore files
+gitignore-snippets #type gig-templatename into new gitignore files
 #jekyll can we ask if jekyl is needed or do we just install?
 #jekyll-snippets
 linter
 markdown-writer
 merge-conflicts
-#project-palette-finder
+pigments
 project-ring
 stacktrace
-#terminal-runner nees replace
 terminal-status
 #drupal
 language-todotxt
@@ -28,8 +25,7 @@ todo-list
 open-plus
 notebook
 #scrapfy nice but dangerous to paste sensitive data
-refactor# renames variables and functions ctrl alt r
+refactor # renames variables and functions ctrl alt r
 find-selection#ctrl+f3
 #livereload optional or disabled in favour of browsersync
-atom-gist   # ctrl alt g possible private?
-sync-settings
+#atom-gist #ctrl alt g possible private?

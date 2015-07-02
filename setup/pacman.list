@@ -4,7 +4,7 @@
 # or
 # for x in $(cat pacman.list); do pacman -S $x; done
 # https://bbs.archlinux.org/viewtopic.php?pid=470581#p470581
-nodejs
+node
 terminator
 sparkleshare
 emacs
@@ -14,8 +14,13 @@ pandoc
 zsh
 thunderbird
 vlc
-php-composer
+composer
 logwatch
 conky
+composure
+yaourt
+base-devel
+gnome
+pamac
 vagrant
 virtualbox

@@ -46,9 +46,7 @@ fi
 #curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 #install cask
-
 #curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
-
 #go get github.com/monochromegane/vagrant-global-status/...
 #go get github.com/peco/peco/cmd/peco
 
