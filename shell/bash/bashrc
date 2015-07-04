@@ -223,7 +223,5 @@ xterm*|rxvt*)
     ;;
 esac
 
-
-
 source ~/.fresh/build/shell.sh # source fresh rc for dotfile management
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/bin:$HOME/.rvm/bin" # Add RVM to PATH for scripting

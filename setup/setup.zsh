@@ -19,6 +19,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 #git clone https://github.com/freshshell/fresh.git ~/.fresh/source/freshshell/fresh
 #ln -s ~/.fresh/build/.freshrc ~/.freshrc
 #~/.fresh/source/freshshell/fresh/bin/fresh
+rmdir $HOME/Desktop
 
 if command -v fresh >/dev/null 2>&1; then
     echo fresh installed...OK
@@ -28,7 +29,11 @@ else
   echo installing fresh...
   FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
   echo fresh installed...OK
+  mv ~/.fresh/build.new ~/.fresh/build
+  ~/bin/fresh update
 fi
+
+
 
 # install betty if its not already installed
 if [ ! -d /opt/betty ]
@@ -70,9 +75,10 @@ install_bashit()
     then
     echo "INSTALLING BASHIT"
     git clone https://github.com/revans/bash-it.git "$HOME/.bash_it"
-    sh "$HOME/.bash_it/install.sh"
+    . "$HOME/.bash_it/install.sh"
     else
-      "$HOME/.bash_it/upgrade_bashit"
+      #"$HOME/.bash_it/upgrade_bashit"
+      echo "bashit seems installed"
     fi
   fi
 }
@@ -116,22 +122,11 @@ install_xiki()
   cd ~; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
   fi
 }
-# install npm
-install_npm()
-{
-  echo -n "Install NPM apps?"
-  read NPM
-  if [[ $NPM =~ ^[Yy]$ ]]
-  then
-  echo "NPM"
-  . "$DIR/setup-npm.zsh"
-  fi
-}
-install_atom
+
 install_terminal_profiles
-install_xiki
-install_npm
 install_bashit
+install_xiki
+
 
 # make sure zsh is the default shell
 if [[ $SHELL == $(which zsh) ]]

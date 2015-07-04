@@ -45,7 +45,7 @@ fresh rnons/mikidown . --file=src/mikidown/
 fresh rnons/mikidown mikidown.py --bin
 
 # sublimetext 3 plugin for xiki, TODO: fresh needs to pull correct branch
-fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/SublimeXiki/
+#fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/SublimeXiki/
 
 #ln -sf ~/.dotfiles/config/.xikij ~/
 
@@ -77,7 +77,7 @@ ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applicati
 
 
 # xiki installed via rvm and rakefile
-fresh trogdoro/xiki . --file=~/src/xiki/
+#fresh trogdoro/xiki . --file=~/src/xiki/
 
 
 # Commandline Fu

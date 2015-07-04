@@ -83,7 +83,7 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 
  https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
 $ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home
-
+- https://github.com/erichs/composure
 - https://github.com/webflo/drush_zsh_completion
 - https://github.com/drush-ops/drush/blob/master/README.md#post-install
 - https://github.com/skwp/dotfiles
@@ -94,3 +94,4 @@ http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
 composure
 shocco from repo
+rvm
