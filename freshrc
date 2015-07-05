@@ -79,6 +79,8 @@ ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applicati
 # xiki installed via rvm and rakefile
 #fresh trogdoro/xiki . --file=~/src/xiki/
 
+# nvm 
+fresh creationix/nvm --file=~/.nvm
 
 # Commandline Fu
 # find cli commands

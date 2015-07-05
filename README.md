@@ -80,7 +80,7 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 
 
 # TODO:
-
+- https://github.com/chrisallenlane/cheat/issues/130 cheat autocomplete
  https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
 $ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home
 - https://github.com/erichs/composure

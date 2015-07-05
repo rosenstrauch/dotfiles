@@ -28,7 +28,7 @@ if command -v fresh >/dev/null 2>&1; then
 else
   echo installing fresh...
   rmdir $HOME/Desktop
-  FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
+  FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)
   echo fresh installed...OK
   mv ~/.fresh/build.new ~/.fresh/build
   ~/bin/fresh update
@@ -44,12 +44,6 @@ then
 else
     echo betty is initialized...OK
 fi
-
-# setup vundle (now via pacman or vimrc)
- git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-
-# use evil pyenv installer see https://github.com/yyuu/pyenv
-#curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 #install cask
 #curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
@@ -84,17 +78,7 @@ install_bashit()
   fi
 }
 
-install_atom()
-{
-  echo -n "Install atom plugins?"
-  read ATOM
 
-  if [[ $ATOM =~ ^[Yy]$ ]]
-  then
-  echo "atom plugins"
-  . "$DIR/atomplugins.sh"
-  fi
-}
 
 # import terminal profiles
 

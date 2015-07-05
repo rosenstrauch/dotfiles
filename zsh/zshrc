@@ -14,6 +14,12 @@ then
 source ~/.xsh
 fi
 
+if [[ -a ~/.nvm ]]
+then
+. ~/.nvm/nvm.sh
+fi
+
+
 #zsh completion wrapper for fresh
 fpath=(~/.fresh/build/completion $fpath)
 
