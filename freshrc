@@ -49,7 +49,7 @@ fresh rnons/mikidown mikidown.py --bin
 
 #ln -sf ~/.dotfiles/config/.xikij ~/
 
-ln -sf ~/.dotfiles/config/sublime-text-3/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/Preferences.sublime-settings
+#ln -sf ~/.dotfiles/config/sublime-text-3/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/Preferences.sublime-settings
 
 # gedit plugins
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/

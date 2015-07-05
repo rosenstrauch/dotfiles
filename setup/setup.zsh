@@ -19,7 +19,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 #git clone https://github.com/freshshell/fresh.git ~/.fresh/source/freshshell/fresh
 #ln -s ~/.fresh/build/.freshrc ~/.freshrc
 #~/.fresh/source/freshshell/fresh/bin/fresh
-rmdir $HOME/Desktop
+
 
 if command -v fresh >/dev/null 2>&1; then
     echo fresh installed...OK
@@ -27,6 +27,7 @@ if command -v fresh >/dev/null 2>&1; then
     #fresh update
 else
   echo installing fresh...
+  rmdir $HOME/Desktop
   FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL get.freshshell.com)
   echo fresh installed...OK
   mv ~/.fresh/build.new ~/.fresh/build
@@ -45,7 +46,7 @@ else
 fi
 
 # setup vundle (now via pacman or vimrc)
-# git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 # use evil pyenv installer see https://github.com/yyuu/pyenv
 #curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
