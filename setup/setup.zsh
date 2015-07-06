@@ -122,5 +122,5 @@ fi
 
 install_terminal_profiles
 install_bashit
-install_xiki
+#install_xiki
 set_zsh_default

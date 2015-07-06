@@ -81,7 +81,7 @@ ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applicati
 fresh trogdoro/xiki . --file=src/xiki/
 
 # nvm
-fresh creationix/nvm --file=~/.nvm
+fresh creationix/nvm . --file=~/.nvm
 
 # Commandline Fu
 # find cli commands
@@ -112,7 +112,7 @@ fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions
 fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
 fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
 
-fresh pickhardt/betty . --file=~/betty/
+fresh pickhardt/betty . --file=src/betty/
 
 #fresh yyuu/pyenv/ . --file=~/.pyenv/
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
