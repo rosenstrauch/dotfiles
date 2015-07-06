@@ -61,10 +61,11 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 
 
 
-LAUNCHERS=(~/.dotfiles/config/desktop/*)
-for FILE in $LAUNCHERS; do
+LAUNCHERS=(~/.dotfiles/config/desktop/*.desktop)
+for FILE in "${LAUNCHERS[@]}"; do
   ln -sf $FILE ~/Desktop/$FILE
 done
+
 ln -sf ~/.dotfiles/config/autostart ~/.config
 
 ##########################
