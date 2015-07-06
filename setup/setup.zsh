@@ -36,14 +36,14 @@ fi
 
 
 
-# install betty if its not already installed
-if [ ! -d /opt/betty ]
-then
-    echo initialising betty...
-    cp -rf ~/.fresh/source/pickhardt/betty /opt/betty/
-else
-    echo betty is initialized...OK
-fi
+# # install betty if its not already installed
+# if [ ! -d /opt/betty ]
+# then
+#     echo initialising betty...
+#     cp -rf ~/.fresh/source/pickhardt/betty /opt/betty/
+# else
+#     echo betty is initialized...OK
+# fi
 
 #install cask
 #curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
@@ -58,6 +58,23 @@ fi
 #for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 #ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 #done
+
+
+
+
+# import terminal profiles
+
+install_terminal_profiles()
+{
+  echo -n "Install terminal profiles?"
+  read terminal
+
+  if [[ $terminal =~ ^[Yy]$ ]]
+  then
+  echo "terminal profiles imported"
+  gconftool-2 --load ~/.dotfiles/config/gnome-terminal/gnome-terminal-conf.xml
+  fi
+}
 
 
 install_bashit()
@@ -78,23 +95,6 @@ install_bashit()
   fi
 }
 
-
-
-# import terminal profiles
-
-install_terminal_profiles()
-{
-  echo -n "Install terminal profiles?"
-  read terminal
-
-  if [[ $terminal =~ ^[Yy]$ ]]
-  then
-  echo "terminal profiles imported"
-  gconftool-2 --load ~/.dotfiles/config/gnome-terminal/gnome-terminal-conf.xml
-  fi
-}
-
-
 # install xiki
 install_xiki()
 {
@@ -108,15 +108,18 @@ install_xiki()
   fi
 }
 
-install_terminal_profiles
-install_bashit
-install_xiki
-
-
-# make sure zsh is the default shell
+# make zsh the default shell
+set_zsh_default () {
+  # make sure zsh is the default shell
 if [[ $SHELL == $(which zsh) ]]
   then echo "shell is $SHELL...OK"
 else
   # switch to zsh
   chsh -s $(which zsh)
 fi
+}
+
+install_terminal_profiles
+install_bashit
+install_xiki
+set_zsh_default

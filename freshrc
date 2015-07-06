@@ -59,8 +59,12 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 # Desktop and autostart
 #######################
 
+for FILE in ~/.dotfiles/config/Desktop; do
+  ln -sf $FILE --file=~/Desktop/$(basename $FILE)
+done
+
 ln -sf ~/.dotfiles/config/autostart ~/.config
-ln -sf ~/.dotfiles/config/Desktop ~/
+#ln -sf ~/.dotfiles/config/Desktop ~/
 
 ##########################
 # launchers in local share
@@ -79,7 +83,7 @@ ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applicati
 # xiki installed via rvm and rakefile
 #fresh trogdoro/xiki . --file=~/src/xiki/
 
-# nvm 
+# nvm
 fresh creationix/nvm --file=~/.nvm
 
 # Commandline Fu
@@ -111,7 +115,7 @@ fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions
 fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
 fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
 
-fresh pickhardt/betty . --file=src/betty/
+fresh pickhardt/betty . --file=~/betty/
 
 #fresh yyuu/pyenv/ . --file=~/.pyenv/
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
