@@ -23,6 +23,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 if command -v fresh >/dev/null 2>&1; then
     echo fresh installed...OK
+    cd ~/.dotfiles && git pull
     #echo updating fresh ...
     #fresh update
 else
