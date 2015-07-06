@@ -229,7 +229,8 @@ fresh simonair/vim-fasd/ plugin/vim-fasd.vim --file=~/.vim/bundle/vim-fasd/
 ln -sf ~/.dotfiles/manual/boom/boom ~/.boom
 
 fresh http://git.drupal.org/project/vimrc.git . --file=~/.drush/vimrc/ --ref=7.x-1.x
-ln -sf ~/.drush/vimrc/bundle/vim-plugin-for-drupal ~/.vim/bundle/vim-plugin-for-drupal
+
+# ln -sf ~/.drush/vimrc/bundle/vim-plugin-for-drupal ~/.vim/bundle/vim-plugin-for-drupal
 
 fresh tpope/vim-fugitive .  --file=~/.vim/bundle/vim-fugitive/
 
