@@ -59,14 +59,14 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 # Desktop and autostart
 #######################
 
-for FILE in ~/.dotfiles/config/desktop/{*}.desktop; do
-  ln -sf $FILE ~/Desktop/$(basename $FILE)
-done
+# this doesnt work if the directory exists without first deleting it, but deleting it seems wrong
+#ln -sf ~/.dotfiles/config/Desktop ~/
 
 ln -sf ~/.dotfiles/config/autostart ~/.config
 
 ##########################
 # launchers in local share
+# TODO: find a way to glob those
 ##########################
 
 ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
@@ -77,10 +77,8 @@ ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applicati
 # CLI Apps
 #################
 
-
-
-# xiki installed via rvm and rakefile
-#fresh trogdoro/xiki . --file=~/src/xiki/
+# xiki installed via setup.zsh for now
+fresh trogdoro/xiki . --file=src/xiki/
 
 # nvm
 fresh creationix/nvm --file=~/.nvm

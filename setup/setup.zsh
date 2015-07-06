@@ -13,6 +13,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 # make bin directory in users home if it doesn't already exist for user commands
 [ ! -d $HOME/bin ] && mkdir -p $HOME/bin
+[ ! -d $HOME/.tmuxinator ] && mkdir -p $HOME/.tmuxinator
 
 
 # setup fresh
