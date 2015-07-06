@@ -27,7 +27,6 @@ if command -v fresh >/dev/null 2>&1; then
     #fresh update
 else
   echo installing fresh...
-  rmdir $HOME/Desktop
   FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)
   echo fresh installed...OK
   mv ~/.fresh/build.new ~/.fresh/build
