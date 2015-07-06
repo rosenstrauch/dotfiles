@@ -59,9 +59,8 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 # Desktop and autostart
 #######################
 
-LAUNCHERS=(~/.dotfiles/config/desktop/{*}.desktop)
-for FILE in "${LAUNCHERS[@]}"; do
-  ln -sf $FILE ~/Desktop/$FILE
+for FILE in ~/.dotfiles/config/desktop/{*}.desktop; do
+  ln -sf $FILE ~/Desktop/$(basename $FILE)
 done
 
 ln -sf ~/.dotfiles/config/autostart ~/.config
