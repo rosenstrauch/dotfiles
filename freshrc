@@ -60,7 +60,7 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 #######################
 
 # this doesnt work if the directory exists without first deleting it, but deleting it seems wrong
-#ln -sf ~/.dotfiles/config/Desktop ~/
+ln -sf ~/.dotfiles/config/Desktop ~/
 
 ln -sf ~/.dotfiles/config/autostart ~/.config
 
@@ -174,19 +174,42 @@ fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xcha
 # <https://github.com/freshshell/fresh#a-single-config-file-built-from-multiple-sources>
 #########################
 
-# BASHRC
+# BASH
 
-#fresh-options --file=~/.bashrc --marker
-#  fresh shell/bash/bashrc
+fresh-options --file='~/.bashrc' --marker
+  fresh shell/bash/bashrc
+  fresh freshshell/fresh contrib/source-build.sh
+fresh-options
+
+
+#fresh-options --file=~/.bash_profile --marker
+#  fresh shell/bash/bash_profile
 #fresh-options
 
-fresh-options --file=~/bash_it/completion/custom.completion.bash --marker
+#########
+# BASH-IT
+#########
+
+#fresh Bash-it/bash-it/ . --file=~/.bash_it/
+#fresh bash-it --file=~/.bash_it/
+
+# https://github.com/revans/bash_it customization
+fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
+fresh bash-it/custom.bash --file=~/.bash_it/lib/custom.bash
+
+# additional bash plugins via bashit
+fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
+
+ln -sf bash-it/custom/plugins/ ~/.bash_it/custom/
+
+# additional bash completions via bashit
+#fresh bash-it/custom.completion.bash --file=~/.bash_it/completion/custom.completion.bash
+
+fresh-options --file=~/.bash_it/completion/custom.completion.bash --marker
   fresh freshshell/fresh contrib/completion/fresh-completion.bash
   fresh bobthecow/git-flow-completion git-flow-completion.bash
   fresh tmuxinator/tmuxinator completion/tmuxinator.bash
 fresh-options
-
-
 
 # TMUX.conf
 
@@ -199,8 +222,13 @@ fresh-options
 
 fresh-options --file=~/.zshrc --marker
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh
-#  fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh
+# this loads the shell files and needs to be at the bottom of the zshrc for
+ # compdef be availiable
+ fresh freshshell/fresh contrib/source-build.sh
 fresh-options
+
+fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh  --file=vendor/zsh-syntax-highlighting.zsh
+
 
 ## VIMRC
 # using a minimal .vimrc file loading plugins via pathogen plugin updates managed by fresh
@@ -278,17 +306,6 @@ fresh_after_build() {
   fi
   unset updated_submodules
 }
-
-#########
-# BASH-IT
-#########
-
-# https://github.com/revans/bash_it customization
-fresh bash-it/custom.aliases.bash --file=bash_it/aliases/custom.aliases.bash
-fresh bash-it/custom.bash --file=bash_it/lib/custom.bash
-fresh bash-it/custom.plugins.bash --file=bash_it/plugins/custom.plugins.bash
-
-#fresh bash-it/custom.completion.bash --file=bash_it/completion/custom.completion.bash
 
 
 #add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>

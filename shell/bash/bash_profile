@@ -1,0 +1,6 @@
+#
+# ~/.bash_profile
+#
+#Source the default profile and bashrc
+[[ -e ~/.profile ]] && source ~/.profile
+[[ -f ~/.bashrc ]] && . ~/.bashrc

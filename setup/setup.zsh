@@ -11,11 +11,53 @@
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-# make directories in users home if it doesn't already exist
+# make directories in users home if they don't already exist
 [ ! -d $HOME/bin ] && mkdir -p $HOME/bin
 [ ! -d $HOME/.config/terminator ] && mkdir -p $HOME/.config/terminator
 [ ! -d $HOME/.tmuxinator ] && mkdir -p $HOME/.tmuxinator
 [ ! -d $HOME/.cheat ] && mkdir -p $HOME/.cheat
+[ ! -d $HOME/scripts ] && mkdir -p $HOME/scripts
+[ ! -d $HOME/.emacs.d ] && mkdir -p $HOME/.emacs.d
+
+#must move old bashrc
+case $OSTYPE in
+  darwin*)
+    CONFIG_FILE=.bash_profile
+    ;;
+  *)
+    CONFIG_FILE=.bashrc
+    ;;
+esac
+make_backup () {
+  CONFIG_FILE=$1
+  BACKUP_FILE=$CONFIG_FILE.bak
+
+  if [ -e "$HOME/$BACKUP_FILE" ]; then
+      echo "Backup file already exists. Make sure to backup your $CONFIG_FILE before running this installation." >&2
+      while true
+      do
+          read -e -n 1 -r -p "Would you like to overwrite the existing backup? This will delete your existing backup file ($HOME/$BACKUP_FILE) [y/N] " RESP
+          case $RESP in
+          [yY])
+              break
+              ;;
+          [nN]|"")
+              echo -e "\033[91mInstallation aborted. Please come back soon!\033[m"
+              exit 1
+              ;;
+          *)
+              echo -e "\033[91mPlease choose y or n.\033[m"
+              ;;
+          esac
+      done
+  fi
+
+  test -w "$HOME/$CONFIG_FILE" &&
+    mv "$HOME/$CONFIG_FILE" "$HOME/$CONFIG_FILE.bak" &&
+    echo "Your original $CONFIG_FILE has been backed up to $CONFIG_FILE.bak"
+
+}
+
 
 # setup fresh
 #git clone https://github.com/freshshell/fresh.git ~/.fresh/source/freshshell/fresh
@@ -23,18 +65,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 #~/.fresh/source/freshshell/fresh/bin/fresh
 
 
-if command -v fresh >/dev/null 2>&1; then
-    echo fresh installed...OK
-    cd ~/.dotfiles && git pull
-    #echo updating fresh ...
-    #fresh update
-else
-  echo installing fresh...
-  FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)
-  echo fresh installed...OK
-  mv ~/.fresh/build.new ~/.fresh/build
-  ~/bin/fresh update
-fi
+
 
 
 
@@ -125,3 +156,24 @@ install_terminal_profiles
 install_bashit
 #install_xiki
 set_zsh_default
+
+if command -v fresh >/dev/null 2>&1; then
+    echo fresh installed...OK
+    cd ~/.dotfiles && git pull
+    echo updating fresh ...
+    fresh update
+else
+  echo "installing fresh..."
+  make_backup .bashrc
+  make_backup .zprofile
+  make_backup .zshrc
+  make_backup .zlogin
+  make_backup Desktop
+  FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)
+  echo "fresh installed...OK"
+  if [ ! -d $HOME/.fresh/build ]
+    then mv ~/.fresh/build.new ~/.fresh/build
+  fi
+#  ~/bin/fresh update
+fi
+echo "best logout and log back in now"
