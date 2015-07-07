@@ -81,7 +81,7 @@ ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applicati
 fresh trogdoro/xiki . --file=src/xiki/
 
 # nvm
-fresh creationix/nvm . --file=~/.nvm
+fresh creationix/nvm . --file=~/.nvm/
 
 # Commandline Fu
 # find cli commands
