@@ -140,7 +140,7 @@ fresh shell/zsh/functions/zman --file=zsh/functions/zman
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
 
 # some scripts only meant to be used by other scripts
-ln -sf ~/.dotfiles/shell/lib ~/scripts
+ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
 
 ########
 # Config
