@@ -95,3 +95,5 @@ http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
 composure
 shocco from repo
 rvm
+https://github.com/nvbn/thefuck
+https://github.com/schneems/explain_shell

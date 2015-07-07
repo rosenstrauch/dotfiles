@@ -176,12 +176,17 @@ fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xcha
 
 # BASHRC
 
-fresh-options --file=~/.bashrc --marker
-  fresh shell/bash/bashrc
+#fresh-options --file=~/.bashrc --marker
+#  fresh shell/bash/bashrc
+#fresh-options
+
+fresh-options --file=~/bash_it/completion/custom.completion.bash --marker
   fresh freshshell/fresh contrib/completion/fresh-completion.bash
   fresh bobthecow/git-flow-completion git-flow-completion.bash
   fresh tmuxinator/tmuxinator completion/tmuxinator.bash
 fresh-options
+
+
 
 # TMUX.conf
 
@@ -274,12 +279,16 @@ fresh_after_build() {
   unset updated_submodules
 }
 
-
+#########
 # BASH-IT
+#########
+
 # https://github.com/revans/bash_it customization
 fresh bash-it/custom.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 fresh bash-it/custom.bash --file=bash_it/lib/custom.bash
 fresh bash-it/custom.plugins.bash --file=bash_it/plugins/custom.plugins.bash
+
+#fresh bash-it/custom.completion.bash --file=bash_it/completion/custom.completion.bash
 
 
 #add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
