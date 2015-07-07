@@ -11,9 +11,9 @@
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-# make bin directory in users home if it doesn't already exist for user commands
+# make directories in users home if it doesn't already exist 
 [ ! -d $HOME/bin ] && mkdir -p $HOME/bin
-
+[ ! -d $HOME/.config/terminator ] && mkdir -p $HOME/.terminator
 [ ! -d $HOME/.tmuxinator ] && mkdir -p $HOME/.tmuxinator
 [ ! -d $HOME/.cheat ] && mkdir -p $HOME/.cheat
 
