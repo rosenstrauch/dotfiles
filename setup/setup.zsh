@@ -152,7 +152,29 @@ else
 fi
 }
 
-install_terminal_profiles
+setup_gsettings () {
+  # Font settings
+   echo 'Setting font preferences...'
+   gsettings set org.gnome.desktop.interface text-scaling-factor '1.1'
+   gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 11'
+   gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
+   gsettings set org.gnome.nautilus.desktop font 'Cantarell 11'
+   gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Bold 11'
+   gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
+   gsettings set org.gnome.settings-daemon.plugins.xsettings hinting 'slight'
+   echo 'Done. '
+   # Nautilus Preferences
+   echo 'Setting Nautilus preferences...'
+   gsettings set org.gnome.nautilus.preferences sort-directories-first true
+   # Gedit Preferences
+   echo 'Setting Gedit preferences...'
+   gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
+   gsettings set org.gnome.gedit.preferences.editor create-backup-copy false
+   gsettings set org.gnome.gedit.preferences.editor auto-save true
+   gsettings set org.gnome.gedit.preferences.editor insert-spaces true
+   gsettings set org.gnome.gedit.preferences.editor tabs-size 4
+}
+
 install_bashit
 #install_xiki
 set_zsh_default
@@ -176,4 +198,8 @@ else
   fi
 #  ~/bin/fresh update
 fi
+
+install_terminal_profiles
+setup_gsettings
+
 echo "best logout and log back in now"
