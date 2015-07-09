@@ -292,7 +292,7 @@ fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendl
 fresh sorin-ionescu/prezto . --file=~/.zprezto/
 # zsh substring history search
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
-fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
+#fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
 
 
 fresh_after_build() {
@@ -327,8 +327,8 @@ fresh  squizlabs/PHP_CodeSniffer . --file=PHP_CodeSniffer/ --filter="chmod +x ~/
 fresh  git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
 fresh  http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
 fresh  http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
-#fresh  squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
-#ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
+fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
+ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
 # rvm
 # https://rvm.io/gemsets/global
