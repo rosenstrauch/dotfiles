@@ -322,13 +322,18 @@ fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --f
 
 # pareview
 # https://github.com/klausi/pareviewsh
+# http://cgit.drupalcode.org/pareviewsh/tree/README.md?id=58d4a53
 
-fresh  squizlabs/PHP_CodeSniffer . --file=PHP_CodeSniffer/ --filter="chmod +x ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs"
-fresh  git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
-fresh  http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
-fresh  http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
-fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
-ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
+fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
+fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
+fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
+fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
+
+chmod +x ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+
+#fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+
+ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
 # rvm
 # https://rvm.io/gemsets/global
