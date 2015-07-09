@@ -9,3 +9,4 @@ alias zcp='zmv -C'
 alias zln='zmv -L'
 alias vg='vagrant'
 alias bty='~/betty/main.rb'
+alias drupalcs="phpcs --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'"
