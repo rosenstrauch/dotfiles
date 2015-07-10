@@ -324,12 +324,12 @@ fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --f
 # https://github.com/klausi/pareviewsh
 # http://cgit.drupalcode.org/pareviewsh/tree/README.md?id=58d4a53
 
-ln -sf squizlabs/PHP_CodeSniffer . ~/
+fresh squizlabs/PHP_CodeSniffer . src/PHP_CodeSniffer
 #ln -sf git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure src/PHP_CodeSniffer/CodeSniffer/Standards/
 #ln -sf http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x src/PHP_CodeSniffer/CodeSniffer/Standards/
 #ln -sf http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x src/PHP_CodeSniffer/CodeSniffer/Standards
 
-#fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=PHP_CodeSniffer/scripts/phpcs
+fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin
 
 #ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
