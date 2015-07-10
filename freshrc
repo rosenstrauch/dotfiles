@@ -69,9 +69,9 @@ ln -sf ~/.dotfiles/config/autostart ~/.config
 # TODO: find a way to glob those
 ##########################
 
-ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
+
 ln -sf ~/.dotfiles/config/desktop/mutt.desktop ~/.local/share/applications/mutt.desktop
-ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applications/xiki-terminal.desktop
+ln -sf ~/.dotfiles/config/desktop/xikiterm.desktop ~/.local/share/applications/xikiterm.desktop
 
 #################
 # CLI Apps
