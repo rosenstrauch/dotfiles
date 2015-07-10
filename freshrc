@@ -326,8 +326,8 @@ fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --f
 
 fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
 fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure
-#ln -sf http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x src/PHP_CodeSniffer/CodeSniffer/Standards/
-#ln -sf http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x src/PHP_CodeSniffer/CodeSniffer/Standards
+fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal
+fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice
 
 fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin
 
