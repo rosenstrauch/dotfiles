@@ -331,7 +331,7 @@ fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref
 
 chmod +x ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
-fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+#fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
 ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
