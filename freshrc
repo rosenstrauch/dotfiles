@@ -329,10 +329,10 @@ fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal
 fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice
 
-rm ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
-fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
+rm ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
-ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
+ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
 # rvm
 # https://rvm.io/gemsets/global
