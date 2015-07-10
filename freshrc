@@ -330,7 +330,7 @@ fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x
 fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice
 
 rm -r ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
-fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=src/PHP_CodeSniffer/scripts/phpcs
 
 ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
