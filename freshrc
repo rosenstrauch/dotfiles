@@ -332,7 +332,7 @@ fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref
 rm ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
 fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/PHP_CodeSniffer/scripts/phpcs
 
-#ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
+ln -sf ~/.fresh/build/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 
 # rvm
 # https://rvm.io/gemsets/global
