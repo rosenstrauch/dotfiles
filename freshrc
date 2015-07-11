@@ -11,8 +11,6 @@ fresh-options --bin
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
   fresh tj/bm bin/bm
-  fresh rtomayko/shocco shocco.sh
-  fresh rtomayko/shocco Markdown.pl
   #fresh monochromegane/vagrant-peco
   fresh pi3ch/taskboy taskboy
   fresh simonwhitaker/gitignore-boilerplates gibo
