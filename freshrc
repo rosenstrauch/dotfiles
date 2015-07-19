@@ -331,7 +331,7 @@ chmod +x ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
 #fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
-ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
+ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
 phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
 # rvm
