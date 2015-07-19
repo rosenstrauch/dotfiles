@@ -18,6 +18,8 @@
       "atom-bootstrap3"
       "bootstrap3-snippets"
       "notebook"
+      "todo-list"
+      "project-palette-finder"
     ]
     themes: [
       "atom-dark-ui"

@@ -1,8 +1,15 @@
 # See http://freshshell.com/readme for documentation.
 # https://github.com/freshshell/fresh#building-files-without-symlinking
 
+# FIXME: Add a toc to freshrc and use sensible categories
+# TODO: try to Generate a browsable Documentation from this file using a command
+# TODO generate Documentation for commands in ~/bin
+
 ##############
 # commands from others
+# TODO try adding packer here
+# TODO test gibo command
+# TODO test composure command
 ##############
 
 fresh-options --bin
@@ -21,14 +28,13 @@ fresh-options --bin
   fresh erichs/composure composure.sh
 fresh-options
 
-#fresh https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
+
 
 #########
 # own scripts and commands
 #########
 
-##http://askubuntu.com/questions/349385/how-to-start-terminator-with-a-custom-command-per-window
-##http://askubuntu.com/questions/158159/how-do-i-get-terminator-to-start-up-with-my-custom-layout
+
 
 fresh-options --bin
   fresh bin/\*
@@ -50,20 +56,30 @@ fresh rnons/mikidown mikidown.py --bin
 #ln -sf ~/.dotfiles/config/sublime-text-3/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/Preferences.sublime-settings
 
 # gedit plugins
+# https://wiki.gnome.org/Apps/Gedit/ThirdPartyPlugins_v3.14
+# TODO: Activate gedit plugins
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 
 #######################
-# Desktop and autostart
+# Setup Desktop and autostart Launchers
 #######################
 
-# this doesnt work if the directory exists without first deleting it, but deleting it seems wrong
+# FIXME: this doesnt work if the directory exists
+# without first deleting it,
+# deleting it seems wrong.
+# if you set this up via setup.zsh,
+# then it will have made a backup of your desktop.
+# XXX http://askubuntu.com/questions/349385/how-to-start-terminator-with-a-custom-command-per-window
+# XXX http://askubuntu.com/questions/158159/how-do-i-get-terminator-to-start-up-with-my-custom-layout
+
 ln -sf ~/.dotfiles/config/Desktop ~/
 
 ln -sf ~/.dotfiles/config/autostart ~/.config
 
 ##########################
-# launchers in local share
+# launchers in local share so gnome shell finds them
+# CHANGED: verify having them on the desktop isnt better and enough.
 # TODO: find a way to glob those
 ##########################
 
@@ -78,7 +94,7 @@ ln -sf ~/.dotfiles/config/desktop/xikiterm.desktop ~/.local/share/applications/x
 # xiki installed via setup.zsh for now
 fresh trogdoro/xiki . --file=src/xiki/
 
-# nvm
+# setup node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
 # Commandline Fu
@@ -88,13 +104,12 @@ fresh samirahmed/fu . --file=src/fu/
 
 # Cheat
 # cheatsheets
-#
+# TODO: https://github.com/chrisallenlane/cheat/issues/130 cheat autocomplete
 fresh chrisallenlane/cheat . --file=src/cheat/
 
 
 # Git achievements
-
-# icefox/git-achievements
+# forked from icefox/git-achievements
 # Aquire achievements while using git.
 
 fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=gh-pages
@@ -154,15 +169,16 @@ fresh-options --file
   fresh gitignore
   fresh gitattributes
   fresh config/rvm/gemrc
+  fresh config/parcelliterc
+  fresh config/liquidpromptrc
+  fresh taskrc
+  fresh bugwarriorrc
 fresh-options
 
-# various config files
-fresh config/liquidpromptrc --file=~/.config/liquidpromptrc
+# various config files in special locations
 fresh config/conky --file=~/.conky/
-fresh config/parcelliterc --file=~/.config/parcelliterc
 fresh config/todo/todo.cfg --file=~/.todo/config
-fresh taskrc --file=~/.taskrc
-fresh bugwarriorrc --file=~/.bugwarriorrc
+
 # xchat - solarized
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
@@ -173,6 +189,7 @@ fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xcha
 #########################
 
 # BASH
+# use a minimal .bashrc that loads bash-it and knows about fresh
 
 fresh-options --file='~/.bashrc' --marker
   fresh shell/bash/bashrc
@@ -186,10 +203,12 @@ fresh-options
 
 #########
 # BASH-IT
-#########
-
+# CHANGED: Currently installed via setup.zsh
 #fresh Bash-it/bash-it/ . --file=~/.bash_it/
 #fresh bash-it --file=~/.bash_it/
+#########
+
+
 
 # https://github.com/revans/bash_it customization
 fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
@@ -217,6 +236,7 @@ fresh-options
 #fresh-options
 
 # adding on to ZSHRC
+# TODO: https://github.com/webflo/drush_zsh_completion
 
 fresh-options --file=~/.zshrc --marker
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh
@@ -229,6 +249,9 @@ fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh  --file=vendor/zsh-
 
 
 ## VIMRC
+# XXX http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
+# XXX http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
+
 # using a minimal .vimrc file loading plugins via pathogen plugin updates managed by fresh
 fresh tpope/vim-pathogen autoload/pathogen.vim --file=~/.vim/autoload/pathogen.vim
 # custom color scheme for vim
@@ -278,6 +301,7 @@ fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
 
 # Aliases
 fresh shell/zsh/aliases/\*
+
 # our own zsh files forked from prezto
 fresh zsh/\* --file
 
@@ -292,6 +316,7 @@ fresh sorin-ionescu/prezto . --file=~/.zprezto/
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
 #fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
 
+# TODO: make sure fresh after build successfully # update prezto submodules
 
 fresh_after_build() {
   if [ -z "${updated_submodules+1}" ]; then

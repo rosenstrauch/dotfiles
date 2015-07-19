@@ -20,6 +20,8 @@
 
 > My dotfiles are managed by fresh.
 
+run setup.zsh to install your dotfiles and additional applications to your $HOME
+
 ## Components ##
 
 - http://dotfiles.github.io/
@@ -80,21 +82,12 @@ these are added into [bash-it custom files](https://github.com/revans/bash-it#yo
 
 
 # TODO:
-- make sure fresh after build successfully updates prezto submodules
-- https://github.com/chrisallenlane/cheat/issues/130 cheat autocomplete
- https://github.com/monochromegane/vagrant-global-status/releases/download/v0.0.3/vagrant-global-status_linux_amd64.tar.gz --filter="tar -ztvf" --bin
-$ todo add "add https://github.com/simonwhitaker/gitignore-boilerplates +dotfiles @home
-- https://github.com/erichs/composure
-- https://github.com/webflo/drush_zsh_completion
-- https://github.com/drush-ops/drush/blob/master/README.md#post-install
-- https://github.com/skwp/dotfiles
-- https://github.com/Lokaltog/powerline
-gibo
-fresh simonwhitaker/gitignore-boilerplates gibo --bin
-http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
-http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
-composure
-shocco from repo
-rvm
-https://github.com/nvbn/thefuck
-https://github.com/schneems/explain_shell
+
+TODO: https://github.com/drush-ops/drush/blob/master/README.md#post-install
+TODO: https://github.com/skwp/dotfiles
+TODO: https://github.com/Lokaltog/powerline
+TODO: shocco from github needs make install to work, wont build from aur
+TODO: rvm
+TODO: https://github.com/nvbn/thefuck
+TODO: https://github.com/schneems/explain_shell
+TODO: https://wiki.archlinux.org/index.php/Xdg_user_directories

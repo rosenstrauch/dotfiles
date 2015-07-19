@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-# setup script meant to be run once on clean arch install (worry about other distros later).
-#
+# setup script meant to be run once on clean arch install (worry about other distros later). this will configure your $HOME settings and applications.
+# for now this script assumes you are using fresh and gets the dotfiles for rosenstrauch
+
 #References:
 
 #https://github.com/darol100/lazydubuntu/blob/master/lazydubuntu.sh
 
 
-# remember dir for using other scripts
+# remember dir this script is executed from for sourcing other scripts
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
@@ -20,14 +21,18 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 [ ! -d $HOME/.emacs.d ] && mkdir -p $HOME/.emacs.d
 
 #must move old bashrc
-case $OSTYPE in
-  darwin*)
-    CONFIG_FILE=.bash_profile
-    ;;
-  *)
-    CONFIG_FILE=.bashrc
-    ;;
-esac
+# case $OSTYPE in
+#   darwin*)
+#     CONFIG_FILE=.bash_profile
+#     ;;
+#   *)
+#     CONFIG_FILE=.bashrc
+#     ;;
+# esac
+
+# function to backup existing files and folders
+# in your $HOME before linking your fresh dotfiles
+
 make_backup () {
   CONFIG_FILE=$1
   BACKUP_FILE=$CONFIG_FILE.bak
@@ -78,8 +83,7 @@ make_backup () {
 #     echo betty is initialized...OK
 # fi
 
-#install cask
-#curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+# TODO: Figure out where and when to best install these go commands
 #go get github.com/monochromegane/vagrant-global-status/...
 #go get github.com/peco/peco/cmd/peco
 
@@ -95,7 +99,7 @@ make_backup () {
 
 
 
-# import terminal profiles
+# function to import terminal profiles from your dotfiles
 
 install_terminal_profiles()
 {
@@ -109,7 +113,7 @@ install_terminal_profiles()
   fi
 }
 
-
+# function to install the bash-it framework
 install_bashit()
 {
   echo -n "Install bashit?"
@@ -128,7 +132,7 @@ install_bashit()
   fi
 }
 
-# install xiki
+# function to install xsh
 install_xiki()
 {
   echo -n "Install xiki?"
@@ -141,7 +145,7 @@ install_xiki()
   fi
 }
 
-# make zsh the default shell
+# function make zsh the default shell
 set_zsh_default () {
   # make sure zsh is the default shell
 if [[ $SHELL == $(which zsh) ]]
@@ -152,6 +156,7 @@ else
 fi
 }
 
+# function to configure gnome and gnome apps
 setup_gsettings () {
   # Font settings
    echo 'Setting font preferences...'
@@ -175,10 +180,13 @@ setup_gsettings () {
    gsettings set org.gnome.gedit.preferences.editor tabs-size 4
 }
 
+# Now ask if we want to install bashit
 install_bashit
 #install_xiki
+# run function to set zsh as default Shell
 set_zsh_default
 
+# setup your fresh dotfiles from github
 if command -v fresh >/dev/null 2>&1; then
     echo fresh installed...OK
     cd ~/.dotfiles && git pull
@@ -201,7 +209,9 @@ else
 #  ~/bin/fresh update
 fi
 
+# now that we have fresh dotfiles ask if we want to setup terminal profiles
 install_terminal_profiles
+# configure our gnome shell and gnome apps
 setup_gsettings
 
 echo "best logout and log back in now"
