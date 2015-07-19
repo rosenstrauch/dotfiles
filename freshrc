@@ -294,6 +294,9 @@ fresh sorin-ionescu/prezto . --file=~/.zprezto/
 
 
 fresh_after_build() {
+chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
+
   if [ -z "${updated_submodules+1}" ]; then
     cd ~/.fresh/source/sorin-ionescu/prezto/ && git pull && git submodule update --init --recursive
     export updated_submodules=0
@@ -327,12 +330,10 @@ fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
 
-chmod +x ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
-
 #fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
-ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
-phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
+ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
 
 # rvm
 # https://rvm.io/gemsets/global
