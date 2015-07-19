@@ -11,8 +11,6 @@ fresh-options --bin
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
   fresh tj/bm bin/bm
-  fresh rtomayko/shocco shocco.sh
-  fresh rtomayko/shocco Markdown.pl
   #fresh monochromegane/vagrant-peco
   fresh pi3ch/taskboy taskboy
   fresh simonwhitaker/gitignore-boilerplates gibo
@@ -71,7 +69,7 @@ ln -sf ~/.dotfiles/config/autostart ~/.config
 
 ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
 ln -sf ~/.dotfiles/config/desktop/mutt.desktop ~/.local/share/applications/mutt.desktop
-ln -sf ~/.dotfiles/config/desktop/xiki-terminal.desktop ~/.local/share/applications/xiki-terminal.desktop
+ln -sf ~/.dotfiles/config/desktop/xikiterm.desktop ~/.local/share/applications/xikiterm.desktop
 
 #################
 # CLI Apps
@@ -334,6 +332,7 @@ chmod +x ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 #fresh squizlabs/PHP_CodeSniffer scripts/phpcs --bin=~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
 ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs ~/scripts/phpcs
+phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
 # rvm
 # https://rvm.io/gemsets/global
