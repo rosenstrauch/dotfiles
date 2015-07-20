@@ -21,9 +21,8 @@
     background_darkness = 0.48
     foreground_color = "#5b5700"
     scroll_on_output = False
-    scrollback_infinite = True
     background_color = "#b9b9b9"
-    use_theme_colors = True
+    scrollback_infinite = True
   [[friendlimux]]
     background_image = None
     cursor_color = "#00b902"
@@ -46,10 +45,11 @@
     background_darkness = 0.75
     background_type = transparent
     use_system_font = False
-    foreground_color = "#839496"
+    foreground_color = "#5b5700"
     scroll_on_output = False
+    use_theme_colors = True
     font = Nimbus Mono L Bold 15
-    background_color = "#002b36"
+    background_color = "#b9b9b9"
     scrollback_infinite = True
   [[multitail]]
     use_system_font = False

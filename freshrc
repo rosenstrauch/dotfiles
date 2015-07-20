@@ -95,7 +95,7 @@ fresh creationix/nvm . --file=~/.nvm/
 
 # Commandline Fu
 # find cli commands
-# <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
+# TODO: investigate error message for fu <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
 fresh samirahmed/fu . --file=src/fu/
 
 # Cheat
@@ -312,7 +312,7 @@ fresh sorin-ionescu/prezto . --file=~/.zprezto/
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
 #fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
 
-# TODO: make sure fresh after build successfully # update prezto submodules
+# TODO: make sure fresh after build successfully # update prezto submodules (seems only aftter "fresh" not after fresh install or update?)
 
 fresh_after_build() {
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
