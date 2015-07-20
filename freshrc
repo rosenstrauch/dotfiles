@@ -30,7 +30,7 @@ fresh-options
 
 # TODO: test explainshell
 # CHANGED explainshell as bin
-fresh https://gist.github.com/6384869.git explain-shell-command --bin=~/bin/explain
+fresh https://gist.github.com/axelson/6384869.git explain-shell-command --bin=~/bin/explain
 
 #########
 # own scripts and commands
