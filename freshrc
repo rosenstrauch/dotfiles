@@ -7,11 +7,12 @@
 ##############
 # commands from others
 # TODO try adding packer here
-# TODO test gibo command
+# FIXED test gibo command
 # TODO test composure command
 ##############
 
 fresh-options --bin
+  fresh https://gist.github.com/6384869.git explain
   fresh freshshell/fresh bin/fresh
   fresh pengwynn/dotfiles bin/notes
   fresh freshshell/fresh-open bin/fresh-open
