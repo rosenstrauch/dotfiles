@@ -19,6 +19,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 [ ! -d $HOME/.cheat ] && mkdir -p $HOME/.cheat
 [ ! -d $HOME/scripts ] && mkdir -p $HOME/scripts
 [ ! -d $HOME/.emacs.d ] && mkdir -p $HOME/.emacs.d
+[ ! -d $HOME/.local/share/applications ] && mkdir -p $HOME/.local/share/applications
 
 #must move old bashrc
 # case $OSTYPE in

@@ -1,9 +1,8 @@
 # See http://freshshell.com/readme for documentation.
 # https://github.com/freshshell/fresh#building-files-without-symlinking
 
-# FIXME: Add a toc to freshrc and use sensible categories
+# FIXME: Add a toc to freshrc and use sensible categories, investigate https://www.npmjs.com/package/grunt-doctoc and https://github.com/thlorenz/doctoc
 # TODO: try to Generate a browsable Documentation from this file using a command
-# TODO generate Documentation for commands in ~/bin
 
 ##############
 # commands from others
