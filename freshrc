@@ -8,7 +8,7 @@
 # commands from others
 # TODO try adding packer here
 # FIXED test gibo command
-# TODO test composure command
+# CHANGED tested composure command
 # TODO: test explainshell
 # CHANGED explainshell as bin
 ##############
