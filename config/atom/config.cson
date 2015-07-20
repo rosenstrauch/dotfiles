@@ -53,6 +53,7 @@
     removeEmptyNotepadsAutomatically: false
   "autocomplete-plus": {}
   "atom-color-highlight": {}
+  "merge-conflicts": {}
 drupal:
   fileTypesPhp: "module,install,inc,test"
 metrics:
