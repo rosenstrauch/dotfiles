@@ -1,7 +1,7 @@
 # See http://freshshell.com/readme for documentation.
 # https://github.com/freshshell/fresh#building-files-without-symlinking
 
-# FIXME: Add a toc to freshrc and use sensible categories, investigate https://www.npmjs.com/package/grunt-doctoc and https://github.com/thlorenz/doctoc
+# FIXME: Add a toc to freshrc and use sensible categories, investigate https://www.npmjs.com/package/grunt-doctoc and https://github.com/thlorenz/doctoc and http://ricostacruz.com/flatdoc/
 # TODO: try to Generate a browsable Documentation from this file using a command
 
 ##############
@@ -28,7 +28,6 @@ fresh-options --bin
   fresh lucasdemarchi/codespell codespell.py
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
-  fresh https://gist.github.com/f4b5afb539cbe8704371.git explain
 fresh-options
 
 #########
@@ -148,6 +147,9 @@ fresh shell/zsh/functions/zman --file=zsh/functions/zman
 
 # other functions with the correct extension are loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
+
+fresh https://gist.github.com/f4b5afb539cbe8704371.git explain
+
 
 # some scripts only meant to be used by other scripts
 ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
