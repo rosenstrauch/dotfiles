@@ -14,7 +14,7 @@
 
 fresh-options --bin
   fresh freshshell/fresh bin/fresh
-  pengwynn/dotfiles bin/notes
+  fresh pengwynn/dotfiles bin/notes
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
@@ -212,6 +212,7 @@ fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
 fresh bash-it/custom.bash --file=~/.bash_it/lib/custom.bash
 
 # additional bash plugins via bashit
+# XXX https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions
 fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
 
 ln -sf bash-it/custom/plugins/ ~/.bash_it/custom/
@@ -331,7 +332,8 @@ phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffe
 }
 
 
-#add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
+# add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
+# these are added into [bash-it custom files](https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions)
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
 fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 
