@@ -65,11 +65,7 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 # Setup Desktop and autostart Launchers
 #######################
 
-# FIXME: this doesnt work if the directory exists
-# without first deleting it,
-# deleting it seems wrong.
-# if you set this up via setup.zsh,
-# then it will have made a backup of your desktop.
+# CHANGED: this doesnt work if the directory exists if you set this up via setup.zsh, then it will have made a backup of your desktop.
 # XXX http://askubuntu.com/questions/349385/how-to-start-terminator-with-a-custom-command-per-window
 # XXX http://askubuntu.com/questions/158159/how-do-i-get-terminator-to-start-up-with-my-custom-layout
 
