@@ -9,6 +9,8 @@
 # TODO try adding packer here
 # FIXED test gibo command
 # TODO test composure command
+# TODO: test explainshell
+# CHANGED explainshell as bin
 ##############
 
 fresh-options --bin
@@ -26,11 +28,8 @@ fresh-options --bin
   fresh lucasdemarchi/codespell codespell.py
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
+  fresh https://gist.github.com/f4b5afb539cbe8704371.git explain
 fresh-options
-
-# TODO: test explainshell
-# CHANGED explainshell as bin
-fresh https://gist.github.com/axelson/6384869.git explain-shell-command --bin=~/bin/explain
 
 #########
 # own scripts and commands
