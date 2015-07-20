@@ -116,25 +116,27 @@ install_terminal_profiles()
 # function to install the bash-it framework
 install_bashit()
 {
+  if [ ! -d $HOME/.bash_it ]
+  then
   echo -n "Install bashit?"
   read BASH
   if [[ $BASH =~ ^[Yy]$ ]]
   then
-    if [ ! -d $HOME/.bash_it ]
-    then
     echo "INSTALLING BASHIT"
     git clone https://github.com/revans/bash-it.git "$HOME/.bash_it"
     . "$HOME/.bash_it/install.sh"
+    fi
     else
       #"$HOME/.bash_it/upgrade_bashit"
       echo "bashit seems installed"
-    fi
   fi
 }
 
 # function to install xsh
 install_xiki()
 {
+if [ ! -f $HOME/.xsh ]
+
   echo -n "Install xiki?"
   read XIKI
 
@@ -143,6 +145,8 @@ install_xiki()
   echo "XIKI"
   cd ~; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
   fi
+fi
+echo "Xiki installed ...OK"
 }
 
 # function make zsh the default shell
