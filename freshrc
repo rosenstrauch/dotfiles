@@ -9,6 +9,8 @@
 # TODO try adding packer here
 # FIXED test gibo command
 # TODO test composure command
+# TODO: test explainshell
+# CHANGED explainshell as bin
 ##############
 
 fresh-options --bin

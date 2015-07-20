@@ -60,6 +60,5 @@ TODO: https://github.com/Lokaltog/powerline
 TODO: shocco from github needs make install to work, wont build from aur
 TODO: rvm
 
-TODO: https://github.com/schneems/explain_shell
 TODO: https://wiki.archlinux.org/index.php/Xdg_user_directories
 TODO: Optional trackpad setup http://www.thinkwiki.org/wiki/How_to_configure_the_TrackPoint possibly use from AUR: configure-trackpoint

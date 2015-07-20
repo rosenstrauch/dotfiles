@@ -9,6 +9,11 @@ then
 source ~/.zshrc.local
 fi
 
+if [[ -a ~/bin/composure.sh ]]
+then
+source  ~/bin/composure.sh
+fi
+
 if [[ -a ~/.xsh ]]
 then
 source ~/.xsh
