@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=workflowy.com
+Exec=epiphany --application-mode --profile="/home/rosenstrauch/.config/epiphany/app-epiphany-workflowy.com-c3ef6509e38c2ed01e4ada981bafdc066790b5d2" https://workflowy.com/
+StartupNotify=true
+Terminal=false
+Type=Application
+Icon=/home/rosenstrauch/.config/epiphany/app-epiphany-workflowy.com-c3ef6509e38c2ed01e4ada981bafdc066790b5d2/app-icon.png
+StartupWMClass=epiphany-workflowy.com-c3ef6509e38c2ed01e4ada981bafdc066790b5d2
