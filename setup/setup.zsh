@@ -65,13 +65,6 @@ make_backup () {
 }
 
 
-# setup fresh
-#git clone https://github.com/freshshell/fresh.git ~/.fresh/source/freshshell/fresh
-#ln -s ~/.fresh/build/.freshrc ~/.freshrc
-#~/.fresh/source/freshshell/fresh/bin/fresh
-
-
-
 
 
 
@@ -89,13 +82,6 @@ make_backup () {
 #go get github.com/peco/peco/cmd/peco
 
 
-
-# setup prezto - this is done by fresh
-#git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
-#setopt EXTENDED_GLOB
-#for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-#ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-#done
 
 
 
@@ -161,31 +147,40 @@ fi
 # function to configure gnome and gnome apps
 setup_gsettings () {
   # Font settings
-   echo 'Setting font preferences...'
-   gsettings set org.gnome.desktop.interface text-scaling-factor '1.1'
-   gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 11'
-   gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
-   gsettings set org.gnome.nautilus.desktop font 'Cantarell 11'
-   gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Bold 11'
-   gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
-   gsettings set org.gnome.settings-daemon.plugins.xsettings hinting 'slight'
-   echo 'Done. '
-   # Nautilus Preferences
-   echo 'Setting Nautilus preferences...'
-   gsettings set org.gnome.nautilus.preferences sort-directories-first true
-   # Gedit Preferences
-   echo 'Setting Gedit preferences...'
-   gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
-   gsettings set org.gnome.gedit.preferences.editor create-backup-copy false
-   gsettings set org.gnome.gedit.preferences.editor auto-save true
-   gsettings set org.gnome.gedit.preferences.editor insert-spaces true
-   gsettings set org.gnome.gedit.preferences.editor tabs-size 4
+  echo 'Setting font preferences...'
+  gsettings set org.gnome.desktop.interface text-scaling-factor '1.1'
+  gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 11'
+  gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
+  gsettings set org.gnome.nautilus.desktop font 'Cantarell 11'
+  gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Bold 11'
+  gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
+  gsettings set org.gnome.settings-daemon.plugins.xsettings hinting 'slight'
+  echo 'Done. '
+  # Nautilus Preferences
+  echo 'Setting Nautilus preferences...'
+  gsettings set org.gnome.nautilus.preferences sort-directories-first true
+  # Gedit Preferences
+  echo 'Setting Gedit preferences...'
+  gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
+  gsettings set org.gnome.gedit.preferences.editor create-backup-copy false
+  gsettings set org.gnome.gedit.preferences.editor auto-save true
+  gsettings set org.gnome.gedit.preferences.editor insert-spaces true
+  gsettings set org.gnome.gedit.preferences.editor tabs-size 4
+  echo 'gnome Desktop settings'
+  gsettings set org.gnome.desktop.interface clock-show-date true
+  gsettings set org.gnome.shell enabled-extensions 'elementary'
+  gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+  echo 'gnome terminal settings'
+  gsettings set org.gnome.Terminal.Legacy.Settings dark-theme true
+  gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
+  gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+  # gsettings set org.gnome.Terminal.Legacy.Keybindings prev-tab '<Alt>Left'
+  # gsettings set org.gnome.Terminal.Legacy.Keybindings next-tab '<Alt>Right'
+  # gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/gnome/Mirror.jpg'
+  # gsettings set org.gnome.desktop.datetime automatic-timezone true
 }
 
-# Now ask if we want to install bashit
 install_bashit
-#install_xiki
-# run function to set zsh as default Shell
 set_zsh_default
 
 # setup your fresh dotfiles from github
