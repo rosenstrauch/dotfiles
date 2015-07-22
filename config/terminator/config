@@ -15,13 +15,15 @@
   hide_window = KP_Delete
 [profiles]
   [[default]]
-    background_image = None
+    use_system_font = False
     login_shell = True
     visible_bell = True
     background_darkness = 0.48
+    background_image = None
     foreground_color = "#5b5700"
     scroll_on_output = False
     scrollback_infinite = True
+    font = Terminus 12
     background_color = "#b9b9b9"
     use_theme_colors = True
   [[friendlimux]]
@@ -45,10 +47,9 @@
     background_darkness = 0.75
     background_type = transparent
     background_image = None
-    foreground_color = "#5b5700"
+    foreground_color = "#ffffff"
     scroll_on_output = False
-    font = Nimbus Mono L Bold 15
-    background_color = "#ffffff"
+    font = Nimbus Mono 10
     scrollback_infinite = True
   [[multitail]]
     use_system_font = False
