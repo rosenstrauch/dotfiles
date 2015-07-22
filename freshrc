@@ -21,7 +21,7 @@ fresh-options --bin
   fresh https://gist.github.com/1209316.git gitio
   fresh tj/bm bin/bm
   #fresh monochromegane/vagrant-peco
-  fresh pi3ch/taskboy taskboy
+  fresh rosenstrauch/taskboy taskboy --ref=python3
   fresh simonwhitaker/gitignore-boilerplates gibo
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
