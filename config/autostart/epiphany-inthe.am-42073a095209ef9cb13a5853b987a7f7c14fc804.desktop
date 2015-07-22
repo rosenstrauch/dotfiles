@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=inthe.am
-Exec=epiphany --application-mode --profile="/home/rosenstrauch/.config/epiphany/app-epiphany-inthe.am-42073a095209ef9cb13a5853b987a7f7c14fc804" https://inthe.am/tasks/0bd9ad3e-e0de-46f1-b6bf-ec56d4bcf2f0 
-StartupNotify=true
-Terminal=false
-Type=Application
-Icon=/home/rosenstrauch/.config/epiphany/app-epiphany-inthe.am-42073a095209ef9cb13a5853b987a7f7c14fc804/app-icon.png
-StartupWMClass=epiphany-inthe.am-42073a095209ef9cb13a5853b987a7f7c14fc804

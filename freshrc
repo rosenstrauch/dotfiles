@@ -1,19 +1,21 @@
 # See http://freshshell.com/readme for documentation.
 # https://github.com/freshshell/fresh#building-files-without-symlinking
 
-# FIXME: Add a toc to freshrc and use sensible categories
+# FIXME: Add a toc to freshrc and use sensible categories, investigate https://www.npmjs.com/package/grunt-doctoc and https://github.com/thlorenz/doctoc and http://ricostacruz.com/flatdoc/
 # TODO: try to Generate a browsable Documentation from this file using a command
-# TODO generate Documentation for commands in ~/bin
 
 ##############
 # commands from others
 # TODO try adding packer here
-# TODO test gibo command
-# TODO test composure command
+# FIXED test gibo command
+# CHANGED tested composure command
+# TODO: test explainshell
+# CHANGED explainshell as bin
 ##############
 
 fresh-options --bin
   fresh freshshell/fresh bin/fresh
+  fresh pengwynn/dotfiles bin/notes
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
@@ -27,8 +29,6 @@ fresh-options --bin
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
 fresh-options
-
-
 
 #########
 # own scripts and commands
@@ -65,11 +65,7 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 # Setup Desktop and autostart Launchers
 #######################
 
-# FIXME: this doesnt work if the directory exists
-# without first deleting it,
-# deleting it seems wrong.
-# if you set this up via setup.zsh,
-# then it will have made a backup of your desktop.
+# CHANGED: this doesnt work if the directory exists if you set this up via setup.zsh, then it will have made a backup of your desktop.
 # XXX http://askubuntu.com/questions/349385/how-to-start-terminator-with-a-custom-command-per-window
 # XXX http://askubuntu.com/questions/158159/how-do-i-get-terminator-to-start-up-with-my-custom-layout
 
@@ -99,7 +95,7 @@ fresh creationix/nvm . --file=~/.nvm/
 
 # Commandline Fu
 # find cli commands
-# <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
+# TODO: investigate error message for fu <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
 fresh samirahmed/fu . --file=src/fu/
 
 # Cheat
@@ -151,6 +147,9 @@ fresh shell/zsh/functions/zman --file=zsh/functions/zman
 
 # other functions with the correct extension are loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
+
+fresh https://gist.github.com/f4b5afb539cbe8704371.git explain
+
 
 # some scripts only meant to be used by other scripts
 ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
@@ -215,6 +214,7 @@ fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
 fresh bash-it/custom.bash --file=~/.bash_it/lib/custom.bash
 
 # additional bash plugins via bashit
+# XXX https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions
 fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
 
 ln -sf bash-it/custom/plugins/ ~/.bash_it/custom/
@@ -316,7 +316,7 @@ fresh sorin-ionescu/prezto . --file=~/.zprezto/
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
 #fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
 
-# TODO: make sure fresh after build successfully # update prezto submodules
+# TODO: make sure fresh after build successfully # update prezto submodules (seems only aftter "fresh" not after fresh install or update?)
 
 fresh_after_build() {
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
@@ -334,7 +334,8 @@ phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffe
 }
 
 
-#add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
+# add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
+# these are added into [bash-it custom files](https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions)
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
 fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 

@@ -7,7 +7,8 @@
 # is just a symbol, and doesn't have any functional importance.
 #targets = my_github, my_bitbucket, paj_bitbucket, moksha_trac, bz.redhat
 
-targets = rosenstrauch_github
+# TODO: try to make bugwarrior work
+targets = rosenstrauch_bitbucket
 
 # If unspecified, the default taskwarrior config will be used.
 taskrc = ~/.taskrc
@@ -16,7 +17,7 @@ taskrc = ~/.taskrc
 #shorten = False
 
 # Setting this to True will include a link to the ticket in the description
-inline_links = False
+inline_links = True
 
 # Setting this to True will include a link to the ticket as an annotation
 annotation_links = True

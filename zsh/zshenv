@@ -42,4 +42,3 @@ export CHEATPATH=~/.dotfiles/manual/cheat
 export CHEATCOLORS=true
 
 export GOPATH=/usr/local/go/bin
-export PATH=$PATH:/usr/local/go/bin/bin
