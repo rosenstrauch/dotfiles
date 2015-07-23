@@ -1,4 +1,4 @@
-alias bty='~/betty/main.rb'
+#alias bty='~/betty/main.rb'
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 # You can use whatever you want as an alias, like for Mondays:
 alias FUCK='fuck'

@@ -9,8 +9,6 @@
 # TODO try adding packer here
 # FIXED test gibo command
 # CHANGED tested composure command
-# TODO: test explainshell
-# CHANGED explainshell as bin
 ##############
 
 fresh-options --bin
@@ -19,7 +17,7 @@ fresh-options --bin
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
   fresh tj/bm bin/bm
-  #fresh monochromegane/vagrant-peco
+  fresh monochromegane/vagrant-peco vagrant-peco
   fresh rosenstrauch/taskboy taskboy --ref=13896662480
   fresh simonwhitaker/gitignore-boilerplates gibo
   fresh sivel/speedtest-cli speedtest_cli.py
@@ -119,7 +117,7 @@ fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions
 fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
 fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
 
-fresh pickhardt/betty . --file=src/betty/
+#fresh pickhardt/betty . --file=src/betty/
 
 #fresh yyuu/pyenv/ . --file=~/.pyenv/
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
@@ -146,6 +144,8 @@ fresh shell/zsh/functions/zman --file=zsh/functions/zman
 # other functions with the correct extension are loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
 
+# explain a command
+# TODO: improve explainshell
 fresh https://gist.github.com/f4b5afb539cbe8704371.git explain
 
 
