@@ -15,7 +15,6 @@
 
 fresh-options --bin
   fresh freshshell/fresh bin/fresh
-  fresh pengwynn/dotfiles bin/notes
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
   fresh https://gist.github.com/1209316.git gitio
@@ -45,8 +44,7 @@ fresh-options
 # Gui apps and plugins
 ##########
 
-fresh rnons/mikidown . --file=src/mikidown/
-fresh rnons/mikidown mikidown.py --bin
+
 
 # sublimetext 3 plugin for xiki, TODO: fresh needs to pull correct branch
 #fresh lunixbochs/SublimeXiki . --ref=7fbf4f2bbce086a528b4056988a4750dc1e79445 --file=~/.config/sublime-text-3/Packages/SublimeXiki/
