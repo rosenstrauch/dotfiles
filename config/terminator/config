@@ -25,6 +25,10 @@
     font = Terminus 12
     background_color = "#b9b9b9"
     scrollback_infinite = True
+  [[friendlinux]]
+    use_system_font = False
+    font = Nimbus Mono 10
+    scrollback_infinite = True
   [[friendlimux]]
     background_image = None
     cursor_color = "#00b902"
@@ -41,17 +45,6 @@
     background_image = None
     foreground_color = "#5b5700"
     background_color = "#b9b9b9"
-  [[friendlinux]]
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    background_image = None
-    background_darkness = 0.75
-    background_type = transparent
-    background_image = None
-    foreground_color = "#ffffff"
-    scroll_on_output = False
-    font = Nimbus Mono 10
-    use_theme_colors = True
-    scrollback_infinite = True
   [[multitail]]
     use_system_font = False
     copy_on_selection = True
