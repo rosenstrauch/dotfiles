@@ -20,6 +20,7 @@
       "notebook"
       "todo-list"
       "project-palette-finder"
+      "metrics"
     ]
     themes: [
       "atom-dark-ui"
@@ -60,5 +61,3 @@ metrics:
   userId: "5afe01d925f56ca54ea8945b2cce677f8755be3a"
 welcome:
   showOnStartup: false
-"exception-reporting":
-  userId: "65a586aa-48c1-3dad-6dd6-09489ae80c7e"
