@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # setup script meant to be run once on clean arch install (worry about other distros later). this will configure your $HOME settings and applications.
 # for now this script assumes you are using fresh and gets the dotfiles for rosenstrauch
@@ -127,7 +127,7 @@ if [ ! -f $HOME/.xsh ]; then
 
   if [[ $XIKI =~ ^[Yy]$ ]]; then
   echo "XIKI"
-  cd ~; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
+  cd ~/src; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
   fi
 fi
 echo "Xiki installed ...OK"
