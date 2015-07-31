@@ -15,6 +15,7 @@ fresh-options --bin
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
+  fresh alicraigmile/show-wip
   fresh https://gist.github.com/1209316.git gitio
   fresh tj/bm bin/bm
   fresh monochromegane/vagrant-peco vagrant-peco
@@ -84,7 +85,7 @@ ln -sf ~/.dotfiles/config/desktop/xikiterm.desktop ~/.local/share/applications/x
 #################
 
 # xiki installed via setup.zsh for now
-fresh trogdoro/xiki . --file=src/xiki/
+#fresh trogdoro/xiki . --file=src/xiki/
 
 # setup node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
@@ -305,6 +306,7 @@ fresh zsh/\* --file
 
 # ZSH PROMPT
 # my own prompt with alias suggestions
+# XXX http://zsh.sourceforge.net/Intro/intro_14.html
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
@@ -314,7 +316,7 @@ fresh sorin-ionescu/prezto . --file=~/.zprezto/
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
 #fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
 
-# TODO: make sure fresh after build successfully # update prezto submodules (seems only aftter "fresh" not after fresh install or update?)
+# NOTE prezto submodules update only after "fresh" not after fresh install or update
 
 fresh_after_build() {
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs

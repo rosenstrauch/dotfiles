@@ -12,7 +12,10 @@
     zcompile "$zcompdump"
   fi
 } &!
-
+if (( $+commands[show-wip])); then
+  . ~/.config/user-dirs.dirs
+  show-wip -f $XDG_REPOS_DIR
+fi
 # Print a random, hopefully interesting, adage.
 if (( $+commands[fortune] )); then
   fortune -a

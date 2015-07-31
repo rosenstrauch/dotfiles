@@ -1,5 +1,5 @@
 # Your keymap
-#
+# TODO: Generate flashcards from atom keymap for aiding memorization
 # Atom keymaps work similarly to stylesheets. Just as stylesheets use selectors
 # to apply styles to elements, Atom keymaps use selectors to associate
 # keystrokes with events in specific contexts.
@@ -25,15 +25,12 @@
 #body':
 #  'alt-x': 'pane:close'
 '.workspace':
-  'alt-shitft-S': 'timekeeper:start'
-  'alt-shift-right': 'term2:open-split-right'
   'alt-right': 'pane:split-right'
-  'alt-shift-up': 'term2:open-split-up'
   'alt-up': 'pane:split-up'
-  'alt-shift-down': 'term2:open-split-down'
   'alt-down': 'pane:split-down'
-  'alt-shift-left': 'term2:open-split-left'
   'alt-left': 'pane:split-left'
-  'shift-alt-D': 'timekeeper:dashboard'
-  'shift-alt-L': 'livereload:toggle'
-  'ctrl-alt-n': 'notebook:new-notepad'
+'.platform-win32, .platform-linux':
+  'ctrl-k ctrl-b': 'tree-view:toggle'
+  'ctrl-k ctrl-.': 'tree-view:reveal-active-file'
+'.platform-win32 atom-workspace, .platform-linux atom-workspace':
+  'alt-shift-T': 'todo-show:find-in-project'

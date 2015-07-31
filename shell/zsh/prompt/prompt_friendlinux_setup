@@ -153,7 +153,7 @@ prompt_friendlinux_ps1 () {
     time="%{$fg[%@]%}%@$rs"
 
     # This is just a tad silly ...
-    [[ $prompt_theme[1] = rosen ]] && PS1='[%~%0(?..:%?)]%# ' ||
+    [[ $prompt_theme[1] = rosen ]] && PS1='[%h%0(?..:%?)]%# ' ||
 	PS1=${PS1//$prompt_newline/$'\n'}
 
     # Assemble the new prompt
@@ -167,7 +167,7 @@ prompt_friendlinux_ps1 () {
   "$user"
   " at "
   "$host"
-  
+
 	"$space"		# Pad line to upper right position
 	"%$[COLUMNS-PSCOL-15](l. . $date)"
 	"%$[COLUMNS-PSCOL-7](l.. $time)"
@@ -241,7 +241,7 @@ prompt_friendlinux_setup () {
 	fg[%m]="%F{${1:-red}}"
 	fg[%h]="%F{${2:-blue}}"
 	fg[%~]="%F{${3:-default}}"
-	fg[%D]="%F{${4:-default}}"
+	fg[%D]="%F{${4:-green}}"
 	fg[%@]="%F{${1:-red}}"
 	;;
     esac

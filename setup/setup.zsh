@@ -42,7 +42,9 @@ make_backup () {
       echo "Backup file already exists. Make sure to backup your $CONFIG_FILE before running this installation." >&2
       while true
       do
-          read -e -n 1 -r -p "Would you like to overwrite the existing backup? This will delete your existing backup file ($HOME/$BACKUP_FILE) [y/N] " RESP
+        echo -n "Would you like to overwrite the existing backup??"
+        read RESP
+        #read -e -n 1 -r -p "Would you like to overwrite the existing backup? This will delete your existing backup file ($HOME/$BACKUP_FILE) [y/N] " RESP
           case $RESP in
           [yY])
               break
@@ -188,7 +190,7 @@ if command -v fresh >/dev/null 2>&1; then
     echo fresh installed...OK
     cd ~/.dotfiles && git pull
     echo updating fresh ...
-    fresh update
+    fresh
 else
   echo "installing fresh..."
   make_backup .bashrc

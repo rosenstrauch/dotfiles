@@ -68,3 +68,4 @@ versiontag =
 
 [git-up "rebase"]
 arguments = --preserve-merges
+merge.renamelinit = 999999

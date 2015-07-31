@@ -12,3 +12,6 @@ alias vg='vagrant'
 alias drupalcs="phpcs --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'"
 # XXX: https://github.com/nvbn/thefuck
 alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+alias sorry='sudo $(history -p !-1)'
+#alias please='sudo $(fc -nl -1)'
+#alias please='eval "sudo $(history -p !!)"'

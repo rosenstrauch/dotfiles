@@ -21,6 +21,7 @@
       "todo-list"
       "project-palette-finder"
       "metrics"
+      "org"
     ]
     themes: [
       "atom-dark-ui"
@@ -28,7 +29,7 @@
     ]
     projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
   editor:
-    fontSize: 28
+    fontSize: 27
     showInvisibles: true
     showIndentGuide: true
     softWrap: true
@@ -55,9 +56,9 @@
   "autocomplete-plus": {}
   "atom-color-highlight": {}
   "merge-conflicts": {}
-drupal:
-  fileTypesPhp: "module,install,inc,test"
-metrics:
-  userId: "5afe01d925f56ca54ea8945b2cce677f8755be3a"
 welcome:
   showOnStartup: false
+metrics:
+  userId: "5afe01d925f56ca54ea8945b2cce677f8755be3a"
+drupal:
+  fileTypesPhp: "module,install,inc,test"

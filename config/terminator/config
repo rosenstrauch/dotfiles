@@ -6,26 +6,30 @@
   focus = system
   sticky = True
   title_inactive_fg_color = "#03008d"
+  suppress_multiple_term_dialog = True
   enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   title_receive_bg_color = "#16c900"
   dbus = True
   inactive_color_offset = 0.46
 [keybindings]
-  new_tab = <Primary>t
+  cycle_prev = <Primary><Shift>p
+  cycle_next = <Primary><Shift>n
   hide_window = KP_Delete
+  new_tab = <Primary><Shift>t
 [profiles]
   [[default]]
     use_system_font = False
     login_shell = True
     visible_bell = True
     background_darkness = 0.48
+    background_type = transparent
     background_image = None
     foreground_color = "#5b5700"
     scroll_on_output = False
-    scrollback_infinite = True
-    font = Terminus 13
-    background_color = "#545454"
     use_theme_colors = True
+    font = Terminus 13
+    background_color = "#d6d6d6"
+    scrollback_infinite = True
   [[friendlimux]]
     background_image = None
     cursor_color = "#00b902"
@@ -44,12 +48,14 @@
     background_color = "#b9b9b9"
   [[friendlinux]]
     use_system_font = False
+    background_darkness = 0.69
     background_type = transparent
     background_image = None
     foreground_color = "#5b5700"
-    font = Nimbus Mono 12
-    background_color = "#545454"
     scrollback_infinite = True
+    font = Nimbus Mono 13
+    background_color = "#d6d6d6"
+    use_theme_colors = True
   [[multitail]]
     use_system_font = False
     copy_on_selection = True
