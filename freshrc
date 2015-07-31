@@ -15,7 +15,7 @@ fresh-options --bin
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
-  fresh alicraigmile/show-wip
+  fresh alicraigmile/show-wip show-wip
   fresh https://gist.github.com/1209316.git gitio
   fresh tj/bm bin/bm
   fresh monochromegane/vagrant-peco vagrant-peco
