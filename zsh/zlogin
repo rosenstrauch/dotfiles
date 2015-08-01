@@ -12,6 +12,7 @@
     zcompile "$zcompdump"
   fi
 } &!
+# TODO: find out if we can make show wip use a larger depth
 if (( $+commands[show-wip])); then
   . ~/.config/user-dirs.dirs
   show-wip -f $XDG_REPOS_DIR

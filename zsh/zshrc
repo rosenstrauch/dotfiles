@@ -14,9 +14,9 @@ then
 source  ~/bin/composure.sh
 fi
 
-if [[ -a ~/.xsh ]]
+if [[ -a ~/src/xiki-master/bin/.xsh ]]
 then
-source ~/.xsh
+source ~/src/xiki-master/bin/.xsh
 fi
 
 if [[ -a ~/.nvm ]]
