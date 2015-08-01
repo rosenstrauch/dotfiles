@@ -129,7 +129,7 @@ if [ ! -f $HOME/.xsh ]; then
 
   if [[ $XIKI =~ ^[Yy]$ ]]; then
   echo "XIKI"
-  cd ~/src; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
+  cd ; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
   fi
 fi
 echo "Xiki installed ...OK"
