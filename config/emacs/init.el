@@ -35,9 +35,9 @@
 
 ; Load el4r, which loads Xiki
 ;(add-to-list 'load-path "/home/rosenstrauch/.rvm/gems/ruby-1.9.3-p551/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
-;(require 'el4r)
-;(el4r-boot)
-
+(require 'el4r)
+(el4r-boot)
+(el4r-troubleshooting-keys)
 
 ; Set default font
 (set-face-attribute 'default nil
@@ -57,7 +57,7 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote
-    ("/home/rosenstrauch/org/agendas.org" "/home/rosenstrauch/org/flagged.org" "/home/rosenstrauch/org/from-mobile.org" "/home/rosenstrauch/org/home.org" "/home/rosenstrauch/org/index.org" "/home/rosenstrauch/org/videoscenes.org"))))
+    ("/home/rosenstrauch/org/*.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
