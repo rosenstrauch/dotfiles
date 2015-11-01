@@ -26,6 +26,8 @@ fresh-options --bin
   fresh lucasdemarchi/codespell codespell.py
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
+  fresh olof/Text-FileTree bin/find2tree.pl
+  https://gist.github.com/8511861.git keybindings.pl
 fresh-options
 
 #########
@@ -149,9 +151,21 @@ fresh twe4ked/dotfiles shell/functions/pubkey.sh
 # TODO: improve explainshell
 fresh https://gist.github.com/f4b5afb539cbe8704371.git explain
 
-
+######
 # some scripts only meant to be used by other scripts
+#####
+
+## utilities library
 ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
+
+## zim custom tools and plugins
+## https://github.com/jaap-karssenberg/zim-wiki/wiki/Text2mindmap-custom-tool
+
+fresh https://gist.github.com/8e49f6bb3c26674d6d47.git zim2mindmap --bin=~/scripts/zim2map.py
+
+fresh https://gist.github.com/403600a1c1fe691c39ba.git ShowFolderTree.py --bin=~/scripts/ShowFolderTree.py
+
+fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~/.local/share/zim/plugins/treemapeditor.py
 
 ########
 # Config
