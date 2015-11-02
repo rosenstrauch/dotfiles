@@ -27,7 +27,7 @@ fresh-options --bin
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
-  https://gist.github.com/8511861.git keybindings.pl
+  fresh https://gist.github.com/8511861.git keybindings.pl
 fresh-options
 
 #########
