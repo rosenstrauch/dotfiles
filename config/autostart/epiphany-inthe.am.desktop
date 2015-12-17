@@ -6,3 +6,4 @@ Terminal=false
 Type=Application
 Icon=/home/rosenstrauch/.config/epiphany/app-epiphany-inthe.am/app-icon.png
 StartupWMClass=epiphany-inthe.am
+X-GNOME-Autostart-enabled=false

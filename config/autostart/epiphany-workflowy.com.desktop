@@ -6,3 +6,4 @@ Terminal=false
 Type=Application
 Icon=/home/rosenstrauch/.config/epiphany/app-epiphany-workflowy.com/app-icon.png
 StartupWMClass=epiphany-workflowy.com
+X-GNOME-Autostart-enabled=false

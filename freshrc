@@ -28,6 +28,8 @@ fresh-options --bin
   fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
+  fresh pantheon-systems/drush-config-workflow bin/quickstart
+
 fresh-options
 
 #########

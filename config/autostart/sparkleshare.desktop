@@ -1,8 +1,10 @@
 [Desktop Entry]
 Type=Application
 Name=SparkleShare
-Exec=sparkleshare start
+Exec=sparkleshare start &
 Icon=folder-sparkleshare
 Terminal=false
-X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-enabled=false
 Categories=Network
+Comment[en_US]=start sparkleshare 
+Comment=start sparkleshare 

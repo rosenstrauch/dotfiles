@@ -29,21 +29,14 @@
 ;; set missing xiki hotkeys https://github.com/trogdoro/xiki/issues/119
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/rvm"))
+(setq rvm-verbose nil)
+
 (require 'rvm)
 (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
-
-
 ; Load el4r, which loads Xiki
-;(add-to-list 'load-path "/home/rosenstrauch/.rvm/gems/ruby-1.9.3-p551/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
+(add-to-list 'load-path "/home/rosenstrauch/.rvm/gems/ruby-1.9.3-p551/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
 (require 'el4r)
 (el4r-boot)
-(el4r-troubleshooting-keys)
-
-; Set default font
-(set-face-attribute 'default nil
-  :height 110
-  :family "Monaco"
-  )
 
 ; Make tabs into spaces when you type them
 (setq-default indent-tabs-mode nil)
@@ -58,9 +51,3 @@
  '(org-agenda-files
    (quote
     ("/home/rosenstrauch/org/*.org"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

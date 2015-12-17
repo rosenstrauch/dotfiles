@@ -3,7 +3,7 @@ Type=Application
 Exec=terminator --geometry=1366x730 -m -b -l friendlinux -p friendlinux
 Hidden=false
 NoDisplay=false
-X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-enabled=false
 Name[en_US]=friendlinux terminator
 Name=friendlinux terminator
 Comment[en_US]=borderless fullsize

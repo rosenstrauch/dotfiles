@@ -8,3 +8,4 @@ Exec=manjaro-welcome
 Icon=gtk-info
 Comment=The Manjaro Welcome utility.
 Name[de_DE.UTF-8]=Manjaro Welcome
+X-GNOME-Autostart-enabled=false

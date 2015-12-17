@@ -1,238 +1,250 @@
 [global_config]
-  window_state = maximise
-  handle_size = 1
-  title_hide_sizetext = True
   always_split_with_profile = True
-  focus = system
-  sticky = True
-  title_inactive_fg_color = "#03008d"
-  suppress_multiple_term_dialog = True
-  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  title_receive_bg_color = "#16c900"
   dbus = True
+  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  focus = system
+  handle_size = 1
   inactive_color_offset = 0.46
+  sticky = True
+  suppress_multiple_term_dialog = True
+  title_hide_sizetext = True
+  title_inactive_fg_color = "#03008d"
+  title_receive_bg_color = "#16c900"
+  window_state = maximise
 [keybindings]
-  cycle_prev = <Primary><Shift>p
   cycle_next = <Primary><Shift>n
+  cycle_prev = <Primary><Shift>p
   hide_window = KP_Delete
   new_tab = <Primary><Shift>t
-[profiles]
-  [[default]]
-    use_system_font = False
-    login_shell = True
-    visible_bell = True
-    background_darkness = 0.48
-    background_type = transparent
-    background_image = None
-    foreground_color = "#5b5700"
-    scroll_on_output = False
-    use_theme_colors = True
-    font = Terminus 13
-    background_color = "#d6d6d6"
-    scrollback_infinite = True
-  [[friendlimux]]
-    background_image = None
-    cursor_color = "#00b902"
-  [[vagrant]]
-    background_image = None
-    background_color = "#b9b9b9"
-    cursor_color = "#d52f2f"
-    foreground_color = "#5b5700"
-  [[rvm]]
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
-    login_shell = True
-    background_darkness = 0.84
-    background_type = transparent
-    background_image = None
-    foreground_color = "#5b5700"
-    background_color = "#b9b9b9"
-  [[friendlinux]]
-    use_system_font = False
-    background_darkness = 0.69
-    background_type = transparent
-    background_image = None
-    foreground_color = "#5b5700"
-    scrollback_infinite = True
-    font = Nimbus Mono 13
-    background_color = "#d6d6d6"
-    use_theme_colors = True
-  [[multitail]]
-    use_system_font = False
-    copy_on_selection = True
-    alternate_screen_scroll = False
-    visible_bell = True
-    background_darkness = 0.78
-    urgent_bell = True
-    background_type = transparent
-    background_image = None
-    foreground_color = "#5b5700"
-    scroll_on_output = False
-    use_theme_colors = True
-    exit_action = hold
-    custom_command = multitail
-    scroll_on_keystroke = False
-    font = "Padauk Book, 10"
-    background_color = "#ffffff"
-    audible_bell = True
-    scrollback_infinite = True
-  [[Xiki]]
-    background_image = None
-    login_shell = True
-    background_color = "#b9b9b9"
-    exit_action = hold
-    foreground_color = "#5b5700"
-  [[mutt]]
-    background_image = None
-    background_color = "#b9b9b9"
-    foreground_color = "#5b5700"
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
       profile = default
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
-  [[friendlimux]]
-    [[[child0]]]
-      position = 1920:0
       type = Window
-      order = 0
-      parent = ""
-      size = 1920, 1034
-    [[[child1]]]
-      position = 960
-      type = HPaned
-      order = 0
-      parent = child0
-    [[[terminal3]]]
-      profile = friendlimux
-      command = ""
-      type = Terminal
-      order = 1
-      parent = child1
-    [[[terminal2]]]
-      profile = friendlimux
-      command = tmuxinator start friendlimux
-      type = Terminal
-      order = 0
-      parent = child1
   [[Dev]]
     [[[child0]]]
-      position = 0:27
-      type = Window
       order = 0
       parent = ""
+      position = 0:27
       size = 1920, 1014
+      type = Window
     [[[child1]]]
+      order = 0
+      parent = child0
       position = 962
       type = HPaned
+    [[[terminal2]]]
       order = 0
-      parent = child0
-    [[[terminal3]]]
+      parent = child1
       profile = default
       type = Terminal
+    [[[terminal3]]]
       order = 1
       parent = child1
-    [[[terminal2]]]
       profile = default
       type = Terminal
+  [[friendlimux]]
+    [[[child0]]]
+      order = 0
+      parent = ""
+      position = 1920:0
+      size = 1920, 1034
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 960
+      type = HPaned
+    [[[terminal2]]]
+      command = tmuxinator start friendlimux
       order = 0
       parent = child1
+      profile = friendlimux
+      type = Terminal
+    [[[terminal3]]]
+      command = ""
+      order = 1
+      parent = child1
+      profile = friendlimux
+      type = Terminal
   [[friendlinux]]
     [[[child0]]]
-      position = 1920:0
-      type = Window
       order = 0
       parent = ""
+      position = 1920:0
       size = 1920, 1080
+      type = Window
     [[[child1]]]
       labels = None, None, None
-      type = Notebook
       order = 0
       parent = child0
+      type = Notebook
     [[[child3]]]
+      order = 1
+      parent = child1
       position = 652
       type = VPaned
-      order = 1
-      parent = child1
     [[[child6]]]
-      position = 1240
-      type = HPaned
       order = 2
       parent = child1
+      position = 1240
+      type = HPaned
     [[[terminal2]]]
-      profile = friendlinux
-      type = Terminal
+      command = /bin/bash bty
       order = 0
       parent = child1
-      command = /bin/bash bty
-    [[[terminal5]]]
       profile = friendlinux
       type = Terminal
-      order = 1
-      parent = child3
     [[[terminal4]]]
-      profile = friendlinux
-      type = Terminal
       order = 0
       parent = child3
-    [[[terminal7]]]
       profile = friendlinux
       type = Terminal
+    [[[terminal5]]]
+      order = 1
+      parent = child3
+      profile = friendlinux
+      type = Terminal
+    [[[terminal7]]]
       order = 0
       parent = child6
-    [[[terminal8]]]
       profile = friendlinux
       type = Terminal
+    [[[terminal8]]]
       order = 1
       parent = child6
+      profile = friendlinux
+      type = Terminal
   [[multitail]]
     [[[child0]]]
-      position = 1920:27
-      type = Window
       order = 0
       parent = ""
+      position = 1920:27
       size = 1920, 993
+      type = Window
     [[[terminal1]]]
-      profile = multitail
       command = multitail -s 2 -m 500 -c /var/log/syslog /var/log/dpkg.log /var/log/kern.log --no-repeat
-      type = Terminal
       order = 0
       parent = child0
+      profile = multitail
+      type = Terminal
   [[mutt]]
     [[[child0]]]
-      position = 960:30
-      type = Window
       order = 0
       parent = ""
+      position = 960:30
       size = 943, 1000
+      type = Window
     [[[child1]]]
-      position = 471
-      type = HPaned
       order = 0
       parent = child0
+      position = 471
+      type = HPaned
     [[[child3]]]
+      order = 1
+      parent = child1
       position = 500
       type = VPaned
-      order = 1
-      parent = child1
     [[[terminal2]]]
-      profile = mutt
       command = mutt
-      type = Terminal
       order = 0
       parent = child1
-    [[[terminal5]]]
       profile = mutt
       type = Terminal
-      order = 1
-      parent = child3
     [[[terminal4]]]
-      profile = mutt
-      type = Terminal
+      command = ""
       order = 0
       parent = child3
-      command = ""
+      profile = mutt
+      type = Terminal
+    [[[terminal5]]]
+      order = 1
+      parent = child3
+      profile = mutt
+      type = Terminal
 [plugins]
+[profiles]
+  [[default]]
+    background_color = "#060039"
+    background_darkness = 0.96
+    background_image = None
+    background_type = transparent
+    cursor_color = "#00ff27"
+    font = Terminus 13
+    foreground_color = "#5b5700"
+    login_shell = True
+    palette = "#000000:#aa0000:#00aa00:#aa5500:#0000aa:#aa00aa:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#ffff55:#5555ff:#ff55ff:#55ffff:#ffffff"
+    scroll_on_output = False
+    scrollback_infinite = True
+    use_system_font = False
+    use_theme_colors = True
+    visible_bell = True
+  [[SSH]]
+    background_color = "#ffffff"
+    background_image = None
+    foreground_color = "#5b5700"
+  [[Xiki]]
+    background_color = "#d6d6d6"
+    background_image = None
+    exit_action = hold
+    foreground_color = "#5b5700"
+    login_shell = True
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    use_theme_colors = True
+  [[friendlimux]]
+    background_color = "#8c8c8c"
+    background_image = None
+    cursor_color = "#00b902"
+    foreground_color = "#5b5700"
+  [[friendlinux]]
+    background_color = "#002b36"
+    background_darkness = 0.87
+    background_image = None
+    font = Nimbus Mono 13
+    foreground_color = "#839496"
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
+    scrollback_infinite = True
+    use_system_font = False
+  [[multitail]]
+    alternate_screen_scroll = False
+    audible_bell = True
+    background_color = "#ffffff"
+    background_darkness = 0.78
+    background_image = None
+    background_type = transparent
+    copy_on_selection = True
+    custom_command = multitail
+    exit_action = hold
+    font = "Padauk Book, 10"
+    foreground_color = "#5b5700"
+    scroll_on_keystroke = False
+    scroll_on_output = False
+    scrollback_infinite = True
+    urgent_bell = True
+    use_system_font = False
+    use_theme_colors = True
+    visible_bell = True
+  [[mutt]]
+    background_color = "#b9b9b9"
+    background_image = None
+    foreground_color = "#5b5700"
+  [[rvm]]
+    background_color = "#d6d6d6"
+    background_darkness = 0.84
+    background_image = None
+    background_type = transparent
+    cursor_color = "#00ff1a"
+    foreground_color = "#5b5700"
+    login_shell = True
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+  [[vagrant]]
+    background_color = "#b9b9b9"
+    background_image = None
+    cursor_color = "#d52f2f"
+    foreground_color = "#5b5700"
+    scroll_on_output = False
+    scrollback_infinite = True

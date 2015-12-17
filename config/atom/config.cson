@@ -14,8 +14,6 @@
       "atom-grunt-runner"
       "wakatime"
       "atom-copy-on-select"
-      "atom-xikij"
-      "atom-bootstrap3"
       "bootstrap3-snippets"
       "notebook"
       "todo-list"
@@ -29,12 +27,13 @@
     ]
     projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
   editor:
-    fontSize: 27
+    fontSize: 18
     showInvisibles: true
     showIndentGuide: true
     softWrap: true
     softWrapAtPreferredLineLength: true
     invisibles: {}
+    autoIndentOnPaste: false
   drupal:
     fileTypesPhp: "module,install,inc,test"
   "find-and-replace":
@@ -50,12 +49,14 @@
   linter: {}
   "atom-beautify":
     _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
+    beautifyEntireFileOnSave: false
   "atom-xikij": {}
   notebook:
     removeEmptyNotepadsAutomatically: false
   "autocomplete-plus": {}
   "atom-color-highlight": {}
   "merge-conflicts": {}
+  "api-blueprint-preview": {}
 drupal:
   fileTypesPhp: "module,install,inc,test"
 metrics:

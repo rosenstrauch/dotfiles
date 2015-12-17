@@ -84,3 +84,4 @@ GenericName=
 X-GNOME-Autostart-Phase=Initialization
 X-KDE-autostart-phase=1
 X-GNOME-Autostart-enabled=false
+Nodisplay=False
