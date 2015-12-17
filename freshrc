@@ -336,6 +336,8 @@ fresh sorin-ionescu/prezto . --file=~/.zprezto/
 
 fresh_after_build() {
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
+
 phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
   if [ -z "${updated_submodules+1}" ]; then
@@ -376,6 +378,8 @@ fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref
 #chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 
 ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
+ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
+
 
 # rvm
 # https://rvm.io/gemsets/global
