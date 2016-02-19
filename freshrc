@@ -327,7 +327,7 @@ fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
 # Prezto zsh config
-fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=ed04176bd1eb63d129464
+fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=a0f795830c657e30
 
 # zsh substring history search
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>

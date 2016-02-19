@@ -201,11 +201,11 @@
     cursor_color = "#00b902"
     foreground_color = "#5b5700"
   [[friendlinux]]
-    background_color = "#002b36"
+    background_color = "#060039"
     background_darkness = 0.87
     background_image = None
     font = Nimbus Mono 13
-    foreground_color = "#839496"
+    foreground_color = "#5b5700"
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
     scrollback_infinite = True
     use_system_font = False
