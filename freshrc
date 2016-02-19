@@ -327,7 +327,8 @@ fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
 # Prezto zsh config
-fresh sorin-ionescu/prezto . --file=~/.zprezto/
+fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=ed04176bd1eb63d129464
+
 # zsh substring history search
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
 #fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
@@ -341,7 +342,7 @@ chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
 phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
   if [ -z "${updated_submodules+1}" ]; then
-    cd ~/.fresh/source/sorin-ionescu/prezto/ && git pull && git submodule update --init --recursive
+    cd ~/.fresh/source/rosenstrauch/prezto/ && git pull && git submodule update --init --recursive
     export updated_submodules=0
   fi
   if [ "$updated_submodules" -eq 0 ]; then
@@ -352,7 +353,7 @@ phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffe
 }
 
 
-# add drush <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
+# add drush integration to bashit <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
 # these are added into [bash-it custom files](https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions)
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
 fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
