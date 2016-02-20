@@ -327,7 +327,7 @@ fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
 # Prezto zsh config
-fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=fa8a25007
+fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=7ebbbc464c1a178
 
 # zsh substring history search
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
@@ -342,7 +342,7 @@ chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
 phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
   if [ -z "${updated_submodules+1}" ]; then
-    cd ~/.fresh/source/rosenstrauch/prezto/ && git pull && git submodule update --init --recursive
+    cd ~/.fresh/source/rosenstrauch/prezto/ && git checkout production && git pull && git submodule update --init --recursive
     export updated_submodules=0
   fi
   if [ "$updated_submodules" -eq 0 ]; then
