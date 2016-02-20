@@ -40,6 +40,7 @@ zstyle ':prezto:load' pmodule \
 'pacman' \
 'gpg' \
 'node' \
+'fu' \
 'rsync' \
 'ruby' \
 'ssh' \

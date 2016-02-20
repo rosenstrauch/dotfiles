@@ -1,6 +1,6 @@
 # aliases sourced from zshrc
 alias git="git-achievements"
-alias fu="python ~/.fresh/build/src/fu/fu"
+alias fu="python2 ~/.fresh/build/src/fu/fu"
 alias git-team="git log --format='%aN' | sort -u"
 alias ...='nocorrect cd ../../'
 alias pbcopy='xclip -selection clipboard'
