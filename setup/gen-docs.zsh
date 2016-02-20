@@ -30,6 +30,7 @@ done
 # System Hardware
 inxi -Fxz > "${ZDOTDIR:-$HOME}/.dotfiles/docs/system.inxi"
 
+cd ${ZDOTDIR:-$HOME}/.dotfiles/docs/ && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip
 
 # Sources and their readmes
 

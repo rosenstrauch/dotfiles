@@ -96,11 +96,9 @@ fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
 fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
 
+fresh agnoster/agnoster-zsh-theme . --file=.zprezto/modules/prompt/external/agnoster-zsh-theme/
+
 fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/pure/
-
-fresh agnoster/agnoster-zsh-theme . --file=.zprezto/modules/prompt/external/pure/
-
-fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/powerline/
 
 fresh davidjrice/prezto_powerline . --file=zprezto/modules/prompt/external/powerline/
 
@@ -160,7 +158,6 @@ ln -sf ~/.dotfiles/config/desktop/xikiterm.desktop ~/.local/share/applications/x
 #################
 # CLI Apps
 #################
-
 
 ## NVM
 ## setup node version manager (NVM) in your $HOME
