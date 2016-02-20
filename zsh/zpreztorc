@@ -43,6 +43,10 @@ zstyle ':prezto:load' pmodule \
 'rsync' \
 'ruby' \
 'ssh' \
+'bd' \
+'alias-tips' \
+'explainshell' \
+'please' \
 'syntax-highlighting' \
 'history-substring-search' \
 'prompt'
