@@ -53,6 +53,12 @@ zstyle ':prezto:load' pmodule \
 'prompt'
 
 #
+# alias-tips
+# keyboard shortcut: alt + ß
+
+zstyle ':prezto:module:alias-tips' expand 'yes'
+
+#
 # Explainshell
 # : set keyboard shortcut to alt + g
 

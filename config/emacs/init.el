@@ -23,21 +23,6 @@
 "/run/media/rosenstrauch/DATA/DEV/Projectrepos/INTERNAL/rosenstrauch.com/ROSENREPOS/org"
 )))
 
-;;
-;; XIKI
-;; http://stackoverflow.com/questions/15869029/bind-command-to-c-ret-in-emacs
-;; set missing xiki hotkeys https://github.com/trogdoro/xiki/issues/119
-
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/rvm"))
-(setq rvm-verbose nil)
-
-(require 'rvm)
-(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
-; Load el4r, which loads Xiki
-(add-to-list 'load-path "/home/rosenstrauch/.rvm/gems/ruby-1.9.3-p551/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
-(require 'el4r)
-(el4r-boot)
-
 ; Make tabs into spaces when you type them
 (setq-default indent-tabs-mode nil)
 ; Display existing tabs as 2 characters wide

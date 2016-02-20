@@ -76,7 +76,7 @@ fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendl
 ## Prezto zsh config
 ## :get our own prezto setup
 
-fresh rosenstrauch/prezto . --file=.zprezto/ --ref=6d39b057a3
+fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bedeb39281035
 
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
