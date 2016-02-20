@@ -53,12 +53,15 @@ customized prompts
 - https://github.com/sorin-ionescu/prezto
 
 
-# TODO:
-
+# Investigate:
+https://github.com/unixorn/awesome-zsh-plugins
 TODO: https://github.com/drush-ops/drush/blob/master/README.md#post-install
 TODO: https://github.com/Lokaltog/powerline
 TODO: shocco from github needs make install to work, wont build from aur
 TODO: rvm
-
+https://github.com/michaelklishin/git-wtf
+search terminal output (previous)
+http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/
+TODO: https://github.com/dborzov/lsp
 TODO: https://wiki.archlinux.org/index.php/Xdg_user_directories
 TODO: Optional trackpad setup http://www.thinkwiki.org/wiki/How_to_configure_the_TrackPoint possibly use from AUR: configure-trackpoint
