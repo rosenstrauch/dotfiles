@@ -352,7 +352,7 @@ fresh sindresorhus/pure . --file=zprezto/modules/prompt/external/powerline/
 
 fresh davidjrice/prezto_powerline . --file=zprezto/modules/prompt/external/powerline/
 
-ln -sf ~/.fresh/source/rosenstrauch/prezto ~/.zprezto
+ln -sf ~/.fresh/build/zprezto ~/.zprezto
 
 ## !!!!!!!!!!!!!!!!!!!!!!
 ## ATTENTION
