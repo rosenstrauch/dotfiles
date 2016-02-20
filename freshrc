@@ -327,13 +327,16 @@ fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
 # Prezto zsh config
-fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=2fb1eae895dd3
+fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=36498c331b868
 
 # zsh substring history search
 # <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
 #fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
 
-# NOTE prezto submodules update only after "fresh" not after fresh install or update
+# !!!!!!!!!!!!!!!!!!!!!!
+# ATTENTION
+# !!!!!!!!!!!!!!!!!!!!!!
+# prezto submodules update only after "fresh" not after fresh install or update
 
 fresh_after_build() {
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
