@@ -95,6 +95,7 @@ fresh djui/alias-tips . --file=.zprezto/modules/alias-tips/external/
 fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
 fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
+fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup --file
 
 fresh agnoster/agnoster-zsh-theme . --file=.zprezto/modules/prompt/external/agnoster-zsh-theme/
 
