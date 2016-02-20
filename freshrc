@@ -338,7 +338,7 @@ fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-s
 
 fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
 
-fresh djui/alias-tips . --file=.zprezto/modules/alias-tips/external/
+#fresh djui/alias-tips . --file=.zprezto/modules/alias-tips/external/
 
 fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
@@ -363,7 +363,7 @@ fresh_after_build() {
 ## :make some things executable
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
-chmod +x $HOME/.fresh/build/zprezto/modules/alias-tips/external/alias-tips
+#chmod +x $HOME/.fresh/build/zprezto/modules/alias-tips/external/alias-tips
 
 phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
