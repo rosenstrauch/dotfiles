@@ -329,30 +329,30 @@ fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendl
 ## Prezto zsh config
 ## :get our own prezto setup
 #########################
-fresh rosenstrauch/prezto . --file=zprezto/ --ref=3ae84a55879
+fresh rosenstrauch/prezto . --file=.zprezto/ --ref=3ae84a55879
 
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
 
-fresh zsh-users/zsh-history-substring-search . --file=zprezto/modules/history-substring-search/external/
+fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
 
-fresh zsh-users/zsh-syntax-highlighting . --file=zprezto/modules/syntax-highlighting/external/
+fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
 
-fresh djui/alias-tips . --file=zprezto/modules/alias-tips/external/
+fresh djui/alias-tips . --file=.zprezto/modules/alias-tips/external/
 
-fresh Tarrasch/zsh-bd . --file=zprezto/modules/bd/external/
+fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
-fresh el1t/statusline . --file=zprezto/modules/prompt/external/statusline/
+fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
 
-fresh sindresorhus/pure . --file=zprezto/modules/prompt/external/pure/
+fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/pure/
 
-fresh agnoster/agnoster-zsh-theme . --file=zprezto/modules/prompt/external/pure/
+fresh agnoster/agnoster-zsh-theme . --file=.zprezto/modules/prompt/external/pure/
 
-fresh sindresorhus/pure . --file=zprezto/modules/prompt/external/powerline/
+fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/powerline/
 
 fresh davidjrice/prezto_powerline . --file=zprezto/modules/prompt/external/powerline/
 
-ln -sf ~/.fresh/build/zprezto ~/.zprezto
+ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
 
 ## !!!!!!!!!!!!!!!!!!!!!!
 ## ATTENTION
