@@ -307,31 +307,47 @@ fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
 
 #######
 # SHELL
-#######
-
 # our own Shell Files sourced to
 # /home/rosenstrauch/.fresh/build/shell.sh
 # https://github.com/freshshell/fresh#shell-files
+#######
 
-
-# Aliases
+## Aliases
 fresh shell/zsh/aliases/\*
 
-# our own zsh files forked from prezto
+## our own zsh runcoms files forked from prezto
 fresh zsh/\* --file
 
-# ZSH PROMPT
+# zsh Prompt
 # my own prompt with alias suggestions
 # XXX http://zsh.sourceforge.net/Intro/intro_14.html
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
-# Prezto zsh config
-fresh rosenstrauch/prezto . --file=~/.zprezto/ --ref=f167c4765136
+## Prezto zsh config
+## :get our own prezto setup
+fresh rosenstrauch/prezto . --file=zprezto/ --ref=f167c4765136
 
-# zsh substring history search
-# <https://github.com/zsh-users/zsh-history-substring-search/blob/master/zsh-history-substring-search.zsh>
-#fresh zsh-users/zsh-history-substring-search zsh-history-substring-search.zsh
+
+## Prezto Submodules
+## :instead of relying on git submodules load external components using fresh
+fresh zsh-users/zsh-history-substring-search . --file=zprezto/modules/history-substring-search/external/
+
+fresh zsh-users/zsh-syntax-highlighting . --file=zprezto/modules/syntax-highlighting/external/
+
+fresh djui/alias-tips . --file=zprezto/modules/alias-tips/external/
+
+fresh el1t/statusline . --file=zprezto/modules/prompt/external/statusline/
+
+fresh sindresorhus/pure . --file=zprezto/modules/prompt/external/pure/
+
+fresh agnoster/agnoster-zsh-theme . --file=zprezto/modules/prompt/external/pure/
+
+fresh sindresorhus/pure . --file=zprezto/modules/prompt/external/powerline/
+
+fresh davidjrice/prezto_powerline . --file=zprezto/modules/prompt/external/powerline/
+
+
 
 # !!!!!!!!!!!!!!!!!!!!!!
 # ATTENTION
@@ -369,9 +385,9 @@ fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
 
-# pareview
-# https://github.com/klausi/pareviewsh
-# http://cgit.drupalcode.org/pareviewsh/tree/README.md?id=58d4a53
+## Pareview
+## https://github.com/klausi/pareviewsh
+## http://cgit.drupalcode.org/pareviewsh/tree/README.md?id=58d4a53
 
 fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
 fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
@@ -384,14 +400,22 @@ fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref
 ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
 ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
 
-
-# rvm
+###############################
+# RVM
 # https://rvm.io/gemsets/global
+#
 # Gems in the global gemset, will be added to the global gemset
 # in every new Ruby you install.
 # rake, rdoc and bundler are good examples of handy global gems.
 # The gems in the default gemset are the gems included in every newly created gemset.
-#NOTE: A little bit about where the default and global gemsets differ. If you don't use a gemset at all, you get the gems in the 'default' set. If you use a specific gemset (say @testing), it will inherit gems from that ruby's @global. The 'global' gemset is to allow you to share gems to all your gemsets. The word 'default' quite literally says it all, eg. the gemset used without selecting one for a specific installed ruby.
+# NOTE: A little bit about where the default and global gemsets differ.
+# If you don't use a gemset at all, you get the gems in the 'default' set.
+# If you use a specific gemset (say @testing),
+# it will inherit gems from that ruby's @global.
+# The 'global' gemset is to allow you to share gems to all your gemsets.
+# The word 'default' quite literally says it all,
+# eg. the gemset used without selecting one for a specific installed ruby.
+###############################
 
 fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
 fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
@@ -402,20 +426,24 @@ fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 # <https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files>
 ############
 
-# emacs and rvm
+## Emacs and rvm
 fresh senny/rvm.el rvm.el --file=~/.emacs.d/rvm/rvm.el
 ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
 
-# tmuxinator projects
-# https://github.com/tmuxinator/tmuxinator#create-a-project
+## Tmuxinator projects
+## https://github.com/tmuxinator/tmuxinator#create-a-project
 ln -sf ~/.dotfiles/config/tmuxinator/* ~/.tmuxinator/
-# boom Links
+
+## Boom Links
 ln -sf ~/.dotfiles/manual/boom/boom  ~/.boom
-# cheatsheets
+
+## Cheatsheets
 ln -sf ~/.dotfiles/manual/cheat/*  ~/.cheat/
-# terminator
+
+## Terminator
 ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
-# atom
+
+## Atom Editor
 ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
 ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
 ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
