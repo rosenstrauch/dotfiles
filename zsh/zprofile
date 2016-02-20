@@ -21,7 +21,8 @@ fi
 
 export VISUAL='emacs'
 export PAGER='less'
-export EDITOR='vim'
+# done by prezto
+#export EDITOR='vim'
 export USE_EDITOR="$EDITOR"
 
 #

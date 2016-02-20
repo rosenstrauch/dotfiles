@@ -52,6 +52,13 @@ zstyle ':prezto:load' pmodule \
 'prompt'
 
 #
+# Explainshell
+# : set keyboard shortcut to alt + g
+
+`zstyle ':prezto:module:explainshell' key-binding '\eg'`
+
+
+#
 # Editor
 #
 

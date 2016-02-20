@@ -313,6 +313,7 @@ fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
 #######
 
 ## Aliases
+## : many aliases are set by prezto modules. some custom ones will be sourced here though.
 fresh shell/zsh/aliases/\*
 
 ## our own zsh runcoms files forked from prezto
@@ -320,22 +321,27 @@ fresh zsh/\* --file
 
 # zsh Prompt
 # my own prompt with alias suggestions
-# XXX http://zsh.sourceforge.net/Intro/intro_14.html
+# @see <http://zsh.sourceforge.net/Intro/intro_14.html>
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
+#########################
 ## Prezto zsh config
 ## :get our own prezto setup
-fresh rosenstrauch/prezto . --file=zprezto/ --ref=f167c4765136
+#########################
+fresh rosenstrauch/prezto . --file=zprezto/ --ref=5fc695b5361773
 
 
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
+
 fresh zsh-users/zsh-history-substring-search . --file=zprezto/modules/history-substring-search/external/
 
 fresh zsh-users/zsh-syntax-highlighting . --file=zprezto/modules/syntax-highlighting/external/
 
 fresh djui/alias-tips . --file=zprezto/modules/alias-tips/external/
+
+fresh Tarrasch/zsh-bd . --file=zprezto/modules/bd/external/
 
 fresh el1t/statusline . --file=zprezto/modules/prompt/external/statusline/
 
@@ -349,14 +355,16 @@ fresh davidjrice/prezto_powerline . --file=zprezto/modules/prompt/external/power
 
 
 
-# !!!!!!!!!!!!!!!!!!!!!!
-# ATTENTION
-# !!!!!!!!!!!!!!!!!!!!!!
-# prezto submodules update only after "fresh" not after fresh install or update
+## !!!!!!!!!!!!!!!!!!!!!!
+## ATTENTION
+## !!!!!!!!!!!!!!!!!!!!!!
+## :prezto submodules update only after "fresh" not after fresh install or update
 
 fresh_after_build() {
+## :make some things executable
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
 chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
+chmod +x $HOME/.fresh/build/zprezto/modules/alias-tips/external/alias-tips
 
 phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
@@ -372,15 +380,15 @@ phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffe
 }
 
 
-# add drush integration to bashit <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
-# these are added into [bash-it custom files](https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions)
+## add drush integration to bashit <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
+## these are added into [bash-it custom files](https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions)
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
 fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 
 
-# ~/.drush config
-# Modifying the PHP or PHP configuration that drush runs under
-# <https://www.drupal.org/node/1302418>
+## ~/.drush config
+## :Modifying the PHP or PHP configuration that drush runs under
+## <https://www.drupal.org/node/1302418>
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
