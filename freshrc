@@ -76,7 +76,7 @@ fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendl
 ## Prezto zsh config
 ## :get our own prezto setup
 
-fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bedeb39281035
+fresh rosenstrauch/prezto . --file=.zprezto/ --ref=01b3d24626b4432f4
 
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
@@ -105,6 +105,10 @@ fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt
 
 fresh davidjrice/prezto_powerline . --file=.zprezto/modules/prompt/external/powerline/
 fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
+
+
+fresh chauncey-garrett/zsh-prompt-garrett . --file=.zprezto/modules/prompt/external/garrett/
+fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
 
 # now get the completed prezto setup
 ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
