@@ -1,6 +1,7 @@
 # aliases sourced from zshrc
 alias git="git-achievements"
-alias fu="python2 ~/.fresh/build/src/fu/fu"
+
+#alias fu="python2 ~/.fresh/build/src/fu/fu" --> moved to prezto
 alias git-team="git log --format='%aN' | sort -u"
 alias ...='nocorrect cd ../../'
 alias pbcopy='xclip -selection clipboard'
