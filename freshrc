@@ -97,17 +97,17 @@ fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 ## Prezto themes
 fresh sindresorhus/pure  async.zsh --file=.zprezto/modules/prompt/functions/async
 
-fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
+#fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
 fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
 
-fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/pure/
+#fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/pure/
 fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
 
-fresh davidjrice/prezto_powerline . --file=.zprezto/modules/prompt/external/powerline/
+#fresh davidjrice/prezto_powerline . --file=.zprezto/modules/prompt/external/powerline/
 fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
 
 
-fresh chauncey-garrett/zsh-prompt-garrett . --file=.zprezto/modules/prompt/external/garrett/
+#fresh chauncey-garrett/zsh-prompt-garrett . --file=.zprezto/modules/prompt/external/garrett/
 fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
 
 # now get the completed prezto setup
