@@ -14,6 +14,7 @@ export FRESH_DIR=$USR_DIR/.fresh
 export ZSH_DIR=$FRESH_DIR/build/zsh
 export FRESH_BUILD_PATH=$FRESH_DIR/build
 export TMPDIR=/tmp
+export NVM_DIR="$HOME/.nvm"
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
