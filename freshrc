@@ -17,7 +17,7 @@ fresh-options --bin
   fresh clvv/fasd fasd
   fresh alicraigmile/show-wip show-wip
   fresh https://gist.github.com/1209316.git gitio
-  fresh tj/bm bin/bm
+  fresh tj/bm bm
   fresh monochromegane/vagrant-peco vagrant-peco
   fresh rosenstrauch/taskboy taskboy --ref=13896662480
   fresh simonwhitaker/gitignore-boilerplates gibo
