@@ -77,7 +77,7 @@ fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendl
 ## Prezto zsh config
 ## :get our own prezto setup
 
-fresh rosenstrauch/prezto . --file=.zprezto/ --ref=01b3d24626b4432f4
+fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bed21a831348
 
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
@@ -405,6 +405,7 @@ fresh_after_build() {
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
   chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips
+  chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
 
   phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
