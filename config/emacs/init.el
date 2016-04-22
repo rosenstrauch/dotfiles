@@ -1,8 +1,46 @@
 ;; User-setting area is below this line.
 
 ;;
+;; Melpa for org-trello
+;;
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
+(package-initialize)
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+
+;;
+;; Org-trello
+;;
+
+(use-package org-trello
+  :ensure t)
+
+;; Custom list of trello org files
+(custom-set-variables '(org-trello-files '("~/org/boards/Welcome.trello")))
+
+;; org-trello major mode for all .trello files
+(add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
+
+;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
+(add-hook 'org-mode-hook
+          (lambda ()
+            (let ((filename (buffer-file-name (current-buffer))))
+              (when (and filename (string= "trello" (file-name-extension filename)))
+              (org-trello-mode)))))
+;;
 ;; ORG MODE
 ;;
+
+(use-package org
+  :ensure t)
 
 
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
@@ -33,6 +71,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
- '(org-agenda-files
-   (quote
-    ("/home/rosenstrauch/org/*.org"))))
+ '(org-agenda-files (quote ("/home/rosenstrauch/org/"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
