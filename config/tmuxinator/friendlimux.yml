@@ -24,6 +24,7 @@ windows:
       panes:
         - vim ~/.dotfiles/manual/vimwiki/index.wiki
         - emacs -nw ~/org/home.org
+        - xsh
         - bty
   - Web:
       layout: main-vertical
@@ -43,6 +44,8 @@ windows:
   - Communication:
       panes:
         - irssi
+        - weechat
+        - notmuch
         - mutt
   - Servers:
       panes:

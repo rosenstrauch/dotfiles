@@ -29,6 +29,7 @@ fresh-options --bin
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
   fresh pantheon-systems/drush-config-workflow bin/quickstart
+  fresh blinkreaction/drude bin/dsh
 fresh-options
 
 ## some other external functions with the correct extension
@@ -305,8 +306,10 @@ fresh-options --file=~/.zshrc --marker
  fresh freshshell/fresh contrib/source-build.sh
 fresh-options
 
-
-
+## EMACS
+# https://www.emacswiki.org/emacs/OrgJiraMode
+fresh baohaojun/org-jira . --file=~/.emacs.d/org-jira/
+fresh jaseemabid/elisp youtrack.el --file=~/.emacs.d/youtrack.el
 ## VIMRC
 ## XXX http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 ## XXX http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/

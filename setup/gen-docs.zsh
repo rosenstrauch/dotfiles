@@ -23,6 +23,16 @@ setopt EXTENDED_GLOB
 # find any readme files from fresh sources and convert to HTML
 
 for file in "${ZDOTDIR:-$HOME}"/.fresh/source/**/**/*(#ia2)readme.*; do
+  # create boom list per remote
+  boom ${file:h:t}
+  #echo ${file:h:t}
+
+  #
+  #echo ${file:h:h}
+  cd ${file:h} && pwd && ORIGIN=$(git config --get remote.origin.url)
+  echo $ORIGIN
+  boom ${file:h:t} origin $ORIGIN
+
   mkdir -p ${ZDOTDIR:-$HOME}/.dotfiles/docs/${file:h:t}
   pandoc ${file} -f markdown -t html -s -o "${ZDOTDIR:-$HOME}/.dotfiles/docs/${file:h:t}/${file:h:t}.html"
 done
@@ -30,7 +40,6 @@ done
 # System Hardware
 inxi -Fxz > "${ZDOTDIR:-$HOME}/.dotfiles/docs/system.inxi"
 
-cd ${ZDOTDIR:-$HOME}/.dotfiles/docs/ && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip
 
 # Sources and their readmes
 

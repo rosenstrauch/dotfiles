@@ -1,7 +1,7 @@
 [global_config]
   always_split_with_profile = True
   dbus = True
-  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = CustomCommandsMenu, InactivityWatch, ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   focus = system
   handle_size = 1
   inactive_color_offset = 0.46
@@ -170,7 +170,7 @@
 [profiles]
   [[default]]
     background_color = "#060039"
-    background_darkness = 0.96
+    background_darkness = 0.83
     background_image = None
     background_type = transparent
     cursor_color = "#00ff27"
@@ -184,7 +184,7 @@
     use_theme_colors = True
     visible_bell = True
   [[SSH]]
-    background_color = "#ffffff"
+    background_color = "#afc0ff"
     background_image = None
     foreground_color = "#5b5700"
   [[Xiki]]
@@ -201,7 +201,7 @@
     cursor_color = "#00b902"
     foreground_color = "#5b5700"
   [[friendlinux]]
-    background_color = "#060039"
+    background_color = "#ceffd4"
     background_darkness = 0.87
     background_image = None
     font = Nimbus Mono 13
@@ -242,7 +242,7 @@
     login_shell = True
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
   [[vagrant]]
-    background_color = "#b9b9b9"
+    background_color = "#fbd3ff"
     background_image = None
     cursor_color = "#d52f2f"
     foreground_color = "#5b5700"

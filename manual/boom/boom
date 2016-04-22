@@ -15,6 +15,692 @@
           "conky_hddtemp": "http://ubuntuforums.org/showthread.php?t=282353"
         }
       ]
+    },
+    {
+      "show-wip": [
+        {
+          "origin": "https://github.com/alicraigmile/show-wip"
+        }
+      ]
+    },
+    {
+      "git-flow-completion": [
+        {
+          "origin": "https://github.com/bobthecow/git-flow-completion"
+        }
+      ]
+    },
+    {
+      "scss-syntax.vim": [
+        {
+          "origin": "https://github.com/cakebaker/scss-syntax.vim"
+        }
+      ]
+    },
+    {
+      "zsh-prompt-garrett": [
+        {
+          "origin": "https://github.com/chauncey-garrett/zsh-prompt-garrett"
+        }
+      ]
+    },
+    {
+      "todo_txt_actions": [
+        {
+          "origin": "https://github.com/civrot/todo_txt_actions"
+        }
+      ]
+    },
+    {
+      "fasd": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "nvm": [
+        {
+          "origin": "https://github.com/creationix/nvm"
+        }
+      ]
+    },
+    {
+      "prezto_powerline": [
+        {
+          "origin": "https://github.com/davidjrice/prezto_powerline"
+        }
+      ]
+    },
+    {
+      "alias-tips": [
+        {
+          "origin": "https://github.com/djui/alias-tips"
+        }
+      ]
+    },
+    {
+      "todo.txt-cli": [
+        {
+          "origin": "https://github.com/mgarrido/todo.txt-cli"
+        }
+      ]
+    },
+    {
+      "tests": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "todo.txt-revive": [
+        {
+          "origin": "https://github.com/duncanje/todo.txt-revive"
+        }
+      ]
+    },
+    {
+      "prezto": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "statusline": [
+        {
+          "origin": "https://github.com/el1t/statusline"
+        }
+      ]
+    },
+    {
+      "composure": [
+        {
+          "origin": "https://github.com/erichs/composure"
+        }
+      ]
+    },
+    {
+      "fresh-open": [
+        {
+          "origin": "https://github.com/freshshell/fresh-open"
+        }
+      ]
+    },
+    {
+      "fresh": [
+        {
+          "origin": "https://github.com/freshshell/fresh"
+        }
+      ]
+    },
+    {
+      "project-coder": [
+        {
+          "origin": "http://git.drupal.org/project/coder.git"
+        }
+      ]
+    },
+    {
+      "project-vimrc": [
+        {
+          "origin": "http://git.drupal.org/project/vimrc.git"
+        }
+      ]
+    },
+    {
+      "sandbox-coltrane-1921926": [
+        {
+          "origin": "http://git.drupal.org/sandbox/coltrane/1921926.git"
+        }
+      ]
+    },
+    {
+      "open-uri-context-menu": [
+        {
+          "origin": "https://github.com/jpfleury/open-uri-context-menu"
+        }
+      ]
+    },
+    {
+      "pareviewsh": [
+        {
+          "origin": "https://github.com/klausi/pareviewsh"
+        }
+      ]
+    },
+    {
+      "codespell": [
+        {
+          "origin": "https://github.com/lucasdemarchi/codespell"
+        }
+      ]
+    },
+    {
+      "vagrant-peco": [
+        {
+          "origin": "https://github.com/monochromegane/vagrant-peco"
+        }
+      ]
+    },
+    {
+      "liquidprompt": [
+        {
+          "origin": "https://github.com/nojhan/liquidprompt"
+        }
+      ]
+    },
+    {
+      "gedit-file-search": [
+        {
+          "origin": "https://github.com/oliver/gedit-file-search"
+        }
+      ]
+    },
+    {
+      "Text-FileTree": [
+        {
+          "origin": "https://github.com/olof/Text-FileTree"
+        }
+      ]
+    },
+    {
+      "drush-config-workflow": [
+        {
+          "origin": "https://github.com/pantheon-systems/drush-config-workflow"
+        }
+      ]
+    },
+    {
+      "git-achievements": [
+        {
+          "origin": "https://github.com/rosenstrauch/git-achievements"
+        }
+      ]
+    },
+    {
+      "archive": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "command-not-found": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "completion": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "directory": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "dnf": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "dpkg": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "editor": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "emacs": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "environment": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "git": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "gnu-utility": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "gpg": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "haskell": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "helper": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "history": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "history-substring-search": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "homebrew": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "macports": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "node": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "ocaml": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "osx": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "pacman": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "perl": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "python": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "rails": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "modules": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "rsync": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "ruby": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "screen": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "spectrum": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "ssh": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "syntax-highlighting": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "terminal": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "tmux": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "utility": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "wakeonlan": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "yum": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "runcoms": [
+        {
+          "origin": "https://github.com/rosenstrauch/prezto"
+        }
+      ]
+    },
+    {
+      "taskboy": [
+        {
+          "origin": "https://github.com/rosenstrauch/taskboy"
+        }
+      ]
+    },
+    {
+      "todotxt-study-suite": [
+        {
+          "origin": "https://github.com/sachinrudr/todotxt-study-suite"
+        }
+      ]
+    },
+    {
+      "fu": [
+        {
+          "origin": "https://github.com/samirahmed/fu"
+        }
+      ]
+    },
+    {
+      "sack": [
+        {
+          "origin": "https://github.com/sampson-chen/sack"
+        }
+      ]
+    },
+    {
+      "syntastic": [
+        {
+          "origin": "https://github.com/scrooloose/syntastic"
+        }
+      ]
+    },
+    {
+      "rvm.el": [
+        {
+          "origin": "https://github.com/senny/rvm.el"
+        }
+      ]
+    },
+    {
+      "dotfiles": [
+        {
+          "origin": "https://github.com/twe4ked/dotfiles"
+        }
+      ]
+    },
+    {
+      "vim-fasd-": [
+        {
+          "origin": "https://github.com/simonair/vim-fasd/"
+        }
+      ]
+    },
+    {
+      "gitignore-boilerplates": [
+        {
+          "origin": "https://github.com/simonwhitaker/gitignore-boilerplates"
+        }
+      ]
+    },
+    {
+      "pure": [
+        {
+          "origin": "https://github.com/sindresorhus/pure"
+        }
+      ]
+    },
+    {
+      "speedtest-cli": [
+        {
+          "origin": "https://github.com/sivel/speedtest-cli"
+        }
+      ]
+    },
+    {
+      "xchat-colors-solarized": [
+        {
+          "origin": "https://github.com/solarized/xchat-colors-solarized"
+        }
+      ]
+    },
+    {
+      "PHP_CodeSniffer": [
+        {
+          "origin": "https://github.com/squizlabs/PHP_CodeSniffer"
+        }
+      ]
+    },
+    {
+      "zsh-bd": [
+        {
+          "origin": "https://github.com/Tarrasch/zsh-bd"
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "origin": "https://github.com/the1ts/todo.txt-plugins"
+        }
+      ]
+    },
+    {
+      "todo.txt-plugins": [
+        {
+          "origin": "https://github.com/the1ts/todo.txt-plugins"
+        }
+      ]
+    },
+    {
+      "bm": [
+        {
+          "origin": "https://github.com/tj/bm"
+        }
+      ]
+    },
+    {
+      "tmuxinator": [
+        {
+          "origin": "https://github.com/tmuxinator/tmuxinator"
+        }
+      ]
+    },
+    {
+      "vim-fugitive": [
+        {
+          "origin": "https://github.com/tpope/vim-fugitive"
+        }
+      ]
+    },
+    {
+      "vim-pathogen": [
+        {
+          "origin": "https://github.com/tpope/vim-pathogen"
+        }
+      ]
+    },
+    {
+      "vimwiki": [
+        {
+          "origin": "https://github.com/vim-scripts/vimwiki"
+        }
+      ]
+    },
+    {
+      "zsh-history-substring-search": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-history-substring-search"
+        }
+      ]
+    },
+    {
+      "brackets": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "cursor": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "line": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "main": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "highlighters": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "root": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
+    },
+    {
+      "zsh-syntax-highlighting": [
+        {
+          "origin": "https://github.com/zsh-users/zsh-syntax-highlighting"
+        }
+      ]
     }
   ]
 }

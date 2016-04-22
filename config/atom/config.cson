@@ -20,6 +20,7 @@
       "project-palette-finder"
       "metrics"
       "org"
+      "project-ring"
     ]
     themes: [
       "atom-dark-ui"
@@ -57,6 +58,8 @@
   "atom-color-highlight": {}
   "merge-conflicts": {}
   "api-blueprint-preview": {}
+  "project-quick-open":
+    projectPaths: "/home/rosenstrauch/ProjectCollections"
 drupal:
   fileTypesPhp: "module,install,inc,test"
 metrics:
