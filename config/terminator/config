@@ -187,6 +187,17 @@
     background_color = "#afc0ff"
     background_image = None
     foreground_color = "#5b5700"
+  [[Tests]]
+    background_color = "#060039"
+    background_image = None
+    cursor_color = "#7eff90"
+    cursor_shape = ibeam
+    font = Roboto Bold 14
+    foreground_color = "#5b5700"
+    login_shell = True
+    scroll_on_output = False
+    scrollback_infinite = True
+    scrollback_lines = 5000
   [[Xiki]]
     background_color = "#d6d6d6"
     background_image = None
