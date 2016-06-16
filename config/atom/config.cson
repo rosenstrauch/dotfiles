@@ -21,6 +21,14 @@
       "metrics"
       "org"
       "project-ring"
+      "merge-conflicts"
+      "api-blueprint-preview"
+      "atom-bootstrap3"
+      "atom-html-preview"
+      "atom-ungit"
+      "erb-snippets"
+      "markdown-writer"
+      "stacktrace"
     ]
     themes: [
       "atom-dark-ui"
@@ -28,7 +36,7 @@
     ]
     projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
   editor:
-    fontSize: 18
+    fontSize: 27
     showInvisibles: true
     showIndentGuide: true
     softWrap: true
@@ -60,6 +68,10 @@
   "api-blueprint-preview": {}
   "project-quick-open":
     projectPaths: "/home/rosenstrauch/ProjectCollections"
+  awiki: {}
+  "markdown-mindmap": {}
+  "markdown-preview": {}
+  "markdown-writer": {}
 drupal:
   fileTypesPhp: "module,install,inc,test"
 metrics:

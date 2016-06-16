@@ -23,7 +23,7 @@ fresh-options --bin
   fresh simonwhitaker/gitignore-boilerplates gibo
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
-  fresh lucasdemarchi/codespell codespell.py
+  fresh lucasdemarchi/codespell bin/codespell.py
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
@@ -91,7 +91,7 @@ fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-s
 
 fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
 
-fresh djui/alias-tips . --file=.zprezto/modules/alias-tips/external/
+fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
 
 fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
@@ -306,9 +306,15 @@ fresh-options --file=~/.zshrc --marker
 fresh-options
 
 ## EMACS
+
+
+# Youtrack
+# https://github.com/jaseemabid/elisp
+fresh jaseemabid/elisp youtrack.el --file=~/.emacs.d/youtrack/youtrack.el
+
 # https://www.emacswiki.org/emacs/OrgJiraMode
-fresh baohaojun/org-jira . --file=~/.emacs.d/org-jira/
-fresh jaseemabid/elisp youtrack.el --file=~/.emacs.d/youtrack.el
+fresh baohaojun/org-jira . --file=~/.emacs.d/org-jira/ --ref="6745ad8c"
+
 ## VIMRC
 ## XXX http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 ## XXX http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
@@ -403,7 +409,7 @@ fresh_after_build() {
   ## :make some things executable
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
-  chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips
+  chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips.py
   chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
 
   phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
