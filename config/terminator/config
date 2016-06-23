@@ -172,17 +172,19 @@
     background_color = "#060039"
     background_darkness = 0.83
     background_image = None
-    background_type = transparent
     cursor_color = "#00ff27"
     font = Terminus 13
     foreground_color = "#5b5700"
     login_shell = True
-    palette = "#000000:#aa0000:#00aa00:#aa5500:#0000aa:#aa00aa:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#ffff55:#5555ff:#ff55ff:#55ffff:#ffffff"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     scroll_on_output = False
     scrollback_infinite = True
     use_system_font = False
-    use_theme_colors = True
     visible_bell = True
+  [[Project]]
+    background_color = "#ffffdd"
+    background_image = None
+    foreground_color = "#000000"
   [[SSH]]
     background_color = "#afc0ff"
     background_image = None
@@ -198,6 +200,13 @@
     scroll_on_output = False
     scrollback_infinite = True
     scrollback_lines = 5000
+  [[Virtual]]
+    background_color = "#060039"
+    background_image = None
+    cursor_color = "#d52f2f"
+    foreground_color = "#5b5700"
+    scroll_on_output = False
+    scrollback_infinite = True
   [[Xiki]]
     background_color = "#d6d6d6"
     background_image = None
@@ -207,7 +216,7 @@
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     use_theme_colors = True
   [[friendlimux]]
-    background_color = "#8c8c8c"
+    background_color = "#060039"
     background_image = None
     cursor_color = "#00b902"
     foreground_color = "#5b5700"
@@ -220,6 +229,15 @@
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
     scrollback_infinite = True
     use_system_font = False
+  [[frontend]]
+    background_color = "#d6d6d6"
+    background_darkness = 0.84
+    background_image = None
+    background_type = transparent
+    cursor_color = "#00ff1a"
+    foreground_color = "#5b5700"
+    login_shell = True
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
   [[multitail]]
     alternate_screen_scroll = False
     audible_bell = True
@@ -243,19 +261,8 @@
     background_color = "#b9b9b9"
     background_image = None
     foreground_color = "#5b5700"
-  [[rvm]]
-    background_color = "#d6d6d6"
-    background_darkness = 0.84
+  [[task]]
+    background_color = "#520200"
     background_image = None
-    background_type = transparent
-    cursor_color = "#00ff1a"
-    foreground_color = "#5b5700"
-    login_shell = True
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
-  [[vagrant]]
-    background_color = "#fbd3ff"
-    background_image = None
-    cursor_color = "#d52f2f"
-    foreground_color = "#5b5700"
-    scroll_on_output = False
-    scrollback_infinite = True
+    foreground_color = "#fffcb1"
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
