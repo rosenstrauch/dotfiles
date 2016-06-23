@@ -235,7 +235,6 @@ fresh-options --file
   fresh config/parcelliterc
   fresh config/liquidpromptrc
   fresh taskrc
-  fresh bugwarriorrc
 fresh-options
 
 # various config files in special locations
