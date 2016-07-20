@@ -1,13 +1,24 @@
 ;; User-setting area is below this line.
 
 ;; Style
-
-
 (load-theme 'wheatgrass)
 
+;; TODO Keywords
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+              ("NEXT" :foreground "blue" :weight bold)
+              ("DONE" :foreground "forest green" :weight bold)
+              ("WAITING" :foreground "orange" :weight bold)
+              ("HOLD" :foreground "magenta" :weight bold)
+              ("CANCELLED" :foreground "forest green" :weight bold)
+              ("MEETING" :foreground "forest green" :weight bold)
+              ("PHONE" :foreground "forest green" :weight bold))))
 
 ;; Keyboard remappings
-
 ;; Duplicate line http://stackoverflow.com/a/88828
 (defun duplicate-line()
   (interactive)
@@ -19,7 +30,6 @@
   (yank)
 )
 (global-set-key (kbd "C-d") 'duplicate-line)
-
 
 ;;
 ;; Melpa
@@ -57,7 +67,6 @@
 
 (use-package org
   :ensure t)
-
 
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -111,9 +120,8 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote
-    ("/home/rosenstrauch/org/agendas.org" "/home/rosenstrauch/org/flagged.org" "/home/rosenstrauch/org/from-mobile.org" "/home/rosenstrauch/org/home.org" "/home/rosenstrauch/org/index.org")))
- '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
- '(org-trello-files (quote ("~/org/boards/Welcome.trello")) nil (org-trello)))
+    ("/home/rosenstrauch/org/home.org" "/home/rosenstrauch/org/06-teams")))
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello)))
 
 ;; org-trello major mode for all .trello files
 (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
@@ -124,6 +132,7 @@
             (let ((filename (buffer-file-name (current-buffer))))
               (when (and filename (string= "trello" (file-name-extension filename)))
               (org-trello-mode)))))
+
 ;; ORG-JIRA
 ;; credentials are in authinfo
 (setq jiralib-url "http://acolono.atlassian.net")
@@ -133,11 +142,6 @@
   :ensure t)
 
 ;; jiralib is not explicitly required, since org-jira will load it.
-
-
-;; Youtrack
-;;(add-to-list 'load-path "~/.emacs.d/youtrack")
-;;(require 'youtrack)
 
 ;; GITLAB
 ;; https://github.com/nlamirault/emacs-gitlab#usage
