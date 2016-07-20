@@ -96,6 +96,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
+ '(initial-buffer-choice "/home/rosenstrauch/org/home.org")
  '(org-agenda-files
    (quote
     ("/home/rosenstrauch/org/*.org"))))

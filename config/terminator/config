@@ -27,26 +27,34 @@
       type = Window
   [[Dev]]
     [[[child0]]]
+      fullscreen = False
+      last_active_term = 85fb1abc-3125-49bd-b885-3dab3cf9eda5
+      last_active_window = True
+      maximised = False
       order = 0
       parent = ""
-      position = 0:27
-      size = 1920, 1014
+      position = 488:174
+      size = 806, 500
+      title = rosenstrauch@whitebull: ~
       type = Window
     [[[child1]]]
       order = 0
       parent = child0
-      position = 962
+      position = 403
+      ratio = 0.500620347395
       type = HPaned
     [[[terminal2]]]
       order = 0
       parent = child1
-      profile = default
+      profile = devel
       type = Terminal
+      uuid = 85fb1abc-3125-49bd-b885-3dab3cf9eda5
     [[[terminal3]]]
       order = 1
       parent = child1
-      profile = default
+      profile = Project
       type = Terminal
+      uuid = 3d3ddd14-5d44-41dc-8870-7222d2e455fd
   [[friendlimux]]
     [[[child0]]]
       order = 0
@@ -73,52 +81,34 @@
       type = Terminal
   [[friendlinux]]
     [[[child0]]]
+      fullscreen = False
+      last_active_term = 85fb1abc-3125-49bd-b885-3dab3cf9eda5
+      last_active_window = True
+      maximised = False
       order = 0
       parent = ""
-      position = 1920:0
-      size = 1920, 1080
+      position = 488:174
+      size = 806, 500
+      title = rosenstrauch@whitebull: ~
       type = Window
     [[[child1]]]
-      labels = None, None, None
       order = 0
       parent = child0
-      type = Notebook
-    [[[child3]]]
-      order = 1
-      parent = child1
-      position = 652
-      type = VPaned
-    [[[child6]]]
-      order = 2
-      parent = child1
-      position = 1240
+      position = 403
+      ratio = 0.500620347395
       type = HPaned
     [[[terminal2]]]
-      command = /bin/bash bty
       order = 0
       parent = child1
-      profile = friendlinux
+      profile = devel
       type = Terminal
-    [[[terminal4]]]
-      order = 0
-      parent = child3
-      profile = friendlinux
-      type = Terminal
-    [[[terminal5]]]
+      uuid = 85fb1abc-3125-49bd-b885-3dab3cf9eda5
+    [[[terminal3]]]
       order = 1
-      parent = child3
-      profile = friendlinux
+      parent = child1
+      profile = Project
       type = Terminal
-    [[[terminal7]]]
-      order = 0
-      parent = child6
-      profile = friendlinux
-      type = Terminal
-    [[[terminal8]]]
-      order = 1
-      parent = child6
-      profile = friendlinux
-      type = Terminal
+      uuid = 3d3ddd14-5d44-41dc-8870-7222d2e455fd
   [[multitail]]
     [[[child0]]]
       order = 0
@@ -172,12 +162,10 @@
     background_color = "#060039"
     background_darkness = 0.83
     background_image = None
-    background_type = transparent
     cursor_color = "#00ff27"
     font = Terminus 13
-    foreground_color = "#5b5700"
+    foreground_color = "#fffdc2"
     login_shell = True
-    palette = "#000000:#aa0000:#00aa00:#aa5500:#0000aa:#aa00aa:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#ffff55:#5555ff:#ff55ff:#55ffff:#ffffff"
     scroll_on_output = False
     scrollback_infinite = True
     use_system_font = False
@@ -192,7 +180,7 @@
     background_image = None
     foreground_color = "#5b5700"
   [[Tests]]
-    background_color = "#060039"
+    background_color = "#ffffff"
     background_image = None
     cursor_color = "#7eff90"
     cursor_shape = ibeam
@@ -207,6 +195,7 @@
     background_image = None
     cursor_color = "#d52f2f"
     foreground_color = "#5b5700"
+    login_shell = True
     scroll_on_output = False
     scrollback_infinite = True
   [[Xiki]]
@@ -273,10 +262,10 @@
     background_image = None
     foreground_color = "#5b5700"
   [[task]]
-    background_color = "#520200"
+    background_color = "#060039"
     background_image = None
-    foreground_color = "#fffcb1"
-    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    foreground_color = "#fffdc2"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
   [[vagrant]]
     background_color = "#fbd3ff"
     background_image = None

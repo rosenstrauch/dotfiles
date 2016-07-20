@@ -20,15 +20,13 @@
       "project-palette-finder"
       "metrics"
       "org"
-      "project-ring"
-      "merge-conflicts"
-      "api-blueprint-preview"
       "atom-bootstrap3"
-      "atom-html-preview"
-      "atom-ungit"
       "erb-snippets"
-      "markdown-writer"
       "stacktrace"
+      "api-blueprint-preview"
+      "atom-ungit"
+      "language-api-blueprint"
+      "merge-conflicts"
     ]
     themes: [
       "atom-dark-ui"
@@ -36,7 +34,7 @@
     ]
     projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
   editor:
-    fontSize: 27
+    fontSize: 23
     showInvisibles: true
     showIndentGuide: true
     softWrap: true
@@ -63,7 +61,8 @@
   notebook:
     removeEmptyNotepadsAutomatically: false
   "autocomplete-plus": {}
-  "atom-color-highlight": {}
+  "atom-color-highlight":
+    markersAtEndOfLine: true
   "merge-conflicts": {}
   "api-blueprint-preview": {}
   "project-quick-open":
@@ -72,6 +71,9 @@
   "markdown-mindmap": {}
   "markdown-preview": {}
   "markdown-writer": {}
+  pigments: {}
+  "git-history": {}
+  "linter-checkbashisms": {}
 drupal:
   fileTypesPhp: "module,install,inc,test"
 metrics:
