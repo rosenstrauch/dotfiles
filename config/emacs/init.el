@@ -95,13 +95,13 @@
 
 ;; Configure org mode Directories
 (setq org-default-notes-file "~/org/home.org")
-(setq org-agenda-files "~/org/")
+(setq org-agenda-files "~/org")
 (setq org-agenda-files
       (append
        (file-expand-wildcards "~/org/*/*.org")
        (file-expand-wildcards "/mnt/DATA/02-CLIENTS/*/_ORG")
        (file-expand-wildcards "/mnt/DATA/01-INTERNAL/*/org")))
-(setq org-archive-location "~/org/04-archive")
+(setq org-archive-location "~/org/04-archive/%s_archive::")
 
 
 ;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
@@ -110,14 +110,14 @@
 
       '(("Q" . "Custom queries") ;; gives label to "Q"
 	("Qa" "Archive search" search ""
-	 ((org-agenda-files (file-expand-wildcards "~/org/archive/*.org"))))
+	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
 	("Qw" "published search" search ""
-	 ((org-agenda-files (file-expand-wildcards "~/org/published/*.org"))))
+	 ((org-agenda-files (file-expand-wildcards "~/org/08-published/*.org"))))
 	("Qb" "published and Archive" search ""
-	 ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org"))))
+	 ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org_archive"))))
 	        ;; searches both projects and archive directories
 	("QA" "Archive tags search" org-tags-view ""
-	 ((org-agenda-files (file-expand-wildcards "~/org/archive/*.org"))))
+	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
 	;; ...other commands here
 	 ))
 
@@ -189,8 +189,10 @@
 
 (setq org-refile-targets
       '(
-      ("~/org/home.org" :maxlevel . 3)
-        ((file-expand-wildcards "~/org/06-teams/*.org") :maxlevel . 1)
+      ("~/org/home.org" :maxlevel . 4)
+        ((file-expand-wildcards "~/org/06-teams/*.org") :maxlevel . 3)
+        ((file-expand-wildcards "~/org/05-start/*.org") :maxlevel . 3)
+        ((file-expand-wildcards "~/org/01-internal/*.org") :maxlevel . 3)
         ))
 (setq org-reverse-note-order t)
 (setq org-refile-use-outline-path nil)
@@ -202,15 +204,13 @@
 
 ;; Mobile org
 
-(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-
 ;; Set to the location of your Org files on your local system
 (setq org-directory "~/org")
 ;; Set to the name of the file where new notes will be stored
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-
+(setq org-mobile-files (list "~/org/home.org"))
 
 
 ;;
