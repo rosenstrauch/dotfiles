@@ -13,7 +13,7 @@
  ;; If there is more than one, they won't work right.
 (custom-set-variables
  '(inhibit-startup-screen t)
- '(initial-buffer-choice "/home/rosenstrauch/org/home.org")
+ '(initial-buffer-choice "~/org/home.org")
  )
 
 
