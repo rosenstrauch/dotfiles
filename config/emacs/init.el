@@ -13,7 +13,7 @@
  ;; If there is more than one, they won't work right.
 (custom-set-variables
  '(inhibit-startup-screen t)
- '(initial-buffer-choice "/home/rosenstrauch/org/home.org")
+;; '(initial-buffer-choice "/home/rosenstrauch/org/home.org")
  )
 
 
@@ -98,9 +98,8 @@
 (setq org-agenda-files "~/org")
 (setq org-agenda-files
       (append
-       (file-expand-wildcards "~/org/*/*.org")
-       (file-expand-wildcards "/mnt/DATA/02-CLIENTS/*/_ORG")
-       (file-expand-wildcards "/mnt/DATA/01-INTERNAL/*/org")))
+       (file-expand-wildcards "~/org/*/*.org"))
+      )
 (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 
@@ -190,9 +189,8 @@
 (setq org-refile-targets
       '(
       ("~/org/home.org" :maxlevel . 4)
-        ((file-expand-wildcards "~/org/06-teams/*.org") :maxlevel . 3)
-        ((file-expand-wildcards "~/org/05-start/*.org") :maxlevel . 3)
-        ((file-expand-wildcards "~/org/01-internal/*.org") :maxlevel . 3)
+        ((file-expand-wildcards "~/org/*/*.org") :maxlevel . 3)
+        ((file-expand-wildcards "~/org/*/*/*.org") :maxlevel . 3)
         ))
 (setq org-reverse-note-order t)
 (setq org-refile-use-outline-path nil)
@@ -210,8 +208,8 @@
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-(setq org-mobile-files (list "~/org/home.org"))
-
+(setq org-mobile-files
+      (list "~/org"))
 
 ;;
 ;; Org-trello
