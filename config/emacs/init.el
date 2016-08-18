@@ -95,11 +95,10 @@
 
 ;; Configure org mode Directories
 (setq org-default-notes-file "~/org/home.org")
-(setq org-agenda-files "~/org")
-(setq org-agenda-files
-      (append
-       (file-expand-wildcards "~/org/*/*.org"))
-      )
+;; https://lists.gnu.org/archive/html/emacs-orgmode/2011-10/msg00057.html
+(setq org-agenda-files '("~/org"))
+
+(setq org-agenda-files (file-expand-wildcards "~/org/*/*.org"))
 (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 
@@ -208,8 +207,6 @@
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-(setq org-mobile-files
-      (list "~/org"))
 
 ;;
 ;; Org-trello
