@@ -85,8 +85,8 @@
 ;; Configure org mode Directories
 (setq org-default-notes-file "~/org/home.org")
 ;; https://lists.gnu.org/archive/html/emacs-orgmode/2011-10/msg00057.html
-
-(setq org-agenda-files (file-expand-wildcards "~/org" "~/org/*/*.trello" "~/org/*/*.org"))
+(setq org-agenda-files "~/org")
+(setq org-agenda-files (file-expand-wildcards "~/org/*/*.trello" "~/org/*/*.org"))
 (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 
