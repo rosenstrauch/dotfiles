@@ -1,12 +1,13 @@
 "*":
-  metrics: false
-  "exception-reporting":
-    userId: "1efb5cc8-a86b-9769-acbe-5035473f8e3c"
-  welcome:
-    showOnStartup: false
-  jekyll:
-    includesDir: "app/_includes"
-    layoutsDir: "app/_layouts"
+  "api-blueprint-preview": {}
+  "atom-beautify":
+    _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
+    beautifyEntireFileOnSave: false
+  "atom-color-highlight":
+    markersAtEndOfLine: true
+  "atom-xikij": {}
+  "autocomplete-plus": {}
+  awiki: {}
   core:
     disabledPackages: [
       "atom-build"
@@ -28,23 +29,41 @@
       "language-api-blueprint"
       "merge-conflicts"
     ]
+    projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
     themes: [
       "atom-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
-    projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
-  editor:
-    fontSize: 23
-    showInvisibles: true
-    showIndentGuide: true
-    softWrap: true
-    softWrapAtPreferredLineLength: true
-    invisibles: {}
-    autoIndentOnPaste: false
   drupal:
     fileTypesPhp: "module,install,inc,test"
+  editor:
+    autoIndentOnPaste: false
+    fontSize: 23
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+  "exception-reporting":
+    userId: "1efb5cc8-a86b-9769-acbe-5035473f8e3c"
   "find-and-replace":
     openProjectFindResultsInRightPane: true
+  "git-history": {}
+  jekyll:
+    includesDir: "app/_includes"
+    layoutsDir: "app/_layouts"
+  linter: {}
+  "linter-checkbashisms": {}
+  "markdown-mindmap": {}
+  "markdown-preview": {}
+  "markdown-writer": {}
+  "merge-conflicts": {}
+  metrics: false
+  notebook:
+    removeEmptyNotepadsAutomatically: false
+  pigments: {}
+  "project-quick-open":
+    projectPaths: "/home/rosenstrauch/ProjectCollections"
   "project-ring":
     doNotSaveAndRestoreOpenProjectFiles: true
   wakatime:
@@ -53,27 +72,8 @@
       "^/tmp/"
       "^/private/"
     ]
-  linter: {}
-  "atom-beautify":
-    _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
-    beautifyEntireFileOnSave: false
-  "atom-xikij": {}
-  notebook:
-    removeEmptyNotepadsAutomatically: false
-  "autocomplete-plus": {}
-  "atom-color-highlight":
-    markersAtEndOfLine: true
-  "merge-conflicts": {}
-  "api-blueprint-preview": {}
-  "project-quick-open":
-    projectPaths: "/home/rosenstrauch/ProjectCollections"
-  awiki: {}
-  "markdown-mindmap": {}
-  "markdown-preview": {}
-  "markdown-writer": {}
-  pigments: {}
-  "git-history": {}
-  "linter-checkbashisms": {}
+  welcome:
+    showOnStartup: false
 drupal:
   fileTypesPhp: "module,install,inc,test"
 metrics:
