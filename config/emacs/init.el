@@ -168,6 +168,9 @@
                      "* %?\nEntered on %U\n  %i\n  %a")
              ))
 
+;; export as markdown
+(eval-after-load "org"
+  '(require 'ox-md nil t))
 ;; Project tags http://juanreyero.com/article/emacs/org-teams.html
 
 (setq org-tags-exclude-from-inheritance '("@PRJ")
