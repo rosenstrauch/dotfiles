@@ -7,23 +7,12 @@
 ; Display existing tabs as 2 characters wide
 (setq-default tab-width 2)
 
- ;; custom-set-variables
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-(custom-set-variables
- '(inhibit-startup-screen t)
- '(initial-buffer-choice "~/org/home.org")
- )
-
-
 ;; Backups http://pages.sachachua.com/.emacs.d/Sacha.html#org7b1ada1
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq delete-old-versions -1)
 (setq version-control t)
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
-
 
 ;;
 ;; Style
@@ -96,27 +85,36 @@
 ;; Configure org mode Directories
 (setq org-default-notes-file "~/org/home.org")
 ;; https://lists.gnu.org/archive/html/emacs-orgmode/2011-10/msg00057.html
-(setq org-agenda-files '("~/org"))
 
-(setq org-agenda-files (file-expand-wildcards "~/org/*/*.org"))
+(setq org-agenda-files (file-expand-wildcards "~/org" "~/org/*/*.trello" "~/org/*/*.org"))
 (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 
+;; Agenda
+;;warn me of any deadlines in next 7 days
+(setq org-deadline-warning-days 7)
 ;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
 (setq org-agenda-custom-commands
 
-
       '(("Q" . "Custom queries") ;; gives label to "Q"
+        ;; wishes
+  ("Qw" "wishes" tags-todo "TODO=\"WISH\" ")
+  ("Qm" "maybe search" todo "MAYBE") ;; review someday/maybe items
+  ("Qp" "Projects" tags "PRJ");; review project items
+  ("QP" "project search" org-tags-view "PRJ")
 	("Qa" "Archive search" search ""
 	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
-	("Qw" "published search" search ""
-	 ((org-agenda-files (file-expand-wildcards "~/org/08-published/*.org"))))
+	("Qs" "published search" search ""
+	 ((org-agenda-files (file-expand-wildcards "~/org/08-pubsys/*.org"))))
 	("Qb" "published and Archive" search ""
 	 ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org_archive"))))
 	        ;; searches both projects and archive directories
 	("QA" "Archive tags search" org-tags-view ""
 	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
+
+  
 	;; ...other commands here
+  
 	 ))
 
 	 ;; Tags
@@ -124,7 +122,8 @@
      (setq org-tag-alist '((:startgroup . nil)
                            ("@work" . ?w) ("@home" . ?h)
                            ("@errands" . ?t)
-                           ("@phone" . ?t)
+                           ("@meeting" . ?m)
+                           ("@phone" . ?c)
                            (:endgroup . nil)
                            ("@PRJ" . ?e)
                            ("laptop" . ?l) ("pc" . ?p)))
@@ -162,7 +161,9 @@
       '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
              "* TODO %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
-             "* %?\nEntered on %U\n  %i\n  %a")
+         "* %?\nEntered on %U\n  %i\n  %a")
+        ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
+         "* %?\nEntered on %U\n  %i\n  %a")
         ("l" "Link" entry (file+datetree "~/org/links.org")
                      "* %?\nEntered on %U\n  %i\n  %a")
              ))
