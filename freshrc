@@ -307,6 +307,8 @@ fresh-options
 
 ## EMACS
 
+# emacs githublinks.el https://www.reddit.com/r/emacs/comments/3jxsqb/link_to_github_in_orgmode/
+fresh lygaret/emacs.d site-lisp/org-github-links.el --file=~/.emacs.d/site-lisp/org-github-links.el --ref="96a043f"
 
 # Youtrack
 # https://github.com/jaseemabid/elisp
@@ -314,6 +316,8 @@ fresh jaseemabid/elisp youtrack.el --file=~/.emacs.d/youtrack/youtrack.el
 
 # https://www.emacswiki.org/emacs/OrgJiraMode
 fresh baohaojun/org-jira . --file=~/.emacs.d/org-jira/ --ref="6745ad8c"
+# fork of org sync for issue id
+fresh glasser/org-sync . --file=~/.emacs.d/org-sync/ --ref="36c5ccc"
 
 ## VIMRC
 ## XXX http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
