@@ -164,7 +164,7 @@
 
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "red" :weight bold)
-              ("NEXT" :foreground "blue" :weight bold)
+              ("NEXT" :foreground "pink1" :weight bold)
               ("WISH" :foreground "medium sea green" :weight bold)
               ("INSERT" :foreground "medium sea green" :weight bold)
               ("DONE" :foreground "forest green" :weight bold)
@@ -280,9 +280,3 @@
 ;; https://github.com/nlamirault/emacs-gitlab#usage
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
