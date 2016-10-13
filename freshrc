@@ -82,6 +82,12 @@ fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bed21a831348
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
 
+### Docker
+# TODO: https://github.com/sorin-ionescu/prezto/pull/863/files
+#fresh rosenstrauch/prezto-docker . --file=.zprezto/modules/prezto-docker/external/
+
+
+
 ### Commandline Fu
 ### :find cli commands
 ###  <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
