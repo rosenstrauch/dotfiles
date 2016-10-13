@@ -1,8 +1,9 @@
 "*":
   "api-blueprint-preview": {}
   "atom-beautify":
-    _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
-    beautifyEntireFileOnSave: false
+    general:
+      _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
+      beautifyEntireFileOnSave: false
   "atom-color-highlight":
     markersAtEndOfLine: true
   "atom-xikij": {}
@@ -28,6 +29,11 @@
       "atom-ungit"
       "language-api-blueprint"
       "merge-conflicts"
+      "atom-xikij"
+      "jsonlint"
+      "language-json5"
+      "pretty-json"
+      "linter-swagger"
     ]
     projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
     themes: [
@@ -38,7 +44,7 @@
     fileTypesPhp: "module,install,inc,test"
   editor:
     autoIndentOnPaste: false
-    fontSize: 23
+    fontSize: 17
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -52,7 +58,8 @@
   jekyll:
     includesDir: "app/_includes"
     layoutsDir: "app/_layouts"
-  linter: {}
+  linter:
+    errorPanelHeight: 36
   "linter-checkbashisms": {}
   "markdown-mindmap": {}
   "markdown-preview": {}

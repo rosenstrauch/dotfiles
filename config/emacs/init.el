@@ -69,6 +69,13 @@
   (package-install 'use-package))
 
 
+;; use fork of org sync
+(add-to-list 'load-path "~/.emacs.d/org-sync")
+  (mapc 'load
+      '("org-sync" "org-sync-bb" "org-sync-github" "org-sync-redmine"))
+
+
+(setq org-sync-id-in-headline 1)
 ;;
 ;; Markdown mode
 ;;
@@ -108,6 +115,29 @@
 ;;warn me of any deadlines in next 7 days
 (setq org-deadline-warning-days 7)
 ;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
+
+(setq org-agenda-custom-commands
+
+      '(("Q" . "Custom queries") ;; gives label to "Q"
+        ;; wishes
+  ("Qw" "wishes" tags-todo "TODO=\"WISH\" ")
+  ("Qm" "maybe search" todo "MAYBE") ;; review someday/maybe items
+  ("Qp" "Projects" tags "PRJ");; review project items
+  ("QP" "project search" org-tags-view "PRJ")
+	("Qa" "Archive search" search ""
+	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
+	("Qs" "published search" search ""
+	 ((org-agenda-files (file-expand-wildcards "~/org/08-pubsys/*.org"))))
+	("Qb" "published and Archive" search ""
+	 ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org_archive"))))
+	        ;; searches both projects and archive directories
+	("QA" "Archive tags search" org-tags-view ""
+	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
+
+
+	;; ...other commands here
+
+	 ))
 
 	 ;; Tags
 
@@ -225,7 +255,9 @@
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello)))
 
 ;; org-trello major mode for all .trello files
+
 (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.issues$" . org-mode))
 
 ;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
 (add-hook 'org-mode-hook
@@ -248,3 +280,9 @@
 ;; https://github.com/nlamirault/emacs-gitlab#usage
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

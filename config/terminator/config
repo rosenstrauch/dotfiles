@@ -159,6 +159,7 @@
 [plugins]
 [profiles]
   [[default]]
+    audible_bell = True
     background_color = "#060039"
     background_darkness = 0.83
     background_image = None
@@ -180,16 +181,18 @@
     background_image = None
     foreground_color = "#5b5700"
   [[Tests]]
-    background_color = "#ffffff"
+    audible_bell = True
+    background_color = "#060039"
     background_image = None
     cursor_color = "#7eff90"
     cursor_shape = ibeam
     font = Roboto Bold 14
-    foreground_color = "#5b5700"
+    foreground_color = "#fffdc2"
     login_shell = True
     scroll_on_output = False
     scrollback_infinite = True
     scrollback_lines = 5000
+    visible_bell = True
   [[Virtual]]
     background_color = "#060039"
     background_image = None
@@ -207,12 +210,12 @@
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     use_theme_colors = True
   [[devel]]
-    background_color = "#060039"
+    background_color = "#3f002d"
     background_darkness = 0.84
     background_image = None
     background_type = transparent
     cursor_color = "#00ff1a"
-    foreground_color = "#5b5700"
+    foreground_color = "#fffdc2"
     login_shell = True
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
   [[friendlimux]]
