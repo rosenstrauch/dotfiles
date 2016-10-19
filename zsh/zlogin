@@ -30,7 +30,10 @@ fi
 ps $$
 
 # list tmux projects
-tmuxinator list
+if (( $+commands[tmuxinator] )); then
+  tmuxinator list
+
+fi
 
 #echo "and remember:"; $(compgen -ac | shuf -n 1) -h
 

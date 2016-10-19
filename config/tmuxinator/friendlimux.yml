@@ -19,25 +19,14 @@ pre_window: rvm use 2
 # tmux_command: byobu
 
 windows:
-  - Wiki:
+  - Command:
       layout: main-vertical
       panes:
-        - vim ~/.dotfiles/manual/vimwiki/index.wiki
-        - emacs -nw ~/org/home.org
-        - xsh
-        - bty
+        - xsh ~/org/routines.org
   - Web:
       layout: main-vertical
       panes:
         - lynx
-        - #empty
-  - Tasks:
-      layout: main-vertical
-      panes:
-        - task:
-          - task synchronize
-          - task project
-        - task help | less
         - #empty
   - Browse: mc
   - News: newsbeuter

@@ -4,6 +4,7 @@
 
 ; Make tabs into spaces when you type them
 (setq-default indent-tabs-mode nil)
+
 ; Display existing tabs as 2 characters wide
 (setq-default tab-width 2)
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
@@ -113,7 +114,7 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 
-;; Install Org mode
+;; Install Org mode (can we add all of the following config inside this use package declaration?)
 (use-package org
   :ensure t)
 
@@ -130,7 +131,16 @@
 (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 
-;; Agenda
+;; Agenda and tasks
+;; enforce todo dependencies
+(setq org-enforce-todo-dependencies 1)
+(setq org-agenda-dim-blocked-tasks 1)
+(setq org-enforce-todo-checkbox-dependencies 1)
+; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
+(setq org-columns-default-format
+      "%25ITEM %TODO %3PRIORITY $TAGS %TIMESTAMP %5Effort(Time){:} %6CLOCKSUM(Clock)")
+
+
 ;;warn me of any deadlines in next 7 days
 (setq org-deadline-warning-days 7)
 ;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
@@ -139,31 +149,42 @@
 
       '(
         ("x" agenda)
-        ("n" "next projects" tags "PRJ/NEXT" nil)
-        ("P" "Active projects" org-tags-view "PRJ")
-        ("I" "Next Issues" todo "NEXT"
+        ;; show subtasks with todostate NEXT for headlines tagged PRJ
+        ("P" . "Projects") ;; gives label to "P"
+        ("Pl" "Projects List" tags "PRJ")
+        ;; second try to show only next tasks for projects (only works if parent project is a task with child tasks)
+        ("Pn" "Project NEXT" tags "PRJ/NEXT")
+        ("I" . "Issues") ;; gives label to "I"
+        ;; show only Issues
+        ("In" "NEXT Issues" todo "NEXT"
          ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
-        ("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
-        ("y" agenda*)
-        ("h" todo "WAITING")
-        ("H" todo-tree "WAITING")
-        ("w" "wishes" todo-tree "WISH");; wishes
-        ("u" tags "+@home-urgent")
-        ("v" tags-todo "+@home-urgent")
-        ("U" tags-tree "+@home-urgent")
-        ("f" occur-tree "\\<FIXME\\>")
+        ;("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
+
+        ;("y" agenda*)
+        ;; show one next task (actually we want one per project but for now this will have to do)
+        ("Q" . "Quests") ;; gives label to "Q"
+        ("Qn" "Next Tasks" todo "NEXT")
+        ("Qc" "Current Task" todo "NEXT"
+         ((org-agenda-max-todos 2)
+          (org-agenda-view-columns-initially t)))
+        ;("H" todo-tree "NEXT") ; only current file
+        ;("w" "wishes" todo-tree "WISH");; wishes
+        ;("u" tags "+@home-urgent")
+        ;("v" tags-todo "+@home-urgent")
+        ;("U" tags-tree "+@home-urgent")
+        ;("f" occur-tree "\\<FIXME\\>")
         
-        ("Q" . "Custom queries") ;; gives label to "Q"
-        ("Qi" "Issue search" search ""
+        ("F" . "Find - Custom queries/searches") ;; gives label to "Q"
+        ("Fi" "Issue search" search ""
          ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
-        ("QA" "Archive search" search ""
+        ("FA" "Archive search" search ""
          ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
-        ("Qs" "published search" search ""
+        ("Fs" "published search" search ""
          ((org-agenda-files (file-expand-wildcards "~/org/08-pubsys/*.org"))))
-        ("Qb" "published and Archive" search ""
+        ("Fb" "published and Archive" search ""
          ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org_archive"))))
         ;; searches both projects and archive directories
-        ("QA" "Archive tags search" org-tags-view ""
+        ("FA" "Archive tags search" org-tags-view ""
          ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
 
         
@@ -171,12 +192,15 @@
         ;; match orphan headlines (the ones without tag or todo)
         ("O" "Orphans" tags "-{.*}+TODO=\"\"")
         ;; match those tagged with :inbox:, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
-        ("ii" "[i]nbox tagged unscheduled tasks" tags "+inbox-SCHEDULED={.+}/!+TODO|+STARTED|+WAITING")
-        ("h" "Agenda and Home-related tasks"
+        ;; http://emacs.stackexchange.com/a/16561
+        ;; http://emacs.stackexchange.com/questions/20155/how-to-show-a-list-of-todo-entries-without-timestamps
+        ("Ti" "[i]nserted unscheduled tasks" tags-todo "-SCHEDULED={.+}/!+TODO|+STARTED|+WAITING|+INSERTED")
+        ("Ts" "[s]chedule next tasks" tags-todo "-SCHEDULED={.+}/!+NEXT")
+        ("Th" "Agenda and Home-related tasks"
          ((agenda "")
           (tags-todo "home")
           (tags "garden")))
-        ("o" "Agenda and Office-related tasks"
+        ("To" "Agenda and Office-related tasks"
          ((agenda "")
           (tags-todo "work")
           (tags "office")))

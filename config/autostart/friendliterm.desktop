@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Exec=terminator --geometry=1366x730 -m -b -l friendlinux -p friendlinux
+Exec=terminator --new-tab -T friendlinux --geometry=1366x730 -m -b -s -p friendlinux
 Hidden=false
 NoDisplay=false
-X-GNOME-Autostart-enabled=false
+X-GNOME-Autostart-enabled=true
 Name[en_US]=friendlinux terminator
 Name=friendlinux terminator
 Comment[en_US]=borderless fullsize

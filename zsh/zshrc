@@ -51,7 +51,7 @@ autoload -U zmv
 
 # Customize to your needs...
 
-export EDITOR='emacs'
+export EDITOR='emacs -nw'
 
 # Locale settings (utf-8)
 export LC_ALL=en_US.UTF-8
@@ -108,7 +108,7 @@ export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/b
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # export system ruby path
-export PATH="$PATH:/root/.gem/ruby/2.1.0/bin"
+export PATH="$PATH:/root/.gem/ruby/2.3.0/bin"
 
 # Keybindings in zsh https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 # create a zkbd compatible hash;
