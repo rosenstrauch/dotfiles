@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=terminator -l friendlimux -p friendlimux 
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=friendlimux terminator
+Name=friendlimux terminator
+Comment[en_US]=borderless fullsize
+Comment=borderless fullsize
