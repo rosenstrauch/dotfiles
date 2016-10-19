@@ -137,20 +137,22 @@
 
 (setq org-agenda-custom-commands
 
-      '(("x" agenda)
+      '(
+        ("x" agenda)
+        ("n" "next projects" tags "PRJ/NEXT" nil)
+        ("P" "Active projects" org-tags-view "PRJ")
+        ("I" "Next Issues" todo "NEXT"
+         ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
+        ("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
         ("y" agenda*)
-        ("w" todo "WAITING")
-        ("W" todo-tree "WAITING")
+        ("h" todo "WAITING")
+        ("H" todo-tree "WAITING")
         ("w" "wishes" todo-tree "WISH");; wishes
         ("u" tags "+@home-urgent")
         ("v" tags-todo "+@home-urgent")
         ("U" tags-tree "+@home-urgent")
         ("f" occur-tree "\\<FIXME\\>")
-        ("n" "next projects" tags "PRJ/NEXT" nil)
-        ("P" "Active projects" org-tags-view "PRJ")
-        ("I" "Next Issues" todo "NEXT"
-               ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
-        ("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
+        
         ("Q" . "Custom queries") ;; gives label to "Q"
         ("Qi" "Issue search" search ""
          ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
@@ -159,27 +161,42 @@
         ("Qs" "published search" search ""
          ((org-agenda-files (file-expand-wildcards "~/org/08-pubsys/*.org"))))
         ("Qb" "published and Archive" search ""
-	 ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org_archive"))))
+         ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org_archive"))))
         ;; searches both projects and archive directories
         ("QA" "Archive tags search" org-tags-view ""
-	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
+         ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
+
+        
+        ;; ...other commands here
+        ;; match orphan headlines (the ones without tag or todo)
+        ("O" "Orphans" tags "-{.*}+TODO=\"\"")
+        ;; match those tagged with :inbox:, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
+        ("ii" "[i]nbox tagged unscheduled tasks" tags "+inbox-SCHEDULED={.+}/!+TODO|+STARTED|+WAITING")
+        ("h" "Agenda and Home-related tasks"
+         ((agenda "")
+          (tags-todo "home")
+          (tags "garden")))
+        ("o" "Agenda and Office-related tasks"
+         ((agenda "")
+          (tags-todo "work")
+          (tags "office")))
+;; Custom Agenda end
+))
+
+;; TODO: unsceduled http://emacs.stackexchange.com/a/868
 
 
-	;; ...other commands here
+;; Tags
 
-	 ))
-
-	 ;; Tags
-
-     (setq org-tag-alist '((:startgroup . nil)
-                           ("@work" . ?w) ("@home" . ?h)
-                           ("@errands" . ?t)
-                           ("@BUY" . ?t)
-                           ("@meeting" . ?m)
-                           ("@phone" . ?c)
-                           (:endgroup . nil)
-                           ("PRJ" . ?e)
-                           ("@laptop" . ?l) ("@pc" . ?p)))
+(setq org-tag-alist '((:startgroup . nil)
+                      ("@work" . ?w) ("@home" . ?h)
+                      ("@errands" . ?t)
+                      ("@BUY" . ?t)
+                      ("@meeting" . ?m)
+                      ("@phone" . ?c)
+                      (:endgroup . nil)
+                      ("PRJ" . ?e)
+                      ("@laptop" . ?l) ("@pc" . ?p)))
 
 ;; Controlling tasks http://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-log-redeadline (quote time))
@@ -205,21 +222,21 @@
               ("PHONE" :foreground "forest green" :weight bold))))
 
 ;; setup capture
-     (setq org-default-notes-file (concat org-directory "/capture.org"))
-     (define-key global-map "\C-cc" 'org-capture)
+(setq org-default-notes-file (concat org-directory "/capture.org"))
+(define-key global-map "\C-cc" 'org-capture)
 
 ;; Capture Templates http://orgmode.org/manual/Using-capture.html
 
-     (setq org-capture-templates
+(setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
-             "* TODO %?\n  %i\n  %a")
+         "* TODO %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
         ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
          "* %?\nEntered on %U\n  %i\n  %a")
         ("l" "Link" entry (file+datetree "~/org/links.org")
-                     "* %?\nEntered on %U\n  %i\n  %a")
-             ))
+         "* %?\nEntered on %U\n  %i\n  %a")
+        ))
 
 
 ;; Project tags http://juanreyero.com/article/emacs/org-teams.html
@@ -242,7 +259,7 @@
 
 (setq org-refile-targets
       '(
-      ("~/org/home.org" :maxlevel . 4)
+        ("~/org/home.org" :maxlevel . 4)
         ((file-expand-wildcards "~/org/*/*.org") :maxlevel . 3)
         ((file-expand-wildcards "~/org/*/*/*.org") :maxlevel . 3)
         ))
@@ -280,7 +297,7 @@
  '(package-selected-packages
    (quote
     (helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
- ;;
+;;
 ;; Org-trello
 ;;
 
@@ -296,7 +313,7 @@
           (lambda ()
             (let ((filename (buffer-file-name (current-buffer))))
               (when (and filename (string= "trello" (file-name-extension filename)))
-              (org-trello-mode)))))
+                (org-trello-mode)))))
 
 ;; ORG-JIRA
 ;; credentials are in authinfo
@@ -319,7 +336,7 @@
 ;; use fork of org sync for id in headline
 ;; unused because i cannot create issues with this.
 (add-to-list 'load-path "~/.emacs.d/org-sync")
-  (mapc 'load
+(mapc 'load
       '("org-sync" "org-sync-bb" "org-sync-github"))
 ;;(setq org-sync-id-in-headline 1)
 
@@ -357,9 +374,9 @@
 (defun gh-issue-get-project ()
   (org-entry-get (point) "GH-PROJECT" t))
 
-;(defun gh-issue-create ()
-;  (interactive)
-;  (gh-issue-new-browse (gh-issue-get-project) (org-get-heading) (org-get-entry);))
+                                        ;(defun gh-issue-create ()
+                                        ;  (interactive)
+                                        ;  (gh-issue-new-browse (gh-issue-get-project) (org-get-heading) (org-get-entry);))
 
 (defun gh-issue-create ()
   (interactive)
