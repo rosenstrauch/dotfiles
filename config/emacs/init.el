@@ -6,7 +6,7 @@
 (setq-default indent-tabs-mode nil)
 ; Display existing tabs as 2 characters wide
 (setq-default tab-width 2)
-
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
 ;; Backups http://pages.sachachua.com/.emacs.d/Sacha.html#org7b1ada1
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq delete-old-versions -1)
@@ -56,11 +56,11 @@
 ;;
 ;; Melpa
 ;;
+
+;; Setup package.el
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
-
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 ;; Bootstrap `use-package'
@@ -68,25 +68,41 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-
-;; use fork of org sync
-(add-to-list 'load-path "~/.emacs.d/org-sync")
-  (mapc 'load
-      '("org-sync" "org-sync-bb" "org-sync-github" "org-sync-redmine"))
+;; Use use-package now
 
 
-(setq org-sync-id-in-headline 1)
 ;;
 ;; Markdown mode
 ;;
 
 (use-package markdown-mode
   :ensure t
-  :commands (markdown-mode gfm-mode)
+  :commands (markdown-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+
+
+;; export as github markdown http://stackoverflow.com/a/22990257/6768011
+
+(use-package ox-gfm
+  :commands (gfm-mode)
+  :init  (eval-after-load 'org '(require 'ox-gfm)) 
+  :ensure t)
+
+;;
+;; TODO habits
+;; https://github.com/abrochard/emacs-habitica
+;;
+
+(use-package habitica
+  :ensure t
+  
+  )
+
+
 
 ;;
 ;; ORG MODE
@@ -96,6 +112,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
+
 ;; Install Org mode
 (use-package org
   :ensure t)
@@ -104,7 +121,9 @@
 (setq org-default-notes-file "~/org/home.org")
 ;; https://lists.gnu.org/archive/html/emacs-orgmode/2011-10/msg00057.html
 (setq org-agenda-files "~/org")
-(setq org-agenda-files (append '("~/org") (file-expand-wildcards "~/org/*/*.trello")
+(setq org-agenda-files (append '("~/org")
+(file-expand-wildcards "~/org/boards/*.trello")
+(file-expand-wildcards "~/org/issues/*.issues")
 (file-expand-wildcards "~/org/*/*.org")
 ))
 
@@ -118,20 +137,31 @@
 
 (setq org-agenda-custom-commands
 
-      '(("Q" . "Custom queries") ;; gives label to "Q"
-        ;; wishes
-  ("Qw" "wishes" tags-todo "TODO=\"WISH\" ")
-  ("Qm" "maybe search" todo "MAYBE") ;; review someday/maybe items
-  ("Qp" "Projects" tags "PRJ");; review project items
-  ("QP" "project search" org-tags-view "PRJ")
-	("Qa" "Archive search" search ""
-	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
-	("Qs" "published search" search ""
-	 ((org-agenda-files (file-expand-wildcards "~/org/08-pubsys/*.org"))))
-	("Qb" "published and Archive" search ""
+      '(("x" agenda)
+        ("y" agenda*)
+        ("w" todo "WAITING")
+        ("W" todo-tree "WAITING")
+        ("w" "wishes" todo-tree "WISH");; wishes
+        ("u" tags "+@home-urgent")
+        ("v" tags-todo "+@home-urgent")
+        ("U" tags-tree "+@home-urgent")
+        ("f" occur-tree "\\<FIXME\\>")
+        ("n" "next projects" tags "PRJ/NEXT" nil)
+        ("P" "Active projects" org-tags-view "PRJ")
+        ("I" "Next Issues" todo "NEXT"
+               ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
+        ("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
+        ("Q" . "Custom queries") ;; gives label to "Q"
+        ("Qi" "Issue search" search ""
+         ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
+        ("QA" "Archive search" search ""
+         ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
+        ("Qs" "published search" search ""
+         ((org-agenda-files (file-expand-wildcards "~/org/08-pubsys/*.org"))))
+        ("Qb" "published and Archive" search ""
 	 ((org-agenda-text-search-extra-files (file-expand-wildcards "~/archive/*.org_archive"))))
-	        ;; searches both projects and archive directories
-	("QA" "Archive tags search" org-tags-view ""
+        ;; searches both projects and archive directories
+        ("QA" "Archive tags search" org-tags-view ""
 	 ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
 
 
@@ -144,11 +174,12 @@
      (setq org-tag-alist '((:startgroup . nil)
                            ("@work" . ?w) ("@home" . ?h)
                            ("@errands" . ?t)
+                           ("@BUY" . ?t)
                            ("@meeting" . ?m)
                            ("@phone" . ?c)
                            (:endgroup . nil)
-                           ("@PRJ" . ?e)
-                           ("laptop" . ?l) ("pc" . ?p)))
+                           ("PRJ" . ?e)
+                           ("@laptop" . ?l) ("@pc" . ?p)))
 
 ;; Controlling tasks http://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-log-redeadline (quote time))
@@ -190,14 +221,12 @@
                      "* %?\nEntered on %U\n  %i\n  %a")
              ))
 
-;; export as markdown
-(eval-after-load "org"
-  '(require 'ox-md nil t))
+
 ;; Project tags http://juanreyero.com/article/emacs/org-teams.html
 
-(setq org-tags-exclude-from-inheritance '("@PRJ")
-      org-stuck-projects '("+@PRJ/-MAYBE-DONE"
-                           ("TODO" "TASK") ()))
+(setq org-tags-exclude-from-inheritance '("PRJ")
+      org-stuck-projects '("+PRJ/-HOLD-INSERT-DONE"
+                           ("NEXT") ("@BUY")))
 
 ;; Org mode keyboard remappings
 
@@ -234,14 +263,8 @@
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 
-;;
-;; Org-trello
-;;
 
-(use-package org-trello
-  :ensure t)
 
-;; Custom list of trello org files
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -252,12 +275,21 @@
  '(ansi-color-names-vector
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(inhibit-startup-screen t)
- '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello)))
+ '(org-export-backends (quote (ascii html icalendar latex md odt gfm)))
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+ '(package-selected-packages
+   (quote
+    (helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
+ ;;
+;; Org-trello
+;;
+
+(use-package org-trello
+  :ensure t)
 
 ;; org-trello major mode for all .trello files
 
 (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
-(add-to-list 'auto-mode-alist '("\\.issues$" . org-mode))
 
 ;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
 (add-hook 'org-mode-hook
@@ -280,3 +312,60 @@
 ;; https://github.com/nlamirault/emacs-gitlab#usage
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
+
+;; GITHUB
+(add-to-list 'auto-mode-alist '("\\.issues$" . org-mode))
+
+;; use fork of org sync for id in headline
+;; unused because i cannot create issues with this.
+(add-to-list 'load-path "~/.emacs.d/org-sync")
+  (mapc 'load
+      '("org-sync" "org-sync-bb" "org-sync-github"))
+;;(setq org-sync-id-in-headline 1)
+
+
+;;(use-package gist
+;;  :ensure t)
+;;(use-package github-notifier
+;;  :ensure t)
+;;(use-package github-issues
+;;  :ensure t
+;;  :pin manual)
+;;(use-package helm-github-issues
+;;  :ensure t
+;;  :pin manual)
+;;(use-package org-github-links
+;;  :ensure t
+;;  :pin manual)
+
+
+;; (use-package helm-github-stars
+;;  :ensure t)
+
+;; http://moritz-breit.de/blog/2015/10/05/github-issues-in-emacs/
+(defun gh-issue-new-url (project title body)
+  (concat "https://github.com/"
+          project
+          "/issues/new?title="
+          (url-hexify-string title)
+          "&body="
+          (url-hexify-string body)))
+
+(defun gh-issue-new-browse (project title body)
+  (browse-url (gh-issue-new-url project title body)))
+
+(defun gh-issue-get-project ()
+  (org-entry-get (point) "GH-PROJECT" t))
+
+;(defun gh-issue-create ()
+;  (interactive)
+;  (gh-issue-new-browse (gh-issue-get-project) (org-get-heading) (org-get-entry);))
+
+(defun gh-issue-create ()
+  (interactive)
+  (gh-issue-new-browse (gh-issue-get-project)
+                       (org-get-heading)
+                       (org-export-as 'md t)
+                       ))
+
+(global-set-key (kbd "C-x c g i") 'gh-issue-create)
