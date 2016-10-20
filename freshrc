@@ -329,8 +329,9 @@ fresh jaseemabid/elisp youtrack.el --file=~/.emacs.d/youtrack/youtrack.el
 # https://www.emacswiki.org/emacs/OrgJiraMode
 fresh baohaojun/org-jira . --file=~/.emacs.d/org-jira/ --ref="6745ad8c"
 # fork of org sync for issue id
-#fresh glasser/org-sync . --file=~/.emacs.d/org-sync/ --ref="36c5ccc"
-fresh arbox/org-sync . --file=~/.emacs.d/org-sync/
+fresh git://orgmode.org/org-sync.git . --file=~/.emacs.d/org-sync/
+#fresh emacs-pe/org-sync . --file=~/.emacs.d/org-sync/
+#fresh arbox/org-sync . --file=~/.emacs.d/org-sync/
 ## VIMRC
 ## XXX http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 ## XXX http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
