@@ -135,8 +135,12 @@
     use_theme_colors = True
     visible_bell = True
   [[ORG]]
+    background_color = "#002b36"
     background_image = None
     custom_command = emacs -nw ~/org/home.org
+    exit_action = restart
+    foreground_color = "#839496"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     use_custom_command = True
   [[Project]]
     background_color = "#ffffdd"
