@@ -90,7 +90,7 @@
 
 (use-package ox-gfm
   :commands (gfm-mode)
-  :init  (eval-after-load 'org '(require 'ox-gfm)) 
+  :init  (eval-after-load 'org '(require 'ox-gfm))
   :ensure t)
 
 ;;
@@ -99,8 +99,8 @@
 ;;
 
 (use-package habitica
+  :bind (("C-c C-h" . habitica-tasks))
   :ensure t
-  
   )
 
 
@@ -173,7 +173,7 @@
         ;("v" tags-todo "+@home-urgent")
         ;("U" tags-tree "+@home-urgent")
         ;("f" occur-tree "\\<FIXME\\>")
-        
+
         ("F" . "Find - Custom queries/searches") ;; gives label to "Q"
         ("Fi" "Issue search" search ""
          ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
@@ -187,20 +187,20 @@
         ("FA" "Archive tags search" org-tags-view ""
          ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
 
-        
+
         ;; ...other commands here
         ;; match orphan headlines (the ones without tag or todo)
         ("O" "Orphans" tags "-{.*}+TODO=\"\"")
         ;; match those tagged with :inbox:, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
         ;; http://emacs.stackexchange.com/a/16561
         ;; http://emacs.stackexchange.com/questions/20155/how-to-show-a-list-of-todo-entries-without-timestamps
-        ("Ti" "[i]nserted unscheduled tasks" tags-todo "-SCHEDULED={.+}/!+TODO|+STARTED|+WAITING|+INSERTED")
-        ("Ts" "[s]chedule next tasks" tags-todo "-SCHEDULED={.+}/!+NEXT")
-        ("Th" "Agenda and Home-related tasks"
+        ("Qi" "[i]nserted unscheduled tasks" tags-todo "-SCHEDULED={.+}/!+TODO|+STARTED|+WAITING|+INSERTED")
+        ("Qs" "[s]chedule next tasks" tags-todo "-SCHEDULED={.+}/!+NEXT")
+        ("Qh" "Agenda and Home-related tasks"
          ((agenda "")
           (tags-todo "home")
           (tags "garden")))
-        ("To" "Agenda and Office-related tasks"
+        ("Qo" "Agenda and Office-related tasks"
          ((agenda "")
           (tags-todo "work")
           (tags "office")))
@@ -231,7 +231,8 @@
 ;; TODO Keywords
 
 (setq org-todo-keywords
-      (quote ((sequence "WISH(w)" "INSERT(i)" "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+      (quote ((sequence "INSERT(i)" "OPEN(o)" "|" "DONE(d)")
+              (sequence "WISH(w)"  "TODO(t)" "NEXT(n)" "|" "DONE(d)")
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
 
 (setq org-todo-keyword-faces
@@ -354,6 +355,23 @@
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
 
+
+
+;; MAGIT
+
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status)
+  :config
+  (progn
+    (setenv "GIT_PAGER" "")
+    (add-hook 'magit-log-edit-mode-hook
+              '(lambda ()
+                 (auto-fill-mode)
+                 (flyspell-mode)
+                 (set-fill-column 80)))))
+
+
 ;; GITHUB
 (add-to-list 'auto-mode-alist '("\\.issues$" . org-mode))
 
@@ -361,7 +379,7 @@
 ;; unused because i cannot create issues with this.
 (add-to-list 'load-path "~/.emacs.d/org-sync")
 (mapc 'load
-      '("org-sync" "org-sync-bb" "org-sync-github"))
+      '("os" "os-github"))
 ;;(setq org-sync-id-in-headline 1)
 
 
