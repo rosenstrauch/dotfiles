@@ -4,7 +4,7 @@ Exec=terminator --new-tab -T friendlinux --geometry=1366x730 -m -b -s -p friendl
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=friendlinux terminator
-Name=friendlinux terminator
+Name[en_US]=Friendliterm terminator
+Name=Friendliterm terminator
 Comment[en_US]=borderless fullsize
 Comment=borderless fullsize

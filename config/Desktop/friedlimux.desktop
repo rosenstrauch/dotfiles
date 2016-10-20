@@ -9,3 +9,4 @@ Name=friendlinux terminator
 Comment[en_US]=borderless fullsize with profile
 Comment=borderless fullsize with profile
 Icon=/usr/share/icons/Azenis-Green/scalable/apps/Terminal.png
+Comment[en_US.UTF-8]=tmuxinated terminator

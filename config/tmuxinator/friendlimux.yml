@@ -11,7 +11,7 @@ root: ~/
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
-pre_window: rvm use 2
+pre_window: rvm use ruby-2.3.0
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
 
@@ -20,14 +20,10 @@ pre_window: rvm use 2
 
 windows:
   - Command:
-      layout: main-vertical
+      layout: even-vertical
       panes:
         - xsh ~/org/routines.org
-  - Web:
-      layout: main-vertical
-      panes:
-        - lynx
-        - #empty
+  - Web: lynx
   - Browse: mc
   - News: newsbeuter
   - Communication:
@@ -41,7 +37,7 @@ windows:
         - gollum ~/org --config ~/gollum/config.rb
         - #empty
   - stats:
-      layout: main-vertical
+      layout: even-vertical
       panes:
         - htop
         - tail -f logs.txt
@@ -51,7 +47,7 @@ windows:
           - cheat --help
           - boom help
           - bindkey
-        - sleep 30s && lynx http://localhost:4567
-        - sleep 30s && lynx http://localhost:1234
-        - sleep 30s && lynx http://dashboard.rosenstrauch.com
+          - sleep 30s && lynx http://localhost:4567
+          - sleep 30s && lynx http://localhost:1234
+          - sleep 30s && lynx http://dashboard.rosenstrauch.com
         - #empty

@@ -22,7 +22,7 @@ fi
 export VISUAL='emacs'
 export PAGER='less'
 # done by prezto
-#export EDITOR='vim'
+export EDITOR='emacs -nw'
 export USE_EDITOR="$EDITOR"
 
 #
