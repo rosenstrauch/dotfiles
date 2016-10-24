@@ -2,10 +2,10 @@
 
 ;; Global Emacs Settings
 
-; Make tabs into spaces when you type them
+                                        ; Make tabs into spaces when you type them
 (setq-default indent-tabs-mode nil)
 
-; Display existing tabs as 2 characters wide
+                                        ; Display existing tabs as 2 characters wide
 (setq-default tab-width 2)
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 ;; Backups http://pages.sachachua.com/.emacs.d/Sacha.html#org7b1ada1
@@ -21,11 +21,13 @@
 
 (load-theme 'tsdh-dark)
 (setq org-fontify-whole-heading-line t)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cursor ((((background light)) (:background "black")) (((background dark)) (:background "white"))))
  '(org-level-1 ((t (:inherit outline-1 :background "blue" :foreground "lavender blush" :box nil :height 1.2))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "orange" :box nil :height 1.1))))
  '(org-level-3 ((t (:inherit outline-3 :foreground "magenta" :box nil :height 1.0))))
@@ -45,15 +47,15 @@
   (open-line 1)
   (next-line 1)
   (yank)
-)
+  )
 (global-set-key (kbd "C-d") 'duplicate-line)
 
 
 
 ;; http://pages.sachachua.com/.emacs.d/Sacha.html#orgb362383
 (with-eval-after-load 'org
-     (bind-key "C-c k" 'org-cut-subtree org-mode-map)
-     (setq org-yank-adjusted-subtrees t))
+  (bind-key "C-c k" 'org-cut-subtree org-mode-map)
+  (setq org-yank-adjusted-subtrees t))
 ;;
 ;; Melpa
 ;;
@@ -123,56 +125,84 @@
 ;; https://lists.gnu.org/archive/html/emacs-orgmode/2011-10/msg00057.html
 (setq org-agenda-files "~/org")
 (setq org-agenda-files (append '("~/org")
-(file-expand-wildcards "~/org/boards/*.trello")
-(file-expand-wildcards "~/org/issues/*.issues")
-(file-expand-wildcards "~/org/*/*.org")
-))
+                               (file-expand-wildcards "~/org/boards/*.trello")
+                               ;(file-expand-wildcards "~/org/issues/*.issues")
+                               (file-expand-wildcards "~/org/*/*.org")
+                               (file-expand-wildcards "~/org/*/*/*.org")
+                               ))
 
 (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 
 ;; Agenda and tasks
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-mode agenda options                                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;open agenda in current window
+(setq org-agenda-window-setup (quote current-window))
+;;warn me of any deadlines in next 7 days
+(setq org-deadline-warning-days 7)
+;;show me tasks scheduled or due in next fortnight
+(setq org-agenda-span (quote fortnight))
+;;don't show tasks as scheduled if they are already shown as a deadline
+(setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+;;don't give awarning colour to tasks with impending deadlines
+;;if they are scheduled to be done
+(setq org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled))
+;;don't show tasks that are scheduled or have deadlines in the
+;;normal todo list
+(setq org-agenda-todo-ignore-deadlines (quote all))
+(setq org-agenda-todo-ignore-scheduled (quote all))
+;;sort tasks in order of when they are due and then by priority
+(setq org-agenda-sorting-strategy
+      (quote
+       ((agenda deadline-up priority-down)
+        (todo priority-down category-keep)
+        (tags priority-down category-keep)
+        (search category-keep))))
+
 ;; enforce todo dependencies
 (setq org-enforce-todo-dependencies 1)
-(setq org-agenda-dim-blocked-tasks 1)
+(setq org-agenda-dim-blocked-tasks 'invisible)
 (setq org-enforce-todo-checkbox-dependencies 1)
-; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
+                                        ; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
 (setq org-columns-default-format
       "%25ITEM %TODO %3PRIORITY $TAGS %TIMESTAMP %5Effort(Time){:} %6CLOCKSUM(Clock)")
 
-
-;;warn me of any deadlines in next 7 days
-(setq org-deadline-warning-days 7)
 ;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
 
 (setq org-agenda-custom-commands
 
       '(
+
         ("x" agenda)
         ;; show subtasks with todostate NEXT for headlines tagged PRJ
         ("P" . "Projects") ;; gives label to "P"
         ("Pl" "Projects List" tags "PRJ")
         ;; second try to show only next tasks for projects (only works if parent project is a task with child tasks)
-        ("Pn" "Project NEXT" tags "PRJ/NEXT")
+                                        ; ("Pn" "Project NEXT" tags "PRJ" (org-agenda-view-columns-initially 1))
         ("I" . "Issues") ;; gives label to "I"
         ;; show only Issues
         ("In" "NEXT Issues" todo "NEXT"
          ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
-        ;("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
+                                        ;("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
 
-        ;("y" agenda*)
+                                        ;("y" agenda*)
         ;; show one next task (actually we want one per project but for now this will have to do)
         ("Q" . "Quests") ;; gives label to "Q"
-        ("Qn" "Next Tasks" todo "NEXT")
-        ("Qc" "Current Task" todo "NEXT"
-         ((org-agenda-max-todos 2)
-          (org-agenda-view-columns-initially t)))
-        ;("H" todo-tree "NEXT") ; only current file
-        ;("w" "wishes" todo-tree "WISH");; wishes
-        ;("u" tags "+@home-urgent")
-        ;("v" tags-todo "+@home-urgent")
-        ;("U" tags-tree "+@home-urgent")
-        ;("f" occur-tree "\\<FIXME\\>")
+        ("Qt" "TODAY" agenda "" (
+                                 (org-agenda-ndays 1)
+                                 (org-agenda-use-time-grid nil)
+                                 (org-agenda-overriding-columns-format "%TODO %7EFFORT %PRIORITY %100ITEM 100%TAGS")
+                                 (org-agenda-view-columns-initially t)))
+        
+                                        ;("H" todo-tree "NEXT") ; only current file
+                                        ;("w" "wishes" todo-tree "WISH");; wishes
+                                        ;("W" "waiting" todo-tree "WAITING");; wishes
+                                        ;("u" tags "+@home-urgent")
+                                        ;("v" tags-todo "+@home-urgent")
+                                        ;("U" tags-tree "+@home-urgent")
+                                        ;("f" occur-tree "\\<FIXME\\>")
 
         ("F" . "Find - Custom queries/searches") ;; gives label to "Q"
         ("Fi" "Issue search" search ""
@@ -194,8 +224,9 @@
         ;; match those tagged with :inbox:, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
         ;; http://emacs.stackexchange.com/a/16561
         ;; http://emacs.stackexchange.com/questions/20155/how-to-show-a-list-of-todo-entries-without-timestamps
-        ("Qi" "[i]nserted unscheduled tasks" tags-todo "-SCHEDULED={.+}/!+TODO|+STARTED|+WAITING|+INSERTED")
-        ("Qs" "[s]chedule next tasks" tags-todo "-SCHEDULED={.+}/!+NEXT")
+        ("Qi" "[i]nserted unscheduled tasks" tags-todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+WAITING|+INSERTED" )
+        ("Qs" "[s]chedule next tasks" tags-todo "-SCHEDULED={.+}/!+NEXT"
+         )
         ("Qh" "Agenda and Home-related tasks"
          ((agenda "")
           (tags-todo "home")
@@ -204,8 +235,8 @@
          ((agenda "")
           (tags-todo "work")
           (tags "office")))
-;; Custom Agenda end
-))
+        ;; Custom Agenda end
+        ))
 
 ;; TODO: unsceduled http://emacs.stackexchange.com/a/868
 
@@ -253,7 +284,7 @@
 ;; Capture Templates http://orgmode.org/manual/Using-capture.html
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
+      '(("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
          "* TODO %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
@@ -282,12 +313,6 @@
 
 ;; Refile
 
-(setq org-refile-targets
-      '(
-        ("~/org/home.org" :maxlevel . 4)
-        ((file-expand-wildcards "~/org/*/*.org") :maxlevel . 3)
-        ((file-expand-wildcards "~/org/*/*/*.org") :maxlevel . 3)
-        ))
 (setq org-reverse-note-order t)
 (setq org-refile-use-outline-path nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
@@ -321,7 +346,7 @@
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
+    (htmlize helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
 ;;
 ;; Org-trello
 ;;
@@ -428,3 +453,12 @@
                        ))
 
 (global-set-key (kbd "C-x c g i") 'gh-issue-create)
+
+;; Htmlize for exporting agenda
+(use-package htmlize
+  :commands (htmlize-buffer
+             htmlize-file
+             htmlize-many-files
+             htmlize-many-files-dired
+             htmlize-region)
+  :ensure t)
