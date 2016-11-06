@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# TODO: find a way to generate docs for everything in dotfiles repo
 
 setopt EXTENDED_GLOB
 # for file in "${ZDOTDIR:-$HOME}"/.dotfiles/setup/*.zsh; do

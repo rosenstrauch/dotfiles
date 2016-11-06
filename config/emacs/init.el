@@ -26,16 +26,16 @@
 (setq org-fontify-whole-heading-line t)
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  '(cursor ((((background light)) (:background "black")) (((background dark)) (:background "white"))))
-  '(org-level-1 ((t (:inherit outline-1 :background "blue" :foreground "lavender blush" :box nil :height 1.2))))
-  '(org-level-2 ((t (:inherit outline-2 :foreground "orange" :box nil :height 1.1))))
-  '(org-level-3 ((t (:inherit outline-3 :foreground "magenta" :box nil :height 1.0))))
-  '(org-level-4 ((t (:inherit outline-4 :foreground "khaki" :box nil :height 0.9))))
-  '(org-level-5 ((t (:inherit outline-5 :foreground "orchid1" :box nil :height 0.8)))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(cursor ((((background light)) (:background "black")) (((background dark)) (:background "white"))))
+ '(org-level-1 ((t (:inherit outline-1 :background "blue" :foreground "lavender blush" :box nil :height 1.2))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "orange" :box nil :height 1.1))))
+ '(org-level-3 ((t (:inherit outline-3 :foreground "magenta" :box nil :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :foreground "khaki" :box nil :height 0.9))))
+ '(org-level-5 ((t (:inherit outline-5 :foreground "orchid1" :box nil :height 0.8)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -84,20 +84,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (custom-set-variables
-;; custom-set-variables was added by Custom.
-;; If you edit it by hand, you could mess it up, so be careful.
-;; Your init file should contain only one such instance.
-;; If there is more than one, they won't work right.
-'(ansi-color-faces-vector
-[default default default italic underline success warning error])
-'(ansi-color-names-vector
-["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
-'(inhibit-startup-screen t)
-'(org-export-backends (quote (ascii html icalendar latex md odt gfm)))
-'(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
-'(package-selected-packages
-(quote
-(htmlize helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
+ '(inhibit-startup-screen t)
+ '(org-export-backends (quote (ascii html icalendar latex md odt gfm)))
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+ '(package-selected-packages
+   (quote
+    (htmlize helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
 
 
 
@@ -505,6 +505,15 @@ t)) ; do not block
 (flyspell-mode)
 (set-fill-column 80)))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org sync
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; use fork of org sync for id in headline
+;; unused because i cannot create issues with this.
+(add-to-list 'load-path "~/.emacs.d/org-sync")
+(mapc 'load
+'("os" "os-github" "os-bb"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GITHUB                                                             ;;
@@ -512,11 +521,6 @@ t)) ; do not block
 
 (add-to-list 'auto-mode-alist '("\\.issues$" . org-mode))
 
-;; use fork of org sync for id in headline
-;; unused because i cannot create issues with this.
-(add-to-list 'load-path "~/.emacs.d/org-sync")
-(mapc 'load
-'("os" "os-github"))
 ;;(setq org-sync-id-in-headline 1)
 
 
