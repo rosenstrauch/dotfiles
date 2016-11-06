@@ -146,6 +146,10 @@
 (setq org-agenda-span (quote fortnight))
 ;;don't show tasks as scheduled if they are already shown as a deadline
 (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+
+;; Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind:
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-skip-scheduled-if-done t)
 ;;don't give awarning colour to tasks with impending deadlines
 ;;if they are scheduled to be done
 (setq org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled))
@@ -168,6 +172,12 @@
                                         ; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
 (setq org-columns-default-format
       "%25ITEM %TODO %3PRIORITY $TAGS %TIMESTAMP %5Effort(Time){:} %6CLOCKSUM(Clock)")
+;; show all tags available (but only when tagging with : in agenda)
+;(setq org-complete-tags-always-offer-all-agenda-tags t)
+
+
+;; Org Diary
+(setq org-agenda-diary-file "~/org/journal.org")
 
 ;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
 
@@ -183,6 +193,8 @@
                                         ; ("Pn" "Project NEXT" tags "PRJ" (org-agenda-view-columns-initially 1))
         ("I" . "Issues") ;; gives label to "I"
         ;; show only Issues
+                ("Io" "OPEN Issues" todo "OPEN"
+         ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
         ("In" "NEXT Issues" todo "NEXT"
          ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
                                         ;("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
@@ -195,7 +207,7 @@
                                  (org-agenda-use-time-grid nil)
                                  (org-agenda-overriding-columns-format "%TODO %7EFFORT %PRIORITY %100ITEM 100%TAGS")
                                  (org-agenda-view-columns-initially t)))
-        
+
                                         ;("H" todo-tree "NEXT") ; only current file
                                         ;("w" "wishes" todo-tree "WISH");; wishes
                                         ;("W" "waiting" todo-tree "WAITING");; wishes
@@ -203,7 +215,13 @@
                                         ;("v" tags-todo "+@home-urgent")
                                         ;("U" tags-tree "+@home-urgent")
                                         ;("f" occur-tree "\\<FIXME\\>")
-
+("Qd" "Upcoming deadlines" agenda ""
+         ((org-agenda-entry-types '(:deadline))
+          ;; a slower way to do the same thing
+          ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline))
+          (org-agenda-ndays 1)
+          (org-deadline-warning-days 60)
+          (org-agenda-time-grid nil)))
         ("F" . "Find - Custom queries/searches") ;; gives label to "Q"
         ("Fi" "Issue search" search ""
          ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
@@ -220,13 +238,18 @@
 
         ;; ...other commands here
         ;; match orphan headlines (the ones without tag or todo)
-        ("O" "Orphans" tags "-{.*}+TODO=\"\"")
+("O" "Orphans" tags "-{.*}+TODO=\"\""
+ ((org-tags-match-list-sublevels 'indented)
+ ))
         ;; match those tagged with :inbox:, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
         ;; http://emacs.stackexchange.com/a/16561
         ;; http://emacs.stackexchange.com/questions/20155/how-to-show-a-list-of-todo-entries-without-timestamps
         ("Qi" "[i]nserted unscheduled tasks" tags-todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+WAITING|+INSERTED" )
         ("Qs" "[s]chedule next tasks" tags-todo "-SCHEDULED={.+}/!+NEXT"
          )
+        ("Qc" "Agenda and Orphaned Capture"
+         ((agenda "")
+          (alltodo "" )))
         ("Qh" "Agenda and Home-related tasks"
          ((agenda "")
           (tags-todo "home")
@@ -235,6 +258,28 @@
          ((agenda "")
           (tags-todo "work")
           (tags "office")))
+
+        ("Pa" "Printed agenda"
+         ((agenda "" ((org-agenda-ndays 7)                      ;; overview of appointments
+                      (org-agenda-start-on-weekday nil)         ;; calendar begins today
+                      (org-agenda-repeating-timestamp-show-all t)
+                      (org-agenda-entry-types '(:timestamp :sexp))))
+          (agenda "" ((org-agenda-ndays 1)                      ;; daily agenda
+                      (org-deadline-warning-days 7)             ;; 7 day advanced warning for deadlines
+                      (org-agenda-todo-keyword-format "[ ]")
+                      (org-agenda-scheduled-leaders '("" ""))
+                      (org-agenda-prefix-format "%t%s")))
+          (todo "TODO"                                          ;; todos sorted by context
+                ((org-agenda-prefix-format "[ ] %T: ")
+                 (org-agenda-sorting-strategy '(tag-up priority-down))
+                 (org-agenda-todo-keyword-format "")
+                 (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
+         ((org-agenda-with-colors nil)
+          (org-agenda-compact-blocks t)
+          (org-agenda-remove-tags t)
+          (ps-number-of-columns 2)
+           (ps-landscape-mode t))
+         ("~/agenda.ps"))
         ;; Custom Agenda end
         ))
 
@@ -251,6 +296,7 @@
                       ("@phone" . ?c)
                       (:endgroup . nil)
                       ("PRJ" . ?e)
+                      ("TEAM" . ?g)
                       ("@laptop" . ?l) ("@pc" . ?p)))
 
 ;; Controlling tasks http://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
@@ -317,7 +363,7 @@
 (setq org-refile-use-outline-path nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 (setq org-refile-use-cache nil)
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 7))))
 (setq org-blank-before-new-entry nil)
 
 
@@ -462,3 +508,33 @@
              htmlize-many-files-dired
              htmlize-region)
   :ensure t)
+
+
+
+
+
+;; EXPERIMENTS
+
+; https://julien.danjou.info/blog/2010/icon-category-support-in-org-mode
+(setq org-agenda-category-icon-alist
+      '(("[Ee]macs" "/usr/share/icons/hicolor/16x16/apps/emacs-snapshot.png" nil nil :ascent center)
+        ("Naquadah" "~/.emacs.d/icons/org/naquadah.png" nil nil :ascent center)
+        ("Visitors" "~/.emacs.d/icons/org/visitors.png" nil nil :ascent center)
+        ("\\(Party\\|Celeb\\)" "~/.emacs.d/icons/org/party.png" nil nil :ascent center)
+        ("Wine" "~/.emacs.d/icons/org/wine.png" nil nil :ascent center)
+        ("Gnus" "~/.emacs.d/icons/org/gnus.png" nil nil :ascent center)
+        ("Org" "~/.emacs.d/icons/org/org.png" nil nil :ascent center)
+        ("Medical" "~/.emacs.d/icons/org/medical.png" nil nil :ascent center)
+        ("Music" "~/.emacs.d/icons/org/music.png" nil nil :ascent center)
+        ("Wii" "~/.emacs.d/icons/org/wii.png" nil nil :ascent center)
+        ("Trip" "~/.emacs.d/icons/org/trip.png" nil nil :ascent center)
+        ("Train" "~/.emacs.d/icons/org/train.png" nil nil :ascent center)
+        ("Anniv" "~/.emacs.d/icons/org/anniversary.png" nil nil :ascent center)
+        ("Debian" "~/.emacs.d/icons/org/debian.png" nil nil :ascent center)
+        ("Plants" "~/.emacs.d/icons/org/tree.png" nil nil :ascent center)
+        ("awesome" "~/.emacs.d/icons/org/awesome.png" nil nil :ascent center)
+        ("Solar" "~/.emacs.d/icons/org/solar.png" nil nil :ascent center)
+        ("Reading" "~/.emacs.d/icons/org/book.png" nil nil :ascent center)
+        ("OpenStack" "~/.emacs.d/icons/org/openstack.png" nil nil :ascent center)
+        ("\\(Holidays\\|Vacation\\)" "~/.emacs.d/icons/org/holidays.png" nil nil :ascent center)
+(".*" '(space . (:width (16))))))

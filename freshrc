@@ -464,3 +464,6 @@ fresh_after_build() {
 
 #fresh mutt --file=~/.mutt/
 #fresh config/rvm/.rvmrc --file=~/.rvmrc
+
+# weechat
+fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
