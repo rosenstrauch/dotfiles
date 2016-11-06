@@ -275,9 +275,10 @@ t)) ; do not block
         ("I" . "Issues") ;; gives label to "I"
         ;; show only Issues
         ("Io" "OPEN Issues" todo "OPEN"
-        ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
-        ("In" "NEXT Issues" todo "NEXT"
-        ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
+        ((org-agenda-files (file-expand-wildcards "~/org/issues/*/*.issues"))))
+;; there arent any next issues if using githubs state
+      ;  ("In" "NEXT Issues" todo "NEXT"
+      ;  ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
         ;("i" "Incubating Projects" org-tags-view "PRJ/!+MAYBE|+INSERT|+WISH" nil);; incubating projects
 
         ;("y" agenda*)
@@ -316,8 +317,11 @@ t)) ; do not block
           ("FA" "Archive tags search" org-tags-view ""
           ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
 
-
-          ;; ...other commands here
+;; match tagged headlines that are not todos
+          ("K" "Knowledge" tags "+{.*}+TODO=\"\"|+{.*}+TODO=\"DONE\""
+          ((org-tags-match-list-sublevels 'indented)
+          (org-agenda-sorting-strategy '(tag-up))
+          ))
           ;; match orphan headlines (the ones without tag or todo)
           ("O" "Orphans" tags "-{.*}+TODO=\"\""
           ((org-tags-match-list-sublevels 'indented)
