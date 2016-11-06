@@ -7,7 +7,10 @@
 
                                         ; Display existing tabs as 2 characters wide
 (setq-default tab-width 2)
+;; load custom lisp from others
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
+; load my own custom lisp
+(add-to-list 'load-path "~/.emacs.d/rosen-lisp/")
 ;; Backups http://pages.sachachua.com/.emacs.d/Sacha.html#org7b1ada1
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq delete-old-versions -1)
@@ -270,7 +273,7 @@
                       (org-agenda-scheduled-leaders '("" ""))
                       (org-agenda-prefix-format "%t%s")))
           (todo "TODO"                                          ;; todos sorted by context
-                ((org-agenda-prefix-format "[ ] %T: ")
+                ((org-agenda-prefix-format " %b%T:")
                  (org-agenda-sorting-strategy '(tag-up priority-down))
                  (org-agenda-todo-keyword-format "")
                  (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
@@ -309,9 +312,8 @@
 
 (setq org-todo-keywords
       (quote ((sequence "INSERT(i)" "OPEN(o)" "|" "DONE(d)")
-              (sequence "WISH(w)"  "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
-
+              (sequence "WISH(w)"  "TODO(t)" "WAITING(w@/!)" "NEXT(n)" "|" "DONE(d)")
+)))
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "red" :weight bold)
               ("NEXT" :foreground "pink1" :weight bold)
@@ -320,8 +322,7 @@
               ("DONE" :foreground "forest green" :weight bold)
               ("WAITING" :foreground "orange" :weight bold)
               ("CANCELLED" :foreground "forest green" :weight bold)
-              ("MEETING" :foreground "forest green" :weight bold)
-              ("PHONE" :foreground "forest green" :weight bold))))
+)))
 
 ;; setup capture
 (setq org-default-notes-file (concat org-directory "/capture.org"))
@@ -331,7 +332,7 @@
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
+         "* WISH %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
         ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
@@ -345,7 +346,7 @@
 
 (setq org-tags-exclude-from-inheritance '("PRJ")
       org-stuck-projects '("+PRJ/-HOLD-INSERT-DONE"
-                           ("NEXT") ("@BUY")))
+      ("NEXT") ("@BUY")))
 
 ;; Org mode keyboard remappings
 

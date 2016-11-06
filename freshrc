@@ -310,8 +310,14 @@ fresh-options --file=~/.zshrc --marker
  # compdef be availiable
  fresh freshshell/fresh contrib/source-build.sh
 fresh-options
-
+########
 ## EMACS
+########
+
+# my own lisp
+fresh config/emacs/rosen-lisp . --file=~/.emacs.d/rosen-lisp/
+
+# Lisp from others
 
 # emacs githublinks.el https://www.reddit.com/r/emacs/comments/3jxsqb/link_to_github_in_orgmode/
 fresh lygaret/emacs.d site-lisp/org-github-links.el --file=~/.emacs.d/site-lisp/org-github-links.el --ref="96a043f"
@@ -332,11 +338,16 @@ fresh baohaojun/org-jira . --file=~/.emacs.d/org-jira/ --ref="6745ad8c"
 fresh git://orgmode.org/org-sync.git . --file=~/.emacs.d/org-sync/
 #fresh emacs-pe/org-sync . --file=~/.emacs.d/org-sync/
 #fresh arbox/org-sync . --file=~/.emacs.d/org-sync/
+
+
+######################
 ## VIMRC
+##
 ## XXX http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 ## XXX http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
 ## using a minimal .vimrc file loading plugins via pathogen
 ## plugin updates managed by fresh
+#######################
 
 fresh tpope/vim-pathogen autoload/pathogen.vim --file=~/.vim/autoload/pathogen.vim
 
@@ -400,6 +411,7 @@ fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 
 ## Emacs and rvm
 fresh senny/rvm.el rvm.el --file=~/.emacs.d/rvm/rvm.el
+
 ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
 
 ## Tmuxinator projects
