@@ -310,12 +310,13 @@ fresh-options --file=~/.zshrc --marker
  # compdef be availiable
  fresh freshshell/fresh contrib/source-build.sh
 fresh-options
-########
-## EMACS
-########
+
+###########
+## EMACS ##
+###########
 
 # my own lisp
-fresh config/emacs/rosen-lisp . --file=~/.emacs.d/rosen-lisp/
+fresh config/emacs/rosen-lisp --file=~/.emacs.d/rosen-lisp/
 
 # Lisp from others
 
