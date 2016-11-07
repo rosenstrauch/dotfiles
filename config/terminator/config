@@ -175,7 +175,7 @@
     background_color = "#060039"
     background_image = None
     cursor_color = "#00b902"
-    custom_command = /home/rosenstrauch/.rvm/gems/ruby-2.3.0@global/bin/tmuxinator start friendlimux
+    custom_command = tmuxinator start friendlimux
     exit_action = restart
     foreground_color = "#fffdc2"
     login_shell = True
