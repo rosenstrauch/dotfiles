@@ -1,6 +1,7 @@
 "*":
   "api-blueprint-preview": {}
   "atom-beautify":
+    _analyticsUserId: "860d9ffa-c8d3-4409-a4f3-2108b8029611"
     general:
       _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
       beautifyEntireFileOnSave: false
