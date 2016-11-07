@@ -136,6 +136,34 @@
 ;; ORG MODE                                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+
+
+;; Install Org mode (can we add all of the following config inside this use package declaration?)
+(use-package org
+  ;; make emacs autorecognize org extension as org major mode
+  :mode (("\\.org\\'" . org-mode))
+  :load-path "rosenorg-lisp/"
+  :bind
+  (
+  ;; remapping C-c ^     (org-sort)
+  ("\C-c r" . org-sort)
+  ("\C-cc" . org-capture)
+  ("\C-co" . mby-org-agenda-toggle-list-sublevels)
+  )
+  :init
+  ;; provide a command to show the subtasks
+  ;; NOTE this currently hides toplevel tasks for some reason and needs reload after toggle this could be a conflict with something like our blocking settings ie org-agenda-dim-blocked-tasks may not be invisible
+
+  (defun mby-org-agenda-toggle-list-sublevels ()
+    "Toggle the display of the subtasks in the agenda lists. between nil and t"
+    (message "agenda-toggle-list-sublevels")
+
+    (interactive)
+    (setq org-agenda-todo-list-sublevels
+          (not org-agenda-todo-list-sublevels)))
+
+;; limit wip states
 (defun org-count-todos-in-state (state)
 (let ((count 0))
 (org-scan-tags (lambda ()
@@ -161,20 +189,6 @@ count))
 t)) ; do not block
 
 (add-hook 'org-blocker-hook #'org-block-wip-limit)
-
-
-
-;; Install Org mode (can we add all of the following config inside this use package declaration?)
-(use-package org
-  ;; make emacs autorecognize org extension as org major mode
-  :mode (("\\.org\\'" . org-mode))
-  :load-path "rosenorg-lisp/"
-  :bind
-  (
-  ;; remapping C-c ^     (org-sort)
-  ("\C-c r" . org-sort)
-  ("\C-cc" . org-capture)
-  )
   :config
 
   (setq org-wip-limit 2)
@@ -208,10 +222,12 @@ t)) ; do not block
   (setq org-capture-templates
     '(("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
     "* WISH %?\n  %i\n  %a")
+    ;; journal entries do not show up in agenda (but maybe as diary)
     ("j" "Journal" entry (file+datetree "~/org/journal.org")
     "* %?\nEntered on %U\n  %i\n  %a")
+    ;; calendar entries prompt for date and show up in agenda may or maynot be todos
     ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
-    "* %?\nEntered on %U\n  %i\n  %a")
+    "* %?\nEntered on %^T\n  %i\n  %a")
     ("l" "Link" entry (file+datetree "~/org/links.org")
     "* %?\nEntered on %U\n  %i\n  %a")
     ))
@@ -240,16 +256,28 @@ t)) ; do not block
 (setq org-agenda-todo-ignore-deadlines (quote all))
 (setq org-agenda-todo-ignore-scheduled (quote all))
 ;;sort tasks in order of when they are due and then by priority
+(setq org-agenda-window-setup 'current-window)
+(setq org-agenda-restore-windows-after-quit t)
+
+;; make agenda view sticky
+(setq org-agenda-sticky t)
+;; We show only the parent tasks in the agenda's lists…
+;; https://github.com/bystrano/emacs-conf
+;(setq mby-org-agenda-toggle-list-sublevels nil)
+
+
 (setq org-agenda-sorting-strategy
-(quote
-  ((agenda deadline-up priority-down)
-  (todo priority-down category-keep)
-  (tags priority-down category-keep)
-  (search category-keep))))
+      '((agenda habit-down deadline-up time-up priority-down category-keep)
+        (todo priority-down todo-state-up category-keep)
+        (tags priority-down category-keep)
+        (search category-keep)))
+(setq org-agenda-log-mode-items '(state closed clock))
 
   ;; enforce todo dependencies
   (setq org-enforce-todo-dependencies 1)
-  (setq org-agenda-dim-blocked-tasks 'invisible)
+
+  ;(setq org-agenda-dim-blocked-tasks 'invisible)
+  (setq org-agenda-dim-blocked-tasks t)
   (setq org-enforce-todo-checkbox-dependencies 1)
   ; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
   (setq org-columns-default-format
