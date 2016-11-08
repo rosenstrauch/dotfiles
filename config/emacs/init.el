@@ -93,7 +93,8 @@
  '(ansi-color-names-vector
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(inhibit-startup-screen t)
- '(org-export-backends (quote (ascii html icalendar latex md odt gfm)))
+ ; TODO: ox-odt error https://lists.gnu.org/archive/html/emacs-orgmode/2015-03/msg00102.html
+ '(org-export-backends (quote (ascii html icalendar latex md gfm)))
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
@@ -119,89 +120,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; export as github markdown http://stackoverflow.com/a/22990257/6768011
-;; export as pdf http://nickguthrie.com/archives/276
-;; -------------------------------------
-;; -- PDF
-;; -------------------------------------
-;; 'djcb-org-article' for export org documents to the LaTex 'article', using
-;; XeTeX and some fancy fonts; requires XeTeX (see org-latex-to-pdf-process)
-;; -----------------------------------------------------------------------------
-;; http://emacs-fu.blogspot.com/2011/04/nice-looking-pdfs-with-org-mode-and.html
-;; http://comments.gmane.org/gmane.emacs.orgmode/40221
-;; -----------------------------------------------------------------------------
-;; Install Packages:
-;; + texlive-all  
-;; + texlive-xetex
-;; + ttf-sil-gentium
-;; + ttf-sil-gentium-basic
-;; + ttf-sil-charis
-;; + ttf-dejavu
-;; -----------------------------------------------------------------------------
-;; Make sure to include the latex class in you header:
-;; #+LaTeX_CLASS: djcb-org-article
-;; -----------------------------------------------------------------------------
-(eval-after-load 'org-export-latex
-  '(progn
-     (add-to-list 'org-export-latex-classes
-          '("djcb-org-article"
-            "\\documentclass[11pt,a4paper]{article}
-             \\usepackage{minted}
-             \\usemintedstyle{emacs}
-             \\newminted{common-lisp}{fontsize=10}
-                     \\usepackage[T1]{fontenc}
-                     \\usepackage{hyperref}
-                     \\usepackage{fontspec}
-                     \\usepackage{graphicx} 
-                     \\defaultfontfeatures{Mapping=tex-text}
-                     \\setromanfont{Gentium}
-                     \\setromanfont [BoldFont={Gentium Basic Bold},
-                                     ItalicFont={Gentium Basic Italic}]{Gentium Basic}
-                     \\setsansfont{Charis SIL}
-                     \\setmonofont[Scale=0.8]{DejaVu Sans Mono}
-                     \\usepackage{geometry}
-                     \\geometry{a4paper, textwidth=6.5in, textheight=10in,
-                                 marginparsep=7pt, marginparwidth=.6in}
-                     \\pagestyle{empty}
-                     \\title{}
-                           [NO-DEFAULT-PACKAGES]
-                           [NO-PACKAGES]"
-            ("\\section{%s}" . "\\section*{%s}")
-            ("\\subsection{%s}" . "\\subsection*{%s}")
-            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-            ("\\paragraph{%s}" . "\\paragraph*{%s}")
-            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
-;; -----------------------------------------------------------------------------
-;; Added Syntax Highlighting Support
-;; http://orgmode.org/worg/org-tutorials/org-latex-export.html
-;; #+LaTeX_HEADER: \usepackage{minted}
-;; #+LaTeX_HEADER: \usemintedstyle{emacs}
-;; #+LaTeX_HEADER: \newminted{common-lisp}{fontsize=\footnotesize}
-;; -----------------------------------------------------------------------------
-;; Install Packages:
-;; + python-pygments
-;; -----------------------------------------------------------------------------
-(setq org-export-latex-listings 'minted)
-(setq org-export-latex-custom-lang-environments
-      '(
-    (emacs-lisp "common-lispcode")
-       ))
-(setq org-export-latex-minted-options
-      '(("frame" "lines")
-        ("fontsize" "\\scriptsize")
-    ("linenos" "")
-))
-(setq org-latex-to-pdf-process 
-      '("xelatex --shell-escape -interaction nonstopmode %f"
-    "xelatex --shell-escape -interaction nonstopmode %f")) ;; for multiple passes
-;; Not sure if this is actually setting the export class correctly.
-(setq org-export-latex-class "djcb-org-article")
-;;
-;;
+;(use-package ox-gfm
+;  :commands (gfm-mode)
+  ;; note conflict with instructions from org-export-backends
+;;  :init  (eval-after-load 'org '(require 'ox-gfm))
+  ;:ensure t)
 
-(use-package ox-gfm
-  :commands (gfm-mode)
-  :init  (eval-after-load 'org '(require 'ox-gfm))
-  :ensure t)
+; http://stackoverflow.com/questions/21113229/choose-a-different-color-theme-for-printing-in-emacs
+(setq org-agenda-exporter-settings
+      '((ps-print-color-p 'black-white)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TODO habits ttps://github.com/abrochard/emacs-habitica                 ;;
@@ -463,16 +391,18 @@ t)) ; do not block
           (org-agenda-scheduled-leaders '("" ""))
           (org-agenda-prefix-format "%t%s")))
           (todo "TODO"                                          ;; todos sorted by context
-          ((org-agenda-prefix-format " %b%T:")
+          ((org-agenda-prefix-format "%e%l%t%s%T:")
+          (org-agenda-todo-keyword-format "[ ]")
           (org-agenda-sorting-strategy '(tag-up priority-down))
-          (org-agenda-todo-keyword-format "")
           (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
           ((org-agenda-with-colors nil)
           (org-agenda-compact-blocks t)
-          (org-agenda-remove-tags t)
-          (ps-number-of-columns 2)
-          (ps-landscape-mode t))
-          ("~/agenda.ps"))
+          ;(org-agenda-remove-tags t)
+          (ps-number-of-columns 1)
+          (org-tags-match-list-sublevels 'indented)
+          (ps-landscape-mode nil))
+          ("/mnt/DATA/exportedata/org-export/agenda.pdf")
+          )
           ;; Custom Agenda end
           ))
 
@@ -548,24 +478,6 @@ t)) ; do not block
 
 
 
-
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(inhibit-startup-screen t)
- '(org-export-backends (quote (ascii html icalendar latex md odt gfm)))
- '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
- '(package-selected-packages
-   (quote
-    (helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
 ;;
 ;; Org-trello
 ;;
@@ -630,6 +542,43 @@ t)) ; do not block
 (auto-fill-mode)
 (flyspell-mode)
 (set-fill-column 80)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-projects (publishing)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Switches off use of time-stamps when publishing. I would prefer to publish
+;;; everything every time
+(setq org-publish-use-timestamps-flag nil)
+(setq org-publish-project-alist
+  '(("01-internal-html"
+  :base-directory "~/org/01-internal/"
+  :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html"
+  :section-numbers nil
+  :with-toc nil
+  :recursive t
+  :publishing-function org-html-publish-to-html
+  ;:html-head "<link rel=\"stylesheet\"
+  ;           href=\"../other/mystyle.css\"
+  ;           type=\"text/css\"/>"
+  )
+  ("01-internal-pdf"
+  :base-directory "~/org/01-internal/"
+  :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/pdf"
+  :section-numbers nil
+  :with-toc nil
+  :recursive t
+  :publishing-function org-latex-publish-to-pdf)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-attach-screenshot
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package org-attach-screenshot
+  :bind
+  (("C-c S" . org-attach-screenshot))
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org sync
@@ -705,10 +654,7 @@ htmlize-many-files-dired
 htmlize-region)
 :ensure t)
 
-
-
-
-
+;; try pdf export settings from
 ;; EXPERIMENTS
 
 ; https://julien.danjou.info/blog/2010/icon-category-support-in-org-mode

@@ -316,7 +316,7 @@ fresh-options
 ###########
 
 # my own lisp
-fresh config/emacs/rosen-lisp --file=~/.emacs.d/rosen-lisp/
+#fresh config/emacs/rosen-lisp --file=~/.emacs.d/rosen-lisp/
 
 # Lisp from others
 
