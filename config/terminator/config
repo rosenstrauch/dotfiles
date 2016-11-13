@@ -1,7 +1,7 @@
 [global_config]
   always_split_with_profile = True
   dbus = True
-  enabled_plugins = CustomCommandsMenu, InactivityWatch, ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = ,
   focus = system
   handle_size = 1
   inactive_color_offset = 0.46
@@ -27,36 +27,6 @@
     [[[window0]]]
       parent = ""
       type = Window
-  [[Dev]]
-    [[[child0]]]
-      fullscreen = False
-      last_active_term = 85fb1abc-3125-49bd-b885-3dab3cf9eda5
-      last_active_window = True
-      maximised = False
-      order = 0
-      parent = ""
-      position = 488:174
-      size = 806, 500
-      title = rosenstrauch@whitebull: ~
-      type = Window
-    [[[child1]]]
-      order = 0
-      parent = child0
-      position = 403
-      ratio = 0.500620347395
-      type = HPaned
-    [[[terminal2]]]
-      order = 0
-      parent = child1
-      profile = devel
-      type = Terminal
-      uuid = 85fb1abc-3125-49bd-b885-3dab3cf9eda5
-    [[[terminal3]]]
-      order = 1
-      parent = child1
-      profile = Project
-      type = Terminal
-      uuid = 3d3ddd14-5d44-41dc-8870-7222d2e455fd
   [[friendlimux]]
     [[[child0]]]
       fullscreen = False
@@ -126,7 +96,6 @@
     background_darkness = 0.83
     background_image = None
     cursor_color = "#00ff27"
-    font = Terminus 13
     foreground_color = "#fffdc2"
     login_shell = True
     scroll_on_output = False
@@ -140,12 +109,7 @@
     custom_command = emacs -nw ~/org/home.org
     exit_action = restart
     foreground_color = "#839496"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     use_custom_command = True
-  [[Project]]
-    background_color = "#ffffdd"
-    background_image = None
-    foreground_color = "#000000"
   [[SSH]]
     background_color = "#afc0ff"
     background_image = None
@@ -156,7 +120,6 @@
     background_image = None
     cursor_color = "#7eff90"
     cursor_shape = ibeam
-    font = Roboto Bold 14
     foreground_color = "#5b5700"
     login_shell = True
     scroll_on_output = False
@@ -184,17 +147,6 @@
     background_color = "#060039"
     background_darkness = 0.87
     background_image = None
-    font = Nimbus Mono 13
     foreground_color = "#fffdc2"
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
     scrollback_infinite = True
     use_system_font = False
-  [[frontend]]
-    background_color = "#d6d6d6"
-    background_darkness = 0.84
-    background_image = None
-    background_type = transparent
-    cursor_color = "#00ff1a"
-    foreground_color = "#5b5700"
-    login_shell = True
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
