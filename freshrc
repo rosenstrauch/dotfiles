@@ -121,6 +121,13 @@ fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/m
 ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
 
 
+## app dotfiles
+
+fresh config/newsbeuter/config --file=~/.newsbeuter/config
+fresh config/mimeapps.list --file=~/.config/mimeapps.list
+
+
+
 ## ~/.drush config
 ## :Modifying the PHP or PHP configuration that drush runs under
 ## <https://www.drupal.org/node/1302418>

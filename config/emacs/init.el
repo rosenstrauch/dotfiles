@@ -84,27 +84,6 @@
 ;; custom-set-variables                                                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(inhibit-startup-screen t)
- '(org-agenda-files
-   (quote
-    ("~/org/boards/HazelRosenstrauchCom.trello" "~/org/boards/Wollzeile.trello" "~/org/boards/cical.trello" "~/org/boards/forhazel.trello" "~/org/boards/goalines.trello" "~/org/boards/goltzgasse.trello" "~/org/boards/quermaschine.onlinecoaching.trello" "~/org/boards/quermashine.publiccoachingwebsite.trello" "~/org/boards/rosencom.repos.trello" "~/org/boards/rosencom.webfactory.trello")))
- '(org-export-backends (quote (ascii html icalendar latex md gfm)))
- '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
- '(package-selected-packages
-   (quote
-    (htmlize helm-github-stars gitlab org-jira org-trello use-package markdown-mode habitica))))
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Markdown mode                                                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -234,7 +213,12 @@
           ("h" "Habit" entry (file "~/org/routines.org")
                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
           ("l" "Link" entry (file+datetree "~/org/links.org")
-           "* %?\nEntered on %U\n  %i\n  %a")))
+           "* %?\nEntered on %U\n  %i\n  %a")
+          ("x" "Firefox Capture Template" entry
+       (file+headline "~/org/capture.org" "Firefox")
+       "* BOOKMARKS %T\n%c\%a\n%i\n Tan's Note:%?" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
+
+           ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; org-mode agenda options                                                ;;
@@ -507,8 +491,11 @@ as the default task."
          ("B" . "Boards") ;; gives label to "I"
          ;; TODO show only assigned
            ;; show only Issues
-           ("Ba" "Trello Tasks" todo ""
+           ("Bs" "[s]chedule next Trello Tasks" tags-todo "-SCHEDULED={.+}/!+NEXT" ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
+           ("Ba" "Assigned Trello Tasks" tags "orgtrello\\-users={rosenstrauch}/!+TODO|+WISH|+NEXT|+WAITING|+INSERTED"
             ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
+            ("Bi" "[i]nserted unscheduled Tasks" todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+WAITING|+INSERTED"
+             ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
           ;; show one next task (actually we want one per project but for now this will have to do)
 
           ("Q" . "Quests") ;; gives label to "Q"
@@ -579,7 +566,7 @@ as the default task."
                                     (tags "REFILE" )
                                     (stuck "")
                                     (todo "TODO"                                          ;; todos sorted by context
-                                          ((org-agenda-prefix-format "%e%l%t%s%T:")
+                                          ((org-agenda-prefix-format "%i%e%l%t%s%T:")
                                            (org-agenda-todo-keyword-format "[ ]")
                                            (org-agenda-sorting-strategy '(tag-up priority-down))
                                            (org-agenda-overriding-header "\nTasks by Context\n------------------\n")))))
@@ -588,18 +575,19 @@ as the default task."
                                   (agenda "" ((org-agenda-ndays 7)
                                               (org-agenda-start-on-weekday nil)
                                               (org-agenda-repeating-timestamp-show-all t)
-                                              (org-agenda-entry-types '(:timestamp :sexp))))
+                                              ;(org-agenda-entry-types '(:timestamp :sexp))
+                                              ))
 
                                   (agenda "" ((org-agenda-ndays 1)
                                               (org-deadline-warning-days 7)
                                               (org-agenda-todo-keyword-format "[ ]")
                                               (org-agenda-scheduled-leaders '("" ""))
-                                              (org-agenda-prefix-format "%t%s")))
+                                              (org-agenda-prefix-format "%i%t%s")))
 
                                   (todo "TODO"
                                         (
                                          (org-agenda-todo-keyword-format "")
-                                         (org-agenda-prefix-format "%-12/c%?-12e% l")
+                                         (org-agenda-prefix-format "%i%-12/c%?-12e% l")
 
                                         (org-agenda-sorting-strategy '(category-up priority-down))
                                          (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
@@ -852,8 +840,10 @@ as the default task."
 
                                         ; https://julien.danjou.info/blog/2010/icon-category-support-in-org-mode
 (setq org-agenda-category-icon-alist
-      '(("[Ee]macs" "/usr/share/icons/hicolor/16x16/apps/emacs-snapshot.png" nil nil :ascent center)
+      '(("[Ee]macs" "/usr/share/icons/hicolor/16x16/apps/emacs.png" nil nil :ascent center)
         ("Naquadah" "~/.emacs.d/icons/org/naquadah.png" nil nil :ascent center)
+        ("LR" "~/.emacs.d/icons/LR-icon.png" nil nil :ascent center)
+        ("AO" "~/.emacs.d/icons/AO_icon.png" nil nil :ascent center)
         ("Visitors" "~/.emacs.d/icons/org/visitors.png" nil nil :ascent center)
         ("\\(Party\\|Celeb\\)" "~/.emacs.d/icons/org/party.png" nil nil :ascent center)
         ("Wine" "~/.emacs.d/icons/org/wine.png" nil nil :ascent center)
@@ -873,3 +863,32 @@ as the default task."
         ("OpenStack" "~/.emacs.d/icons/org/openstack.png" nil nil :ascent center)
         ("\\(Holidays\\|Vacation\\)" "~/.emacs.d/icons/org/holidays.png" nil nil :ascent center)
         (".*" '(space . (:width (16))))))
+
+
+(use-package org-protocol
+  :init
+  (progn
+    (defun my-org-capture-cleanup ()
+      "Clean up the frame created while capturing via org-protocol."
+      (-when-let ((&alist 'name name) (frame-parameters))
+        (when (equal name "org-protocol-capture")
+          (delete-frame))))
+    (add-hook 'org-capture-after-finalize-hook 'my-org-capture-cleanup)
+    (use-package async)
+    (defun my-org-protocol-save-youtube (info)
+      (let* ((parts (org-protocol-split-data info t org-protocol-data-separator))
+             (link (car parts)))
+        (save-window-excursion
+          (async-start-process "ydown" "ydown" nil link)
+          (message "Youtube download started: %s" link)
+          nil)))
+
+    ;;(push '("save-youtube"
+    ;;        :protocol "save-youtube"
+    ;;        :function my-org-protocol-save-youtube
+    ;;        :kill-client nil)
+    ;;      org-protocol-protocol-alist
+  ;;        )
+          ))
+
+(use-package org-contacts)
