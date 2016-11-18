@@ -1,0 +1,6 @@
+
+[Default Applications]
+text/plain=gvim.desktop
+text/x-org=emacs.desktop
+[Added Associations]
+x-scheme-handler/org-protocol=org-protocol.desktop
