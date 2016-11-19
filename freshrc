@@ -123,7 +123,8 @@ ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
 
 ## app dotfiles
 
-fresh config/newsbeuter/config --file=~/.newsbeuter/config
+# TODO Newsbeuter ttrss login is sensitive
+# fresh config/newsbeuter/config --file=~/.newsbeuter/config
 fresh config/mimeapps.list --file=~/.config/mimeapps.list
 
 

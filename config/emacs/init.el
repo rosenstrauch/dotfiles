@@ -864,31 +864,5 @@ as the default task."
         ("\\(Holidays\\|Vacation\\)" "~/.emacs.d/icons/org/holidays.png" nil nil :ascent center)
         (".*" '(space . (:width (16))))))
 
-
-(use-package org-protocol
-  :init
-  (progn
-    (defun my-org-capture-cleanup ()
-      "Clean up the frame created while capturing via org-protocol."
-      (-when-let ((&alist 'name name) (frame-parameters))
-        (when (equal name "org-protocol-capture")
-          (delete-frame))))
-    (add-hook 'org-capture-after-finalize-hook 'my-org-capture-cleanup)
-    (use-package async)
-    (defun my-org-protocol-save-youtube (info)
-      (let* ((parts (org-protocol-split-data info t org-protocol-data-separator))
-             (link (car parts)))
-        (save-window-excursion
-          (async-start-process "ydown" "ydown" nil link)
-          (message "Youtube download started: %s" link)
-          nil)))
-
-    ;;(push '("save-youtube"
-    ;;        :protocol "save-youtube"
-    ;;        :function my-org-protocol-save-youtube
-    ;;        :kill-client nil)
-    ;;      org-protocol-protocol-alist
-  ;;        )
-          ))
-
-(use-package org-contacts)
+(server-start)
+(require 'org-protocol)
