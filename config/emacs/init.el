@@ -226,11 +226,20 @@
   ;;open agenda in current window
   (setq org-agenda-window-setup (quote current-window))
   ;;warn me of any deadlines in next 7 days
-  (setq org-deadline-warning-days 7)
+  (setq org-deadline-warning-days 2)
   ;;show me tasks scheduled or due in next fortnight
   (setq org-agenda-span (quote fortnight))
   ;;don't show tasks as scheduled if they are already shown as a deadline
   (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+
+(setq org-agenda-prefix-format '((agenda . " %i %-15:c%?-12t% s")
+         (timeline . "  % s")
+         (todo .
+               "%-15:c")
+         (tags .
+               " %-12:c %?-12t% s %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+         (search . " %i %-12:c"))
+      )
 
   ;; Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind:
   (setq org-agenda-skip-deadline-if-done t)
@@ -566,7 +575,8 @@ as the default task."
                                     (tags "REFILE" )
                                     (stuck "")
                                     (todo "TODO"                                          ;; todos sorted by context
-                                          ((org-agenda-prefix-format "%i%e%l%t%s%T:")
+                                          (
+                                            ;(org-agenda-prefix-format "%i%e%l%t%s%T:")
                                            (org-agenda-todo-keyword-format "[ ]")
                                            (org-agenda-sorting-strategy '(tag-up priority-down))
                                            (org-agenda-overriding-header "\nTasks by Context\n------------------\n")))))
@@ -575,19 +585,18 @@ as the default task."
                                   (agenda "" ((org-agenda-ndays 7)
                                               (org-agenda-start-on-weekday nil)
                                               (org-agenda-repeating-timestamp-show-all t)
-                                              ;(org-agenda-entry-types '(:timestamp :sexp))
-                                              ))
-
-                                  (agenda "" ((org-agenda-ndays 1)
                                               (org-deadline-warning-days 7)
                                               (org-agenda-todo-keyword-format "[ ]")
-                                              (org-agenda-scheduled-leaders '("" ""))
-                                              (org-agenda-prefix-format "%i%t%s")))
+(org-agenda-scheduled-leaders '("" ""))
+;(org-agenda-entry-types '(:timestamp :sexp))
+                                              ))
+
+
 
                                   (todo "TODO"
                                         (
                                          (org-agenda-todo-keyword-format "")
-                                         (org-agenda-prefix-format "%i%-12/c%?-12e% l")
+                                         ;(org-agenda-prefix-format  "%i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
 
                                         (org-agenda-sorting-strategy '(category-up priority-down))
                                          (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
