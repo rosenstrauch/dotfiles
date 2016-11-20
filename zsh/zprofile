@@ -13,6 +13,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
+
 #
 # Editors
 #
@@ -24,7 +25,6 @@ export PAGER='less'
 # done by prezto
 export EDITOR='emacs -nw'
 export USE_EDITOR="$EDITOR"
-
 #
 # Language
 #

@@ -16,6 +16,15 @@ export FRESH_BUILD_PATH=$FRESH_DIR/build
 export TMPDIR=/tmp
 export NVM_DIR="$HOME/.nvm"
 
+if [[ $(hostname -f) == w* ]]; then
+  export DATADIR="/mnt/DATA"
+
+fi
+export DEFAULT_CHEAT_DIR=~/.cheat
+export CHEATPATH=~/.dotfiles/manual/cheat
+export CHEATCOLORS=true
+
+export GOPATH=/usr/local/go/bin
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
@@ -38,9 +47,3 @@ if [ -d "$HOME/.pyenv" ]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
-
-export DEFAULT_CHEAT_DIR=~/.cheat
-export CHEATPATH=~/.dotfiles/manual/cheat
-export CHEATCOLORS=true
-
-export GOPATH=/usr/local/go/bin
