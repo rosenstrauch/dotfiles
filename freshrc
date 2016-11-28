@@ -121,20 +121,10 @@ fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/m
 ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
 
 
-## app dotfiles
 
-# TODO Newsbeuter ttrss login is sensitive
-# fresh config/newsbeuter/config --file=~/.newsbeuter/config
+# custom mimetype associations
 fresh config/mimeapps.list --file=~/.config/mimeapps.list
 
-
-
-## ~/.drush config
-## :Modifying the PHP or PHP configuration that drush runs under
-## <https://www.drupal.org/node/1302418>
-fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
-fresh config/drush/drush.ini --file=~/.drush/drush.ini
-fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
 
 ## Pareview
 ## https://github.com/klausi/pareviewsh
@@ -236,6 +226,15 @@ fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~
 # Config
 ########
 
+# config files which land in a subfolder of the default $XDG_CONFIG_HOME
+
+
+
+# Newsbeuter non sensitive settings
+# fresh config/newsbeuter/config --file=~/.newsbeuter/config
+
+
+
 # Our own  Our own config files directly linked to home
 
 fresh-options --file
@@ -251,9 +250,23 @@ fresh-options --file
   fresh taskrc
 fresh-options
 
-# various config files in special locations
+# various config files in non hidden subfolders of $HOME
+
+## ~/.drush config
+## :Modifying the PHP or PHP configuration that drush runs under
+## <https://www.drupal.org/node/1302418>
+
+fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
+fresh config/drush/drush.ini --file=~/.drush/drush.ini
+fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
+
+# configuring conky desktop widgets
 fresh config/conky --file=~/.conky/
-fresh config/todo/todo.cfg --file=~/.todo/config
+
+# settings for todo.txt (deprecated in favour of org)
+# fresh config/todo/todo.cfg --file=~/.todo/config
+
+# some settings are stored in hidden subfolders of $HOME
 
 # xchat - solarized
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
@@ -322,9 +335,6 @@ fresh-options
 ###########
 ## EMACS ##
 ###########
-
-# my own lisp
-#fresh config/emacs/rosen-lisp --file=~/.emacs.d/rosen-lisp/
 
 # Lisp from others
 

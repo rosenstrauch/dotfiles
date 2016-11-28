@@ -16,7 +16,7 @@ export FRESH_BUILD_PATH=$FRESH_DIR/build
 export TMPDIR=/tmp
 export NVM_DIR="$HOME/.nvm"
 
-if [[ $(hostname -f) == w* ]]; then
+if [[ "$HOST" == w* ]]; then
   export DATADIR="/mnt/DATA"
 
 fi
