@@ -203,12 +203,14 @@
           ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
            "* %?\nEntered on %^T\n  %i\n  %a")
           ("h" "Habit" entry (file "~/org/routines.org")
-           "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
+           "** TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
+           ;; LinkLibrary is sorted by capture date in a date tree
           ("l" "Link" entry (file+datetree "~/org/links.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
+           "* %?\nEntered on %U\n  %T\n%c\%a\n%i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
+           ;; captured links will need to get refiled
           ("x" "Firefox Capture Template" entry
            (file+headline "~/org/capture.org" "Firefox")
-           "* BOOKMARKS %T\n%c\%a\n%i\n Tan's Note:%?" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
+           "* BOOKMARKS %T\n%c\%a\n%i\n Note: %?" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
 
           ))
 
