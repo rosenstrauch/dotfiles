@@ -16,13 +16,16 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Style                                                                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (load-theme 'tsdh-dark)
 (setq org-fontify-whole-heading-line t)
-
+(set-default-font "9x15")
+(line-number-mode 1)
+(column-number-mode 1)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -57,6 +60,19 @@
   (bind-key "C-c k" 'org-cut-subtree org-mode-map)
   (setq org-yank-adjusted-subtrees t))
 
+
+
+;; quick access to init file http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/
+(defun find-user-init-file ()
+"Edit the `user-init-file', in another window."
+(interactive)
+(find-file-other-window user-init-file))
+(global-set-key (kbd "C-c I") 'find-user-init-file)
+
+;; quick access to home.org
+(global-set-key (kbd "C-c H")
+(lambda() (interactive)(org-babel-load-file "~/org/home.org")))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Melpa and use package                                                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,15 +85,24 @@
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
+
   (package-install 'use-package))
+  ;; make sure to refersh packages
+(package-refresh-contents)
+;; use-package is available from here on
 
-;; use-package is available from here
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; custom-set-variables                                                   ;;
+;; use xclip
+;; http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php#orgheadline33
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(use-package xclip
+  :ensure t
+  :init (xclip-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Markdown mode                                                  ;;
@@ -104,7 +129,13 @@
 
 ;; http://stackoverflow.com/questions/21113229/choose-a-different-color-theme-for-printing-in-emacs
 
-(setq org-agenda-exporter-settings '((ps-print-color-p 'black-white)))
+(setq org-agenda-exporter-settings '(
+  (org-agenda-write-buffer-name "Todays Agenda")
+  (ps-number-of-columns 2)
+  (ps-landscape-mode t)
+  (org-agenda-add-entry-text-maxlines 5)
+  (htmlize-output-type 'css)
+  (ps-print-color-p 'black-white)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TODO habits ttps://github.com/abrochard/emacs-habitica                 ;;
@@ -131,6 +162,16 @@
    ("\C-cc" . org-capture)
    ("\C-co" . mby-org-agenda-toggle-list-sublevels))
   :init
+
+
+
+
+;; allow linking by id
+(setq org-id-link-to-org-use-id t)
+
+
+
+
   ;; provide a command to show the subtasks org-agenda-dim-blocked-tasks may not be invisible
 
   (defun mby-org-agenda-toggle-list-sublevels ()
@@ -191,7 +232,9 @@
   ;; setup capture
   (setq org-default-notes-file (concat org-directory "/capture.org"))
 
-  ;; Capture Templates http://orgmode.org/manual/Using-capture.html
+  ;; Capture Templates
+  ;; http://orgmode.org/manual/Using-capture.html
+  ;; http://orgmode.org/manual/Template-expansion.html#Template-expansion
 
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
@@ -204,13 +247,13 @@
            "* %?\nEntered on %^T\n  %i\n  %a")
           ("h" "Habit" entry (file "~/org/routines.org")
            "** TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
-           ;; LinkLibrary is sorted by capture date in a date tree
+           ;; LinkLibrary is sorted by capture date in a date tree, possibly only store links (not clippings) if i capture a link i only want the link
           ("l" "Link" entry (file+datetree "~/org/links.org")
-           "* %?\nEntered on %U\n  %T\n%c\%a\n%i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
-           ;; captured links will need to get refiled
+           "* %c %a %x %?\nEntered on %U\n  %i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
+           ;; captured snippets will need to get refiled if i capture a link it may include a snipptet
           ("x" "Firefox Capture Template" entry
            (file+headline "~/org/capture.org" "Firefox")
-           "* BOOKMARKS %T\n%c\%a\n%i\n Note: %?" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
+           "* Snippets %a\n%i\nEntered on %U\n%c\ \nNote: %?\nLink: %l" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
 
           ))
 
@@ -225,14 +268,15 @@
   (setq org-agenda-span (quote fortnight))
   ;;don't show tasks as scheduled if they are already shown as a deadline
   (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+;; global prefix formats
+  (setq org-agenda-prefix-format '(
 
-  (setq org-agenda-prefix-format '((agenda . " %i %-15:c%?-12t% s")
-                                   (timeline . "  % s")
-                                   (todo .
-                                         "%-15:c")
-                                   (tags .
-                                         " %-12:c %?-12t% s %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-                                   (search . " %i %-12:c"))
+
+    ((agenda . " %i %-12:c%?-12t% s")
+ (timeline . "  % s")
+ (todo . " %i %-12:c")
+ (tags . " %i %-12:c")
+ (search . " %i %-12:c"))   )
         )
 
   ;; Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind:
@@ -249,7 +293,7 @@
   (setq org-agenda-window-setup 'current-window)
   (setq org-agenda-restore-windows-after-quit t)
   ;; start with follow mode
-  (setq org-agenda-start-with-follow-mode t)
+  ;;(setq org-agenda-start-with-follow-mode t)
 
   ;; make agenda view sticky
   (setq org-agenda-sticky t)
@@ -272,7 +316,7 @@
   (setq org-enforce-todo-checkbox-dependencies 1)
   ;; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
   (setq org-columns-default-format
-        "%25ITEM %TODO %5Effort(Time){:} %3PRIORITY $TAGS %6CLOCKSUM(Clock)")
+        "%45ITEM %3TODO %5Effort(Time){:} %3PRIORITY %TAGS %6CLOCKSUM(Clock)")
                                         ; Set default column view headings: Task Effort Clock_Summary
                                         ; global Effort estimate values
                                         ; global STYLE property values for completion
@@ -477,6 +521,27 @@ as the default task."
 
   (setq org-agenda-custom-commands
         '(
+
+          ("c" . "Priority views")
+        ("ca" "#A"  (
+(tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
+        (alltodo ""
+         ((org-agenda-entry-types '(:scheduled))
+         (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+"\\[#A\\]"))))))
+        ("cb" "#B" alltodo ""
+         ((org-agenda-entry-types '(:scheduled))
+         (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+"\\[#B\\]"))))
+        ("cc" "#C" alltodo ""
+         ((org-agenda-entry-types '(:scheduled))
+         (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+"\\[#C\\]"))))
           ("h" "Habits" tags-todo "STYLE=\"habit\""
            ((org-agenda-overriding-header "Habits")
             (org-agenda-sorting-strategy
@@ -505,6 +570,7 @@ as the default task."
           ("Qi" "[i]nserted unestimated tasks" tags-todo "Effort<1-SCHEDULED={.+}/!-DONE" )
           ;; show only tasks which have estimates
           ("Qs" "[s]chedule next tasks" tags-todo "Effort>1-SCHEDULED={.+}/!-DONE")
+          ;; show anything scheduled for today
           ("Qt" "Do TODAY" agenda ""
            ((org-agenda-ndays 1)
             (org-agenda-use-time-grid nil)
@@ -516,6 +582,8 @@ as the default task."
             (org-deadline-warning-days 60)
             (org-agenda-time-grid nil)))
           ("F" . "Find - Custom queries/searches") ;; gives label to "Q"
+          ;; sparse tree for next string
+          ("Fn" "Next in file" occur-tree "NEXT")
           ("Fi" "Issue search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
           ("FA" "Archive search" search ""
@@ -577,6 +645,7 @@ as the default task."
             (ps-number-of-columns 1)
             (org-tags-match-list-sublevels 'indented)
             (ps-landscape-mode nil))
+
            ("/mnt/DATA/exportedata/org-export/agenda.pdf"))
           ;; Custom Agenda end
           ))
@@ -645,6 +714,11 @@ as the default task."
   (setq org-blank-before-new-entry nil)
   :ensure t)
 
+
+  (setq org-list-demote-modify-bullet (quote (("+" . "-")
+                                            ("*" . "-")
+                                            ("1." . "-")
+                                            ("1)" . "a)"))))
 ;;
 ;; Org-trello
 ;;
@@ -744,6 +818,26 @@ as the default task."
 (mapc 'load
       '("os" "os-github" "os-bb"))
 
+
+;;
+;; Web mode
+;;
+
+(use-package web-mode
+  ;; org-trello major mode for all .trello files
+  :mode (
+    ("\\.phtml$" . web-mode)
+    ("\\.tpl\\.php" . web-mode)
+    ("\\.[agj]sp" . web-mode)
+    ("\\.as[cp]x" . web-mode)
+    ("\\.erb" . web-mode)
+    ("\\.mustache" . web-mode)
+    ("\\.djhtml" . web-mode)
+    )
+  :ensure t)
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GITHUB                                                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -809,8 +903,7 @@ as the default task."
 
 ;; try pdf export settings from
 ;; EXPERIMENTS
-
-                                        ; https://julien.danjou.info/blog/2010/icon-category-support-in-org-mode
+;; https://julien.danjou.info/blog/2010/icon-category-support-in-org-mode
 (setq org-agenda-category-icon-alist
       '(("[Ee]macs" "/usr/share/icons/hicolor/16x16/apps/emacs.png" nil nil :ascent center)
         ("Naquadah" "~/.emacs.d/icons/org/naquadah.png" nil nil :ascent center)
@@ -837,4 +930,5 @@ as the default task."
         (".*" '(space . (:width (16))))))
 
 (server-start)
+
 (require 'org-protocol)

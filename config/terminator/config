@@ -142,6 +142,7 @@
     exit_action = restart
     foreground_color = "#fffdc2"
     login_shell = True
+    scrollback_infinite = True
     use_custom_command = True
   [[friendlinux]]
     background_color = "#060039"
