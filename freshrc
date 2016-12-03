@@ -230,6 +230,8 @@ fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~
 
 # zim colors
 fresh config/zim/style.conf --file=~/.config/zim/style.conf
+# Newsbeuter non sensitive settings
+fresh config/newsbeuter/config --file=~/.config/newsbeuter/config
 
 # Our own  Our own config files directly linked to home
 
@@ -248,8 +250,7 @@ fresh-options
 
 # various config files in non hidden subfolders of $HOME
 
-# Newsbeuter non sensitive settings
- fresh config/newsbeuter/config --file=~/.newsbeuter/config
+
 
 ## ~/.drush config
 ## :Modifying the PHP or PHP configuration that drush runs under

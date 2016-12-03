@@ -15,6 +15,8 @@ export ZSH_DIR=$FRESH_DIR/build/zsh
 export FRESH_BUILD_PATH=$FRESH_DIR/build
 export TMPDIR=/tmp
 export NVM_DIR="$HOME/.nvm"
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$USR_DIR/.local/share/
 
 if [[ "$HOST" == w* ]]; then
   export DATADIR="/mnt/DATA"
