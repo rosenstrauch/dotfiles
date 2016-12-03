@@ -1,5 +1,7 @@
-show-read-articles no
-show-read-feeds no
+# http://newsbeuter.org/doc/newsbeuter.html#_tiny_tiny_rss_synchronization
 
+urls-source "ttrss"
+include "/home/rosenstrauch/SENSITIVE/newsbeuter/config"
+show-read-articles no
+show-read-feeds yes
 cache-file "/mnt/DATA/08-System/AppData/newsbeuter/cachedFeeds"
-include "~/SENSITIVE/newsbeuter/config"
