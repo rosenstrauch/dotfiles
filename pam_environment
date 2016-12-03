@@ -1,0 +1,22 @@
+
+# ~/.pam_environment
+
+LANG             DEFAULT=en_US.UTF-8
+LC_ALL           DEFAULT=${LANG}
+
+XDG_CONFIG_HOME  DEFAULT=@{HOME}/.config
+
+#XDG_CONFIG_HOME=@{HOME}/.config
+# is **not** valid see
+# https://wiki.archlinux.org/index.php/environment_variables
+
+XDG_DATA_HOME    DEFAULT=@{HOME}/.local/share
+
+# you can even use recently defined variables
+RCRC             DEFAULT=${XDG_CONFIG_HOME}/rcrc
+BROWSER=firefox
+#BROWSER         DEFAULT=firefox # same as above
+EDITOR=emacs
+
+DATADIR DEFAULT=/mnt/DATA
+GPODDER_DOWNLOAD_DIR DEFAULT=${DATA}/TEMPORARY/Downloads/Gpodder
