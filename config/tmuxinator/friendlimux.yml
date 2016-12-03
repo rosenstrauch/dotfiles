@@ -23,15 +23,15 @@ windows:
       layout: even-vertical
       panes:
         - xsh ~/org/routines.org
-  - Web: lynx
-  - Browse: mc
+  #- Web: lynx
+  #- Browse: mc
   - News: newsbeuter
   - Communication:
       panes:
-        - irssi
+        #- irssi
         - weechat
-        - notmuch
-        - mutt
+        #- notmuch
+        #- mutt
   - Servers:
       panes:
         - gollum ~/org --config ~/gollum/config.rb
@@ -47,7 +47,7 @@ windows:
           - cheat --help
           - boom help
           - bindkey
-          - sleep 30s && lynx http://localhost:4567
-          - sleep 30s && lynx http://localhost:1234
-          - sleep 30s && lynx http://dashboard.rosenstrauch.com
+          #- sleep 30s && lynx http://localhost:4567
+          #- sleep 30s && lynx http://localhost:1234
+          #- sleep 30s && lynx http://dashboard.rosenstrauch.com
         - #empty
