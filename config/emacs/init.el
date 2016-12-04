@@ -1,15 +1,14 @@
-;;
-;; Global Emacs Settings
-;;
-                                        ; Make tabs into spaces when you type them
-(setq-default indent-tabs-mode nil)
-                                        ; Display existing tabs as 2 characters wide
-(setq-default tab-width 2)
-;; load custom lisp from others
+
+
+;;; Global Emacs Settings
+;;;
+;;; load custom lisp from others
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
+;;; Recognize bash and zsh extensions for sh mode
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.bash\\'" . sh-mode))
-;; Backups http://pages.sachachua.com/.emacs.d/Sacha.html#org7b1ada1
+;;; Backups
+;;; http://pages.sachachua.com/.emacs.d/Sacha.html#org7b1ada1
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq delete-old-versions -1)
 (setq version-control t)
@@ -17,9 +16,24 @@
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Style                                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;; Style                                                                  ;;
+;;;
+;;; Autorecognize Page Breaks
+;;; http://endlessparentheses.com/improving-page-navigation.html
+
+(setq page-delimiter
+      (rx bol (or "\f" ";;;")
+          (not (any "#")) (* not-newline) "\n"
+          (* (* blank) (opt ";" (* not-newline)) "\n")))
+;; Expanded regexp:
+;; "^;;;[^#].*\n\\(?:[[:blank:]]*\\(?:;.*\\)?\n\\)*"
+
+;;; Make tabs into spaces when you type them
+(setq-default indent-tabs-mode nil)
+;;; Display existing tabs as 2 characters wide
+(setq-default tab-width 2)
 
 (load-theme 'tsdh-dark)
 (setq org-fontify-whole-heading-line t)
@@ -28,10 +42,10 @@
 (column-number-mode 1)
 (setq line-spacing '0.25)
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+ ;;; custom-set-faces was added by Custom.
+ ;;; If you edit it by hand, you could mess it up, so be careful.
+ ;;; Your init file should contain only one such instance.
+ ;;; If there is more than one, they won't work right.
  '(cursor ((((background light)) (:background "black")) (((background dark)) (:background "white"))))
  '(org-level-1 ((t (:inherit outline-1 :background "blue" :foreground "lavender blush" :box nil :height 1.2))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "orange" :box nil :height 1.1))))
@@ -39,12 +53,15 @@
  '(org-level-4 ((t (:inherit outline-4 :foreground "khaki" :box nil :height 0.9))))
  '(org-level-5 ((t (:inherit outline-5 :foreground "orchid1" :box nil :height 0.8)))))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Global Emacs Keyboard remappings                                       ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Duplicate line http://stackoverflow.com/a/88828
+
+;;; Global Emacs Keyboard remappings
+;;;
+;;; Next and previous page
+;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Pages.html#Pages
+(define-key prog-mode-map "\C-x\C-n" #'forward-page)
+(define-key prog-mode-map "\C-x\C-p" #'backward-page)
+;;; Duplicate line C-d
+;;; http://stackoverflow.com/a/88828
 (defun duplicate-line()
   (interactive)
   (move-beginning-of-line 1)
@@ -55,59 +72,74 @@
   (yank)
   )
 (global-set-key (kbd "C-d") 'duplicate-line)
-
-;; http://pages.sachachua.com/.emacs.d/Sacha.html#orgb362383
+;;; Cut Subtree C-c k
+;;; http://pages.sachachua.com/.emacs.d/Sacha.html#orgb362383
 (with-eval-after-load 'org
   (bind-key "C-c k" 'org-cut-subtree org-mode-map)
   (setq org-yank-adjusted-subtrees t))
-
-
-
-;; quick access to init file http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/
+;;; quick access to init file C-c I
+;;; http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/
 (defun find-user-init-file ()
-"Edit the `user-init-file', in another window."
-(interactive)
-(find-file-other-window user-init-file))
+  "Edit the `user-init-file', in another window."
+  (interactive)
+  (find-file-other-window user-init-file))
 (global-set-key (kbd "C-c I") 'find-user-init-file)
+;;; TODO quick access to home.org
+;;; Minor outline Mode
+;;; Outline-minor-mode key map
+(define-prefix-command 'cm-map nil "Outline-")
+;;; HIDE
+(define-key cm-map "q" 'hide-sublevels)    ; Hide everything but the top-level headings
+(define-key cm-map "t" 'hide-body)         ; Hide everything but headings (all body lines)
+(define-key cm-map "o" 'hide-other)        ; Hide other branches
+(define-key cm-map "c" 'hide-entry)        ; Hide this entry's body
+(define-key cm-map "l" 'hide-leaves)       ; Hide body lines in this entry and sub-entries
+(define-key cm-map "d" 'hide-subtree)      ; Hide everything in this entry and sub-entries
+;;; SHOW
+(define-key cm-map "a" 'show-all)          ; Show (expand) everything
+(define-key cm-map "e" 'show-entry)        ; Show this heading's body
+(define-key cm-map "i" 'show-children)     ; Show this heading's immediate child sub-headings
+(define-key cm-map "k" 'show-branches)     ; Show all sub-headings under this heading
+(define-key cm-map "s" 'show-subtree)      ; Show (expand) everything in this heading & below
+;;; MOVE
+(define-key cm-map "u" 'outline-up-heading)                ; Up
+(define-key cm-map "n" 'outline-next-visible-heading)      ; Next
+(define-key cm-map "p" 'outline-previous-visible-heading)  ; Previous
+(define-key cm-map "f" 'outline-forward-same-level)        ; Forward - same level
+(define-key cm-map "b" 'outline-backward-same-level)       ; Backward - same level
+;;; commands are prefixed with C-c O
+(global-set-key (kbd "C-c O") cm-map)
 
-;; quick access to home.org
-(global-set-key (kbd "C-c H")
-(lambda() (interactive)(org-babel-load-file "~/org/home.org")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Melpa and use package                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; BOOTSTRAP Package Management
+;;; Melpa and use package
 
-;; Setup package.el
+;;; Setup package.el
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
-;; Bootstrap `use-package'
+;;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
 
   (package-install 'use-package))
-  ;; make sure to refersh packages
+;;; make sure to refersh packages
+;;; TODO: dont run this on every start but dont not run it.
 (package-refresh-contents)
-;; use-package is available from here on
+;;; use-package is available from here on
 
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; use xclip
-;; http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php#orgheadline33
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;; use Package: Xclip
+;;; for integrating emacs kill-ring with gnome clipboard
+;;; http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php#orgheadline33
 
 (use-package xclip
   :ensure t
   :init (xclip-mode 1))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Markdown mode                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Use Package: Markdown mode
 
 (use-package markdown-mode
   :ensure t
@@ -117,43 +149,44 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; export as github markdown http://stackoverflow.com/a/22990257/6768011  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; export as github markdown http://stackoverflow.com/a/22990257/6768011
+
+
+
+;;; export as github markdown
+;;; http://stackoverflow.com/a/22990257/6768011
 ;;(use-package ox-gfm
-;;  :commands (gfm-mode)
-;; note conflict with instructions from org-export-backends
-;;  :init  (eval-after-load 'org '(require 'ox-gfm))
+;;;  :commands (gfm-mode)
+;;; note conflict with instructions from org-export-backends
+;;;  :init  (eval-after-load 'org '(require 'ox-gfm))
 ;;:ensure t)
 
-;; http://stackoverflow.com/questions/21113229/choose-a-different-color-theme-for-printing-in-emacs
+;;; Default Exporter settings
+;;; http://stackoverflow.com/questions/21113229/choose-a-different-color-theme-for-printing-in-emacs
 
 (setq org-agenda-exporter-settings '(
-  (org-agenda-write-buffer-name "Todays Agenda")
-  (ps-number-of-columns 2)
-  (ps-landscape-mode t)
-  (org-agenda-add-entry-text-maxlines 5)
-  (htmlize-output-type 'css)
-  (ps-print-color-p 'black-white)))
+                                     (org-agenda-write-buffer-name "Todays Agenda")
+                                     (ps-number-of-columns 2)
+                                     (ps-landscape-mode t)
+                                     (org-agenda-add-entry-text-maxlines 5)
+                                     (htmlize-output-type 'css)
+                                     (ps-print-color-p 'black-white)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; TODO habits ttps://github.com/abrochard/emacs-habitica                 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; TODO habits ttps://github.com/abrochard/emacs-habitica
 
 (use-package habitica
   :bind (("C-c C-h" . habitica-tasks))
   :ensure t
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ORG MODE                                                               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ORG MODE
 
-;; Install Org mode
-;; make emacs autorecognize org extension as org major mode
-;; remapping C-c ^     (org-sort)
+;;; Install Org mode
+;;; make emacs autorecognize org extension as org major mode
+;;; C-c ^ | (org-sort)
+;;; \C-cc | capture
+;;; C-co  | toggle sublevels (needs reload)
 
 (use-package org
   :mode (("\\.org\\'" . org-mode))
@@ -164,10 +197,11 @@
    ("\C-co" . mby-org-agenda-toggle-list-sublevels))
   :init
 
-  ;; allow linking by id
+  ;;; allow linking by id
   (setq org-id-link-to-org-use-id t)
 
-  ;; provide a command to show the subtasks org-agenda-dim-blocked-tasks may not be invisible
+  ;;; provide a command to show the subtasks
+  ;;; NOTE: org-agenda-dim-blocked-tasks may not be invisible
 
   (defun mby-org-agenda-toggle-list-sublevels ()
     "Toggle the display of the subtasks in the agenda lists. between nil and t"
@@ -175,8 +209,8 @@
 
     (interactive)
     (setq org-agenda-todo-list-sublevels (not org-agenda-todo-list-sublevels)))
+  ;;; Provide Hook and Function to Limit amount of tasks in NEXT state per project
 
-  ;; limit wip states
   (defun org-count-todos-in-state (state)
     (let ((count 0))
       (org-scan-tags (lambda ()
@@ -202,12 +236,12 @@
 
   (add-hook 'org-blocker-hook #'org-block-wip-limit)
   :config
-
+  ;; configure wip limit to 2 next tasks
   (setq org-wip-limit 2)
   (setq org-wip-state "NEXT")
-  ;; Configure org mode Directories
+  ;;; Configure org mode Directories
   (setq org-default-notes-file "~/org/home.org")
-  ;; https://lists.gnu.org/archive/html/emacs-orgmode/2011-10/msg00057.html
+  ;;; https://lists.gnu.org/archive/html/emacs-orgmode/2011-10/msg00057.html
   (setq org-agenda-files "~/org")
   (setq org-agenda-files (append '("~/org")
                                  ;;(file-expand-wildcards "~/org/boards/*.trello")
@@ -215,66 +249,66 @@
                                  (file-expand-wildcards "~/org/*/*/*.org")))
   (setq org-archive-location "~/org/04-archive/%s_archive::")
 
-  ;; Mobile org
-
-  ;; Set to the location of your Org files on your local system
+  ;;; Mobile org
+  ;;; Set to the location of your Org files on your local system
   (setq org-directory "~/org")
-  ;; Set to the name of the file where new notes will be stored
+  ;;; Set to the name of the file where new notes will be stored
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
-  ;; Set to <your Dropbox root directory>/MobileOrg.
+  ;;; Set to <your Dropbox root directory>/MobileOrg.
   (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 
-  ;; setup capture
+  ;;; ORG-CAPTURE
+  ;;;
   (setq org-default-notes-file (concat org-directory "/capture.org"))
 
-  ;; Capture Templates
-  ;; http://orgmode.org/manual/Using-capture.html
-  ;; http://orgmode.org/manual/Template-expansion.html#Template-expansion
+  ;;; Capture Templates
+  ;;; http://orgmode.org/manual/Using-capture.html
+  ;;; http://orgmode.org/manual/Template-expansion.html#Template-expansion
 
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
            "* WISH %?\n  %i\n  %a")
-          ;; journal entries do not show up in agenda (but maybe as diary)
+          ;;; journal entries do not show up in agenda (but maybe as diary)
           ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
-          ;; calendar entries prompt for date and show up in agenda may or maynot be todos
+          ;;; calendar entries prompt for date and show up in agenda may or maynot be todos
           ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
            "* %?\nEntered on %^T\n  %i\n  %a")
           ("h" "Habit" entry (file "~/org/routines.org")
            "** TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
-           ;; LinkLibrary is sorted by capture date in a date tree, possibly only store links (not clippings) if i capture a link i only want the link
+           ;;; LinkLibrary is sorted by capture date in a date tree, possibly only store links (not clippings) if i capture a link i only want the link
           ("l" "Link" entry (file+datetree "~/org/links.org")
            "* %c %a %x %?\nEntered on %U\n  %i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
-           ;; captured snippets will need to get refiled if i capture a link it may include a snipptet
+           ;;; captured snippets will need to get refiled if i capture a link it may include a snipptet
           ("x" "Firefox Capture Template" entry
            (file+headline "~/org/capture.org" "Firefox")
            "* Snippets %a\n%i\nEntered on %U\n%c\ \nNote: %?\nLink: %l" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
 
           ))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; org-mode agenda options                                                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;open agenda in current window
+  
+  ;;; ORG-AGENDA options
+
+  ;;; open agenda in current window
   (setq org-agenda-window-setup (quote current-window))
-  ;;warn me of any deadlines in next 7 days
+  ;;; warn me of any deadlines in next 7 days
   (setq org-deadline-warning-days 2)
-  ;;show me tasks scheduled or due in next fortnight
+  ;;; show me tasks scheduled or due in next fortnight
   (setq org-agenda-span (quote fortnight))
-  ;;don't show tasks as scheduled if they are already shown as a deadline
+  ;;; don't show tasks as scheduled if they are already shown as a deadline
   (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
-;; global prefix formats
+;;; global prefix formats
   (setq org-agenda-prefix-format '(
 
 
-    ((agenda . " %i %-12:c%?-12t% s")
- (timeline . "  % s")
- (todo . " %i %-12:c")
- (tags . " %i %-12:c")
- (search . " %i %-12:c"))   )
+                                   ((agenda . " %i %-12:c%?-12t% s")
+                                    (timeline . "  % s")
+                                    (todo . " %i %-12:c")
+                                    (tags . " %i %-12:c")
+                                    (search . " %i %-12:c"))   )
         )
 
-  ;; Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind:
+  ;;; Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind:
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-if-done t)
   ;;don't give awarning colour to tasks with impending deadlines
@@ -287,13 +321,13 @@
   ;;sort tasks in order of when they are due and then by priority
   (setq org-agenda-window-setup 'current-window)
   (setq org-agenda-restore-windows-after-quit t)
-  ;; start with follow mode
+  ;;; start with follow mode
   ;;(setq org-agenda-start-with-follow-mode t)
 
-  ;; make agenda view sticky
+  ;;; make agenda view sticky
   (setq org-agenda-sticky t)
-  ;; We show only the parent tasks in the agenda's lists…
-  ;; https://github.com/bystrano/emacs-conf
+  ;;; We show only the parent tasks in the agenda's lists…
+  ;;; https://github.com/bystrano/emacs-conf
   ;;(setq mby-org-agenda-toggle-list-sublevels nil)
 
   (setq org-agenda-sorting-strategy
@@ -303,13 +337,13 @@
           (search category-keep)))
 
 
-  ;; enforce todo dependencies
+  ;;; enforce todo dependencies
   (setq org-enforce-todo-dependencies 1)
 
   ;;(setq org-agenda-dim-blocked-tasks 'invisible)
   (setq org-agenda-dim-blocked-tasks t)
   (setq org-enforce-todo-checkbox-dependencies 1)
-  ;; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
+  ;;; http://emacs.stackexchange.com/questions/12364/show-timestamp-for-each-todo-in-org-agenda-global-todo-list
   (setq org-columns-default-format
         "%45ITEM %3TODO %5Effort(Time){:} %3PRIORITY %TAGS %6CLOCKSUM(Clock)")
                                         ; Set default column view headings: Task Effort Clock_Summary
@@ -318,69 +352,69 @@
   (setq org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
                                       ("STYLE_ALL" . "habit"))))
 
-  ;; show all tags available (but only when tagging with : in agenda)
+  ;;; show all tags available (but only when tagging with : in agenda)
   ;;(setq org-complete-tags-always-offer-all-agenda-tags t)
-
+  
   ;;
-  ;; Clocking
+  ;;; Clocking
   ;;
   (setq org-agenda-log-mode-items '(state closed clock))
 
-  ;; so we see how idle timer works switch to agenda after idle timer
+  ;;; so we see how idle timer works switch to agenda after idle timer
 
-  ;; (defun jump-to-org-agenda ()
-  ;;   (interactive)
-  ;;   (let ((buf (get-buffer "*Org Agenda*"))
-  ;; 	wind)
-  ;;     (if buf
-  ;; 	(if (setq wind (get-buffer-window buf))
-  ;; 	    (select-window wind)
-  ;; 	  (if (called-interactively-p)
-  ;; 	      (progn
-  ;; 		(select-window (display-buffer buf t t))
-  ;; 		(org-fit-window-to-buffer)
-  ;; 		;; (org-agenda-redo)
-  ;; 		)
-  ;; 	    (with-selected-window (display-buffer buf)
-  ;; 	      (org-fit-window-to-buffer)
-  ;; 	      ;; (org-agenda-redo)
-  ;; 	      )))
-  ;;       (call-interactively 'org-agenda-list)))
-  ;;   ;;(let ((buf (get-buffer "*Calendar*")))
-  ;;   ;;  (unless (get-buffer-window buf)
-  ;;   ;;    (org-agenda-goto-calendar)))
-  ;;   )
+  ;;; (defun jump-to-org-agenda ()
+  ;;;   (interactive)
+  ;;;   (let ((buf (get-buffer "*Org Agenda*"))
+  ;;; 	wind)
+  ;;;     (if buf
+  ;;; 	(if (setq wind (get-buffer-window buf))
+  ;;; 	    (select-window wind)
+  ;;; 	  (if (called-interactively-p)
+  ;;; 	      (progn
+  ;;; 		(select-window (display-buffer buf t t))
+  ;;; 		(org-fit-window-to-buffer)
+  ;;; 		;;; (org-agenda-redo)
+  ;;; 		)
+  ;;; 	    (with-selected-window (display-buffer buf)
+  ;;; 	      (org-fit-window-to-buffer)
+  ;;; 	      ;;; (org-agenda-redo)
+  ;;; 	      )))
+  ;;;       (call-interactively 'org-agenda-list)))
+  ;;;   ;;(let ((buf (get-buffer "*Calendar*")))
+  ;;;   ;;;  (unless (get-buffer-window buf)
+  ;;;   ;;;    (org-agenda-goto-calendar)))
+  ;;;   )
 
   ;;(run-with-idle-timer 25 t 'jump-to-org-agenda)
 
-  ;; auto start tracking default task
+  ;;; auto start tracking default task
   (run-with-idle-timer 25 nil 'bh/clock-in-organization-task-as-default)
 
   ;;
-  ;; Resume clocking task when emacs is restarted
+  ;;; Resume clocking task when emacs is restarted
   (org-clock-persistence-insinuate)
   ;;
-  ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
+  ;;; Show lot of clocking history so it's easy to pick items off the C-F11 list
   (setq org-clock-history-length 23)
-  ;; Resume clocking task on clock-in if the clock is open
+  ;;; Resume clocking task on clock-in if the clock is open
   (setq org-clock-in-resume t)
-  ;; Change tasks to NEXT when clocking in
+  ;;; Change tasks to NEXT when clocking in
   (setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
-  ;; Separate drawers for clocking and logs
+  ;;; Separate drawers for clocking and logs
   (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
-  ;; Save clock data and state changes and notes in the LOGBOOK drawer
+  ;;; Save clock data and state changes and notes in the LOGBOOK drawer
   (setq org-clock-into-drawer t)
-  ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+  ;;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
   (setq org-clock-out-remove-zero-time-clocks t)
-  ;; Clock out when moving task to a done state
+  ;;; Clock out when moving task to a done state
   (setq org-clock-out-when-done t)
-  ;; Save the running clock and all clock history when exiting Emacs, load it on startup
+  ;;; Save the running clock and all clock history when exiting Emacs, load it on startup
   (setq org-clock-persist t)
-  ;; Do not prompt to resume an active clock
+  ;;; Do not prompt to resume an active clock
   (setq org-clock-persist-query-resume nil)
-  ;; Enable auto clock resolution for finding open clocks
+  ;;; Enable auto clock resolution for finding open clocks
   (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
-  ;; Include current clocking task in clock reports
+  ;;; Include current clocking task in clock reports
   (setq org-clock-report-include-clocking-task t)
 
   (setq bh/keep-clock-running nil)
@@ -449,7 +483,7 @@ as the default task."
     (setq bh/keep-clock-running t)
     (if (equal major-mode 'org-agenda-mode)
         ;;
-        ;; We're in the agenda
+        ;;; We're in the agenda
         ;;
         (let* ((marker (org-get-at-bol 'org-hd-marker))
                (tags (org-with-point-at marker (org-get-tags-at))))
@@ -457,7 +491,7 @@ as the default task."
               (org-agenda-clock-in '(16))
             (bh/clock-in-organization-task-as-default)))
       ;;
-      ;; We are not in the agenda
+      ;;; We are not in the agenda
       ;;
       (save-restriction
         (widen)
@@ -508,65 +542,65 @@ as the default task."
       (bh/clock-in-parent-task)))
 
   (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
-
-  ;; Org Diary
+  
+  ;;; Org Diary
   (setq org-agenda-diary-file "~/org/journal.org")
-
-  ;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
+  
+  ;;; Custom Agenda http://orgmode.org/worg/sources/org-tutorials/org-custom-agenda-commands.org
 
   (setq org-agenda-custom-commands
         '(
 
           ("c" . "Priority views")
-        ("ca" "#A"  (
-(tags "PRIORITY=\"A\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
-        (alltodo ""
-         ((org-agenda-entry-types '(:scheduled))
-         (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
-          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
-"\\[#A\\]"))))))
-        ("cb" "#B" alltodo ""
-         ((org-agenda-entry-types '(:scheduled))
-         (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
-          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
-"\\[#B\\]"))))
-        ("cc" "#C" alltodo ""
-         ((org-agenda-entry-types '(:scheduled))
-         (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
-          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
-"\\[#C\\]"))))
+          ("ca" "#A"  (
+                       (tags "PRIORITY=\"A\""
+                             ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                              (org-agenda-overriding-header "High-priority unfinished tasks:")))
+                       (alltodo ""
+                                ((org-agenda-entry-types '(:scheduled))
+                                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+                                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                                                      "\\[#A\\]"))))))
+          ("cb" "#B" alltodo ""
+           ((org-agenda-entry-types '(:scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                                 "\\[#B\\]"))))
+          ("cc" "#C" alltodo ""
+           ((org-agenda-entry-types '(:scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                                 "\\[#C\\]"))))
           ("h" "Habits" tags-todo "STYLE=\"habit\""
            ((org-agenda-overriding-header "Habits")
             (org-agenda-sorting-strategy
              '(todo-state-down effort-up category-keep))))
-          ;; show subtasks with todostate NEXT for headlines tagged PRJ
+          ;;; show subtasks with todostate NEXT for headlines tagged PRJ
 
-          ("I" . "Issues") ;; gives label to "I"
-          ;; show only Issues
+          ("I" . "Issues") ;;; gives label to "I"
+          ;;; show only Issues
           ("Io" "OPEN Issues" todo "OPEN"
            ((org-agenda-files (file-expand-wildcards "~/org/issues/*/*.issues"))))
-          ("B" . "Boards") ;; gives label to "I"
-          ;; TODO show only assigned
-          ;; show only Issues
+          ("B" . "Boards") ;;; gives label to "I"
+          ;;; TODO show only assigned
+          ;;; show only Issues
           ("Bs" "[s]chedule next Trello Tasks" tags-todo "-SCHEDULED={.+}/!+NEXT" ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
           ("Ba" "Assigned Trello Tasks" tags "orgtrello\\-users={rosenstrauch}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
            ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
           ("Bi" "[i]nserted unscheduled Tasks" todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
            ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
-          ;; show one next task (actually we want one per project but for now this will have to do)
+          ;;; show one next task (actually we want one per project but for now this will have to do)
 
-          ("Q" . "Quests") ;; gives label to "Q"
-          ;; quests should not contain issues and boards?
-          ;; match those tasks that are estimated, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
-          ;; http://emacs.stackexchange.com/a/16561
-          ;; http://emacs.stackexchange.com/questions/20155/how-to-show-a-list-of-todo-entries-without-timestamps
-          ;; I want to know what to estimate next
+          ("Q" . "Quests") ;;; gives label to "Q"
+          ;;; quests should not contain issues and boards?
+          ;;; match those tasks that are estimated, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
+          ;;; http://emacs.stackexchange.com/a/16561
+          ;;; http://emacs.stackexchange.com/questions/20155/how-to-show-a-list-of-todo-entries-without-timestamps
+          ;;; I want to know what to estimate next
           ("Qi" "[i]nserted unestimated tasks" tags-todo "Effort<1-SCHEDULED={.+}/!-DONE" )
-          ;; show only tasks which have estimates
+          ;;; show only tasks which have estimates
           ("Qs" "[s]chedule next tasks" tags-todo "Effort>1-SCHEDULED={.+}/!-DONE")
-          ;; show anything scheduled for today
+          ;;; show anything scheduled for today
           ("Qt" "Do TODAY" agenda ""
            ((org-agenda-ndays 1)
             (org-agenda-use-time-grid nil)
@@ -577,27 +611,27 @@ as the default task."
             (org-agenda-ndays 1)
             (org-deadline-warning-days 60)
             (org-agenda-time-grid nil)))
-          ("F" . "Find - Custom queries/searches") ;; gives label to "Q"
-          ;; sparse tree for next string
+          ("F" . "Find - Custom queries/searches") ;;; gives label to "Q"
+          ;;; sparse tree for next string
           ("Fn" "Next in file" occur-tree "NEXT")
           ("Fi" "Issue search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
           ("FA" "Archive search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
-          ;; match tagged headlines that are not todos
+          ;;; match tagged headlines that are not todos
           ("K" "Knowledge" tags "+{.*}+TODO=\"\"|+{.*}+TODO=\"DONE\""
            ((org-tags-match-list-sublevels 'indented)
             (org-agenda-sorting-strategy '(tag-up))))
-          ;; match orphan headlines (the ones without tag or todo)
+          ;;; match orphan headlines (the ones without tag or todo)
           ("O" "Orphans" tags "-{.*}+TODO=\"\""
            ((org-tags-match-list-sublevels 'indented)))
-          ("P" . "Projects") ;; gives label to "P"
+          ("P" . "Projects") ;;; gives label to "P"
           ("P1" "Internal Block"
            ((tags "PRJ" ((org-agenda-overriding-header "\nInternal Projects\n------------------\n")))
             (tags-todo "Effort>1-SCHEDULED={.+}/!-DONE" ((org-agenda-overriding-header "\Estimated Unscheduled Internal Tasks\n------------------\n"))))
-           ;; only look in internal org files
+           ;;; only look in internal org files
            ((org-agenda-files (file-expand-wildcards "~/org/01-internal/*/*"))
-            ;; show columns
+            ;;; show columns
             (org-agenda-overriding-columns-format "%TODO %7EFFORT %PRIORITY %100ITEM 100%TAGS")
             (org-agenda-view-columns-initially t)))
 
@@ -643,12 +677,12 @@ as the default task."
             (ps-landscape-mode nil))
 
            ("/mnt/DATA/exportedata/org-export/agenda.pdf"))
-          ;; Custom Agenda end
+          ;;; Custom Agenda end
           ))
-  ;; TODO: unscheduled http://emacs.stackexchange.com/a/868
+  ;;; TODO: unscheduled http://emacs.stackexchange.com/a/868
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; ORG MODE Tags                                                     ;;
+  ;;; ORG MODE Tags                                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (setq org-tag-alist '((:startgroup . nil)
@@ -662,19 +696,19 @@ as the default task."
                         ("TEAM" . ?g)
                         ("@laptop" . ?l) ("@pc" . ?p)))
 
-  ;; Controlling tasks http://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
+  ;;; Controlling tasks http://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
   (setq org-log-redeadline (quote time))
   (setq org-log-done (quote time))
   (setq org-enforce-todo-dependencies t)
   (setq org-log-reschedule (quote time))
 
-  ;; TODO Keywords
+  ;;; TODO Keywords
 
   (setq org-todo-keywords
         (quote (
                 (sequence "WISH(w)"  "TODO(t)" "HOLD(w@/!)" "NEXT(n)" "|" "DONE(d)")
                 (sequence "INSERT(i)" "OPEN(o)" "|" "DONE(d)")
-                ;; do we treat ideas as special type of task
+                ;;; do we treat ideas as special type of task
                 (sequence "RESEARCH(r)" "DESCRIBE(f)" "|" "KNOWLEDGE(k)")
                 )))
   (setq org-todo-keyword-faces
@@ -686,23 +720,23 @@ as the default task."
                 ("HOLD" :foreground "orange" :weight bold)
                 ("CANCELLED" :foreground "forest green" :weight bold))))
 
-  ;; Project tags http://juanreyero.com/article/emacs/org-teams.html
+  ;;; Project tags http://juanreyero.com/article/emacs/org-teams.html
 
   (setq org-tags-exclude-from-inheritance '("PRJ")
         org-stuck-projects '("+PRJ/-HOLD-INSERT-DONE"
                              ("NEXT" "TODO") ("@BUY")))
 
-  ;; Org mode keyboard remappings
+  ;;; Org mode keyboard remappings
 
   (global-set-key "\C-cl" 'org-store-link)
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cb" 'org-iswitchb)
 
-  (bind-key "C-c j" 'org-clock-goto) ;; jump to current task from anywhere
+  (bind-key "C-c j" 'org-clock-goto) ;;; jump to current task from anywhere
   (bind-key "C-c C-w" 'org-refile)
 
-  ;; Refile
+  ;;; Refile
 
   (setq org-reverse-note-order t)
   (setq org-refile-use-outline-path nil)
@@ -713,55 +747,55 @@ as the default task."
   :ensure t)
 
 
-  (setq org-list-demote-modify-bullet (quote (("+" . "-")
+(setq org-list-demote-modify-bullet (quote (("+" . "-")
                                             ("*" . "-")
                                             ("1." . "-")
                                             ("1)" . "a)"))))
 ;;
-;; Org-trello
+;;; Org-trello
 ;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Org-trello                                                     ;;
+;;; Org-trello                                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-trello
-  ;; org-trello major mode for all .trello files
+  ;;; org-trello major mode for all .trello files
   :mode (("\\.trello$" . org-mode))
   :ensure t)
 
-;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
+;;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
 (add-hook 'org-mode-hook
           (lambda ()
             (let ((filename (buffer-file-name (current-buffer))))
               (when (and filename (string= "trello" (file-name-extension filename)))
                 (org-trello-mode)))))
 
-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ORG-JIRA                                                          ;;
+;;; ORG-JIRA                                                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; credentials are in authinfo
-;; you need make sure whether the "/jira" at the end is
-;; necessary or not, see discussion at the end of this page
-;; jiralib is not explicitly required, since org-jira will load it.
+;;; credentials are in authinfo
+;;; you need make sure whether the "/jira" at the end is
+;;; necessary or not, see discussion at the end of this page
+;;; jiralib is not explicitly required, since org-jira will load it.
 
 (use-package org-jira
   :config
   (setq jiralib-url "http://acolono.atlassian.net")
   :ensure t)
 
-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; GITLAB                                                            ;;
+;;; GITLAB                                                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; https://github.com/nlamirault/emacs-gitlab#usage
+;;; https://github.com/nlamirault/emacs-gitlab#usage
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MAGIT                                                             ;;
+;;; MAGIT                                                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package magit
@@ -775,13 +809,13 @@ as the default task."
                  (auto-fill-mode)
                  (flyspell-mode)
                  (set-fill-column 80)))))
-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; org-projects (publishing)
+;;; org-projects (publishing)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Switches off use of time-stamps when publishing. I would prefer to publish
-;;; everything every time
+;;;; Switches off use of time-stamps when publishing. I would prefer to publish
+;;;; everything every time
 (setq org-publish-use-timestamps-flag nil)
 (setq org-publish-project-alist
       '(("01-internal-html"
@@ -798,47 +832,46 @@ as the default task."
          :with-toc nil
          :recursive t
          :publishing-function org-latex-publish-to-pdf)))
-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; org-attach-screenshot
+;;; org-attach-screenshot
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package org-attach-screenshot
   :bind
   (("C-c S" . org-attach-screenshot)))
-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Org sync
+;;; Org sync
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; use fork of org sync for id in headline
-;; unused because i cannot create issues with this.
+;;; use fork of org sync for id in headline
+;;; unused because i cannot create issues with this.
 (add-to-list 'load-path "~/.emacs.d/org-sync")
 (mapc 'load
       '("os" "os-github" "os-bb"))
 
-
+
 ;;
-;; Web mode
+;;; Web mode
 ;;
 
 (use-package web-mode
-  ;; org-trello major mode for all .trello files
+  ;;; org-trello major mode for all .trello files
   :mode (
-    ("\\.phtml$" . web-mode)
-    ("\\.tpl\\.php" . web-mode)
-    ("\\.[agj]sp" . web-mode)
-    ("\\.as[cp]x" . web-mode)
-    ("\\.erb" . web-mode)
-    ("\\.mustache" . web-mode)
-    ("\\.djhtml" . web-mode)
-    )
+         ("\\.phtml$" . web-mode)
+         ("\\.tpl\\.php" . web-mode)
+         ("\\.[agj]sp" . web-mode)
+         ("\\.as[cp]x" . web-mode)
+         ("\\.erb" . web-mode)
+         ("\\.mustache" . web-mode)
+         ("\\.djhtml" . web-mode)
+         )
   :ensure t)
 
 
+
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; GITHUB                                                             ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; GITHUB
 
 (add-to-list 'auto-mode-alist '("\\.issues$" . org-mode))
 
@@ -846,24 +879,24 @@ as the default task."
 
 
 ;;(use-package gist
-;;  :ensure t)
+;;;  :ensure t)
 ;;(use-package github-notifier
-;;  :ensure t)
+;;;  :ensure t)
 ;;(use-package github-issues
-;;  :ensure t
-;;  :pin manual)
+;;;  :ensure t
+;;;  :pin manual)
 ;;(use-package helm-github-issues
-;;  :ensure t
-;;  :pin manual)
+;;;  :ensure t
+;;;  :pin manual)
 ;;(use-package org-github-links
-;;  :ensure t
-;;  :pin manual)
+;;;  :ensure t
+;;;  :pin manual)
 
 
-;; (use-package helm-github-stars
-;;  :ensure t)
+;;; (use-package helm-github-stars
+;;;  :ensure t)
 
-;; http://moritz-breit.de/blog/2015/10/05/github-issues-in-emacs/
+;;; http://moritz-breit.de/blog/2015/10/05/github-issues-in-emacs/
 (defun gh-issue-new-url (project title body)
   (concat "https://github.com/"
           project
@@ -879,8 +912,8 @@ as the default task."
   (org-entry-get (point) "GH-PROJECT" t))
 
 ;;(defun gh-issue-create ()
-;;  (interactive)
-;;  (gh-issue-new-browse (gh-issue-get-project) (org-get-heading) (org-get-entry);))
+;;;  (interactive)
+;;;  (gh-issue-new-browse (gh-issue-get-project) (org-get-heading) (org-get-entry);))
 
 (defun gh-issue-create ()
   (interactive)
@@ -890,7 +923,7 @@ as the default task."
 
 (global-set-key (kbd "C-x c g i") 'gh-issue-create)
 
-;; Htmlize for exporting agenda
+;;; Htmlize for exporting agenda
 (use-package htmlize
   :commands (htmlize-buffer
              htmlize-file
@@ -898,10 +931,10 @@ as the default task."
              htmlize-many-files-dired
              htmlize-region)
   :ensure t)
+
 
-;; try pdf export settings from
-;; EXPERIMENTS
-;; https://julien.danjou.info/blog/2010/icon-category-support-in-org-mode
+;;; EXPERIMENTS
+;;; https://julien.danjou.info/blog/2010/icon-category-support-in-org-mode
 (setq org-agenda-category-icon-alist
       '(("[Ee]macs" "/usr/share/icons/hicolor/16x16/apps/emacs.png" nil nil :ascent center)
         ("Naquadah" "~/.emacs.d/icons/org/naquadah.png" nil nil :ascent center)
@@ -929,4 +962,15 @@ as the default task."
 
 (server-start)
 
+;;; org-protocol for capturing from external (i.e. webbrowser)
+
 (require 'org-protocol)
+
+;;; Local Variables
+;;; make outlinemode match only comments starting with ;;; as headings
+;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables
+
+;; Local Variables:
+;; eval: (outline-minor)
+;; eval: (outline-regexp: "^;;; ")
+;; End:
