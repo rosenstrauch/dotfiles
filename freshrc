@@ -30,6 +30,8 @@ fresh-options --bin
   fresh https://gist.github.com/8511861.git keybindings.pl
   fresh pantheon-systems/drush-config-workflow bin/quickstart
   fresh blinkreaction/drude bin/dsh
+  fresh holman/dotfiles bin/git-wtf
+
 fresh-options
 
 ## some other external functions with the correct extension
@@ -237,6 +239,7 @@ fresh config/newsbeuter/config --file=~/.config/newsbeuter/config
 
 fresh-options --file
   fresh inputrc
+  fresh pam_environment
   #fresh freshrc
   fresh tmux.conf
   fresh gitconfig

@@ -26,6 +26,7 @@
 (set-default-font "9x15")
 (line-number-mode 1)
 (column-number-mode 1)
+(setq line-spacing '0.25)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,14 +164,8 @@
    ("\C-co" . mby-org-agenda-toggle-list-sublevels))
   :init
 
-
-
-
-;; allow linking by id
-(setq org-id-link-to-org-use-id t)
-
-
-
+  ;; allow linking by id
+  (setq org-id-link-to-org-use-id t)
 
   ;; provide a command to show the subtasks org-agenda-dim-blocked-tasks may not be invisible
 
@@ -303,8 +298,8 @@
 
   (setq org-agenda-sorting-strategy
         '((agenda habit-down deadline-up time-up priority-down category-keep)
-          (todo priority-down todo-state-up category-keep)
-          (tags priority-down category-keep)
+          (todo category-up todo-state-up priority-down)
+          (tags category-up todo-state-up priority-down)
           (search category-keep)))
 
 
@@ -556,9 +551,9 @@ as the default task."
           ;; TODO show only assigned
           ;; show only Issues
           ("Bs" "[s]chedule next Trello Tasks" tags-todo "-SCHEDULED={.+}/!+NEXT" ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
-          ("Ba" "Assigned Trello Tasks" tags "orgtrello\\-users={rosenstrauch}/!+TODO|+WISH|+NEXT|+WAITING|+INSERTED"
+          ("Ba" "Assigned Trello Tasks" tags "orgtrello\\-users={rosenstrauch}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
            ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
-          ("Bi" "[i]nserted unscheduled Tasks" todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+WAITING|+INSERTED"
+          ("Bi" "[i]nserted unscheduled Tasks" todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
            ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
           ;; show one next task (actually we want one per project but for now this will have to do)
 
@@ -567,6 +562,7 @@ as the default task."
           ;; match those tasks that are estimated, are not scheduled, are not DONE. http://stackoverflow.com/a/17004389
           ;; http://emacs.stackexchange.com/a/16561
           ;; http://emacs.stackexchange.com/questions/20155/how-to-show-a-list-of-todo-entries-without-timestamps
+          ;; I want to know what to estimate next
           ("Qi" "[i]nserted unestimated tasks" tags-todo "Effort<1-SCHEDULED={.+}/!-DONE" )
           ;; show only tasks which have estimates
           ("Qs" "[s]chedule next tasks" tags-todo "Effort>1-SCHEDULED={.+}/!-DONE")
@@ -676,16 +672,18 @@ as the default task."
 
   (setq org-todo-keywords
         (quote (
-                (sequence "WISH(w)"  "TODO(t)" "WAITING(w@/!)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WISH(w)"  "TODO(t)" "HOLD(w@/!)" "NEXT(n)" "|" "DONE(d)")
                 (sequence "INSERT(i)" "OPEN(o)" "|" "DONE(d)")
+                ;; do we treat ideas as special type of task
+                (sequence "RESEARCH(r)" "DESCRIBE(f)" "|" "KNOWLEDGE(k)")
                 )))
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "red" :weight bold)
                 ("NEXT" :foreground "pink1" :weight bold)
                 ("WISH" :foreground "medium sea green" :weight bold)
                 ("INSERT" :foreground "medium sea green" :weight bold)
-                ("DONE" :foreground "forest green" :weight bold)
-                ("WAITING" :foreground "orange" :weight bold)
+                ("DONE" :background "grey" :weight bold :box (:line-width 2 :style released-button))
+                ("HOLD" :foreground "orange" :weight bold)
                 ("CANCELLED" :foreground "forest green" :weight bold))))
 
   ;; Project tags http://juanreyero.com/article/emacs/org-teams.html

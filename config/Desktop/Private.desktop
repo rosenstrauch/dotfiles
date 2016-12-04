@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=firefox -P private -no-remote
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Private
+Name=Firefox
+Comment[en_US]=
+Comment=
+Icon=/usr/share/icons/HighContrast/48x48/apps/firefox.png

@@ -22,7 +22,8 @@ windows:
   - Command:
       layout: even-vertical
       panes:
-        - xsh ~/org/routines.org
+        - #empty
+        #- xsh ~/org/routines.org
   #- Web: lynx
   #- Browse: mc
   - News: newsbeuter
@@ -40,13 +41,13 @@ windows:
       layout: even-vertical
       panes:
         - htop
-        - tail -f logs.txt
+        #- tail -f logs.txt
   - Docs:
       panes:
         - commands:
-          - cheat --help
-          - boom help
-          - bindkey
+          #- cheat --help
+          #- boom help
+          - bindkey && boom help && cheat --help
           #- sleep 30s && lynx http://localhost:4567
           #- sleep 30s && lynx http://localhost:1234
           #- sleep 30s && lynx http://dashboard.rosenstrauch.com

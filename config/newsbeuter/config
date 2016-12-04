@@ -3,5 +3,5 @@
 urls-source "ttrss"
 include "/home/rosenstrauch/SENSITIVE/newsbeuter/config"
 show-read-articles no
-show-read-feeds yes
+show-read-feeds no
 cache-file "/mnt/DATA/08-System/AppData/newsbeuter/cachedFeeds"

@@ -19,14 +19,16 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$USR_DIR/.local/share/
 
 if [[ "$HOST" == w* ]]; then
-  export DATADIR="/mnt/DATA"
+  export MYDATADIR="/mnt/DATA"
 
 fi
+export GPODDER_DOWNLOAD_DIR="$MYDATADIR/TEMPORARY/Downloads/Gpodder"
+
 export DEFAULT_CHEAT_DIR=~/.cheat
 export CHEATPATH=~/.dotfiles/manual/cheat
 export CHEATCOLORS=true
-
 export GOPATH=/usr/local/go/bin
+
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
