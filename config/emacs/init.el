@@ -190,6 +190,9 @@
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
            "* WISH %?\n  %i\n  %a")
+;;; **** CAPTURE: Ideas are not tasks                                           
+          ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
+           "* %?\nEntered on %U\n  %i\n  %a")   
 ;;; **** CAPTURE: journal entries do not show up in agenda (but maybe as diary)
           ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
