@@ -12,6 +12,9 @@
   title_receive_bg_color = "#16c900"
   window_state = maximise
 [keybindings]
+  close_term = <Alt>F4
+  close_window = <Shift><Alt>F4
+  copy = <Alt>w
   cycle_next = <Primary><Shift>n
   cycle_prev = <Primary><Shift>p
   hide_window = KP_Delete
