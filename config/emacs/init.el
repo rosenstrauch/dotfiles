@@ -251,35 +251,37 @@
 
   (setq org-agenda-custom-commands
         '(
-;;; **** CUSTOM AGENDA: Priority views
+;;; **** CUSTOM AGENDA: Review Views
           ("R" . "Review" )
 
-("Rw" "Week in review"
-                agenda ""
-                  ((org-agenda-span 'week)
-                    (org-agenda-start-on-weekday 0)
-                    (org-agenda-overriding-header "Week in Review"))
-                ("/mnt/DATA/exportedata/org-export/review/week.html")
-                )
+          ("Rw" "Week in review"
+           agenda ""
+           ((org-agenda-span 'week)
+            (org-agenda-start-on-weekday 0)
+            (org-agenda-overriding-header "Week in Review"))
+           ("/mnt/DATA/exportedata/org-export/review/week.html")
+           )
 
 
-             ("Rd" "Day in review"
-                agenda ""
-                  ((org-agenda-span 'day)
-                    (org-agenda-overriding-header "Week in Review"))
+          ("Rd" "Day in review"
+           agenda ""
+           ((org-agenda-span 'day)
+            (org-agenda-overriding-header "Week in Review"))
 
-                ("/mnt/DATA/exportedata/org-export/review/day.html")
-                )
+           ("/mnt/DATA/exportedata/org-export/review/day.html")
+           )
 
-             ("Rm" "Month in review"
-                agenda ""
-                  ((org-agenda-span 'month)
-                    (org-agenda-start-day "01")
-                    (org-read-date-prefer-future nil)
-                    (org-agenda-overriding-header "Month in Review"))
+          ("Rm" "Month in review"
+           agenda ""
+           ((org-agenda-span 'month)
+            (org-agenda-start-day "01")
+            (org-read-date-prefer-future nil)
+            (org-agenda-overriding-header "Month in Review"))
 
-                ("/mnt/DATA/exportedata/org-export/review/month.html")
-                )
+           ("/mnt/DATA/exportedata/org-export/review/month.html")
+           )
+
+;;; **** CUSTOM AGENDA: Priority views
           ("c" . "Priority views")
           ("ca" "#A"  (
                        (tags "PRIORITY=\"A\""
@@ -412,13 +414,13 @@
 ;;; *** ORG CONFIG: Agenda
 
 ;;; **** AGENDA Exporter settings
-(setq org-agenda-exporter-settings '(
-                                     (org-agenda-write-buffer-name "Todays Agenda")
-                                     (ps-number-of-columns 2)
-                                     (ps-landscape-mode t)
-                               ;      (org-agenda-add-entry-text-maxlines 5)
-                               ;      (htmlize-output-type 'css)
-                                     (ps-print-color-p 'black-white)))
+  (setq org-agenda-exporter-settings '(
+                                       (org-agenda-write-buffer-name "Todays Agenda")
+                                       (ps-number-of-columns 2)
+                                       (ps-landscape-mode t)
+                                        ;      (org-agenda-add-entry-text-maxlines 5)
+                                        ;      (htmlize-output-type 'css)
+                                       (ps-print-color-p 'black-white)))
 
 
 ;;; **** AGENDA open in current window
@@ -648,22 +650,22 @@ as the default task."
 ;;; ** ORG projects (publishing)
 ;;;; Switches off use of time-stamps when publishing. I would prefer to publish
 ;;;; everything every time
-(setq org-publish-use-timestamps-flag nil)
-(setq org-publish-project-alist
-      '(("01-internal-html"
-         :base-directory "~/org/01-internal/"
-         :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html"
-         :section-numbers nil
-         :with-toc nil
-         :recursive t
-         :publishing-function org-html-publish-to-html)
-        ("01-internal-pdf"
-         :base-directory "~/org/01-internal/"
-         :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/pdf"
-         :section-numbers nil
-         :with-toc nil
-         :recursive t
-         :publishing-function org-latex-publish-to-pdf)))
+  (setq org-publish-use-timestamps-flag nil)
+  (setq org-publish-project-alist
+        '(("01-internal-html"
+           :base-directory "~/org/01-internal/"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html"
+           :section-numbers nil
+           :with-toc nil
+           :recursive t
+           :publishing-function org-html-publish-to-html)
+          ("01-internal-pdf"
+           :base-directory "~/org/01-internal/"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/pdf"
+           :section-numbers nil
+           :with-toc nil
+           :recursive t
+           :publishing-function org-latex-publish-to-pdf)))
 
 ;;; ** ORG Diary/Journal
   (setq org-agenda-diary-file "~/org/journal.org")
@@ -712,43 +714,43 @@ as the default task."
   (setq org-refile-use-cache nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 7))))
 
-   (defun org-refile-to-datetree (&optional file)
-     "Refile a subtree to a datetree corresponding to it's timestamp.
+  (defun org-refile-to-datetree (&optional file)
+    "Refile a subtree to a datetree corresponding to it's timestamp.
 
    The current time is used if the entry has no timestamp. If FILE
    is nil, refile in the current file."
-     (interactive "f")
-     (let* ((datetree-date (or (org-entry-get nil "TIMESTAMP" t)
-                               (org-read-date t nil "now")))
-            (date (org-date-to-gregorian datetree-date))
-            )
-       (save-excursion
-         (with-current-buffer (current-buffer)
-           (org-cut-subtree)
-           (if file (find-file file))
-           (org-datetree-find-date-create date)
-           (org-narrow-to-subtree)
-           (show-subtree)
-           (org-end-of-subtree t)
-           (newline)
-           (goto-char (point-max))
-           (org-paste-subtree 4)
-           (widen)
-           ))
-       )
-     )
+    (interactive "f")
+    (let* ((datetree-date (or (org-entry-get nil "TIMESTAMP" t)
+                              (org-read-date t nil "now")))
+           (date (org-date-to-gregorian datetree-date))
+           )
+      (save-excursion
+        (with-current-buffer (current-buffer)
+          (org-cut-subtree)
+          (if file (find-file file))
+          (org-datetree-find-date-create date)
+          (org-narrow-to-subtree)
+          (show-subtree)
+          (org-end-of-subtree t)
+          (newline)
+          (goto-char (point-max))
+          (org-paste-subtree 4)
+          (widen)
+          ))
+      )
+    )
 
 
 
 
-(setq org-blank-before-new-entry nil) 
-(setq org-list-demote-modify-bullet (quote (("+" . "-")
-                                            ("*" . "-")
-                                            ("1." . "-")
-                                            ("1)" . "a)"))))
+  (setq org-blank-before-new-entry nil) 
+  (setq org-list-demote-modify-bullet (quote (("+" . "-")
+                                              ("*" . "-")
+                                              ("1." . "-")
+                                              ("1)" . "a)"))))
 
 
-:ensure org-plus-contrib)
+  :ensure org-plus-contrib)
 
 
 ;;; * Use Package: Htmlize for exporting agenda
