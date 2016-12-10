@@ -1,6 +1,13 @@
 ;;; * GLOBAL Emacs Settings
 ;;; ** GLOBAL Load custom lisp from others
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
+;;; ** GLOBAL Store Customizations elsewhere
+(setq custom-file "~/.emacs.d/custom.el")
+(unless (file-exists-p custom-file)
+  (with-temp-buffer
+    (write-file custom-file)))
+(load custom-file)
+
 ;;; ** GLOBAL Configure Backups
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq delete-old-versions -1)
@@ -8,7 +15,17 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 ;;; ** GLOBAL KEYMAPs
-;; Set the minor mode prefix to C-co
+;;; *** Match parenthesis with %
+
+(global-set-key "%" 'match-paren)
+
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
+;;; *** Set the minor mode prefix to C-co
 (setq outline-minor-mode-prefix "\C-o")
 ;;; *** KEYMAP Next and previous page
 (define-key prog-mode-map "\C-x\C-n" #'forward-page)
@@ -43,8 +60,15 @@
           (* (* blank) (opt ";" (* not-newline)) "\n")))
 ;; Expanded regexp:
 ;; "^;;;[^#].*\n\\(?:[[:blank:]]*\\(?:;.*\\)?\n\\)*"
+;;; *** STYLE: highlight Matching parenthesis
+(show-paren-mode 1)
 ;;; *** STYLE: Make tabs into spaces when you type them
 (setq-default indent-tabs-mode nil)
+;;; *** STYLE: Org-mode indents description lists so as to keep a consistent left edge. I don't like this behavior.
+
+(setf org-description-max-indent 0)
+
+
 ;;; *** STYLE: Display existing tabs as 2 characters wide
 (setq-default tab-width 2)
 (load-theme 'tsdh-dark)
@@ -70,6 +94,7 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
 ;;; ** BOOTSTRAP `use-package'
 (unless (package-installed-p 'use-package)
@@ -77,11 +102,12 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+
 ;;; use-package is available from here on
 
 ;;; * Use Package: ORG MODE
 
-(use-package org
+(use-package org-plus-contrib
   :mode (("\\.org\\'" . org-mode))
   :load-path "rosenorg-lisp/"
 ;;; ** ORG KEYBINDINGS
@@ -92,6 +118,15 @@
   (("\C-c r" . org-sort)
    ("\C-cc" . org-capture)
    ("\C-c +" . mby-org-agenda-toggle-list-sublevels))
+;;; *** Org mode keyboard remappings
+  ("\C-cl" . org-store-link)
+  ("\C-cc" . org-capture)
+  ("\C-ca" . org-agenda)
+  ("\C-cb" . org-iswitchb)
+  ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
+  ("C-c C-w" . org-refile)
+  ("C-c d" . org-refile-to-datetree)
+  
 ;;; ** ORG INIT
   :init
 ;;; *** ORG INIT: allow linking by id
@@ -199,8 +234,8 @@
 ;;; **** CAPTURE: calendar entries prompt for date and show up in agenda may or maynot be todos
           ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
            "* %?\nEntered on %^T\n  %i\n  %a")
-;;; **** CAPTURE: Habits are repeated tasks captured to routines.org
-          ("h" "Habit" entry (file "~/org/routines.org")
+;;; **** CAPTURE: Routines are repeated tasks captured to routines.org
+          ("r" "Routine" entry (file "~/org/routines.org")
            "** TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
 ;;; **** CAPTURE: LinkLibrary is sorted by capture date in a date tree
           ("l" "Link" entry (file+datetree "~/org/links.org")
@@ -602,9 +637,9 @@ as the default task."
          :recursive t
          :publishing-function org-latex-publish-to-pdf)))
 
-;;; ** ORG Diary
+;;; ** ORG Diary/Journal
   (setq org-agenda-diary-file "~/org/journal.org")
-  
+
 ;;; ** ORG Tags
   (setq org-tag-alist '((:startgroup . nil)
                         ("@work" . ?w) ("@home" . ?h)
@@ -642,26 +677,50 @@ as the default task."
   (setq org-tags-exclude-from-inheritance '("PRJ")
         org-stuck-projects '("+PRJ/-HOLD-INSERT-DONE"
                              ("NEXT" "TODO") ("@BUY")))
-;;; *** Org mode keyboard remappings
-  (global-set-key "\C-cl" 'org-store-link)
-  (global-set-key "\C-cc" 'org-capture)
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cb" 'org-iswitchb)
-  (bind-key "C-c j" 'org-clock-goto) ;;; jump to current task from anywhere
-  (bind-key "C-c C-w" 'org-refile)
   ;;; Refile
   (setq org-reverse-note-order t)
   (setq org-refile-use-outline-path nil)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   (setq org-refile-use-cache nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 7))))
-  (setq org-blank-before-new-entry nil)
-  :ensure t)
+
+   (defun org-refile-to-datetree (&optional file)
+     "Refile a subtree to a datetree corresponding to it's timestamp.
+
+   The current time is used if the entry has no timestamp. If FILE
+   is nil, refile in the current file."
+     (interactive "f")
+     (let* ((datetree-date (or (org-entry-get nil "TIMESTAMP" t)
+                               (org-read-date t nil "now")))
+            (date (org-date-to-gregorian datetree-date))
+            )
+       (save-excursion
+         (with-current-buffer (current-buffer)
+           (org-cut-subtree)
+           (if file (find-file file))
+           (org-datetree-find-date-create date)
+           (org-narrow-to-subtree)
+           (show-subtree)
+           (org-end-of-subtree t)
+           (newline)
+           (goto-char (point-max))
+           (org-paste-subtree 4)
+           (widen)
+           ))
+       )
+     )
+
+
+
+
+(setq org-blank-before-new-entry nil) 
 (setq org-list-demote-modify-bullet (quote (("+" . "-")
                                             ("*" . "-")
                                             ("1." . "-")
                                             ("1)" . "a)"))))
 
+
+:ensure t)
 
 
 ;;; * Use Package: Htmlize for exporting agenda
@@ -851,7 +910,8 @@ as the default task."
 
 ;;; * org-protocol for capturing from external (i.e. webbrowser)
 (require 'org-protocol)
-
+;;; * Org checklists
+(require 'org-checklist)
 ;;; * Print Preview
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
