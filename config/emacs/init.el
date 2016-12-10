@@ -106,8 +106,8 @@
 ;;; use-package is available from here on
 
 ;;; * Use Package: ORG MODE
-
-(use-package org-plus-contrib
+(use-package org
+  
   :mode (("\\.org\\'" . org-mode))
   :load-path "rosenorg-lisp/"
 ;;; ** ORG KEYBINDINGS
@@ -252,6 +252,34 @@
   (setq org-agenda-custom-commands
         '(
 ;;; **** CUSTOM AGENDA: Priority views
+          ("R" . "Review" )
+
+("Rw" "Week in review"
+                agenda ""
+                  ((org-agenda-span 'week)
+                    (org-agenda-start-on-weekday 0)
+                    (org-agenda-overriding-header "Week in Review"))
+                ("/mnt/DATA/exportedata/org-export/review/week.html")
+                )
+
+
+             ("Rd" "Day in review"
+                agenda ""
+                  ((org-agenda-span 'day)
+                    (org-agenda-overriding-header "Week in Review"))
+
+                ("/mnt/DATA/exportedata/org-export/review/day.html")
+                )
+
+             ("Rm" "Month in review"
+                agenda ""
+                  ((org-agenda-span 'month)
+                    (org-agenda-start-day "01")
+                    (org-read-date-prefer-future nil)
+                    (org-agenda-overriding-header "Month in Review"))
+
+                ("/mnt/DATA/exportedata/org-export/review/month.html")
+                )
           ("c" . "Priority views")
           ("ca" "#A"  (
                        (tags "PRIORITY=\"A\""
@@ -720,7 +748,7 @@ as the default task."
                                             ("1)" . "a)"))))
 
 
-:ensure t)
+:ensure org-plus-contrib)
 
 
 ;;; * Use Package: Htmlize for exporting agenda
