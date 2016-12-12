@@ -655,11 +655,11 @@ as the default task."
         '(("org-static"
            :base-directory "~/org/"
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html
+           :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html"
 
  :recursive t
  :publishing-function org-publish-attachment
- )
+)
           ("01-internal-html"
            :base-directory "~/org/01-internal/"
            :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html"

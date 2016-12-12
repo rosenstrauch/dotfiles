@@ -340,7 +340,7 @@ fresh-options
 ###########
 
 # org-templates
-fresh config/emacs/org-templates/ . --file=~/.emacs.d/
+ln -sf config/emacs/org-templates/ ~/.emacs.d/
 
 # Lisp from others
 
