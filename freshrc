@@ -29,7 +29,7 @@ fresh-options --bin
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
   fresh pantheon-systems/drush-config-workflow bin/quickstart
-  fresh blinkreaction/drude bin/dsh
+  fresh docksal/docksal bin/fin --ref=develop
   fresh holman/dotfiles bin/git-wtf
 
 fresh-options
@@ -338,6 +338,9 @@ fresh-options
 ###########
 ## EMACS ##
 ###########
+
+# org-templates
+fresh config/emacs/org-templates/ . --file=~/.emacs.d/
 
 # Lisp from others
 

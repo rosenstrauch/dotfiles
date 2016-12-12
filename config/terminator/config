@@ -14,7 +14,7 @@
 [keybindings]
   close_term = <Alt>F4
   close_window = <Shift><Alt>F4
-  copy = <Alt>w
+  copy = <Primary><Shift>c
   cycle_next = <Primary><Shift>n
   cycle_prev = <Primary><Shift>p
   hide_window = KP_Delete
@@ -107,11 +107,11 @@
     use_theme_colors = True
     visible_bell = True
   [[ORG]]
-    background_color = "#002b36"
+    background_color = "#060039"
     background_image = None
     custom_command = emacs -nw ~/org/home.org
     exit_action = restart
-    foreground_color = "#839496"
+    foreground_color = "#fffdc2"
     use_custom_command = True
   [[SSH]]
     background_color = "#afc0ff"
