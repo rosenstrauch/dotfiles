@@ -107,7 +107,7 @@
 
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
-  
+
   :mode (("\\.org\\'" . org-mode))
   :load-path "rosenorg-lisp/"
 ;;; ** ORG KEYBINDINGS
@@ -126,11 +126,54 @@
   ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
   ("C-c C-w" . org-refile)
   ("C-c d" . org-refile-to-datetree)
-  
+
 ;;; ** ORG INIT [#1]
   :init
-;;; *** ORG INIT: allow linking by id [#1]
-  (setq org-id-link-to-org-use-id t)
+  (add-hook 'before-save-hook #'endless/update-includes)
+
+(defun endless/update-includes (&rest ignore)
+  "Update the line numbers of #+INCLUDE:s in current buffer.
+Only looks at INCLUDEs that have either :range-begin or :range-end.
+This function does nothing if not in org-mode, so you can safely
+add it to `before-save-hook'."
+  (interactive)
+  (when (derived-mode-p 'org-mode)
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward-regexp
+              "^\\s-*#\\+INCLUDE: *\"\\([^\"]+\\)\".*:range-\\(begin\\|end\\)"
+              nil 'noerror)
+        (let* ((file (expand-file-name (match-string-no-properties 1)))
+               lines begin end)
+          (forward-line 0)
+          (when (looking-at "^.*:range-begin *\"\\([^\"]+\\)\"")
+            (setq begin (match-string-no-properties 1)))
+          (when (looking-at "^.*:range-end *\"\\([^\"]+\\)\"")
+            (setq end (match-string-no-properties 1)))
+          (setq lines (endless/decide-line-range file begin end))
+          (when lines
+            (if (looking-at ".*:lines *\"\\([-0-9]+\\)\"")
+                (replace-match lines :fixedcase :literal nil 1)
+              (goto-char (line-end-position))
+              (insert " :lines \"" lines "\""))))))))
+;;; *** ORG INIT: provide command to fix includes
+(defun endless/decide-line-range (file begin end)
+  "Visit FILE and decide which lines to include.
+BEGIN and END are regexps which define the line range to use."
+  (let (l r)
+    (save-match-data
+      (with-temp-buffer
+        (insert-file file)
+        (goto-char (point-min))
+        (if (null begin)
+            (setq l "")
+          (search-forward-regexp begin)
+          (setq l (line-number-at-pos (match-beginning 0))))
+        (if (null end)
+            (setq r "")
+          (search-forward-regexp end)
+          (setq r (1+ (line-number-at-pos (match-end 0)))))
+        (format "%s-%s" l r)))))
 ;;; *** ORG INIT: provide a command to show the subtasks
 ;;; *** ORG INIT: NOTE: org-agenda-dim-blocked-tasks may not be invisible [#7]
 
@@ -140,6 +183,9 @@
 
     (interactive)
     (setq org-agenda-todo-list-sublevels (not org-agenda-todo-list-sublevels)))
+
+
+
 ;;; *** ORG INIT: Provide Hook and Function to Limit amount of tasks in NEXT state per project [#27]
 
   (defun org-count-todos-in-state (state)
@@ -167,16 +213,22 @@
 
   (add-hook 'org-blocker-hook #'org-block-wip-limit)
   :config
+;;; *** ORg config: nicer org elipsis
+(setq org-ellipsis "⤵")
+;;; *** ORG config: allow linking by id [#1]
+  (setq org-id-link-to-org-use-id t)
+
+
 
 ;;; ** ORG CONFIG: Icons [#33]
 
   (setq org-agenda-category-icon-alist
-        '(("[Ee]macs" "/usr/share/icons/hicolor/16x16/apps/emacs.png" nil nil :ascent center)
-          ("Naquadah" "~/.emacs.d/icons/org/naquadah.png" nil nil :ascent center)
+        '(("Emacs" "/usr/share/icons/Moka/16x16/apps/emacs.png" nil nil :ascent center)
+          ("experiments" "/usr/share/icons/HighContrast/48x48/emotes/face-monkey.png" nil nil :ascent center)
           ("LR" "~/.emacs.d/icons/LR-icon.png" nil nil :ascent center)
           ("AO" "~/.emacs.d/icons/AO_icon.png" nil nil :ascent center)
-          ("Visitors" "~/.emacs.d/icons/org/visitors.png" nil nil :ascent center)
-          ("\\(Party\\|Celeb\\)" "~/.emacs.d/icons/org/party.png" nil nil :ascent center)
+          ("[Pp]rototypes" "/usr/share/icons/HighContrast/24x24/actions/document-send.png" nil nil :ascent center)
+          ("[Ss]pikes" "/usr/share/icons/HighContrast/48x48/emotes/face-raspberry.png" nil nil :ascent center)
           ("Wine" "~/.emacs.d/icons/org/wine.png" nil nil :ascent center)
           ("Gnus" "~/.emacs.d/icons/org/gnus.png" nil nil :ascent center)
           ("Org" "~/.emacs.d/icons/org/org.png" nil nil :ascent center)
@@ -198,12 +250,11 @@
 
 
 
-
   ;; configure wip limit to 2 next tasks
   (setq org-wip-limit 2)
   (setq org-wip-state "NEXT")
 ;;; *** ORG CONFIG: Directories [#8]
-  (setq org-default-notes-file "~/org/home.org")
+  (setq org-default-notes-file "~/org/index.org")
   (setq org-agenda-files "~/org")
   (setq org-agenda-files (append '("~/org")
                                  ;;(file-expand-wildcards "~/org/boards/*.trello")
@@ -227,7 +278,7 @@
            "* WISH %?\n  %i\n  %a")
 ;;; **** CAPTURE: Ideas are not tasks                                            [#2]
           ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
-           "* %?\nEntered on %U\n  %i\n  %a")   
+           "* %?\nEntered on %U\n  %i\n  %a")
 ;;; **** CAPTURE: journal entries do not show up in agenda (but maybe as diary) [#2]
           ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
@@ -432,24 +483,18 @@
 ;;; **** AGENDA don't show tasks as scheduled if they are already shown as a deadline [#1]
   (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
 ;;; **** AGENDA global prefix formats [#10]
-  (setq org-agenda-prefix-format '(
-
-
+  (setq org-agenda-prefix-format '
                                    ((agenda . " %i %-12:c%?-12t% s")
                                     (timeline . "  % s")
                                     (todo . " %i %-12:c")
                                     (tags . " %i %-12:c")
-                                    (search . " %i %-12:c"))   )
-        )
+                                    (search . " %i %-12:c")))
 
 ;;; **** AGENDA Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind: [#2]
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-if-done t)
 ;;; **** AGENDA don't give awarning colour to tasks with impending deadlines if they are scheduled to be done [#1]
   (setq org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled))
-;;; **** AGENDA don't show tasks that are scheduled or have deadlines in the normal todo list [#2]
-  (setq org-agenda-todo-ignore-deadlines (quote all))
-  (setq org-agenda-todo-ignore-scheduled (quote all))
 ;;; **** AGENDA sort tasks in order of when they are due and then by priority [#2]
   (setq org-agenda-window-setup 'current-window)
   (setq org-agenda-restore-windows-after-quit t)
@@ -457,7 +502,7 @@
   ;;(setq org-agenda-start-with-follow-mode t)
 
 ;;; **** AGENDA start with sticky? [#1]
-  (setq org-agenda-sticky t)
+;;  (setq org-agenda-sticky t)
 ;;; **** AGENDA show only the parent tasks in the agenda's lists? [#9]
   ;;(setq mby-org-agenda-toggle-list-sublevels nil)
 
@@ -652,24 +697,32 @@ as the default task."
 ;;;; everything every time
   (setq org-publish-use-timestamps-flag nil)
   (setq org-publish-project-alist
-        '(("org-static"
+        '(("org" :components ("orgfull-html" "org-static"))
+          ("org-static"
            :base-directory "~/org/"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html"
-
- :recursive t
- :publishing-function org-publish-attachment
-)
-          ("01-internal-html"
-           :base-directory "~/org/01-internal/"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/html"
-           :section-numbers nil
-           :with-toc nil
            :recursive t
+           :base-extension "css\\|js"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/"
+           :publishing-function org-publish-attachment
+
+           )
+
+          ("orgfull-html"
+           :base-directory "~/org/"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
+           :base-extension "org"
+           :recursive t
+           :section-numbers t
+           :with-toc t
+           :exclude "~/org/09-private/"   ;; regexp
+           :auto-sitemap t                ; Generate sitemap.org automagically...
+           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
+           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
            :publishing-function org-html-publish-to-html)
-          ("01-internal-pdf"
-           :base-directory "~/org/01-internal/"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/01-internal/pdf"
+          ("orgfull-pdf"
+           :base-directory "~/org/"
+           :base-extension "org"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf"
            :section-numbers nil
            :with-toc nil
            :recursive t
@@ -694,7 +747,11 @@ as the default task."
   (setq org-log-redeadline (quote time))
   (setq org-log-done (quote time))
   (setq org-enforce-todo-dependencies t)
-  (setq org-log-reschedule (quote time))
+(setq org-log-reschedule (quote time))
+;;; *** ORG TASKS don't show tasks that are scheduled or have deadlines in the normal todo list [#2]
+  (setq org-agenda-todo-ignore-deadlines (quote all))
+  (setq org-agenda-todo-ignore-scheduled (quote all))
+
 ;;; *** ORG TODO Keywords [#15]
   (setq org-todo-keywords
         (quote (
@@ -751,7 +808,7 @@ as the default task."
 
 
 
-  (setq org-blank-before-new-entry nil) 
+  (setq org-blank-before-new-entry nil)
   (setq org-list-demote-modify-bullet (quote (("+" . "-")
                                               ("*" . "-")
                                               ("1." . "-")
@@ -774,7 +831,7 @@ as the default task."
 ;;; :PROPERTIES:
 ;;;  :CUSTOM_ID: use_outshine.init.el
 ;;;  :END:
-;;; 
+;;;
 
 (use-package outshine
   :ensure t
