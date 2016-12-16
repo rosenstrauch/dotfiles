@@ -1,48 +1,17 @@
 "*":
-  "api-blueprint-preview": {}
   "atom-beautify":
-    _analyticsUserId: "860d9ffa-c8d3-4409-a4f3-2108b8029611"
     general:
-      _analyticsUserId: "8f1c5b08-3a31-4d85-a6e0-a2891aba3f94"
       beautifyEntireFileOnSave: false
-  "atom-color-highlight":
-    markersAtEndOfLine: true
-  "atom-xikij": {}
-  "autocomplete-plus": {}
   awiki: {}
   core:
     disabledPackages: [
-      "atom-build"
-      "atom-grunt-configs"
-      "atom-grunt-runner"
-      "wakatime"
-      "atom-copy-on-select"
-      "bootstrap3-snippets"
-      "notebook"
-      "todo-list"
-      "project-palette-finder"
-      "metrics"
-      "org"
-      "atom-bootstrap3"
-      "erb-snippets"
-      "stacktrace"
-      "api-blueprint-preview"
-      "atom-ungit"
-      "language-api-blueprint"
-      "merge-conflicts"
-      "atom-xikij"
-      "jsonlint"
-      "language-json5"
-      "pretty-json"
-      "linter-swagger"
     ]
-    projectHome: "/media/discipolo/DATA/DEV/Projectrepos/"
+    projectHome: "/mnt/DATA/DEV/AtomProjects/"
+    telemetryConsent: "no"
     themes: [
       "atom-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
-  drupal:
-    fileTypesPhp: "module,install,inc,test"
   editor:
     autoIndentOnPaste: false
     fontSize: 17
@@ -52,13 +21,9 @@
     softWrap: true
     softWrapAtPreferredLineLength: true
   "exception-reporting":
-    userId: "1efb5cc8-a86b-9769-acbe-5035473f8e3c"
+    userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
   "find-and-replace":
     openProjectFindResultsInRightPane: true
-  "git-history": {}
-  jekyll:
-    includesDir: "app/_includes"
-    layoutsDir: "app/_layouts"
   linter:
     errorPanelHeight: 36
   "linter-checkbashisms": {}
@@ -67,24 +32,12 @@
   "markdown-writer": {}
   "merge-conflicts": {}
   metrics: false
-  notebook:
-    removeEmptyNotepadsAutomatically: false
   pigments: {}
   "project-quick-open":
     projectPaths: "/home/rosenstrauch/ProjectCollections"
   "project-ring":
     doNotSaveAndRestoreOpenProjectFiles: true
-  wakatime:
-    ignore: [
-      "^/var/"
-      "^/tmp/"
-      "^/private/"
-    ]
   welcome:
     showOnStartup: false
-drupal:
-  fileTypesPhp: "module,install,inc,test"
-metrics:
-  userId: "5afe01d925f56ca54ea8945b2cce677f8755be3a"
 welcome:
   showOnStartup: false
