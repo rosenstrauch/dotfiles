@@ -198,6 +198,7 @@ else
   make_backup .zshrc
   make_backup .zlogin
   make_backup Desktop
+  make_backup .config/mimeapps.list
   make_backup .rvm/gemsets/default.gems
   make_backup .rvm/gemsets/global.gems
   FRESH_LOCAL_SOURCE=rosenstrauch/dotfiles bash <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)

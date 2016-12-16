@@ -79,7 +79,7 @@
       ratio = 0.499739583333
       type = HPaned
     [[[terminal2]]]
-      command = emacs -nw ~/org/home.org
+      command = emacs -nw ~/org/index.org
       order = 0
       parent = child1
       profile = friendlinux
@@ -109,7 +109,7 @@
   [[ORG]]
     background_color = "#060039"
     background_image = None
-    custom_command = emacs -nw ~/org/home.org
+    custom_command = emacs -nw ~/org/index.org
     exit_action = restart
     foreground_color = "#fffdc2"
     use_custom_command = True

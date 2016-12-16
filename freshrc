@@ -233,7 +233,8 @@ fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~
 # zim colors
 fresh config/zim/style.conf --file=~/.config/zim/style.conf
 # Newsbeuter non sensitive settings
-fresh config/newsbeuter/config --file=~/.config/newsbeuter/config
+
+fresh config/newsbeuter/config --file=~/.local/share/newsbeuter/config
 
 # Our own  Our own config files directly linked to home
 
@@ -314,7 +315,7 @@ fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
 fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 
-ln -sf bash-it/custom/plugins/ ~/.bash_it/custom/
+ln -sf ~/.dotfiles/bash-it/custom/plugins/ ~/.bash_it/custom/
 
 ## additional bash completions via bashit
 
@@ -339,8 +340,13 @@ fresh-options
 ## EMACS ##
 ###########
 
+# org js
+# fresh http://orgmode.org/worg/code/org-info-js/org-info.js
+# org-erxport-styles
+fresh fniessen/org-html-themes . --file=~/.emacs.d/org-html-themes/
+
 # org-templates
-ln -sf config/emacs/org-templates/ ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/org-templates/ ~/.emacs.d/
 
 # Lisp from others
 
@@ -503,4 +509,6 @@ fresh_after_build() {
 #fresh config/rvm/.rvmrc --file=~/.rvmrc
 
 # weechat
-fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
+fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/weenotify_send.py_slack.py
+
+fresh s3rvac/weechat-notify-send notify_send.py --file=~/.weechat/python/notify_send.py
