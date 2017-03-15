@@ -4,8 +4,7 @@
       beautifyEntireFileOnSave: false
   awiki: {}
   core:
-    disabledPackages: [
-    ]
+    disabledPackages: []
     projectHome: "/mnt/DATA/DEV/AtomProjects/"
     telemetryConsent: "no"
     themes: [
@@ -23,7 +22,7 @@
   "exception-reporting":
     userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
   "find-and-replace":
-    openProjectFindResultsInRightPane: true
+    projectSearchResultsPaneSplitDirection: "right"
   linter:
     errorPanelHeight: 36
   "linter-checkbashisms": {}

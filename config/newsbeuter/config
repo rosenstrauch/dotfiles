@@ -1,6 +1,4 @@
 # http://newsbeuter.org/doc/newsbeuter.html#_tiny_tiny_rss_synchronization
-
-urls-source "ttrss"
 include "/mnt/DATA/09-Private/SENSITIVE/newsbeuter/config"
 show-read-articles no
 show-read-feeds no

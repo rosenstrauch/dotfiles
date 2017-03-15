@@ -268,7 +268,7 @@ BEGIN and END are regexps which define the line range to use."
 ;;; **** ORG MOBILE: the name of the file where new notes will be stored [#1]
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;;; **** ORG MOBILE: Set to <your Dropbox root directory>/MobileOrg. [#2]
-  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+  (setq org-mobile-directory "/mnt/DATA/08-System/AppData/org-mobile/internal_org_mobile")
 
 ;;; *** ORG CONFIG: CAPTURE [#5]
 
@@ -1011,7 +1011,9 @@ as the default task."
 (global-set-key (kbd "C-x c g i") 'gh-issue-create)
 
 (server-start)
-
+;;; * Export as markdown
+(eval-after-load "org"
+  '(require 'ox-md nil t))
 ;;; * org-protocol for capturing from external (i.e. webbrowser) [#1]
 (require 'org-protocol)
 ;;; * Org checklists [#1]

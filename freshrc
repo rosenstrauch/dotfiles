@@ -16,19 +16,19 @@ fresh-options --bin
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
   fresh alicraigmile/show-wip show-wip
-  fresh https://gist.github.com/1209316.git gitio
-  fresh tj/bm bm
-  fresh monochromegane/vagrant-peco vagrant-peco
-  fresh rosenstrauch/taskboy taskboy --ref=13896662480
-  fresh simonwhitaker/gitignore-boilerplates gibo
+  #fresh https://gist.github.com/1209316.git gitio
+  #fresh tj/bm bm
+  #fresh monochromegane/vagrant-peco vagrant-peco
+  #fresh rosenstrauch/taskboy taskboy --ref=13896662480
+  #fresh simonwhitaker/gitignore-boilerplates gibo
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
-  fresh lucasdemarchi/codespell bin/codespell.py
+  #fresh lucasdemarchi/codespell bin/codespell.py
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
-  fresh pantheon-systems/drush-config-workflow bin/quickstart
+  #fresh pantheon-systems/drush-config-workflow bin/quickstart
   fresh docksal/docksal bin/fin --ref=develop
   fresh holman/dotfiles bin/git-wtf
 
@@ -84,7 +84,7 @@ fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bed21a831348
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
 
-### Docker
+### Prezto Docker
 # TODO: https://github.com/sorin-ionescu/prezto/pull/863/files
 #fresh rosenstrauch/prezto-docker . --file=.zprezto/modules/prezto-docker/external/
 
@@ -125,7 +125,7 @@ ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
 
 
 # custom mimetype associations
-fresh config/mimeapps.list --file=~/.config/mimeapps.list
+ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 
 ## Pareview
@@ -161,16 +161,6 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 ln -sf ~/.dotfiles/config/Desktop ~/
 ln -sf ~/.dotfiles/config/autostart ~/.config
 
-##########################
-# launchers in local share so gnome shell finds them
-# CHANGED: verify having them on the desktop isnt better and enough.
-# TODO: find a way to glob those
-##########################
-
-ln -sf ~/.dotfiles/config/desktop/lynx.desktop ~/.local/share/applications/lynx.desktop
-ln -sf ~/.dotfiles/config/desktop/mutt.desktop ~/.local/share/applications/mutt.desktop
-ln -sf ~/.dotfiles/config/desktop/xikiterm.desktop ~/.local/share/applications/xikiterm.desktop
-
 #################
 # CLI Apps
 #################
@@ -184,17 +174,6 @@ fresh creationix/nvm . --file=~/.nvm/
 ## Aquire achievements while using git.
 fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=gh-pages
 
-## todo.txt: simple todo list
-## :and addons
-## https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory
-fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
-fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
-fresh the1ts/todo.txt-plugins actions/projectview/projectview --file=~/.todo.actions.d/projectview
-fresh mgarrido/todo.txt-cli todo.actions.d/note --ref=6b29f6fcc9ab --file=~/.todo.actions.d/note
-fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgp --file=~/.todo.actions.d/lsgp
-fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions.d/lsgc
-fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
-fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
 
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
 
@@ -234,7 +213,7 @@ fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~
 fresh config/zim/style.conf --file=~/.config/zim/style.conf
 # Newsbeuter non sensitive settings
 
-fresh config/newsbeuter/config --file=~/.local/share/newsbeuter/config
+fresh config/newsbeuter/config --file=~/.config/newsbeuter/config
 
 # Our own  Our own config files directly linked to home
 
@@ -465,6 +444,16 @@ ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
 
 
+# fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh  --file=vendor/zsh-syntax-highlighting.zsh
+
+#fresh mutt --file=~/.mutt/
+#fresh config/rvm/.rvmrc --file=~/.rvmrc
+
+# weechat
+fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/weenotify_send.py_slack.py
+
+fresh s3rvac/weechat-notify-send notify_send.py --file=~/.weechat/python/notify_send.py
+
 fresh_after_build() {
   ## :make some things executable
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
@@ -503,12 +492,14 @@ fresh_after_build() {
 #  fresh foobacca/dotfiles tmux/statusbar
 #fresh-options
 
-# fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh  --file=vendor/zsh-syntax-highlighting.zsh
-
-#fresh mutt --file=~/.mutt/
-#fresh config/rvm/.rvmrc --file=~/.rvmrc
-
-# weechat
-fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/weenotify_send.py_slack.py
-
-fresh s3rvac/weechat-notify-send notify_send.py --file=~/.weechat/python/notify_send.py
+## todo.txt: simple todo list
+## :and addons
+## https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory
+#fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
+##fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
+#fresh the1ts/todo.txt-plugins actions/projectview/projectview --file=~/.todo.actions.d/projectview
+#fresh mgarrido/todo.txt-cli todo.actions.d/note --ref=6b29f6fcc9ab --file=~/.todo.actions.d/note
+#fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgp --file=~/.todo.actions.d/lsgp
+#fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions.d/lsgc
+#fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
+#fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3

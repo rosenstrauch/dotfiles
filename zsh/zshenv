@@ -39,7 +39,7 @@ path=(
 
 #${ZDOTDIR:-$HOME}/{bin,sbin}
 #${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements
-${ZDOTDIR:-$HOME}/.composer/vendor/bin
+${ZDOTDIR:-$HOME}/.config/composer/vendor/bin
 ${ZDOTDIR:-$HOME}/scripts
 $path
 /usr/local/{bin,sbin}
