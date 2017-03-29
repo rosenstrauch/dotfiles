@@ -450,8 +450,7 @@ ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 #fresh config/rvm/.rvmrc --file=~/.rvmrc
 
 # weechat
-fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/weenotify_send.py_slack.py
-
+fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
 fresh s3rvac/weechat-notify-send notify_send.py --file=~/.weechat/python/notify_send.py
 
 fresh_after_build() {
