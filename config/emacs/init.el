@@ -105,6 +105,9 @@
 
 ;;; use-package is available from here on [#1]
 
+;;; * Use package csv-export
+(use-package org-clock-csv
+  :ensure t)
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
 
@@ -1011,6 +1014,7 @@ as the default task."
 (global-set-key (kbd "C-x c g i") 'gh-issue-create)
 
 (server-start)
+
 ;;; * Export as markdown
 (eval-after-load "org"
   '(require 'ox-md nil t))
