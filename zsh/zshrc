@@ -108,7 +108,7 @@ export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/b
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # export system ruby path
-export PATH="$PATH:/root/.gem/ruby/2.3.0/bin"
+export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
 
 # Keybindings in zsh https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 # create a zkbd compatible hash;
