@@ -43,6 +43,50 @@ fresh twe4ked/dotfiles shell/functions/pubkey.sh
 #######
 
 
+## Prezto zsh config
+## :get our own prezto setup
+
+fresh rosenstrauch/prezto .  --ref=production --file=.zprezto/
+
+## Prezto Submodules
+## :instead of relying on git submodules load external components using fresh
+
+fresh zsh-users/zsh-autosuggestions . --file=.zprezto/modules/autosuggestions/external/
+
+### Prezto Docker
+# TODO: https://github.com/sorin-ionescu/prezto/pull/863/files
+#fresh rosenstrauch/prezto-docker . --file=.zprezto/modules/prezto-docker/external/
+
+
+### Commandline Fu
+### :find cli commands
+###  <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
+fresh samirahmed/fu . --file=.zprezto/modules/fu/external/
+
+fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
+fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
+fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
+fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
+
+## Prezto themes
+fresh sindresorhus/pure  async.zsh --file=.zprezto/modules/prompt/functions/async
+
+#fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
+fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
+
+#fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/pure/
+fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
+
+#fresh davidjrice/prezto_powerline . --file=.zprezto/modules/prompt/external/powerline/
+fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
+
+#fresh chauncey-garrett/zsh-prompt-garrett . --file=.zprezto/modules/prompt/external/garrett/
+fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
+
+# now get the completed prezto setup
+ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
+
+
 ## Functions
 ## sourced to
 ## /home/rosenstrauch/.fresh/build/shell.sh
@@ -74,49 +118,6 @@ fresh zsh/\* --file
 
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
-
-## Prezto zsh config
-## :get our own prezto setup
-
-fresh rosenstrauch/prezto . --file=.zprezto/ --ref=production
-
-## Prezto Submodules
-## :instead of relying on git submodules load external components using fresh
-
-### Prezto Docker
-# TODO: https://github.com/sorin-ionescu/prezto/pull/863/files
-#fresh rosenstrauch/prezto-docker . --file=.zprezto/modules/prezto-docker/external/
-fresh zsh-users/zsh-autosuggestions . --file=.zprezto/modules/autosuggestions/external/
-
-
-### Commandline Fu
-### :find cli commands
-###  <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
-fresh samirahmed/fu . --file=.zprezto/modules/fu/external/
-
-fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
-fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
-fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
-fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
-
-## Prezto themes
-fresh sindresorhus/pure  async.zsh --file=.zprezto/modules/prompt/functions/async
-
-#fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
-fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
-
-#fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/pure/
-fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
-
-#fresh davidjrice/prezto_powerline . --file=.zprezto/modules/prompt/external/powerline/
-fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
-
-#fresh chauncey-garrett/zsh-prompt-garrett . --file=.zprezto/modules/prompt/external/garrett/
-fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
-
-# now get the completed prezto setup
-ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
-
 
 
 # custom mimetype associations
