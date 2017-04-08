@@ -1,6 +1,5 @@
 [global_config]
   always_split_with_profile = True
-  dbus = True
   enabled_plugins = ,
   focus = system
   handle_size = 1
@@ -97,49 +96,40 @@
     audible_bell = True
     background_color = "#060039"
     background_darkness = 0.83
-    background_image = None
     cursor_color = "#00ff27"
     foreground_color = "#fffdc2"
     login_shell = True
-    scroll_on_output = False
     scrollback_infinite = True
     use_system_font = False
     use_theme_colors = True
     visible_bell = True
   [[ORG]]
     background_color = "#060039"
-    background_image = None
     custom_command = emacs -nw ~/org/index.org
     exit_action = restart
     foreground_color = "#fffdc2"
     use_custom_command = True
   [[SSH]]
     background_color = "#afc0ff"
-    background_image = None
     foreground_color = "#5b5700"
   [[Tests]]
     audible_bell = True
     background_color = "#d6d6d6"
-    background_image = None
     cursor_color = "#7eff90"
     cursor_shape = ibeam
     foreground_color = "#5b5700"
     login_shell = True
-    scroll_on_output = False
     scrollback_infinite = True
     scrollback_lines = 5000
     visible_bell = True
   [[Virtual]]
     background_color = "#060039"
-    background_image = None
     cursor_color = "#d52f2f"
     foreground_color = "#5b5700"
     login_shell = True
-    scroll_on_output = False
     scrollback_infinite = True
   [[friendlimux]]
     background_color = "#060039"
-    background_image = None
     cursor_color = "#00b902"
     custom_command = tmuxinator start friendlimux
     exit_action = restart
@@ -150,7 +140,6 @@
   [[friendlinux]]
     background_color = "#060039"
     background_darkness = 0.87
-    background_image = None
     foreground_color = "#fffdc2"
     scrollback_infinite = True
     use_system_font = False

@@ -13,12 +13,11 @@
     ]
   editor:
     autoIndentOnPaste: false
-    fontSize: 17
+    fontSize: 15
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
-    softWrapAtPreferredLineLength: true
   "exception-reporting":
     userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
   "find-and-replace":

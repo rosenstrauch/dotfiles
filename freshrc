@@ -17,13 +17,12 @@ fresh-options --bin
   fresh clvv/fasd fasd
   fresh alicraigmile/show-wip show-wip
   #fresh https://gist.github.com/1209316.git gitio
-  #fresh tj/bm bm
+  fresh tj/bm bm
   #fresh monochromegane/vagrant-peco vagrant-peco
   #fresh rosenstrauch/taskboy taskboy --ref=13896662480
   #fresh simonwhitaker/gitignore-boilerplates gibo
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
-  #fresh lucasdemarchi/codespell bin/codespell.py
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
@@ -31,7 +30,7 @@ fresh-options --bin
   #fresh pantheon-systems/drush-config-workflow bin/quickstart
   fresh docksal/docksal bin/fin --ref=develop
   fresh holman/dotfiles bin/git-wtf
-
+  fresh albfan/git-changemail git-changemail
 fresh-options
 
 ## some other external functions with the correct extension
@@ -79,7 +78,7 @@ fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendl
 ## Prezto zsh config
 ## :get our own prezto setup
 
-fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bed21a831348
+fresh rosenstrauch/prezto . --file=.zprezto/ --ref=production
 
 ## Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
@@ -87,7 +86,7 @@ fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bed21a831348
 ### Prezto Docker
 # TODO: https://github.com/sorin-ionescu/prezto/pull/863/files
 #fresh rosenstrauch/prezto-docker . --file=.zprezto/modules/prezto-docker/external/
-
+fresh zsh-users/zsh-autosuggestions . --file=.zprezto/modules/autosuggestions/external/
 
 
 ### Commandline Fu
@@ -96,11 +95,8 @@ fresh rosenstrauch/prezto . --file=.zprezto/ --ref=bed21a831348
 fresh samirahmed/fu . --file=.zprezto/modules/fu/external/
 
 fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
-
 fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
-
 fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
-
 fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
 ## Prezto themes
@@ -114,7 +110,6 @@ fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt
 
 #fresh davidjrice/prezto_powerline . --file=.zprezto/modules/prompt/external/powerline/
 fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
-
 
 #fresh chauncey-garrett/zsh-prompt-garrett . --file=.zprezto/modules/prompt/external/garrett/
 fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
@@ -274,11 +269,7 @@ fresh-options
 #fresh-options
 
 #########
-# BASH-IT
-# CHANGED: Currently installed via setup.zsh
-# https://github.com/revans/bash_it customization
-#fresh Bash-it/bash-it/ . --file=~/.bash_it/
-#fresh bash-it --file=~/.bash_it/
+# BASH-IT Extensions
 #########
 
 
@@ -319,6 +310,8 @@ fresh-options
 ## EMACS ##
 ###########
 
+ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
+
 # org js
 # fresh http://orgmode.org/worg/code/org-info-js/org-info.js
 # org-erxport-styles
@@ -332,22 +325,8 @@ ln -sf ~/.dotfiles/config/emacs/org-templates/ ~/.emacs.d/
 # emacs githublinks.el https://www.reddit.com/r/emacs/comments/3jxsqb/link_to_github_in_orgmode/
 fresh lygaret/emacs.d site-lisp/org-github-links.el --file=~/.emacs.d/site-lisp/org-github-links.el --ref="96a043f"
 
-# real github issues integration
-fresh inkel/github-issues.el github-issues.el --file=~/.emacs.d/site-lisp/github-issues.el
-
 # helm github issues integration
 fresh syohex/emacs-helm-github-issues helm-github-issues.el --file=~/.emacs.d/site-lisp/helm-github-issues.el
-
-# Youtrack
-# https://github.com/jaseemabid/elisp
-fresh jaseemabid/elisp youtrack.el --file=~/.emacs.d/youtrack/youtrack.el
-
-# https://www.emacswiki.org/emacs/OrgJiraMode
-fresh baohaojun/org-jira . --file=~/.emacs.d/org-jira/ --ref="6745ad8c"
-# fork of org sync for issue id
-fresh git://orgmode.org/org-sync.git . --file=~/.emacs.d/org-sync/
-#fresh emacs-pe/org-sync . --file=~/.emacs.d/org-sync/
-#fresh arbox/org-sync . --file=~/.emacs.d/org-sync/
 
 
 ######################
@@ -410,6 +389,7 @@ fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
 # The word 'default' quite literally says it all,
 # eg. the gemset used without selecting one for a specific installed ruby.
 ###############################
+#fresh config/rvm/.rvmrc --file=~/.rvmrc
 
 fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
 fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
@@ -418,11 +398,6 @@ fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 # Editable config files
 # <https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files>
 ############
-
-## Emacs and rvm
-fresh senny/rvm.el rvm.el --file=~/.emacs.d/rvm/rvm.el
-
-ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
 
 ## Tmuxinator projects
 ## https://github.com/tmuxinator/tmuxinator#create-a-project
@@ -442,12 +417,7 @@ ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
 ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
 ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
-
-
-# fresh twe4ked/dotfiles shell/zsh/zsh-syntax-highlighting.zsh  --file=vendor/zsh-syntax-highlighting.zsh
-
 #fresh mutt --file=~/.mutt/
-#fresh config/rvm/.rvmrc --file=~/.rvmrc
 
 # weechat
 fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
@@ -468,37 +438,3 @@ fresh_after_build() {
   #cd ~/.fresh/source/rosenstrauch/prezto/ && git checkout production && git pull
 
 }
-
-
-##############
-# Disabled experiments
-###########
-#fresh pickhardt/betty . --file=src/betty/
-#fresh yyuu/pyenv/ . --file=~/.pyenv/
-## gnome shell calendar
-#fresh vintitres/gnome-shell-google-calendar gnome-shell-google-calendar.py --bin=~/gnome-shell-google-calendar/gnome-shell-google-calendar.py
-#fresh vintitres/gnome-shell-google-calendar . --file=~/gnome-shell-google-calendar/
-
-## Cheat (installed via pip)
-## cheatsheets
-## TODO: https://github.com/chrisallenlane/cheat/issues/130 cheat autocomplete
-## fresh chrisallenlane/cheat . --file=src/cheat/
-
-
-## tmux powerline for statusbar
-## <https://github.com/foobacca/dotfiles/blob/master/tmux/statusbar>
-#fresh-options --file=~/.tmux.conf --marker
-#  fresh foobacca/dotfiles tmux/statusbar
-#fresh-options
-
-## todo.txt: simple todo list
-## :and addons
-## https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory
-#fresh ginatrapani/todo.txt-cli todo.sh --bin=~/bin/todo
-##fresh duncanje/todo.txt-revive revive --file=~/.todo.d/revive
-#fresh the1ts/todo.txt-plugins actions/projectview/projectview --file=~/.todo.actions.d/projectview
-#fresh mgarrido/todo.txt-cli todo.actions.d/note --ref=6b29f6fcc9ab --file=~/.todo.actions.d/note
-#fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgp --file=~/.todo.actions.d/lsgp
-#fresh sachinrudr/todotxt-study-suite .todo.actions.d/lsgc --file=~/.todo.actions.d/lsgc
-#fresh civrot/todo_txt_actions standup --file=~/.todo.actions.d/standup
-#fresh doegox/todo.txt-cli todo.actions.d/nav --file=~/.todo.actions.d/nav --ref=932ec37f47b91408489ded3
