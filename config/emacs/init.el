@@ -105,6 +105,16 @@
 
 ;;; use-package is available from here on [#1]
 
+;;; * use package org-screenshot
+(use-package org-attach-screenshot
+     :ensure t)
+
+;;; * Use package emacs-fasd
+(use-package fasd                                                                                                              
+  :bind(("\C-c f" . fasd-find-file))
+  :config (setq global-fasd-mode 1)
+          (setq fasd-enable-initial-prompt nil)
+  :ensure t)  
 ;;; * Use package csv-export
 (use-package org-clock-csv
   :ensure t)
@@ -129,6 +139,7 @@
   ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
   ("C-c C-w" . org-refile)
   ("C-c d" . org-refile-to-datetree)
+  ("C-c is" . my-org-screenshot)
 
 ;;; ** ORG INIT [#1]
   :init
@@ -215,7 +226,29 @@ BEGIN and END are regexps which define the line range to use."
       t)) ; do not block
 
   (add-hook 'org-blocker-hook #'org-block-wip-limit)
-  :config
+;;; *** ORG INIT add screenshot utility command http://stackoverflow.com/a/17438212
+(defun my-org-screenshot ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (org-display-inline-images)
+  (setq filename
+        (concat
+         (make-temp-name
+          (concat (file-name-nondirectory (buffer-file-name))
+                  "_imgs/"
+                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+  (unless (file-exists-p (file-name-directory filename))
+    (make-directory (file-name-directory filename)))
+  ; take screenshot
+  (if (eq system-type 'darwin)
+      (call-process "screencapture" nil nil nil "-i" filename))
+  (if (eq system-type 'gnu/linux)
+      (call-process "import" nil nil nil filename))
+  ; insert into file if correctly taken
+  (if (file-exists-p filename)
+    (insert (concat "[[file:" filename "]]"))))
+:config
 ;;; *** ORg config: nicer org elipsis
 (setq org-ellipsis "⤵")
 ;;; *** ORG config: allow linking by id [#1]
@@ -277,7 +310,10 @@ BEGIN and END are regexps which define the line range to use."
 
   (setq org-default-notes-file (concat org-directory "/capture.org"))
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
+        '(("s" "ScreenShot" entry (file+headline "~/org/capture.org" "ScreenShots")
+           "* %?\n  %i\n  %a"
+           )
+          ("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
            "* WISH %?\n  %i\n  %a")
 ;;; **** CAPTURE: Ideas are not tasks                                            [#2]
           ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
@@ -977,16 +1013,6 @@ as the default task."
   (setq web-mode-enable-auto-quoting nil
         web-mode-enable-current-element-highlight t)
   :ensure t)
-
-;;; * Use Package: Org sync
-;;; ** use fork of org sync for id in headline
-;;; unused because i cannot create issues with this. [#34]
-(add-to-list 'load-path "~/.emacs.d/org-sync")
-(mapc 'load
-      '("os" "os-github" "os-bb"))
-
-
-(add-to-list 'auto-mode-alist '("\\.issues$" . org-mode))
 
 ;;(setq org-sync-id-in-headline 1)
 
