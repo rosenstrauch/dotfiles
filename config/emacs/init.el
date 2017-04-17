@@ -304,7 +304,7 @@ same directory as the org-buffer and insert a link to this file."
 ;;; **** ORG MOBILE: the name of the file where new notes will be stored [#1]
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;;; **** ORG MOBILE: Set to <your Dropbox root directory>/MobileOrg. [#2]
-  (setq org-mobile-directory "/mnt/DATA/08-System/AppData/org-mobile/internal_org_mobile")
+  (setq org-mobile-directory "/files.rosenstrauch.com:/home/rosen_sync/roSynxcBox/MobileOrg")
 
 ;;; *** ORG CONFIG: CAPTURE [#5]
 
