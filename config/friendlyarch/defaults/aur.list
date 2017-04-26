@@ -1,0 +1,37 @@
+# generate with
+# pacman -Qm
+# install with
+# yaourt -S
+
+atom
+macchanger-gtk
+pandoc-bin
+thunderbird-lightning-bin
+feedthemonkey
+fasd-git
+gitflow-avh
+gnome-keyring-query
+#brother-hl2130
+brother-hl2140
+mikidown
+betty
+ghi
+gpodder3
+gisto
+geeknote-improved-git
+gitbook-editor
+gitflow-avh
+grub-customizer
+#gnome-shell-extension-installer
+macchanger-gtk
+multimarkdown
+netcat
+pandoc-bin
+rabbitvcs
+rabbitvcs-nautilus
+thunderbird-lightning-bin
+rabbitvcs-nautilus
+signal
+sortphotos
+symfony-installer
+yarn

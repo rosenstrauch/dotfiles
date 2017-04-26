@@ -1,0 +1,7 @@
+# Find directory where these will be installed: composer config --list --global
+# Find globally installed packages with: composer global show
+drupal/coder
+squizlabs/php_codesniffer
+drush/drush:8.x
+drush/config-extra
+asm89/twig-lint

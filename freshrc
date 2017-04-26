@@ -1,98 +1,6 @@
-# See http://freshshell.com/readme for documentation.
-# https://github.com/freshshell/fresh#building-files-without-symlinking
-
-# FIXME: Add a toc to freshrc and use sensible categories, investigate https://www.npmjs.com/package/grunt-doctoc and https://github.com/thlorenz/doctoc and http://ricostacruz.com/flatdoc/
-# TODO: try to Generate a browsable Documentation from this file using a command
-
-##############
-# commands from others
-# TODO try adding packer here
-# FIXED test gibo command
-# CHANGED tested composure command
-##############
-
-fresh-options --bin
-  fresh freshshell/fresh bin/fresh
-  fresh freshshell/fresh-open bin/fresh-open
-  fresh clvv/fasd fasd
-  fresh alicraigmile/show-wip show-wip
-  #fresh https://gist.github.com/1209316.git gitio
-  fresh tj/bm bm
-  #fresh monochromegane/vagrant-peco vagrant-peco
-  #fresh rosenstrauch/taskboy taskboy --ref=13896662480
-  #fresh simonwhitaker/gitignore-boilerplates gibo
-  fresh sivel/speedtest-cli speedtest_cli.py
-  fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
-  fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
-  fresh erichs/composure composure.sh
-  fresh olof/Text-FileTree bin/find2tree.pl
-  fresh https://gist.github.com/8511861.git keybindings.pl
-  #fresh pantheon-systems/drush-config-workflow bin/quickstart
-  fresh docksal/docksal bin/fin --ref=develop
-  fresh holman/dotfiles bin/git-wtf
-  fresh albfan/git-changemail git-changemail
-  fresh hechoendrupal/drupal-console-launcher bin/drupal
-fresh-options
-
-## some other external functions with the correct extension
-## are loaded into shell.sh
-fresh twe4ked/dotfiles shell/functions/pubkey.sh
-
-#######
-# SHELL
-# our own Shell Files
-#######
-
-
-## Prezto zsh config
-## :get our own prezto setup
-
-fresh rosenstrauch/prezto .  --ref=production --file=.zprezto/
-
-## Prezto Submodules
-## :instead of relying on git submodules load external components using fresh
-
-fresh zsh-users/zsh-autosuggestions . --file=.zprezto/modules/autosuggestions/external/
-
-### Prezto Docker
-# TODO: https://github.com/sorin-ionescu/prezto/pull/863/files
-#fresh rosenstrauch/prezto-docker . --file=.zprezto/modules/prezto-docker/external/
-
-
-### Commandline Fu
-### :find cli commands
-###  <http://linuxundich.de/ubuntu/bropages-und-commandlinefu-com-liefern-beispiele-zu-terminalbefehlen-auch-aus-dem-terminal-heraus/>
-fresh samirahmed/fu . --file=.zprezto/modules/fu/external/
-
-fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
-fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
-fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
-fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
-
-## Prezto themes
-fresh sindresorhus/pure  async.zsh --file=.zprezto/modules/prompt/functions/async
-
-#fresh el1t/statusline . --file=.zprezto/modules/prompt/external/statusline/
-fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
-
-#fresh sindresorhus/pure . --file=.zprezto/modules/prompt/external/pure/
-fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
-
-#fresh davidjrice/prezto_powerline . --file=.zprezto/modules/prompt/external/powerline/
-fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
-
-#fresh chauncey-garrett/zsh-prompt-garrett . --file=.zprezto/modules/prompt/external/garrett/
-fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
-
-# now get the completed prezto setup
-ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
-
-
-## Functions
-## sourced to
-## /home/rosenstrauch/.fresh/build/shell.sh
-## <https://github.com/freshshell/fresh#shell-files>
-## some of my own zsh functions are autoloaded so we build them
+# 1.0 My Functions
+# sourced to /home/rosenstrauch/.fresh/build/shell.sh
+# <https://github.com/freshshell/fresh#shell-files>
 
 fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
 fresh shell/zsh/functions/alls --file=zsh/functions/alls
@@ -100,11 +8,61 @@ fresh shell/zsh/functions/ralias --file=zsh/functions/ralias
 fresh shell/zsh/functions/a --file=zsh/functions/a
 fresh shell/zsh/functions/zman --file=zsh/functions/zman
 
-## Commands
+# 2.0 My Commands and scripts
+# :installed to ~/bin
 fresh-options --bin
   fresh bin/\*
   fresh scripts/\*
 fresh-options
+
+# 3.0 Commands from others
+# :installed to ~/bin
+fresh-options --bin
+  fresh freshshell/fresh bin/fresh
+  fresh freshshell/fresh-open bin/fresh-open
+  fresh clvv/fasd fasd
+  fresh alicraigmile/show-wip show-wip
+  fresh tj/bm bm
+  fresh sivel/speedtest-cli speedtest_cli.py
+  fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
+  fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
+  fresh erichs/composure composure.sh
+  fresh olof/Text-FileTree bin/find2tree.pl
+  fresh https://gist.github.com/8511861.git keybindings.pl
+  fresh docksal/docksal bin/fin --ref=develop
+  fresh holman/dotfiles bin/git-wtf
+  fresh albfan/git-changemail git-changemail
+  fresh hechoendrupal/drupal-console-launcher bin/drupal
+fresh-options
+
+
+# 4.0 External Functions loaded into shell.sh
+fresh twe4ked/dotfiles shell/functions/pubkey.sh
+
+
+# 5.0 My Shell Files
+
+## 5.1 Prezto zsh config
+fresh rosenstrauch/prezto .  --ref=production --file=.zprezto/
+
+## 5.2 Prezto Submodules
+## :instead of relying on git submodules load external components using fresh
+fresh zsh-users/zsh-autosuggestions . --file=.zprezto/modules/autosuggestions/external/
+fresh samirahmed/fu . --file=.zprezto/modules/fu/external/
+fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
+fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
+fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
+fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
+
+## 5.3 Prezto themes
+fresh sindresorhus/pure  async.zsh --file=.zprezto/modules/prompt/functions/async
+fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
+fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
+fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
+fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
+
+# 5.4 Finalize Prezto setup
+ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
 
 ## Aliases
 ## : many aliases are set by prezto modules. some custom ones will be sourced here though.
@@ -113,22 +71,36 @@ fresh shell/zsh/aliases/\*
 ## our own zsh runcoms files forked from prezto
 fresh zsh/\* --file
 
-## zsh Prompt
-## my own prompt with alias suggestions
-## @see <http://zsh.sourceforge.net/Intro/intro_14.html>
+##############
+# ZSH Prompt #
+##############
 
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 
-
-# custom mimetype associations
+# Mimetype associations
 ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 
-## Pareview
-## https://github.com/klausi/pareviewsh
-## http://cgit.drupalcode.org/pareviewsh/tree/README.md?id=58d4a53
+#################
+# Gedit plugins #
+#################
 
+fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
+fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
+
+#########################
+# Desktop and Autostart #
+#########################
+
+ln -sf ~/.dotfiles/config/Desktop ~/
+ln -sf ~/.dotfiles/config/autostart ~/.config
+
+############
+# CLI Apps #
+############
+
+## Pareview
 fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
 fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
@@ -136,42 +108,13 @@ fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref
 
 ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
 ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
-
-##########
-# Gui apps and plugins
-##########
-
-## Gedit plugins
-## https://wiki.gnome.org/Apps/Gedit/ThirdPartyPlugins_v3.14
-## TODO: Activate gedit plugins
-fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
-fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
-
-#######################
-# Setup Desktop and autostart Launchers
-#######################
-
-# CHANGED: this doesnt work if the directory exists if you set this up via setup.zsh, then it will have made a backup of your desktop.
-# XXX http://askubuntu.com/questions/349385/how-to-start-terminator-with-a-custom-command-per-window
-# XXX http://askubuntu.com/questions/158159/how-do-i-get-terminator-to-start-up-with-my-custom-layout
-
-ln -sf ~/.dotfiles/config/Desktop ~/
-ln -sf ~/.dotfiles/config/autostart ~/.config
-
-#################
-# CLI Apps
-#################
-
-## NVM
-## setup node version manager (NVM) in your $HOME
+## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
 ## Git achievements
-## forked from icefox/git-achievements
-## Aquire achievements while using git.
 fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=gh-pages
 
-
+## liquidprompt
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
 
 ## sack stuff - https://github.com/sampson-chen/sack
@@ -180,36 +123,28 @@ fresh sampson-chen/sack sag --bin
 fresh sampson-chen/sack sgrep --bin
 fresh sampson-chen/sack .sackrc --file
 
-## explain a command (moved to prezto)
-# TODO: improve explainshell
-# fresh https://gist.github.com/f4b5afb539cbe8704371.git explain
-
-######
-# some scripts only meant to be used by other scripts
-#####
+############
+# Scripts  #
+############
+# only meant to be used by other scripts
 
 ## utilities library
 ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
 
-## zim custom tools and plugins
-## https://github.com/jaap-karssenberg/zim-wiki/wiki/Text2mindmap-custom-tool
-
+## Zim  custom tools and plugins
 fresh https://gist.github.com/8e49f6bb3c26674d6d47.git zim2mindmap --bin=~/scripts/zim2map.py
-
 fresh https://gist.github.com/403600a1c1fe691c39ba.git ShowFolderTree.py --bin=~/scripts/ShowFolderTree.py
-
 fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~/.local/share/zim/plugins/treemapeditor.py
 
-########
-# Config
-########
+##########
+# Config #
+##########
 
-# config files which land in a subfolder of the default $XDG_CONFIG_HOME
+# Files which land in a subfolder of the default $XDG_CONFIG_HOME
 
 # zim colors
 fresh config/zim/style.conf --file=~/.config/zim/style.conf
 # Newsbeuter non sensitive settings
-
 fresh config/newsbeuter/config --file=~/.config/newsbeuter/config
 
 # Our own  Our own config files directly linked to home
@@ -228,62 +163,21 @@ fresh-options --file
   fresh taskrc
 fresh-options
 
-# various config files in non hidden subfolders of $HOME
-
-
-
-## ~/.drush config
-## :Modifying the PHP or PHP configuration that drush runs under
-## <https://www.drupal.org/node/1302418>
-
+# Config files subfolders of $HOME
+fresh config/friendlyarch --file=~/.friendlyarch/
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
-
-# configuring conky desktop widgets
 fresh config/conky --file=~/.conky/
-
-# settings for todo.txt (deprecated in favour of org)
-# fresh config/todo/todo.cfg --file=~/.todo/config
-
-# some settings are stored in hidden subfolders of $HOME
-
-# xchat - solarized
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
+######################
+# BASH-IT Extensions #
+######################
 
-#########################
-# compiled configurations
-# <https://github.com/freshshell/fresh#a-single-config-file-built-from-multiple-sources>
-#########################
-
-# BASH
-# use a minimal .bashrc that loads bash-it and knows about fresh
-
-fresh-options --file='~/.bashrc' --marker
-  fresh shell/bash/bashrc
-  fresh freshshell/fresh contrib/source-build.sh
-fresh-options
-
-
-#fresh-options --file=~/.bash_profile --marker
-#  fresh shell/bash/bash_profile
-#fresh-options
-
-#########
-# BASH-IT Extensions
-#########
-
-
-
-## Bashit Extensions
-# <https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions>
 fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
 fresh bash-it/custom.bash --file=~/.bash_it/lib/custom.bash
 fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
-
-### add drush integration to bashit <https://github.com/drush-ops/drush/blob/master/examples/example.bashrc>
-### these are added into [bash-it custom files](https://github.com/revans/bash-it#your-custom-scripts-aliases-and-functions)
 fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
 fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
 
@@ -297,25 +191,25 @@ fresh-options --file=~/.bash_it/completion/custom.completion.bash --marker
   fresh tmuxinator/tmuxinator completion/tmuxinator.bash
 fresh-options
 
+#########
+# ZSHRC #
+#########
 
-# adding on to existing prezto ZSHRC
-# TODO: https://github.com/webflo/drush_zsh_completion
-
+# Adding on to existing prezto runcom
 fresh-options --file=~/.zshrc --marker
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh
-# this loads the shell files and needs to be at the bottom of the zshrc for
- # compdef be availiable
- fresh freshshell/fresh contrib/source-build.sh
+  fresh freshshell/fresh contrib/source-build.sh
 fresh-options
 
-###########
-## EMACS ##
-###########
+#########
+# EMACS #
+#########
 
 ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
 
 # org js
 # fresh http://orgmode.org/worg/code/org-info-js/org-info.js
+
 # org-erxport-styles
 fresh fniessen/org-html-themes . --file=~/.emacs.d/org-html-themes/
 
@@ -331,14 +225,9 @@ fresh lygaret/emacs.d site-lisp/org-github-links.el --file=~/.emacs.d/site-lisp/
 fresh syohex/emacs-helm-github-issues helm-github-issues.el --file=~/.emacs.d/site-lisp/helm-github-issues.el
 
 
-######################
-## VIMRC
-##
-## XXX http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
-## XXX http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
-## using a minimal .vimrc file loading plugins via pathogen
-## plugin updates managed by fresh
-#######################
+#######
+# VIM #
+#######
 
 fresh tpope/vim-pathogen autoload/pathogen.vim --file=~/.vim/autoload/pathogen.vim
 
@@ -356,53 +245,45 @@ fresh-options --file=~/.vimrc --marker='"'
 fresh-options
 
 ## Vim Plugins
-### vimwiki
 fresh vim-scripts/vimwiki . --file=~/.vim/bundle/vimwiki/
-
-### Fasd vim
-### https://github.com/clvv/fasd/wiki/Vim-Integration
-### https://github.com/simonair/vim-fasd/blob/master/plugin/vim-fasd.vim
 fresh simonair/vim-fasd/ plugin/vim-fasd.vim --file=~/.vim/bundle/vim-fasd/
-
 fresh http://git.drupal.org/project/vimrc.git . --file=~/.drush/vimrc/ --ref=7.x-1.x
-
-# ln -sf ~/.drush/vimrc/bundle/vim-plugin-for-drupal ~/.vim/bundle/vim-plugin-for-drupal
-
 fresh tpope/vim-fugitive .  --file=~/.vim/bundle/vim-fugitive/
-
 fresh scrooloose/syntastic . --file=~/.vim/bundle/vim-syntastic/
-
 fresh cakebaker/scss-syntax.vim .  --file=~/.vim/bundle/scss-syntax.vim/
 
 
-###############################
-# RVM
-# https://rvm.io/gemsets/global
-#
-# Gems in the global gemset, will be added to the global gemset
-# in every new Ruby you install.
-# rake, rdoc and bundler are good examples of handy global gems.
-# The gems in the default gemset are the gems included in every newly created gemset.
-# NOTE: A little bit about where the default and global gemsets differ.
-# If you don't use a gemset at all, you get the gems in the 'default' set.
-# If you use a specific gemset (say @testing),
-# it will inherit gems from that ruby's @global.
-# The 'global' gemset is to allow you to share gems to all your gemsets.
-# The word 'default' quite literally says it all,
-# eg. the gemset used without selecting one for a specific installed ruby.
-###############################
-#fresh config/rvm/.rvmrc --file=~/.rvmrc
+#######
+# RVM #
+#######
 
 fresh config/rvm/gemsets/default.gems --file=~/.rvm/gemsets/default.gems
 fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 
-############
-# Editable config files
-# <https://github.com/freshshell/fresh/wiki/Frequently-Asked-Questions#writeable-files>
-############
+###########
+# Weechat #
+###########
+
+fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
+fresh s3rvac/weechat-notify-send notify_send.py --file=~/.weechat/python/notify_send.py
+
+
+##########
+# BASHRC #
+##########
+
+## use a minimal .bashrc that loads bash-it and knows about fresh
+
+fresh-options --file='~/.bashrc' --marker
+  fresh shell/bash/bashrc
+  fresh freshshell/fresh contrib/source-build.sh
+fresh-options
+
+#########################
+# Editable config files #
+#########################
 
 ## Tmuxinator projects
-## https://github.com/tmuxinator/tmuxinator#create-a-project
 ln -sf ~/.dotfiles/config/tmuxinator/* ~/.tmuxinator/
 
 ## Boom Links
@@ -419,11 +300,6 @@ ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
 ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
 ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
-#fresh mutt --file=~/.mutt/
-
-# weechat
-fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
-fresh s3rvac/weechat-notify-send notify_send.py --file=~/.weechat/python/notify_send.py
 
 fresh_after_build() {
   ## :make some things executable
@@ -432,7 +308,7 @@ fresh_after_build() {
   chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips.py
   chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
 
-  phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
+  ~/bin/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
   ## update nvm
   #cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`

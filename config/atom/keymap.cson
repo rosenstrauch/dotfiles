@@ -24,7 +24,9 @@
 #  'cmd-right': 'pane:split-right'
 #body':
 #  'alt-x': 'pane:close'
-'.workspace':
+
+'atom-workspace atom-text-editor:not([mini])':
+  'alt-h': 'editor:toggle-line-comments'
   'alt-right': 'pane:split-right'
   'alt-up': 'pane:split-up'
   'alt-down': 'pane:split-down'

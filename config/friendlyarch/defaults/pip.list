@@ -1,0 +1,25 @@
+# generate with https://pip.pypa.io/en/latest/reference/pip_list.html
+# pip list|grep '^[^ ]\+' -o
+
+# A tool to build Docker images and orchestrate containers using only Ansible playbooks.
+ansible-container
+# Pygments for cheat
+Pygments
+# Setup cheat
+cheat
+# Authentication in python
+keyring
+# For slack in weechat
+websocket-client
+# CLI tools not necessary in user space
+speedtest-cli
+codespell
+# Used by atom https://github.com/Glavin001/atom-beautify/pull/1220
+beautysh
+# for timetracking
+xprintidle
+# for python dev
+pep8
+autopep8
+# newer version than in pacman
+docker-compose

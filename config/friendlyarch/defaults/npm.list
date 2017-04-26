@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# global npms
+# npm list -g --depth=0
+# or
+# ls `npm root -g`
+
+# Sets your user account as the owner of the /usr/local directory to avoid managing packages with sudo
+elm
+foundation-cli
+generator-gulp-init
+generator-hedley
+generator-elmlang
+gulp-cli
+npm-check-updates
+yo
+docco

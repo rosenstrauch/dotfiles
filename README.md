@@ -36,6 +36,7 @@ sh -c "`curl -fsSL https://raw.githubusercontent.com/rosenstrauch/dotfiles/maste
 
 ## References ##
 
+- http://freshshell.com/readme 
 - http://dotfiles.github.io/
 - http://wiki.ubuntuusers.de/Bash
 

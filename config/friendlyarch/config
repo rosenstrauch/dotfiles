@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+
+# packagemanagers
+# known values are: enabled_packagemanagers=("pacman" "npm" "rvm" "fresh" "aur" "apm" "pip" "go" "composer" "gnome_ext")
+enabled_packagemanagers=("pacman" "pip" "composer" "aur" "apm")
+# Paths
+logfile_path=./logs
+
+# absolute dir path of this script
+#readonly SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+list_path=$BASE_DIR/defaults
+# variable identifier definition
+#readonly VAR_ID='[A-Za-z_]+'
+
+# fresh repo (enable if you want to use it)
+fresh_repo=rosenstrauch/dotfiles

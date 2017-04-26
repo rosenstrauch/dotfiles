@@ -13,7 +13,7 @@ then
     seconds=${duration##*:}
     seconds=${seconds%.*}
 
-    
+
     hours=$((hours*3600))
     minutes=$((minutes*60))
 
@@ -36,14 +36,14 @@ then
     echo "Finished h264"
 
     echo "Writing HTML..."
-    
+
     echo "<video controls poster=\"$filename.jpg\" preload>" > "$directory/$filename.html"
     echo "  <source type=\"video/ogg\" src=\"$filename.ogv\">" >> "$directory/$filename.html"
     echo "  <source type=\"video/webm\" src=\"$filename.webm\">" >> "$directory/$filename.html"
     echo "  <source type=\"video/mp4\" src=\"$filename.mp4\">" >> "$directory/$filename.html"
     echo "  Sorry, your browser does not support HTML5 video" >> "$directory/$filename.html"
     echo "</video>" >> "$directory/$filename.html"
-    
+
     echo "All Done!"
 else
     echo "Usage: [filename]"

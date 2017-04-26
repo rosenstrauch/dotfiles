@@ -1,0 +1,16 @@
+# XXX https://extensions.gnome.org/local/
+#generate with ls ~/.local/share/gnome-shell/extensions/
+#install with gnome-shell-extension-installer
+#@XXX https://github.com/ianbrunelli/gnome-shell-extension-installer
+clipboard-indicator@tudmotu.com
+dash-to-dock@micxgx.gmail.com
+drop-down-terminal@gs-extensions.zzrough.org
+EasyScreenCast@iacopodeenosee.gmail.com
+freon@UshakovVasilii_Github.yahoo.com
+gistnotes@mohan43u.gmail.com
+middleclickclose@paolo.tranquilli.gmail.com
+patterns@felipeborges.github.com
+simple-dock@nothing.org
+windowoverlay-icons@sustmidown.centrum.cz
+ShutdownTimer@neumann
+web_search_dialog@awamper.gmail.com

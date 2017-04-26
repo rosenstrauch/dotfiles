@@ -1,0 +1,22 @@
+# XXX https://atom.io/packages/
+#generate with:
+# apm list --installed --bare | grep '^[^@]\+' -o > my_atom_packages.txt
+# install with
+# apm install --packages-file my_atom_packages.txt
+# TODO: find a package for terminal and git
+atom-beautify
+autocomplete-python
+busy-signal
+intentions
+language-elm
+language-emacs-lisp
+linter
+linter-ui-default
+platformio-ide-terminal
+# Python Dev
+linter-python-pep8
+python-debugger
+python-indent
+python-tools
+# PHP Dev
+php-debug

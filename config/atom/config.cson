@@ -1,10 +1,75 @@
 "*":
   "atom-beautify":
+    apex:
+      disabled: true
+    arduino:
+      disabled: true
+    c:
+      disabled: true
+    cfml:
+      disabled: true
+    cpp:
+      disabled: true
+    crystal:
+      disabled: true
+    cs:
+      disabled: true
+    d:
+      disabled: true
+    fortran: {}
     general:
+      analytics: false
       beautifyEntireFileOnSave: false
+    glsl:
+      disabled: true
+    go:
+      disabled: true
+    haskell:
+      disabled: true
+    jade:
+      disabled: true
+    java:
+      disabled: true
+    marko:
+      disabled: true
+    nunjucks:
+      disabled: true
+    objectivec:
+      disabled: true
+    ocaml:
+      disabled: true
+    pawn:
+      disabled: true
+    puppet:
+      disabled: true
+    python:
+      beautify_on_save: true
+    r:
+      disabled: true
+    riot:
+      disabled: true
+    rust:
+      disabled: true
+    spacebars:
+      disabled: true
+    swig:
+      disabled: true
+    tss:
+      disabled: true
+    vala:
+      disabled: true
+    visualforce:
+      disabled: true
+    vue:
+      disabled: true
   awiki: {}
+  "bitbucket-issues":
+    password: "whereisthisstored"
+    username: "login@rosenstrauch.com"
   core:
-    disabledPackages: []
+    disabledPackages: [
+      "bitbucket-issues"
+    ]
     projectHome: "/mnt/DATA/DEV/AtomProjects/"
     telemetryConsent: "no"
     themes: [
@@ -13,7 +78,7 @@
     ]
   editor:
     autoIndentOnPaste: false
-    fontSize: 15
+    fontSize: 17
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -22,9 +87,13 @@
     userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
   "find-and-replace":
     projectSearchResultsPaneSplitDirection: "right"
-  linter:
-    errorPanelHeight: 36
+  linter: {}
   "linter-checkbashisms": {}
+  "linter-ui-default":
+    decorateOnTreeView: "Files and Directories"
+    gutterPosition: "Left"
+    statusBarPosition: "Right"
+    statusBarRepresents: "Entire Project"
   "markdown-mindmap": {}
   "markdown-preview": {}
   "markdown-writer": {}
@@ -37,5 +106,7 @@
     doNotSaveAndRestoreOpenProjectFiles: true
   welcome:
     showOnStartup: false
+"linter-python-pep8":
+  pep8DirToExecutable: "/usr/bin/"
 welcome:
   showOnStartup: false
