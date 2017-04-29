@@ -29,7 +29,7 @@ fresh-options --bin
   fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
-  fresh docksal/docksal bin/fin --ref=develop
+  fresh docksal/docksal bin/fin --ref=v1.2.0
   fresh holman/dotfiles bin/git-wtf
   fresh albfan/git-changemail git-changemail
   fresh hechoendrupal/drupal-console-launcher bin/drupal
