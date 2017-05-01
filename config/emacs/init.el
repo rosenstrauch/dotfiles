@@ -400,8 +400,7 @@ same directory as the org-buffer and insert a link to this file."
 
           ("I" . "Issues") ;;; gives label to "I"
 ;;; ***** shows open tasks from .issue files [#2]
-          ("Io" "OPEN Issues" todo "OPEN"
-           ((org-agenda-files (file-expand-wildcards "~/org/issues/*/*.issues"))))
+          ("Io" "Todos tagged as Issues" tags-todo "-SCHEDULED={.+}/!+ISSUE")
 ;;; **** CUSTOM AGENDA: Boards [#1]
           ("B" . "Boards") ;;; gives label to "I"
 ;;; ***** TODO show only assigned [#7]
@@ -808,7 +807,7 @@ as the default task."
                 ("HOLD" :foreground "orange" :weight bold)
                 ("CANCELLED" :foreground "forest green" :weight bold))))
 ;;; *** ORG Project tags [#49]
-  (setq org-tags-exclude-from-inheritance '("PRJ")
+  (setq org-tags-exclude-from-inheritance '("PRJ" "TEAM")
         org-stuck-projects '("+PRJ/-HOLD-INSERT-DONE"
                              ("NEXT" "TODO") ("@BUY")))
   ;;; Refile
