@@ -69,6 +69,7 @@
   core:
     disabledPackages: [
       "bitbucket-issues"
+      "language-generic-config"
     ]
     projectHome: "/mnt/DATA/DEV/AtomProjects/"
     telemetryConsent: "no"
