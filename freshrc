@@ -111,9 +111,6 @@ ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
-## Git achievements
-fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=gh-pages
-
 ## liquidprompt
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
 

@@ -51,7 +51,6 @@ typeset -gU cdpath fpath mailpath path
 path=(
 $path
   /usr/local/{bin,sbin}
-${ZDOTDIR:-$HOME}/.fresh/source/rosenstrauch/git-achievements
 )
 
 #
