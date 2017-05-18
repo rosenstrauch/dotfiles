@@ -112,9 +112,6 @@ ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
-## Git achievements
-fresh rosenstrauch/git-achievements . --file=rosenstrauch/git-achievements/ --ref=gh-pages
-
 ## liquidprompt
 fresh nojhan/liquidprompt . --file=~/.liquidprompt/
 
@@ -304,12 +301,13 @@ ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
 fresh_after_build() {
   ## :make some things executable
-  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
-  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
+  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs
+  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf
+  chmod +w $HOME/.fresh/build/src/PHP_CodeSniffer/CodeSniffer.conf
   chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips.py
   chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
 
-  ~/bin/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
+  $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
   ## update nvm
   #cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
