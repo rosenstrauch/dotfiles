@@ -16,6 +16,8 @@
       disabled: true
     d:
       disabled: true
+    elm:
+      beautify_on_save: true
     fortran: {}
     general:
       analytics: false
@@ -70,6 +72,14 @@
     disabledPackages: [
       "bitbucket-issues"
       "language-generic-config"
+      "elm-format"
+      "autocomplete-python"
+      "language-emacs-lisp"
+      "linter-python-pep8"
+      "php-debug"
+      "python-debugger"
+      "python-indent"
+      "python-tools"
     ]
     projectHome: "/mnt/DATA/DEV/AtomProjects/"
     telemetryConsent: "no"
@@ -84,6 +94,9 @@
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
+  "elm-format":
+    binary: "/usr/bin/elm-format"
+    showNotifications: true
   "exception-reporting":
     userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
   "find-and-replace":

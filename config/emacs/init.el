@@ -735,16 +735,23 @@ as the default task."
 ;;;; everything every time
   (setq org-publish-use-timestamps-flag nil)
   (setq org-publish-project-alist
-        '(("org" :components ("orgfull-html" "org-static"))
+        '(
+          ("org" :components ("orgfull-html" "org-static" "orgfull-pdf"))
+
           ("org-static"
            :base-directory "~/org/"
            :recursive t
            :base-extension "css\\|js"
            :publishing-directory "/mnt/DATA/exportedata/org_published/"
-           :publishing-function org-publish-attachment
-
-           )
-
+           :publishing-function org-publish-attachment)
+          ("orgfull-pdf"
+           :base-directory "~/org/"
+           :base-extension "org"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf"
+           :section-numbers nil
+           :with-toc nil
+           :recursive t
+           :publishing-function org-latex-publish-to-pdf)
           ("orgfull-html"
            :base-directory "~/org/"
            :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
@@ -756,15 +763,7 @@ as the default task."
            :auto-sitemap t                ; Generate sitemap.org automagically...
            :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
            :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-           :publishing-function org-html-publish-to-html)
-          ("orgfull-pdf"
-           :base-directory "~/org/"
-           :base-extension "org"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf"
-           :section-numbers nil
-           :with-toc nil
-           :recursive t
-           :publishing-function org-latex-publish-to-pdf)))
+           :publishing-function org-html-publish-to-html)))
 
 ;;; ** ORG Diary/Journal [#2]
   (setq org-agenda-diary-file "~/org/journal.org")
