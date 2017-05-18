@@ -9,6 +9,8 @@
 # for x in $(cat pacman.list); do pacman -S $x; done
 # https://bbs.archlinux.org/viewtopic.php?pid=470581#p470581
 ansible
+anki
+atom
 dmidecode
 docker
 base-devel
@@ -20,10 +22,10 @@ seahorse
 dictd
 emacs
 firefox
+fasd
 foomatic-db
 gedit
 gedit-code-assistance
-gitlab-ci-multi-runner
 gutenprint
 irssi
 jre8-openjdk
@@ -32,28 +34,28 @@ zsh-doc
 gnome
 gnome-icon-theme-extras
 gnome-power-manager
-pamac
 gnome-tweak-tool
 gnome-sound-recorder
-#gnome-photos
-#geary
 gnome-calendar
 go
 isync
-linux318-virtualbox-host-modules
 keepass
 logwatch
+macchanger
 mercurial
 newsbeuter
 notmuch
 nodejs
 npm
+pamac
+pandoc
 parcellite
 python2-pip
 python-pip
 python-pylint
 ruby-ronn
 rabbitvcs
+rabbitvcs-nautilus
 sparkleshare
 syncthing-gtk
 #taskd
@@ -70,6 +72,7 @@ vlc
 weechat
 xclip
 yaourt
+yarn
 zim
 zsh
 # XXX https://github.com/ggreer/the_silver_searcher

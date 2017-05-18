@@ -8,8 +8,6 @@
 elm
 foundation-cli
 generator-gulp-init
-generator-hedley
-generator-elmlang
 gulp-cli
 npm-check-updates
 yo
