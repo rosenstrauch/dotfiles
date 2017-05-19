@@ -9,7 +9,6 @@
 # for x in $(cat pacman.list); do pacman -S $x; done
 # https://bbs.archlinux.org/viewtopic.php?pid=470581#p470581
 ansible
-anki
 atom
 dmidecode
 docker
@@ -87,8 +86,6 @@ python2-pip
 python-pip
 python-pylint
 ruby-ronn
-rabbitvcs
-rabbitvcs-nautilus
 sparkleshare
 syncthing-gtk
 terminator
