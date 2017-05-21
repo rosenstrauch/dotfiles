@@ -3,7 +3,6 @@
 # install with
 # yaourt -S
 
-pandoc-bin
 feedthemonkey
 gitflow-avh
 gnome-keyring-query

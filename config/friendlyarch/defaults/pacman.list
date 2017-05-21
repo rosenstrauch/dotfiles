@@ -28,7 +28,6 @@ gutenprint
 irssi
 jre8-openjdk
 jdk8-openjdk
-zsh-doc
 gnome-autoar
 gnome-backgrounds
 gnome-bluetooth
@@ -107,5 +106,7 @@ yaourt
 yarn
 zim
 zsh
+zsh-doc
+
 # XXX https://github.com/ggreer/the_silver_searcher
 the_silver_searcher
