@@ -22,6 +22,9 @@ fi
 # inform about which shell we are using
 ps $$
 
+## System ruby path set early for tmuxinator
+export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
+
 # list tmux projects
 if (( $+commands[tmuxinator] )); then
   tmuxinator list

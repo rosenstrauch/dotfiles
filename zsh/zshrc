@@ -15,12 +15,14 @@ fi
 # @see https://github.com/sgeb/dotfiles/tree/master/zsh/functions
 
 ## I have Freshshell build zsh files for custom functions and prompts.
+## aliased directories in order
+export USR_DIR=$HOME
 export FRESH_DIR=$USR_DIR/.fresh
 export FRESH_BUILD_PATH=$FRESH_DIR/build
 export ZSH_DIR=$FRESH_BUILD_PATH/zsh
 
 fpath=(
-  # prepend zsh completion wrapper for fresh to the fpath. fresh will add the required function to zshrc.
+  # prepend zsh completion wrapper for fresh to the fpath. fresh will add the required function to zshrc. @see https://github.com/freshshell/fresh/wiki/Loading-Zsh-Completions
   ~/.fresh/build/completion
   # Prepend all directories in $ZSH_DIR/functions to the fpath
   $ZSH_DIR/functions/**/
@@ -122,7 +124,6 @@ if [[ "$HOST" == w* ]]; then
   export MYDATADIR="/mnt/DATA"
 fi
 
-export USR_DIR=$HOME
 export PROJECTS_DIR=$HOME/dev
 export DOTFILES_DIR=$USR_DIR/.dotfiles
 export BRAINDUMP_DIR=$USR_DIR/braindump
@@ -146,8 +147,7 @@ export PATH=$PATH:vendor/bin:$HOME/.config/composer/vendor/bin
 export PATH=$PATH:/usr/local/go/bin/bin
 ## Ruby
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-## System ruby path
-export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
+
 
 
 

@@ -78,7 +78,7 @@ fresh zsh/\* --file
 
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
-
+fresh shell/zsh/prompt/prompt_minifriend_setup --file=zsh/prompt/prompt_minifriend_setup
 # Mimetype associations
 ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
@@ -195,6 +195,7 @@ fresh-options
 
 # Adding on to existing prezto runcom
 fresh-options --file=~/.zshrc --marker
+  # @see https://github.com/freshshell/fresh/wiki/Loading-Zsh-Completions
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh
   # no need to add this line using fresh. doing this directly in my own zshrc
   #fresh freshshell/fresh contrib/source-build.sh
