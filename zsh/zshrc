@@ -20,7 +20,7 @@ export FRESH_BUILD_PATH=$FRESH_DIR/build
 export ZSH_DIR=$FRESH_BUILD_PATH/zsh
 
 fpath=(
-  # prepend zsh completion wrapper for fresh to the fpath
+  # prepend zsh completion wrapper for fresh to the fpath. fresh will add the required function to zshrc.
   ~/.fresh/build/completion
   # Prepend all directories in $ZSH_DIR/functions to the fpath
   $ZSH_DIR/functions/**/

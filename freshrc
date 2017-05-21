@@ -196,7 +196,8 @@ fresh-options
 # Adding on to existing prezto runcom
 fresh-options --file=~/.zshrc --marker
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh
-  fresh freshshell/fresh contrib/source-build.sh
+  # no need to add this line using fresh. doing this directly in my own zshrc
+  #fresh freshshell/fresh contrib/source-build.sh
 fresh-options
 
 #########
