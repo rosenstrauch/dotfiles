@@ -24,6 +24,11 @@ ps $$
 
 ## System ruby path set early for tmuxinator
 export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
+## rvm http://stackoverflow.com/a/27204087
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+## Ruby
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
 
 # list tmux projects
 if (( $+commands[tmuxinator] )); then

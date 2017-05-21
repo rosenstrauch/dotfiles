@@ -137,17 +137,13 @@ export GOPATH=/usr/local/go/bin
 # Add program paths individually
 
 export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/opt/local/bin"
-## rvm http://stackoverflow.com/a/27204087
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 ## NPM
 export PATH=$PATH:node_modules/.bin:/usr/local/share/npm/bin
 ## Composer
 export PATH=$PATH:vendor/bin:$HOME/.config/composer/vendor/bin
 ## Add path to go bin
 export PATH=$PATH:/usr/local/go/bin/bin
-## Ruby
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 
 
 
