@@ -1,31 +1,34 @@
-#
 # Executes commands at the start of an interactive session.
 #
+
+# Source various files under conditions
 
 # use .zshrc.local for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
 if [[ -a ~/.zshrc.local ]]
 then
-source ~/.zshrc.local
-fi
-
-if [[ -a ~/bin/composure.sh ]]
-then
-source  ~/bin/composure.sh
-fi
-
-if [[ -a ~/.xsh ]]
-then
-source ~/.xsh
+  source ~/.zshrc.local
 fi
 
 if [[ -a ~/.nvm ]]
 then
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
 fi
 
+# Pyenv
+if [ -d "${ZDOTDIR:-$HOME}/.pyenv/bin" ]; then
+  export PATH="$PATH:$HOME/.pyenv/bin"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
-#zsh completion wrapper for fresh
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+# zsh completion wrapper for fresh
 fpath=(~/.fresh/build/completion $fpath)
 
 # This is where i place custom themes
@@ -43,15 +46,26 @@ autoload -U $ZSH_DIR/functions/**/*(.:t)
 # Source Prezto before our own zsh files so that we can override zsh settings
 # and aliases (or unalias awkward ones)
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 autoload -U zmv
 
 
 # Customize to your needs...
+# Settings
+## expand functions in the prompt
+setopt prompt_subst
+# makes color constants available
+autoload -U colors
+colors
 
+# Setting various variables
 export EDITOR='emacs -nw'
+export CHEATCOLORS=true
+# enable colored output from ls, etc
+export CLICOLOR=1
+
 
 # Locale settings (utf-8)
 export LC_ALL=en_US.UTF-8
@@ -91,24 +105,49 @@ function
     source $file
   done
 }
-# http://stackoverflow.com/a/27204087
-#export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
-# Pyenv
-if [ -d "${ZDOTDIR:-$HOME}/.pyenv/bin" ]; then
-  export PATH="$PATH:$HOME/.pyenv/bin"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+#
+# Some handy directories
+#
+
+
+if [[ "$HOST" == w* ]]; then
+  export MYDATADIR="/mnt/DATA"
 fi
 
+export USR_DIR=$HOME
+export PROJECTS_DIR=$HOME/dev
+export DOTFILES_DIR=$USR_DIR/.dotfiles
+export BRAINDUMP_DIR=$USR_DIR/braindump
+export FRESH_DIR=$USR_DIR/.fresh
+export ZSH_DIR=$FRESH_DIR/build/zsh
+export FRESH_BUILD_PATH=$FRESH_DIR/build
+export TMPDIR=/tmp
+export NVM_DIR="$HOME/.nvm"
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$USR_DIR/.local/share/
+export GPODDER_DOWNLOAD_DIR="$MYDATADIR/TEMPORARY/Downloads/Gpodder"
+export DEFAULT_CHEAT_DIR=~/.cheat
+export CHEATPATH=~/.dotfiles/manual/cheat
+export GOPATH=/usr/local/go/bin
+
+# Add program paths individually
 
 export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/opt/local/bin"
-
-# Ruby
+## rvm http://stackoverflow.com/a/27204087
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+## NPM
+export PATH=$PATH:node_modules/.bin:/usr/local/share/npm/bin
+## Composer
+export PATH=$PATH:vendor/bin:$HOME/.config/composer/vendor/bin
+## Add path to go bin
+export PATH=$PATH:/usr/local/go/bin/bin
+## Ruby
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# export system ruby path
+## System ruby path
 export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
+
+
 
 # Keybindings in zsh https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 # create a zkbd compatible hash;
@@ -116,7 +155,6 @@ export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
 typeset -A key
 
 key[Home]=${terminfo[khome]}
-
 key[End]=${terminfo[kend]}
 key[Insert]=${terminfo[kich1]}
 key[Delete]=${terminfo[kdch1]}
@@ -142,27 +180,12 @@ key[PageDown]=${terminfo[knp]}
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-    function zle-line-init () {
-        printf '%s' "${terminfo[smkx]}"
-    }
-    function zle-line-finish () {
-        printf '%s' "${terminfo[rmkx]}"
-    }
-    zle -N zle-line-init
-    zle -N zle-line-finish
+  function zle-line-init () {
+    printf '%s' "${terminfo[smkx]}"
+  }
+  function zle-line-finish () {
+    printf '%s' "${terminfo[rmkx]}"
+  }
+  zle -N zle-line-init
+  zle -N zle-line-finish
 fi
-
-
-# https://github.com/creationix/nvm#zsh
-# Calling nvm use automatically in a directory with a .nvmrc file place this after nvm initialization!
-# autoload -U add-zsh-hook
-# load-nvmrc() {
-#   if [[ -f .nvmrc && -r .nvmrc ]]; then
-#     nvm use
-#   elif [[ $(nvm version) != $(nvm version default)  ]]; then
-#     echo "Reverting to nvm default version"
-#     nvm use default
-#   fi
-# }
-#add-zsh-hook chpwd load-nvmrc
-#load-nvmrc

@@ -1,0 +1,102 @@
+function prompt_minifriend_precmd {
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
+
+  # Get Ruby information.
+  if (( $+functions[ruby-info] )); then
+    ruby-info
+  fi
+
+
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
+
+  if (( $+functions[node-info] )); then
+    node-info
+  fi
+}
+
+function prompt_minifriend_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  # Add a hook for calling info functions before each command.
+  add-zsh-hook precmd prompt_minifriend_precmd
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:action' format ' +%s'
+  zstyle ':prezto:module:git:info:branch' format ' %F{8}%b%f'
+  zstyle ':prezto:module:git:info:remote' format ' remote:%R'
+  zstyle ':prezto:module:git:info:commit' format ' %F{white}%.7c%f'
+  zstyle ':prezto:module:git:info:indexed' format ' '
+  zstyle ':prezto:module:git:info:unindexed' format ' '
+  zstyle ':prezto:module:git:info:untracked' format ' '
+  zstyle ':prezto:module:git:info:dirty' format ' %F{8}✗%f'
+  zstyle ':prezto:module:git:info:keys' format \
+  'rprompt' '%b%c%s%D[%R]'
+
+  # Set ruby-info parameters.
+  zstyle ':prezto:module:ruby:info:version' format ' %F{white}%v%f'
+
+ # Set Python-info parameters
+ zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
+
+ # Set NVM config
+ # %v - Node js version
+ zstyle ':prezto:module:node:info:version' format 'version:%v'
+
+
+ # Set Editor parameters
+ zstyle ':prezto:module:editor:info:completing' format ':::'
+
+  # Define prompts.
+  PROMPT="
+%~
+%(?.%F{green}${1:-☻ }%f.%F{red}${1:-☻ }%f) "
+RPROMPT='
+${ruby_info[version]}
+${git_info[rprompt]}
+${python_info[virtualenv]}
+${node_info[version]}
+${editor_info[insert]}
+
+'
+
+}
+
+function prompt_minifriend_help {
+  cat <<EOH
+This prompt's last command exit status symbol is customizable:
+
+  prompt minifriend [<symbol>]
+
+If this option is not provided, the symbol defaults to ☻.
+EOH
+}
+
+function prompt_minifriend_preview {
+  local +h PROMPT='%# '
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  if (( $# > 0 )); then
+    prompt_preview_theme 'minifriend' "$@"
+  else
+    prompt_preview_theme 'minifriend'
+    print
+    prompt_preview_theme 'minifriend' "❯"
+    print
+    prompt_preview_theme 'minifriend' "$"
+  fi
+}
+
+prompt_minifriend_setup "$@"

@@ -26,7 +26,6 @@ fresh-options --bin
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
-  fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
   fresh docksal/docksal bin/fin --ref=v1.2.0
@@ -39,6 +38,7 @@ fresh-options
 
 # 4.0 External Functions loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
+fresh erichs/composure composure.sh
 
 
 # 5.0 My Shell Files

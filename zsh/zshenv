@@ -2,51 +2,7 @@
 # Defines environment variables.
 #
 
-
-#
-# Some handy directories
-#
-export USR_DIR=$HOME
-export PROJECTS_DIR=$HOME/dev
-export DOTFILES_DIR=$USR_DIR/.dotfiles
-export BRAINDUMP_DIR=$USR_DIR/braindump
-export FRESH_DIR=$USR_DIR/.fresh
-export ZSH_DIR=$FRESH_DIR/build/zsh
-export FRESH_BUILD_PATH=$FRESH_DIR/build
-export TMPDIR=/tmp
-export NVM_DIR="$HOME/.nvm"
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$USR_DIR/.local/share/
-
-if [[ "$HOST" == w* ]]; then
-  export MYDATADIR="/mnt/DATA"
-
-fi
-export GPODDER_DOWNLOAD_DIR="$MYDATADIR/TEMPORARY/Downloads/Gpodder"
-
-export DEFAULT_CHEAT_DIR=~/.cheat
-export CHEATPATH=~/.dotfiles/manual/cheat
-export CHEATCOLORS=true
-export GOPATH=/usr/local/go/bin
-
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-
-#${ZDOTDIR:-$HOME}/{bin,sbin}
-${ZDOTDIR:-$HOME}/.config/composer/vendor/bin
-${ZDOTDIR:-$HOME}/scripts
-$path
-/usr/local/{bin,sbin}
-)
-
-
-if [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
 fi
