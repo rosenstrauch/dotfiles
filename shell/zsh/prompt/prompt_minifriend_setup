@@ -60,8 +60,8 @@ function prompt_minifriend_setup {
 
   # Define prompts.
   PROMPT="
-%n%f@%m%f:%~
-%(?.%F{green}${1:-☻ }%f.%F{red}${1:-☻ }%f) "
+[%n%f@%m%f]:%~
+%(?.%F{green}${1:-☻ }%f.%F{red}${1:-☻ }%f)%# "
 RPROMPT='
 ${ruby_info[version]}
 ${git_info[rprompt]}
