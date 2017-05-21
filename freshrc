@@ -56,7 +56,7 @@ fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
 fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
 ## 5.3 Prezto themes
-fresh sindresorhus/pure  async.zsh --file=.zprezto/modules/prompt/functions/async
+fresh sindresorhus/pure async.zsh --file=.zprezto/modules/prompt/functions/async
 fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
 fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
 fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
@@ -79,8 +79,7 @@ fresh zsh/\* --file
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
 fresh shell/zsh/prompt/prompt_minifriend_setup --file=zsh/prompt/prompt_minifriend_setup
-# Mimetype associations
-ln -sf config/mimeapps.list ~/.config/mimeapps.list
+
 
 
 #################
@@ -90,12 +89,12 @@ ln -sf config/mimeapps.list ~/.config/mimeapps.list
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 
-#########################
-# Desktop and Autostart #
-#########################
-
+# Desktop  #
 ln -sf ~/.dotfiles/config/Desktop ~/
+# Autostart
 ln -sf ~/.dotfiles/config/autostart ~/.config
+# Mimetype associations
+ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 ############
 # CLI Apps #
