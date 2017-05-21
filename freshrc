@@ -26,7 +26,6 @@ fresh-options --bin
   fresh sivel/speedtest-cli speedtest_cli.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
-  fresh erichs/composure composure.sh
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
   fresh docksal/docksal bin/fin --ref=v1.2.0
@@ -39,6 +38,7 @@ fresh-options
 
 # 4.0 External Functions loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
+fresh erichs/composure composure.sh
 
 
 # 5.0 My Shell Files
@@ -56,7 +56,7 @@ fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
 fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
 
 ## 5.3 Prezto themes
-fresh sindresorhus/pure  async.zsh --file=.zprezto/modules/prompt/functions/async
+fresh sindresorhus/pure async.zsh --file=.zprezto/modules/prompt/functions/async
 fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
 fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
 fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
@@ -78,9 +78,8 @@ fresh zsh/\* --file
 
 fresh shell/zsh/prompt/prompt_rosen_setup --file=zsh/prompt/prompt_rosen_setup
 fresh shell/zsh/prompt/prompt_friendlinux_setup --file=zsh/prompt/prompt_friendlinux_setup
+fresh shell/zsh/prompt/prompt_minifriend_setup --file=zsh/prompt/prompt_minifriend_setup
 
-# Mimetype associations
-ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 
 #################
@@ -90,12 +89,12 @@ ln -sf config/mimeapps.list ~/.config/mimeapps.list
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 
-#########################
-# Desktop and Autostart #
-#########################
-
+# Desktop  #
 ln -sf ~/.dotfiles/config/Desktop ~/
+# Autostart
 ln -sf ~/.dotfiles/config/autostart ~/.config
+# Mimetype associations
+ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 ############
 # CLI Apps #
@@ -158,7 +157,6 @@ fresh-options --file
   fresh config/rvm/gemrc
   fresh config/parcelliterc
   fresh config/liquidpromptrc
-  fresh taskrc
 fresh-options
 
 # Config files subfolders of $HOME
@@ -195,8 +193,10 @@ fresh-options
 
 # Adding on to existing prezto runcom
 fresh-options --file=~/.zshrc --marker
+  # @see https://github.com/freshshell/fresh/wiki/Loading-Zsh-Completions
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh
-  fresh freshshell/fresh contrib/source-build.sh
+  # no need to add this line using fresh. doing this directly in my own zshrc
+  #fresh freshshell/fresh contrib/source-build.sh
 fresh-options
 
 #########

@@ -16,9 +16,6 @@ fi
 
 #
 # Editors
-#
-# make sure that if a program wants you to edit
-# text, that Vim is going to be there for you
 
 export VISUAL='emacs'
 export PAGER='less'
@@ -45,11 +42,12 @@ typeset -gU cdpath fpath mailpath path
    $cdpath
  )
 
-
-
 # Set the list of directories that Zsh searches for programs.
 path=(
-$path
+  ${ZDOTDIR:-$HOME}/{bin,sbin}
+  ${ZDOTDIR:-$HOME}/.config/composer/vendor/bin
+  ${ZDOTDIR:-$HOME}/scripts
+  $path
   /usr/local/{bin,sbin}
 )
 
@@ -72,11 +70,7 @@ fi
 #
 
 if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$USER"
-  mkdir -p -m 700 "$TMPDIR"
+  export TMPDIR="$(mktemp -d)"
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
-fi

@@ -66,28 +66,6 @@ make_backup () {
 
 }
 
-
-
-
-
-# # install betty if its not already installed
-# if [ ! -d /opt/betty ]
-# then
-#     echo initialising betty...
-#     cp -rf ~/.fresh/source/pickhardt/betty /opt/betty/
-# else
-#     echo betty is initialized...OK
-# fi
-
-# TODO: Figure out where and when to best install these go commands
-#go get github.com/monochromegane/vagrant-global-status/...
-#go get github.com/peco/peco/cmd/peco
-
-
-
-
-
-
 # function to import terminal profiles from your dotfiles
 
 install_terminal_profiles()
@@ -117,22 +95,6 @@ install_bashit()
       #"$HOME/.bash_it/upgrade_bashit"
       echo "bashit seems installed"
   fi
-}
-
-# function to install xsh
-install_xiki()
-{
-if [ ! -f $HOME/.xsh ]; then
-
-  echo -n "Install xiki?"
-  read XIKI
-
-  if [[ $XIKI =~ ^[Yy]$ ]]; then
-  echo "XIKI"
-  cd ; curl -LO https://github.com/trogdoro/xiki/archive/master.tar.gz ; tar xzf master.tar.gz; cd xiki-master/bin; ./clearxsh; ./xsh
-  fi
-fi
-echo "Xiki installed ...OK"
 }
 
 # function make zsh the default shell
@@ -173,7 +135,7 @@ setup_gsettings () {
   gsettings set org.gnome.shell enabled-extensions 'elementary'
   gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
   echo 'gnome terminal settings'
-  gsettings set org.gnome.Terminal.Legacy.Settings dark-theme true
+  gsettings set org.gnome.Terminal.Legacy.Settings dark-theme false
   gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
   gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
   # gsettings set org.gnome.Terminal.Legacy.Keybindings prev-tab '<Alt>Left'

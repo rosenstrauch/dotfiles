@@ -3,6 +3,7 @@
 # install with
 # yaourt -S
 
+anki
 feedthemonkey
 gitflow-avh
 gnome-keyring-query
@@ -14,10 +15,10 @@ ghi
 gpodder3
 gisto
 gitbook-editor
+rabbitvcs
+rabbitvcs-nautilus
 gitflow-avh
 grub-customizer
 multimarkdown
-netcat
 thunderbird-lightning-bin
-sortphotos
 xprintidle

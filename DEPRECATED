@@ -1,5 +1,0 @@
-# not using vundle for managing packages but pathogen
-# http://benmccormick.org/2014/07/21/learning-vim-in-2014-getting-more-from-vim-with-plugins/
-#fresh gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
-# not loading plugins via vundle in vimrc, using pathogen because fresh manages sources
-# fresh vim/vundleconf.vim --file=~/.vimrc --marker

@@ -19,72 +19,19 @@ if (( $+commands[fortune] )); then
   print
 fi
 
-# add tipp of the day
-#echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
-
 # inform about which shell we are using
 ps $$
+
+## System ruby path set early for tmuxinator
+export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
+## rvm http://stackoverflow.com/a/27204087
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+## Ruby
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
 
 # list tmux projects
 if (( $+commands[tmuxinator] )); then
   tmuxinator list
 
 fi
-
-#echo "and remember:"; $(compgen -ac | shuf -n 1) -h
-
-# or cowsay tip of the day
-# cowsay -f $(ls /usr/share/cowsay/cows | shuf -n 1 | cut -d. -f1) $(whatis $(ls /bin) 2>/dev/null | shuf -n 1)
-
-# Print todos.
-#if (( $+commands[todo] )); then
-#  echo TODO.TXT Projects
-#  todo lsprj
-#  print
-#fi
-
-# taskwarrior sync and project list
-
-#if (( $+commands[task] )); then
-#  echo Taskwarrior Projects
-#  task projects
-#  print
-#  task synchronize
-#fi
-
-# adds the current branch name in green
-#git_prompt_info() {
-# ref=$(git symbolic-ref HEAD 2> /dev/null)
-# if [[ -n $ref ]]; then
-# echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
-#  fi
-#}
-
-
-# makes color constants available
-autoload -U colors
-colors
-
-# enable colored output from ls, etc
-export CLICOLOR=1
-
-# expand functions in the prompt
-setopt prompt_subst
-
-# prompt
-#export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
-
-## RVM needs to be first
-#PATH=$HOME/.rvm/bin:$PATH
-## NPM
-PATH=$PATH:node_modules/.bin:/usr/local/share/npm/bin
-## Composer
-PATH=$PATH:vendor/bin:$HOME/.config/composer/vendor/bin
-# Add path to go bin
-PATH=$PATH:/usr/local/go/bin/bin
-
-
-# add bin to path just to be sure
-#export PATH="$HOME/bin:$PATH"
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
