@@ -10,35 +10,24 @@ then
   source ~/.zshrc.local
 fi
 
-if [[ -a ~/.nvm ]]
-then
-  [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
-fi
 
-# Pyenv
-if [ -d "${ZDOTDIR:-$HOME}/.pyenv/bin" ]; then
-  export PATH="$PATH:$HOME/.pyenv/bin"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+# Autoload our custom functions before sourcing the other zsh files
+# @see https://github.com/sgeb/dotfiles/tree/master/zsh/functions
 
-if [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
+## I have Freshshell build zsh files for custom functions and prompts.
+export FRESH_DIR=$USR_DIR/.fresh
+export FRESH_BUILD_PATH=$FRESH_DIR/build
+export ZSH_DIR=$FRESH_BUILD_PATH/zsh
 
-# zsh completion wrapper for fresh
-fpath=(~/.fresh/build/completion $fpath)
-
-# This is where i place custom themes
-fpath=( "$ZSH_DIR/prompt" $fpath )
-
-# https://github.com/sgeb/dotfiles/tree/master/zsh/functions
-# Autoload our custom functions before sourcing the other zsh files so that we
-# can use them there
-# Prepend all directories in $ZSH_DIR/functions to the fpath
-fpath=($ZSH_DIR/functions/**/ $fpath)
+fpath=(
+  # prepend zsh completion wrapper for fresh to the fpath
+  ~/.fresh/build/completion
+  # Prepend all directories in $ZSH_DIR/functions to the fpath
+  $ZSH_DIR/functions/**/
+  # Prepend custom themes to the fpath
+  $ZSH_DIR/prompt
+  $fpath
+)
 
 # and autoload all files in $ZSH_DIR/functions
 autoload -U $ZSH_DIR/functions/**/*(.:t)
@@ -49,36 +38,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-autoload -U zmv
-
-
-# Customize to your needs...
-# Settings
-## expand functions in the prompt
-setopt prompt_subst
-# makes color constants available
-autoload -U colors
-colors
-
-# Setting various variables
-export EDITOR='emacs -nw'
-export CHEATCOLORS=true
-# enable colored output from ls, etc
-export CLICOLOR=1
-
-
-# Locale settings (utf-8)
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-# Source fresh shell
-# https://github.com/freshshell/fresh#installation
-if [[ -s "${ZDOTDIR:-$HOME}/.fresh/build/shell.sh" ]]; then
-  source ~/.fresh/build/shell.sh
-fi
-
-# Source all of our own zsh files from ~/.fresh/build/zsh that arent already in ~/.fresh/build/shell.sh (using an anonymous function)
+# Source all of our own *.zsh files from ~/.fresh/build/zsh that arent already in ~/.fresh/build/shell.sh (using an anonymous function)
 function
 {
   typeset -U config_files
@@ -106,6 +66,53 @@ function
   done
 }
 
+# Adding custom locations to path
+if [[ -a ~/.nvm ]]
+then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+
+## Pyenv
+if [ -d "${ZDOTDIR:-$HOME}/.pyenv/bin" ]; then
+  export PATH="$PATH:$HOME/.pyenv/bin"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+
+# Load the great zmv function for bulk renaming
+autoload -U zmv
+## expand functions in the prompt
+setopt prompt_subst
+# makes color constants available
+autoload -U colors
+colors
+
+# Setting various variables
+export EDITOR='emacs -nw'
+export CHEATCOLORS=true
+# enable colored output from ls, etc
+export CLICOLOR=1
+
+
+# Locale settings (utf-8)
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Source fresh shell
+# https://github.com/freshshell/fresh#installation
+if [[ -s "${ZDOTDIR:-$HOME}/.fresh/build/shell.sh" ]]; then
+  source ~/.fresh/build/shell.sh
+fi
+
 #
 # Some handy directories
 #
@@ -119,11 +126,6 @@ export USR_DIR=$HOME
 export PROJECTS_DIR=$HOME/dev
 export DOTFILES_DIR=$USR_DIR/.dotfiles
 export BRAINDUMP_DIR=$USR_DIR/braindump
-export FRESH_DIR=$USR_DIR/.fresh
-export ZSH_DIR=$FRESH_DIR/build/zsh
-export FRESH_BUILD_PATH=$FRESH_DIR/build
-export TMPDIR=/tmp
-export NVM_DIR="$HOME/.nvm"
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$USR_DIR/.local/share/
 export GPODDER_DOWNLOAD_DIR="$MYDATADIR/TEMPORARY/Downloads/Gpodder"
@@ -152,6 +154,7 @@ export PATH="$PATH:/root/.gem/ruby/2.4.0/bin"
 # Keybindings in zsh https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
+# finding keycodes: In a shell window, hit ^v then the key
 typeset -A key
 
 key[Home]=${terminfo[khome]}
