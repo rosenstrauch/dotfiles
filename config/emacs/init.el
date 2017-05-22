@@ -730,10 +730,10 @@ as the default task."
   (setq org-publish-use-timestamps-flag nil)
   (setq org-publish-project-alist
         '(
-          ("org" :components ("orgfull-html" "org-static" "orgfull-pdf"))
+          ("org" :components ("orgfull-html" "org-styles" "orgfull-pdf"))
 
-          ("org-static"
-           :base-directory "~/org/"
+          ("org-styles"
+           :base-directory "~/org/styles"
            :recursive t
            :base-extension "css\\|js"
            :publishing-directory "/mnt/DATA/exportedata/org_published/"
@@ -867,7 +867,7 @@ as the default task."
      (C . t)
      (sql . t)
      (ditaa . t))))
-     
+
 ;;; * use package org-screenshot
 (use-package org-attach-screenshot
      :ensure t)
@@ -1020,7 +1020,6 @@ as the default task."
   (("C-c S" . org-attach-screenshot)))
 ;;; * Use Package: Web mode [#20]
 (use-package web-mode
-  ;;; org-trello major mode for all .trello files
   :mode (
          ("\\.phtml$" . web-mode)
          ("\\.tpl\\.php" . web-mode)

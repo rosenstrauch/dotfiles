@@ -208,7 +208,7 @@ ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
 # org js
 # fresh http://orgmode.org/worg/code/org-info-js/org-info.js
 
-# org-erxport-styles
+# org-export-styles
 fresh fniessen/org-html-themes . --file=~/.emacs.d/org-html-themes/
 
 # org-templates
