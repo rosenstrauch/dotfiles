@@ -26,7 +26,9 @@ windows:
         #- xsh ~/org/routines.org
   #- Web: lynx
   #- Browse: mc
-  - News: #empty
+  - News:
+      - newsbeuter 
+      - #empty
   - Communication:
       panes:
         #- irssi
