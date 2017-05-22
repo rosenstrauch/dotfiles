@@ -20,6 +20,7 @@ But, in order to enjoy them to their full potential, checkout these programs.
 - python-pip
 - silversearcher-ag (https://github.com/ggreer/the_silver_searcher)
 - vim-gnome
+- https://github.com/clvv/fasd
 
 
 ## Installation Via setup.zsh ##
@@ -42,16 +43,10 @@ sh -c "`curl -fsSL https://raw.githubusercontent.com/rosenstrauch/dotfiles/maste
 
 
 
-### highlights
-
-for moving around the terminal
-- https://github.com/clvv/fasd
-
 customized prompts
 - [liquidprompt](https://github.com/nojhan/liquidprompt)
 
+Using Frameworks:
 - https://github.com/revans/bash-it
 - https://github.com/sorin-ionescu/prezto
 
-
-# Investigate:

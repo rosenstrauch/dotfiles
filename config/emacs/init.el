@@ -60,9 +60,9 @@
           (* (* blank) (opt ";" (* not-newline)) "\n")))
 ;; Expanded regexp:
 ;; "^;;;[^#].*\n\\(?:[[:blank:]]*\\(?:;.*\\)?\n\\)*"
-;;; *** STYLE: highlight Matching parenthesis [#1]
+;;; *** STYLE: highlight Matching parenthesis
 (show-paren-mode 1)
-;;; *** STYLE: Make tabs into spaces when you type them [#1]
+;;; *** STYLE: Make tabs into spaces when you type them
 (setq-default indent-tabs-mode nil)
 ;;; *** STYLE: Org-mode indents description lists so as to keep a consistent left edge. I don't like this behavior. [#4]
 
@@ -96,28 +96,15 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
+;(byte-recompile-directory package-user-dir nil 'force)
 ;;; ** BOOTSTRAP `use-package' [#1]
 (unless (package-installed-p 'use-package)
 ;;; TODO: dont run this on every start but dont not run it so we dont have outdated lists. [#4]
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
-
 ;;; use-package is available from here on [#1]
 
-;;; * use package org-screenshot
-(use-package org-attach-screenshot
-     :ensure t)
-
-;;; * Use package emacs-fasd
-(use-package fasd                                                                                                              
-  :bind(("\C-c f" . fasd-find-file))
-  :config (setq global-fasd-mode 1)
-          (setq fasd-enable-initial-prompt nil)
-  :ensure t)  
-;;; * Use package csv-export
-(use-package org-clock-csv
-  :ensure t)
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
 
@@ -170,6 +157,7 @@ add it to `before-save-hook'."
                 (replace-match lines :fixedcase :literal nil 1)
               (goto-char (line-end-position))
               (insert " :lines \"" lines "\""))))))))
+
 ;;; *** ORG INIT: provide command to fix includes
 (defun endless/decide-line-range (file begin end)
   "Visit FILE and decide which lines to include.
@@ -249,6 +237,12 @@ same directory as the org-buffer and insert a link to this file."
   (if (file-exists-p filename)
     (insert (concat "[[file:" filename "]]"))))
 :config
+;;; *** Org CONFIG Babel
+(org-babel-do-load-languages 'org-babel-load-languages
+    '(
+        (sh . t)
+    )
+)
 ;;; *** ORg config: nicer org elipsis
 (setq org-ellipsis "⤵")
 ;;; *** ORG config: allow linking by id [#1]
@@ -851,9 +845,42 @@ as the default task."
                                               ("1." . "-")
                                               ("1)" . "a)"))))
 
-
+;; https://emacs.stackexchange.com/a/17553
   :ensure org-plus-contrib)
 
+;;; * Endof Org config
+
+(use-package org-babel
+  :init
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (shell . t)
+     (js . t)
+     (latex . t)
+     (dot . t)
+     (gnuplot . t)
+     (ruby . t)
+     (screen . nil)
+     (ledger . t)
+     (C . t)
+     (sql . t)
+     (ditaa . t))))
+     
+;;; * use package org-screenshot
+(use-package org-attach-screenshot
+     :ensure t)
+
+;;; * Use package emacs-fasd
+(use-package fasd
+  :bind(("\C-c f" . fasd-find-file))
+  :config (setq global-fasd-mode 1)
+          (setq fasd-enable-initial-prompt nil)
+  :ensure t)
+;;; * Use package csv-export
+(use-package org-clock-csv
+  :ensure t)
 
 ;;; * Use Package: Htmlize for exporting agenda [#8]
 (use-package htmlize
@@ -968,10 +995,10 @@ as the default task."
 ;;; ** you need make sure whether the "/jira" at the end is
 ;;; ** necessary or not, see discussion at the end of this page
 ;;; ** jiralib is not explicitly required, since org-jira will load it. [#4]
-(use-package org-jira
-  :config
-  (setq jiralib-url "http://acolono.atlassian.net")
-  :ensure t)
+;(use-package org-jira
+;  :config
+;  (setq jiralib-url "http://acolono.atlassian.net")
+;  :ensure t)
 ;;; * Use Package: Gitlab [#2]
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
