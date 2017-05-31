@@ -106,8 +106,8 @@ fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
 
-ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
-ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
+ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/bin/phpcs ~/bin/phpcs
+ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/bin/phpcbf ~/bin/phpcbf
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
