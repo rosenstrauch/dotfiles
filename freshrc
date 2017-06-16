@@ -28,7 +28,7 @@ fresh-options --bin
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
-  fresh docksal/docksal bin/fin --ref=v1.2.0
+  fresh docksal/docksal bin/fin --ref=v1.3.0
   fresh holman/dotfiles bin/git-wtf
   fresh albfan/git-changemail git-changemail
   fresh hechoendrupal/drupal-console-launcher bin/drupal.php
@@ -101,13 +101,13 @@ ln -sf config/mimeapps.list ~/.config/mimeapps.list
 ############
 
 ## Pareview
-fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
+fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/ --ref=2.9.1
 fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-2.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
 
-ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/bin/phpcs ~/bin/phpcs
-ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/bin/phpcbf ~/bin/phpcbf
+ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
+ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
@@ -301,16 +301,17 @@ ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
 fresh_after_build() {
   ## :make some things executable
-  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs
-  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf
-  chmod +w $HOME/.fresh/build/src/PHP_CodeSniffer/CodeSniffer.conf
+  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
+  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
+  chmod +w $HOME/.fresh/build/src/PHP_CodeSniffer/CodeSniffer.conf.dist
   chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips.py
   chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
 
-  $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
+  $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
   ## update nvm
   #cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
+
   ## update prezto
   #cd ~/.fresh/source/rosenstrauch/prezto/ && git checkout production && git pull
 
