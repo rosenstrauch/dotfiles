@@ -7,6 +7,8 @@
 # Sets your user account as the owner of the /usr/local directory to avoid managing packages with sudo
 elm
 elm-version-manager
+elm-new
+elm-test
 foundation-cli
 generator-gulp-init
 gulp-cli
