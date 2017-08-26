@@ -83,6 +83,8 @@
       "python-debugger"
       "python-indent"
       "python-tools"
+      "elm-navigator"
+      "elm-instant"
     ]
     projectHome: "/mnt/DATA/DEV/AtomProjects/"
     telemetryConsent: "no"
@@ -104,6 +106,7 @@
     userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
   "find-and-replace":
     projectSearchResultsPaneSplitDirection: "right"
+  "language-elm": {}
   linter: {}
   "linter-checkbashisms": {}
   "linter-ui-default":
@@ -124,6 +127,9 @@
     doNotSaveAndRestoreOpenProjectFiles: true
   welcome:
     showOnStartup: false
+".elm.source":
+  editor:
+    autoIndentOnPaste: false
 "linter-python-pep8":
   pep8DirToExecutable: "/usr/bin/"
 welcome:
