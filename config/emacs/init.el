@@ -127,6 +127,7 @@
   ("C-c C-w" . org-refile)
   ("C-c d" . org-refile-to-datetree)
   ("C-c is" . my-org-screenshot)
+  ("C-c oc" . org-contacts)
 
 ;;; ** ORG INIT [#1]
   :init
@@ -214,6 +215,47 @@ BEGIN and END are regexps which define the line range to use."
       t)) ; do not block
 
   (add-hook 'org-blocker-hook #'org-block-wip-limit)
+
+;;; *** ORG INIT my invoices
+(defvar invoice-dir "/mnt/DATA/07-NEEDS/Invoices/")
+(defvar invoice-template-path (expand-file-name "_template.org" invoice-dir))
+
+(defun my/invoice-next-number ()
+  "Get next sequential invoice number. Invoice numbers are in the format YYYYXXX,
+where YYYY is the current year and XXX is a zero-padded sequential counter
+modulo 1000. Ex.: 2016001."
+  (concat (format-time-string "%Y" (current-time))
+          (format "%03d" (% (1+ (string-to-number
+                              (substring (car (last (directory-files
+                                      invoice-dir
+                                      nil
+                                      "^[0-9]+\.org$"))) 4 7))) 1000))))
+
+(defun my/invoice-get-path (number)
+  "Derive invoice file path from invoice NUMBER."
+  (format "%s/%s.org" invoice-dir number))
+
+(defun my/invoice-create (scope-file)
+  "Make a new invoice from given file and date range."
+  (interactive "forg file: ")
+  (let ((invoice-number (my/invoice-next-number))
+        (invoice-date (format-time-string "%m/%d/%Y" (current-time)))
+        (invoice-start (org-read-date nil t nil "Choose invoice start" nil "-2Mon"))
+        (invoice-end (org-read-date nil nil nil "Choose invoice end" nil "-Sun")))
+    (find-file (my/invoice-get-path invoice-number))
+    (insert-file-contents invoice-template-path)
+    (goto-char (point-min))
+    (while (search-forward "@INVOICE_NUMBER@" nil t)
+      (replace-match invoice-number))
+    (goto-char (point-min))
+    (while (search-forward "@SCOPE_FILE@" nil t)
+      (replace-match scope-file))
+    (org-update-all-dblocks)))
+
+(defun my/invoice-create-from-current-buffer-file ()
+  "Make a new invoice from current buffer's file and given date range."
+  (interactive)
+  (my/invoice-create (buffer-file-name)))
 ;;; *** ORG INIT add screenshot utility command http://stackoverflow.com/a/17438212
   (defun my-org-screenshot ()
     "Take a screenshot into a time stamped unique-named file in the
@@ -316,551 +358,566 @@ same directory as the org-buffer and insert a link to this file."
            (file+headline (expand-file-name "contacts.org" org-directory) "People")
            "* %(org-contacts-template-name)\n:PROPERTIES:\n:EMAIL: %(org-contacts-template-email)\n:END:"
            :clock-keep t :kill-buffer t)
-          
-;;; **** CAPTURE: Ideas are not tasks                                            [#2]
-          ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
-           "* %?\nEntered on %U\n  %i\n  %a")
-;;; **** CAPTURE: journal entries do not show up in agenda (but maybe as diary) [#2]
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
-;;; **** CAPTURE: calendar entries prompt for date and show up in agenda may or maynot be todos [#2]
-          ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
-           "* %?\nEntered on %^T\n  %i\n  %a")
-;;; **** CAPTURE: Routines are repeated tasks captured to routines.org [#2]
-          ("r" "Routine" entry (file "~/org/routines.org")
-           "** TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
-;;; **** CAPTURE: LinkLibrary is sorted by capture date in a date tree [#2]
-          ("l" "Link" entry (file+datetree "~/org/links.org")
-           "* %c %a %x %?\nEntered on %U\n  %i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
-;;; **** CAPTURE: Snippets will need to get refiled if i capture a link it may include a snipptet [#6]
-          ("x" "Firefox Capture Template" entry
-           (file+headline "~/org/capture.org" "Firefox")
-           "* Snippets %a\n%i\nEntered on %U\n%c\ \nNote: %?\nLink: %l" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
 
-          ))
+          ("C" "Company Contacts" entry
+           (file+headline (expand-file-name "contacts.org" org-directory) "Companies")
+           "* %(org-contacts-template-name)
+ :PROPERTIES:
+ :EMAIL: %(org-contacts-template-email)
+ :PHONE:
+ :ALIAS:
+ :NICKNAME:
+ :IGNORE:
+ :ICON:
+ :NOTE:
+ :ADDRESS:
+ :BIRTHDAY:
+ :END:")
+  
+;;; **** CAPTURE: Ideas are not tasks                                            [#2]
+  ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
+   "* %?\nEntered on %U\n  %i\n  %a")
+;;; **** CAPTURE: journal entries do not show up in agenda (but maybe as diary) [#2]
+  ("j" "Journal" entry (file+datetree "~/org/journal.org")
+   "* %?\nEntered on %U\n  %i\n  %a")
+;;; **** CAPTURE: calendar entries prompt for date and show up in agenda may or maynot be todos [#2]
+  ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
+   "* %?\nEntered on %^T\n  %i\n  %a")
+;;; **** CAPTURE: Routines are repeated tasks captured to routines.org [#2]
+  ("r" "Routine" entry (file "~/org/routines.org")
+   "** TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
+;;; **** CAPTURE: LinkLibrary is sorted by capture date in a date tree [#2]
+  ("l" "Link" entry (file+datetree "~/org/links.org")
+   "* %c %a %x %?\nEntered on %U\n  %i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
+;;; **** CAPTURE: Snippets will need to get refiled if i capture a link it may include a snipptet [#6]
+  ("x" "Firefox Capture Template" entry
+   (file+headline "~/org/capture.org" "Firefox")
+   "* Snippets %a\n%i\nEntered on %U\n%c\ \nNote: %?\nLink: %l" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
+
+  ))
 
 ;;; *** ORG CUSTOM AGENDA Views [#3]
 
-  (setq org-agenda-custom-commands
-        '(
+(setq org-agenda-custom-commands
+      '(
 ;;; **** CUSTOM AGENDA: Review Views [#29]
-          ("R" . "Review" )
+        ("R" . "Review" )
 
-          ("Rw" "Week in review"
-           agenda ""
-           ((org-agenda-span 'week)
-            (org-agenda-start-on-weekday 0)
-            (org-agenda-overriding-header "Week in Review"))
-           ("/mnt/DATA/exportedata/org-export/review/week.html")
-           )
+        ("Rw" "Week in review"
+         agenda ""
+         ((org-agenda-span 'week)
+          (org-agenda-start-on-weekday 0)
+          (org-agenda-overriding-header "Week in Review"))
+         ("/mnt/DATA/exportedata/org-export/review/week.html")
+         )
 
 
-          ("Rd" "Day in review"
-           agenda ""
-           ((org-agenda-span 'day)
-            (org-agenda-overriding-header "Week in Review"))
+        ("Rd" "Day in review"
+         agenda ""
+         ((org-agenda-span 'day)
+          (org-agenda-overriding-header "Week in Review"))
 
-           ("/mnt/DATA/exportedata/org-export/review/day.html")
-           )
+         ("/mnt/DATA/exportedata/org-export/review/day.html")
+         )
 
-          ("Rm" "Month in review"
-           agenda ""
-           ((org-agenda-span 'month)
-            (org-agenda-start-day "01")
-            (org-read-date-prefer-future nil)
-            (org-agenda-overriding-header "Month in Review"))
+        ("Rm" "Month in review"
+         agenda ""
+         ((org-agenda-span 'month)
+          (org-agenda-start-day "01")
+          (org-read-date-prefer-future nil)
+          (org-agenda-overriding-header "Month in Review"))
 
-           ("/mnt/DATA/exportedata/org-export/review/month.html")
-           )
+         ("/mnt/DATA/exportedata/org-export/review/month.html")
+         )
 
 ;;; **** CUSTOM AGENDA: Priority views [#24]
-          ("c" . "Priority views")
-          ("ca" "#A"  (
-                       (tags "PRIORITY=\"A\""
-                             ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                              (org-agenda-overriding-header "High-priority unfinished tasks:")))
-                       (alltodo ""
-                                ((org-agenda-entry-types '(:scheduled))
-                                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
-                                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
-                                                                                      "\\[#A\\]"))))))
-          ("cb" "#B" alltodo ""
-           ((org-agenda-entry-types '(:scheduled))
-            (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
-            (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
-                                                                 "\\[#B\\]"))))
-          ("cc" "#C" alltodo ""
-           ((org-agenda-entry-types '(:scheduled))
-            (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
-            (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
-                                                                 "\\[#C\\]"))))
-          ("h" "Habits" tags-todo "STYLE=\"habit\""
-           ((org-agenda-overriding-header "Habits")
-            (org-agenda-sorting-strategy
-             '(todo-state-down effort-up category-keep))))
+        ("c" . "Priority views")
+        ("ca" "#A"  (
+                     (tags "PRIORITY=\"A\""
+                           ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                            (org-agenda-overriding-header "High-priority unfinished tasks:")))
+                     (alltodo ""
+                              ((org-agenda-entry-types '(:scheduled))
+                               (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+                               (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                                                    "\\[#A\\]"))))))
+        ("cb" "#B" alltodo ""
+         ((org-agenda-entry-types '(:scheduled))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                               "\\[#B\\]"))))
+        ("cc" "#C" alltodo ""
+         ((org-agenda-entry-types '(:scheduled))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                               "\\[#C\\]"))))
+        ("h" "Habits" tags-todo "STYLE=\"habit\""
+         ((org-agenda-overriding-header "Habits")
+          (org-agenda-sorting-strategy
+           '(todo-state-down effort-up category-keep))))
 ;;; **** CUSTOM AGENDA: Issues [#2]
 
-          ("I" . "Issues") ;;; gives label to "I"
+        ("I" . "Issues") ;;; gives label to "I"
 ;;; ***** shows open tasks from .issue files [#2]
-          ("Io" "Todos tagged as Issues" tags-todo "-SCHEDULED={.+}/!+ISSUE")
+        ("Io" "Todos tagged as Issues" tags-todo "-SCHEDULED={.+}/!+ISSUE")
 ;;; **** CUSTOM AGENDA: Boards [#1]
-          ("B" . "Boards") ;;; gives label to "I"
+        ("B" . "Boards") ;;; gives label to "I"
 ;;; ***** TODO show only assigned [#7]
 
-          ("Bs" "[s]chedule next Trello Tasks" tags-todo "-SCHEDULED={.+}/!+NEXT" ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
-          ("Ba" "Assigned Trello Tasks" tags "orgtrello\\-users={rosenstrauch}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
-           ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
-          ("Bi" "[i]nserted unscheduled Tasks" todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
-           ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
+        ("Bs" "[s]chedule next Trello Tasks" tags-todo "-SCHEDULED={.+}/!+NEXT" ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
+        ("Ba" "Assigned Trello Tasks" tags "orgtrello\\-users={rosenstrauch}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
+         ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
+        ("Bi" "[i]nserted unscheduled Tasks" todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"
+         ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
 
 ;;; **** CUSTOM AGENDA: Quests [#1]
-          ("Q" . "Quests") ;;; gives label to "Q"
+        ("Q" . "Quests") ;;; gives label to "Q"
 ;;; ***** quests dont contain issues and boards
 ;;; ***** quests that are estimated, are not scheduled, are not DONE.
 ;;; ***** quests to estimate next [#1]
-          ("Qi" "[i]nserted unestimated tasks" tags-todo "Effort<1-SCHEDULED={.+}/!-DONE" )
+        ("Qi" "[i]nserted unestimated tasks" tags-todo "Effort<1-SCHEDULED={.+}/!-DONE" )
 ;;; ***** quests which have estimates [#1]
-          ("Qs" "[s]chedule next tasks" tags-todo "Effort>1-SCHEDULED={.+}/!-DONE")
+        ("Qs" "[s]chedule next tasks" tags-todo "Effort>1-SCHEDULED={.+}/!-DONE")
 ;;; ***** quests scheduled for today [#10]
-          ("Qt" "Do TODAY" agenda ""
-           ((org-agenda-ndays 1)
-            (org-agenda-use-time-grid nil)
-            (org-agenda-overriding-columns-format "%TODO %7EFFORT %PRIORITY %100ITEM 100%TAGS")
-            (org-agenda-view-columns-initially t)))
-          ("Qd" "Upcoming deadlines" agenda ""
-           ((org-agenda-entry-types '(:deadline))
-            (org-agenda-ndays 1)
-            (org-deadline-warning-days 60)
-            (org-agenda-time-grid nil)))
+        ("Qt" "Do TODAY" agenda ""
+         ((org-agenda-ndays 1)
+          (org-agenda-use-time-grid nil)
+          (org-agenda-overriding-columns-format "%TODO %7EFFORT %PRIORITY %100ITEM 100%TAGS")
+          (org-agenda-view-columns-initially t)))
+        ("Qd" "Upcoming deadlines" agenda ""
+         ((org-agenda-entry-types '(:deadline))
+          (org-agenda-ndays 1)
+          (org-deadline-warning-days 60)
+          (org-agenda-time-grid nil)))
 ;;; **** CUSTOM AGENDA: queries/searches [#1]
-          ("F" . "Find - Custom queries/searches") ;;; gives label to "Q"
+        ("F" . "Find - Custom queries/searches") ;;; gives label to "Q"
 ;;; ***** sparse tree for next string [#5]
-          ("Fn" "Next in file" occur-tree "NEXT")
-          ("Fi" "Issue search" search ""
-           ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
-          ("FA" "Archive search" search ""
-           ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
+        ("Fn" "Next in file" occur-tree "NEXT")
+        ("Fi" "Issue search" search ""
+         ((org-agenda-files (file-expand-wildcards "~/org/issues/*.issues"))))
+        ("FA" "Archive search" search ""
+         ((org-agenda-files (file-expand-wildcards "~/org/04-archive/*.org_archive"))))
 ;;; ***** match tagged headlines that are not todos [#3]
-          ("K" "Knowledge" tags "+{.*}+TODO=\"\"|+{.*}+TODO=\"DONE\""
-           ((org-tags-match-list-sublevels 'indented)
-            (org-agenda-sorting-strategy '(tag-up))))
+        ("K" "Knowledge" tags "+{.*}+TODO=\"\"|+{.*}+TODO=\"DONE\""
+         ((org-tags-match-list-sublevels 'indented)
+          (org-agenda-sorting-strategy '(tag-up))))
 ;;; ***** match orphan headlines (the ones without tag or todo) [#6]
-          ("O" "Orphans" tags "-{.*}+TODO=\"\""
-           ((org-tags-match-list-sublevels 'indented)))
-          ("P" . "Projects") ;;; gives label to "P"
-          ("P1" "Internal Block"
-           ((tags "PRJ" ((org-agenda-overriding-header "\nInternal Projects\n------------------\n")))
-            (tags-todo "Effort>1-SCHEDULED={.+}/!-DONE" ((org-agenda-overriding-header "\Estimated Unscheduled Internal Tasks\n------------------\n"))))
+        ("O" "Orphans" tags "-{.*}+TODO=\"\""
+         ((org-tags-match-list-sublevels 'indented)))
+        ("P" . "Projects") ;;; gives label to "P"
+        ("P1" "Internal Block"
+         ((tags "PRJ" ((org-agenda-overriding-header "\nInternal Projects\n------------------\n")))
+          (tags-todo "Effort>1-SCHEDULED={.+}/!-DONE" ((org-agenda-overriding-header "\Estimated Unscheduled Internal Tasks\n------------------\n"))))
 ;;; ***** only look in internal org files [#1]
-           ((org-agenda-files (file-expand-wildcards "~/org/01-internal/*/*"))
+         ((org-agenda-files (file-expand-wildcards "~/org/01-internal/*/*"))
 ;;; ***** show columns [#2]
-            (org-agenda-overriding-columns-format "%TODO %7EFFORT %PRIORITY %100ITEM 100%TAGS")
-            (org-agenda-view-columns-initially t)))
+          (org-agenda-overriding-columns-format "%TODO %7EFFORT %PRIORITY %100ITEM 100%TAGS")
+          (org-agenda-view-columns-initially t)))
 ;;; **** CUSTOM AGENDA: Customer Agenda [#20]
-          ("P2" "Customer Agenda and TEAM PRJ-related tasks" (
-                                                              (agenda "")
-                                                              (tags "PRJ" ((org-agenda-overriding-header "\nActive Team Projects\n------------------\n")))
-                                                              (tags "TEAM" ((org-agenda-overriding-header "\nActive Teams\n------------------\n"))))
-           ((org-agenda-files (append '("~/org/02-clients")
-                                      (file-expand-wildcards "~/org/02-clients/*")
-                                      (file-expand-wildcards "~/org/02-clients/*/*.org")))))
-          ("P6" "Agenda and TEAM PRJ-related tasks" (
-                                                     (agenda "")
-                                                     (tags "PRJ" ((org-agenda-overriding-header "\nActive Team Projects\n------------------\n")))
-                                                     (tags "TEAM" ((org-agenda-overriding-header "\nActive Teams\n------------------\n"))))
-           ((org-agenda-files (append '("~/org/06-teams")
-                                      (file-expand-wildcards "~/org/06-teams/*")
-                                      (file-expand-wildcards "~/org/06-teams/*/*.org")))))
-          ("Pl" "Refile and stuck" ((tags "REFILE" )
-                                    (stuck "")
-                                    (todo "TODO"(
-                                                 (org-agenda-todo-keyword-format "[ ]")
-                                                 (org-agenda-sorting-strategy '(tag-up priority-down))
-                                                 (org-agenda-overriding-header "\nTasks by Context\n------------------\n")))))
+        ("P2" "Customer Agenda and TEAM PRJ-related tasks" (
+                                                            (agenda "")
+                                                            (tags "PRJ" ((org-agenda-overriding-header "\nActive Team Projects\n------------------\n")))
+                                                            (tags "TEAM" ((org-agenda-overriding-header "\nActive Teams\n------------------\n"))))
+         ((org-agenda-files (append '("~/org/02-clients")
+                                    (file-expand-wildcards "~/org/02-clients/*")
+                                    (file-expand-wildcards "~/org/02-clients/*/*.org")))))
+        ("P6" "Agenda and TEAM PRJ-related tasks" (
+                                                   (agenda "")
+                                                   (tags "PRJ" ((org-agenda-overriding-header "\nActive Team Projects\n------------------\n")))
+                                                   (tags "TEAM" ((org-agenda-overriding-header "\nActive Teams\n------------------\n"))))
+         ((org-agenda-files (append '("~/org/06-teams")
+                                    (file-expand-wildcards "~/org/06-teams/*")
+                                    (file-expand-wildcards "~/org/06-teams/*/*.org")))))
+        ("Pl" "Refile and stuck" ((tags "REFILE" )
+                                  (stuck "")
+                                  (todo "TODO"(
+                                               (org-agenda-todo-keyword-format "[ ]")
+                                               (org-agenda-sorting-strategy '(tag-up priority-down))
+                                               (org-agenda-overriding-header "\nTasks by Context\n------------------\n")))))
 ;;; **** CUSTOM AGENDA: Printed Agenda [#22]
 
-          ("Pa" "Printed agenda" ((agenda "" ((org-agenda-ndays 7)
-                                              (org-agenda-start-on-weekday nil)
-                                              (org-agenda-repeating-timestamp-show-all t)
-                                              (org-deadline-warning-days 7)
-                                              (org-agenda-todo-keyword-format "[ ]")
-                                              (org-agenda-scheduled-leaders '("" ""))
+        ("Pa" "Printed agenda" ((agenda "" ((org-agenda-ndays 7)
+                                            (org-agenda-start-on-weekday nil)
+                                            (org-agenda-repeating-timestamp-show-all t)
+                                            (org-deadline-warning-days 7)
+                                            (org-agenda-todo-keyword-format "[ ]")
+                                            (org-agenda-scheduled-leaders '("" ""))
                                         ;(org-agenda-entry-types '(:timestamp :sexp))
-                                              ))
-                                  (todo "TODO" (
-                                                (org-agenda-todo-keyword-format "")
+                                            ))
+                                (todo "TODO" (
+                                              (org-agenda-todo-keyword-format "")
                                         ;(org-agenda-prefix-format  "%i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-                                                (org-agenda-sorting-strategy '(category-up priority-down))
-                                                (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
-           ((org-agenda-with-colors nil)
-            (org-agenda-compact-blocks t)
-            ;;(org-agenda-remove-tags t)
-            (ps-number-of-columns 1)
-            (org-tags-match-list-sublevels 'indented)
-            (ps-landscape-mode nil))
+                                              (org-agenda-sorting-strategy '(category-up priority-down))
+                                              (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
+         ((org-agenda-with-colors nil)
+          (org-agenda-compact-blocks t)
+          ;;(org-agenda-remove-tags t)
+          (ps-number-of-columns 1)
+          (org-tags-match-list-sublevels 'indented)
+          (ps-landscape-mode nil))
 
-           ("/mnt/DATA/exportedata/org-export/agenda.pdf"))
+         ("/mnt/DATA/exportedata/org-export/agenda.pdf"))
 ;;; Custom Agenda end [#1]
-          ))
+        ))
 ;;; *** ORG CONFIG: Agenda [#1]
 
 ;;; **** AGENDA Exporter settings [#9]
-  (setq org-agenda-exporter-settings '(
-                                       (org-agenda-write-buffer-name "Todays Agenda")
-                                       (ps-number-of-columns 2)
-                                       (ps-landscape-mode t)
+(setq org-agenda-exporter-settings '(
+                                     (org-agenda-write-buffer-name "Todays Agenda")
+                                     (ps-number-of-columns 2)
+                                     (ps-landscape-mode t)
                                         ;      (org-agenda-add-entry-text-maxlines 5)
                                         ;      (htmlize-output-type 'css)
-                                       (ps-print-color-p 'black-white)))
+                                     (ps-print-color-p 'black-white)))
 
 
 ;;; **** AGENDA open in current window [#1]
-  (setq org-agenda-window-setup (quote current-window))
+(setq org-agenda-window-setup (quote current-window))
 ;;; **** AGENDA warn me of any deadlines in next 7 days [#1]
-  (setq org-deadline-warning-days 2)
+(setq org-deadline-warning-days 2)
 ;;; **** AGENDA show me tasks scheduled or due in next fortnight [#1]
-  (setq org-agenda-span (quote fortnight))
+(setq org-agenda-span (quote fortnight))
 ;;; **** AGENDA don't show tasks as scheduled if they are already shown as a deadline [#1]
-  (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+(setq org-agenda-skip-scheduled-if-deadline-is-shown t)
 ;;; **** AGENDA global prefix formats [#10]
-  (setq org-agenda-prefix-format '
-        ((agenda . " %i %-12:c%?-12t% s")
-         (timeline . "  % s")
-         (todo . " %i %-12:c")
-         (tags . " %i %-12:c")
-         (search . " %i %-12:c")))
+(setq org-agenda-prefix-format '
+      ((agenda . " %i %-12:c%?-12t% s")
+       (timeline . "  % s")
+       (todo . " %i %-12:c")
+       (tags . " %i %-12:c")
+       (search . " %i %-12:c")))
 
 ;;; **** AGENDA Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind: [#2]
-  (setq org-agenda-skip-deadline-if-done t)
-  (setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-skip-scheduled-if-done t)
 ;;; **** AGENDA don't give awarning colour to tasks with impending deadlines if they are scheduled to be done [#1]
-  (setq org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled))
+(setq org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled))
 ;;; **** AGENDA sort tasks in order of when they are due and then by priority [#2]
-  (setq org-agenda-window-setup 'current-window)
-  (setq org-agenda-restore-windows-after-quit t)
+(setq org-agenda-window-setup 'current-window)
+(setq org-agenda-restore-windows-after-quit t)
 ;;; **** AGENDA start with follow mode? [#2]
-  ;;(setq org-agenda-start-with-follow-mode t)
+;;(setq org-agenda-start-with-follow-mode t)
 
 ;;; **** AGENDA start with sticky? [#1]
-  ;;  (setq org-agenda-sticky t)
+;;  (setq org-agenda-sticky t)
 ;;; **** AGENDA show only the parent tasks in the agenda's lists? [#9]
-  ;;(setq mby-org-agenda-toggle-list-sublevels nil)
+;;(setq mby-org-agenda-toggle-list-sublevels nil)
 
-  (setq org-agenda-sorting-strategy
-        '((agenda habit-down deadline-up time-up priority-down category-keep)
-          (todo category-up todo-state-up priority-down)
-          (tags category-up todo-state-up priority-down)
-          (search category-keep)))
+(setq org-agenda-sorting-strategy
+      '((agenda habit-down deadline-up time-up priority-down category-keep)
+        (todo category-up todo-state-up priority-down)
+        (tags category-up todo-state-up priority-down)
+        (search category-keep)))
 
 
 ;;; **** AGENDA enforce todo dependencies [#14]
-  (setq org-enforce-todo-dependencies 1)
+(setq org-enforce-todo-dependencies 1)
 
-  ;;(setq org-agenda-dim-blocked-tasks 'invisible)
-  (setq org-agenda-dim-blocked-tasks t)
-  (setq org-enforce-todo-checkbox-dependencies 1)
+;;(setq org-agenda-dim-blocked-tasks 'invisible)
+(setq org-agenda-dim-blocked-tasks t)
+(setq org-enforce-todo-checkbox-dependencies 1)
 
-  (setq org-columns-default-format
-        "%45ITEM %3TODO %5Effort(Time){:} %3PRIORITY %TAGS %6CLOCKSUM(Clock)")
+(setq org-columns-default-format
+      "%45ITEM %3TODO %5Effort(Time){:} %3PRIORITY %TAGS %6CLOCKSUM(Clock)")
                                         ; Set default column view headings: Task Effort Clock_Summary
                                         ; global Effort estimate values
                                         ; global STYLE property values for completion
-  (setq org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
-                                      ("STYLE_ALL" . "habit"))))
+(setq org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
+                                    ("STYLE_ALL" . "habit"))))
 
 ;;; **** AGENDA show all tags available (but only when tagging with : in agenda) [#3]
-  ;;(setq org-complete-tags-always-offer-all-agenda-tags t)
+;;(setq org-complete-tags-always-offer-all-agenda-tags t)
 
 
 ;;; *** ORG CONFIG: Clocking [#3]
 
-  (setq org-agenda-log-mode-items '(state closed clock))
+(setq org-agenda-log-mode-items '(state closed clock))
 
 ;;; **** CLOCKING auto start tracking default task [#3]
-  (run-with-idle-timer 25 nil 'bh/clock-in-organization-task-as-default)
+(run-with-idle-timer 25 nil 'bh/clock-in-organization-task-as-default)
 
 
 ;;; **** CLOCKING Resume clocking task when emacs is restarted [#2]
-  (org-clock-persistence-insinuate)
+(org-clock-persistence-insinuate)
 
 ;;; **** CLOCKING Show lot of clocking history so it's easy to pick items off the C-F11 list [#1]
-  (setq org-clock-history-length 23)
+(setq org-clock-history-length 23)
 ;;; **** CLOCKING Resume clocking task on clock-in if the clock is open [#1]
-  (setq org-clock-in-resume t)
+(setq org-clock-in-resume t)
 ;;; **** CLOCKING Change tasks to NEXT when clocking in [#1]
-  (setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
+(setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
 ;;; **** CLOCKING Separate drawers for clocking and logs [#1]
-  (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+(setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
 ;;; **** CLOCKING Save clock data and state changes and notes in the LOGBOOK drawer [#1]
-  (setq org-clock-into-drawer t)
+(setq org-clock-into-drawer t)
 ;;; **** CLOCKING remove clocked tasks with 0:00 duration [#1]
-  (setq org-clock-out-remove-zero-time-clocks t)
+(setq org-clock-out-remove-zero-time-clocks t)
 ;;; **** CLOCKING Clock out when moving task to a done state [#1]
-  (setq org-clock-out-when-done t)
+(setq org-clock-out-when-done t)
 ;;; **** CLOCKING Save the running clock and all clock history when exiting Emacs, load it on startup [#1]
-  (setq org-clock-persist t)
+(setq org-clock-persist t)
 ;;; **** CLOCKING Do not prompt to resume an active clock [#1]
-  (setq org-clock-persist-query-resume nil)
+(setq org-clock-persist-query-resume nil)
 ;;; **** CLOCKING Enable auto clock resolution for finding open clocks [#1]
-  (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+(setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
 ;;; **** CLOCKING Include current clocking task in clock reports [#128]
-  (setq org-clock-report-include-clocking-task t)
+(setq org-clock-report-include-clocking-task t)
 
-  (setq bh/keep-clock-running nil)
+(setq bh/keep-clock-running nil)
 
-  (defun bh/clock-in-to-next (kw)
-    "Switch a task from TODO to NEXT when clocking in.
+(defun bh/clock-in-to-next (kw)
+  "Switch a task from TODO to NEXT when clocking in.
 Skips capture tasks, projects, and subprojects.
 Switch projects and subprojects from NEXT back to TODO"
-    (when (not (and (boundp 'org-capture-mode) org-capture-mode))
-      (cond
-       ((and (member (org-get-todo-state) (list "TODO"))
-             (bh/is-task-p))
-        "NEXT")
-       ((and (member (org-get-todo-state) (list "NEXT"))
-             (bh/is-project-p))
-        "TODO"))))
+  (when (not (and (boundp 'org-capture-mode) org-capture-mode))
+    (cond
+     ((and (member (org-get-todo-state) (list "TODO"))
+           (bh/is-task-p))
+      "NEXT")
+     ((and (member (org-get-todo-state) (list "NEXT"))
+           (bh/is-project-p))
+      "TODO"))))
 
-  (defun bh/is-project-p ()
-    "Any task with a todo keyword subtask"
-    (save-restriction
-      (widen)
-      (let ((has-subtask)
-            (subtree-end (save-excursion (org-end-of-subtree t)))
-            (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-        (save-excursion
-          (forward-line 1)
-          (while (and (not has-subtask)
-                      (< (point) subtree-end)
-                      (re-search-forward "^\*+ " subtree-end t))
-            (when (member (org-get-todo-state) org-todo-keywords-1)
-              (setq has-subtask t))))
-        (and is-a-task has-subtask))))
+(defun bh/is-project-p ()
+  "Any task with a todo keyword subtask"
+  (save-restriction
+    (widen)
+    (let ((has-subtask)
+          (subtree-end (save-excursion (org-end-of-subtree t)))
+          (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
+      (save-excursion
+        (forward-line 1)
+        (while (and (not has-subtask)
+                    (< (point) subtree-end)
+                    (re-search-forward "^\*+ " subtree-end t))
+          (when (member (org-get-todo-state) org-todo-keywords-1)
+            (setq has-subtask t))))
+      (and is-a-task has-subtask))))
 
-  (defun bh/is-task-p ()
-    "Any task with a todo keyword and no subtask"
-    (save-restriction
-      (widen)
-      (let ((has-subtask)
-            (subtree-end (save-excursion (org-end-of-subtree t)))
-            (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-        (save-excursion
-          (forward-line 1)
-          (while (and (not has-subtask)
-                      (< (point) subtree-end)
-                      (re-search-forward "^\*+ " subtree-end t))
-            (when (member (org-get-todo-state) org-todo-keywords-1)
-              (setq has-subtask t))))
-        (and is-a-task (not has-subtask)))))
+(defun bh/is-task-p ()
+  "Any task with a todo keyword and no subtask"
+  (save-restriction
+    (widen)
+    (let ((has-subtask)
+          (subtree-end (save-excursion (org-end-of-subtree t)))
+          (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
+      (save-excursion
+        (forward-line 1)
+        (while (and (not has-subtask)
+                    (< (point) subtree-end)
+                    (re-search-forward "^\*+ " subtree-end t))
+          (when (member (org-get-todo-state) org-todo-keywords-1)
+            (setq has-subtask t))))
+      (and is-a-task (not has-subtask)))))
 
-  (defun bh/find-project-task ()
-    "Move point to the parent (project) task if any"
-    (save-restriction
-      (widen)
-      (let ((parent-task (save-excursion (org-back-to-heading 'invisible-ok) (point))))
-        (while (org-up-heading-safe)
-          (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
-            (setq parent-task (point))))
-        (goto-char parent-task)
-        parent-task)))
+(defun bh/find-project-task ()
+  "Move point to the parent (project) task if any"
+  (save-restriction
+    (widen)
+    (let ((parent-task (save-excursion (org-back-to-heading 'invisible-ok) (point))))
+      (while (org-up-heading-safe)
+        (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
+          (setq parent-task (point))))
+      (goto-char parent-task)
+      parent-task)))
 
-  (defun bh/punch-in (arg)
-    "Start continuous clocking and set the default task to the
+(defun bh/punch-in (arg)
+  "Start continuous clocking and set the default task to the
 selected task.  If no task is selected set the Organization task
 as the default task."
-    (interactive "p")
-    (setq bh/keep-clock-running t)
-    (if (equal major-mode 'org-agenda-mode)
-        ;;
+  (interactive "p")
+  (setq bh/keep-clock-running t)
+  (if (equal major-mode 'org-agenda-mode)
+      ;;
         ;;; We're in the agenda
-        ;;
-        (let* ((marker (org-get-at-bol 'org-hd-marker))
-               (tags (org-with-point-at marker (org-get-tags-at))))
-          (if (and (eq arg 4) tags)
-              (org-agenda-clock-in '(16))
-            (bh/clock-in-organization-task-as-default)))
       ;;
+      (let* ((marker (org-get-at-bol 'org-hd-marker))
+             (tags (org-with-point-at marker (org-get-tags-at))))
+        (if (and (eq arg 4) tags)
+            (org-agenda-clock-in '(16))
+          (bh/clock-in-organization-task-as-default)))
+    ;;
       ;;; We are not in the agenda
-      ;;
+    ;;
+    (save-restriction
+      (widen)
+                                        ; Find the tags on the current task
+      (if (and (equal major-mode 'org-mode) (not (org-before-first-heading-p)) (eq arg 4))
+          (org-clock-in '(16))
+        (bh/clock-in-organization-task-as-default)))))
+
+(defun bh/punch-out ()
+  (interactive)
+  (setq bh/keep-clock-running nil)
+  (when (org-clock-is-active)
+    (org-clock-out))
+  (org-agenda-remove-restriction-lock))
+
+(defun bh/clock-in-default-task ()
+  (save-excursion
+    (org-with-point-at org-clock-default-task
+      (org-clock-in))))
+
+(defun bh/clock-in-parent-task ()
+  "Move point to the parent (project) task if any and clock in"
+  (let ((parent-task))
+    (save-excursion
       (save-restriction
         (widen)
-                                        ; Find the tags on the current task
-        (if (and (equal major-mode 'org-mode) (not (org-before-first-heading-p)) (eq arg 4))
-            (org-clock-in '(16))
-          (bh/clock-in-organization-task-as-default)))))
+        (while (and (not parent-task) (org-up-heading-safe))
+          (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
+            (setq parent-task (point))))
+        (if parent-task
+            (org-with-point-at parent-task
+              (org-clock-in))
+          (when bh/keep-clock-running
+            (bh/clock-in-default-task)))))))
 
-  (defun bh/punch-out ()
-    (interactive)
-    (setq bh/keep-clock-running nil)
-    (when (org-clock-is-active)
-      (org-clock-out))
-    (org-agenda-remove-restriction-lock))
+(defvar bh/organization-task-id "a7f3b0f6-77b4-4434-8d03-06a267dc1cc6")
 
-  (defun bh/clock-in-default-task ()
-    (save-excursion
-      (org-with-point-at org-clock-default-task
-        (org-clock-in))))
+(defun bh/clock-in-organization-task-as-default ()
+  (interactive)
+  (org-with-point-at (org-id-find bh/organization-task-id 'marker)
+    (org-clock-in '(16))))
 
-  (defun bh/clock-in-parent-task ()
-    "Move point to the parent (project) task if any and clock in"
-    (let ((parent-task))
-      (save-excursion
-        (save-restriction
-          (widen)
-          (while (and (not parent-task) (org-up-heading-safe))
-            (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
-              (setq parent-task (point))))
-          (if parent-task
-              (org-with-point-at parent-task
-                (org-clock-in))
-            (when bh/keep-clock-running
-              (bh/clock-in-default-task)))))))
+(defun bh/clock-out-maybe ()
+  (when (and bh/keep-clock-running
+             (not org-clock-clocking-in)
+             (marker-buffer org-clock-default-task)
+             (not org-clock-resolving-clocks-due-to-idleness))
+    (bh/clock-in-parent-task)))
 
-  (defvar bh/organization-task-id "a7f3b0f6-77b4-4434-8d03-06a267dc1cc6")
-
-  (defun bh/clock-in-organization-task-as-default ()
-    (interactive)
-    (org-with-point-at (org-id-find bh/organization-task-id 'marker)
-      (org-clock-in '(16))))
-
-  (defun bh/clock-out-maybe ()
-    (when (and bh/keep-clock-running
-               (not org-clock-clocking-in)
-               (marker-buffer org-clock-default-task)
-               (not org-clock-resolving-clocks-due-to-idleness))
-      (bh/clock-in-parent-task)))
-
-  (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
-  
+(add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
+
 ;;; ** ORG projects (publishing) [#19]
 ;;;; Switches off use of time-stamps when publishing. I would prefer to publish
 ;;;; everything every time
-  (setq org-publish-use-timestamps-flag nil)
-  (setq org-publish-project-alist
-        '(
-          ("org" :components ("orgfull-html" "org-styles" "orgfull-pdf"))
+(setq org-publish-use-timestamps-flag nil)
+(setq org-publish-project-alist
+      '(
+        ("org" :components ("orgfull-html" "org-styles" "orgfull-pdf"))
 
-          ("org-styles"
-           :base-directory "~/org/styles"
-           :recursive t
-           :base-extension "css\\|js"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/"
-           :publishing-function org-publish-attachment)
-          ("orgfull-pdf"
-           :base-directory "~/org/"
-           :base-extension "org"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf"
-           :section-numbers nil
-           :with-toc nil
-           :recursive t
-           :publishing-function org-latex-publish-to-pdf)
-          ("orgfull-html"
-           :base-directory "~/org/"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
-           :base-extension "org"
-           :recursive t
-           :section-numbers t
-           :with-toc t
-           :exclude "~/org/09-private/"   ;; regexp
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-           :publishing-function org-html-publish-to-html)))
+        ("org-styles"
+         :base-directory "~/org/styles"
+         :recursive t
+         :base-extension "css\\|js"
+         :publishing-directory "/mnt/DATA/exportedata/org_published/"
+         :publishing-function org-publish-attachment)
+        ("orgfull-pdf"
+         :base-directory "~/org/"
+         :base-extension "org"
+         :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf"
+         :section-numbers nil
+         :with-toc nil
+         :recursive t
+         :publishing-function org-latex-publish-to-pdf)
+        ("orgfull-html"
+         :base-directory "~/org/"
+         :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
+         :base-extension "org"
+         :recursive t
+         :section-numbers t
+         :with-toc t
+         :exclude "~/org/09-private/"   ;; regexp
+         :auto-sitemap t                ; Generate sitemap.org automagically...
+         :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
+         :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
+         :publishing-function org-html-publish-to-html)))
 
 ;;; ** ORG Diary/Journal [#2]
-  (setq org-agenda-diary-file "~/org/journal.org")
+(setq org-agenda-diary-file "~/org/journal.org")
 
 ;;; ** ORG Tags [#11]
-  (setq org-tag-alist '((:startgroup . nil)
-                        ("@work" . ?w) ("@home" . ?h)
-                        ("@errands" . ?t)
-                        ("@BUY" . ?t)
-                        ("@meeting" . ?m)
-                        ("@phone" . ?c)
-                        (:endgroup . nil)
-                        ("PRJ" . ?e)
-                        ("TEAM" . ?g)
-                        ("@laptop" . ?l) ("@pc" . ?p)))
+(setq org-tag-alist '((:startgroup . nil)
+                      ("@work" . ?w) ("@home" . ?h)
+                      ("@errands" . ?t)
+                      ("@BUY" . ?t)
+                      ("@meeting" . ?m)
+                      ("@phone" . ?c)
+                      (:endgroup . nil)
+                      ("PRJ" . ?e)
+                      ("TEAM" . ?g)
+                      ("@laptop" . ?l) ("@pc" . ?p)))
 
 ;;; ** ORG Tasks [#4]
-  (setq org-log-redeadline (quote time))
-  (setq org-log-done (quote time))
-  (setq org-enforce-todo-dependencies t)
-  (setq org-log-reschedule (quote time))
+(setq org-log-redeadline (quote time))
+(setq org-log-done (quote time))
+(setq org-enforce-todo-dependencies t)
+(setq org-log-reschedule (quote time))
 ;;; *** ORG TASKS don't show tasks that are scheduled or have deadlines in the normal todo list [#2]
-  (setq org-agenda-todo-ignore-deadlines (quote all))
-  (setq org-agenda-todo-ignore-scheduled (quote all))
+(setq org-agenda-todo-ignore-deadlines (quote all))
+(setq org-agenda-todo-ignore-scheduled (quote all))
 
 ;;; *** ORG TODO Keywords [#15]
-  (setq org-todo-keywords
-        (quote (
-                (sequence "WISH(w)"  "TODO(t)" "HOLD(h@/!)" "NEXT(n)" "|" "CANCELED(c)" "DONE(d)")
-                (sequence "INSERT(i)" "OPEN(o)" "|" "DONE(d)")
+(setq org-todo-keywords
+      (quote (
+              (sequence "WISH(w)"  "TODO(t)" "HOLD(h@/!)" "NEXT(n)" "|" "CANCELED(c)" "DONE(d)")
+              (sequence "INSERT(i)" "OPEN(o)" "|" "DONE(d)")
                 ;;; do we treat ideas as special type of task
-                (sequence "RESEARCH(r)" "DESCRIBE(f)" "|" "KNOWLEDGE(k)")
-                )))
-  (setq org-todo-keyword-faces
-        (quote (("TODO" :foreground "red" :weight bold)
-                ("NEXT" :foreground "pink1" :weight bold)
-                ("WISH" :foreground "medium sea green" :weight bold)
-                ("INSERT" :foreground "medium sea green" :weight bold)
-                ("DONE" :background "darkgrey" :weight bold :box (:line-width 2 :style released-button))
-                ("HOLD" :foreground "orange" :weight bold)
-                ("CANCELLED" :foreground "forest green" :weight bold))))
+              (sequence "RESEARCH(r)" "DESCRIBE(f)" "|" "KNOWLEDGE(k)")
+              )))
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+              ("NEXT" :foreground "pink1" :weight bold)
+              ("WISH" :foreground "medium sea green" :weight bold)
+              ("INSERT" :foreground "medium sea green" :weight bold)
+              ("DONE" :background "darkgrey" :weight bold :box (:line-width 2 :style released-button))
+              ("HOLD" :foreground "orange" :weight bold)
+              ("CANCELLED" :foreground "forest green" :weight bold))))
 ;;; *** ORG Project tags [#49]
-  (setq org-tags-exclude-from-inheritance '("PRJ" "TEAM")
-        org-stuck-projects '("+PRJ/-HOLD-INSERT-DONE"
-                             ("NEXT" "TODO") ("@BUY")))
+(setq org-tags-exclude-from-inheritance '("PRJ" "TEAM")
+      org-stuck-projects '("+PRJ/-HOLD-INSERT-DONE"
+                           ("NEXT" "TODO") ("@BUY")))
   ;;; Refile
-  (setq org-reverse-note-order t)
-  (setq org-refile-use-outline-path nil)
-  (setq org-refile-allow-creating-parent-nodes 'confirm)
-  (setq org-refile-use-cache nil)
-  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 7))))
+(setq org-reverse-note-order t)
+(setq org-refile-use-outline-path nil)
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+(setq org-refile-use-cache nil)
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 7))))
 
-  (defun org-refile-to-datetree (&optional file)
-    "Refile a subtree to a datetree corresponding to it's timestamp.
+(defun org-refile-to-datetree (&optional file)
+  "Refile a subtree to a datetree corresponding to it's timestamp.
 
     The current time is used if the entry has no timestamp. If FILE
     is nil, refile in the current file."
-    (interactive "f")
-    (let* ((datetree-date (or (org-entry-get nil "TIMESTAMP" t)
-                              (org-read-date t nil "now")))
-           (date (org-date-to-gregorian datetree-date))
-           )
-      (save-excursion
-        (with-current-buffer (current-buffer)
-          (org-cut-subtree)
-          (if file (find-file file))
-          (org-datetree-find-date-create date)
-          (org-narrow-to-subtree)
-          (show-subtree)
-          (org-end-of-subtree t)
-          (newline)
-          (goto-char (point-max))
-          (org-paste-subtree 4)
-          (widen)
-          ))
-      )
+  (interactive "f")
+  (let* ((datetree-date (or (org-entry-get nil "TIMESTAMP" t)
+                            (org-read-date t nil "now")))
+         (date (org-date-to-gregorian datetree-date))
+         )
+    (save-excursion
+      (with-current-buffer (current-buffer)
+        (org-cut-subtree)
+        (if file (find-file file))
+        (org-datetree-find-date-create date)
+        (org-narrow-to-subtree)
+        (show-subtree)
+        (org-end-of-subtree t)
+        (newline)
+        (goto-char (point-max))
+        (org-paste-subtree 4)
+        (widen)
+        ))
     )
+  )
 
 
 
 
-  (setq org-blank-before-new-entry nil)
-  (setq org-list-demote-modify-bullet (quote (("+" . "-")
-                                              ("*" . "-")
-                                              ("1." . "-")
-                                              ("1)" . "a)"))))
+(setq org-blank-before-new-entry nil)
+(setq org-list-demote-modify-bullet (quote (("+" . "-")
+                                            ("*" . "-")
+                                            ("1." . "-")
+                                            ("1)" . "a)"))))
 
   ;;; *** Org- config contacts
-  (use-package org-contacts
-    :config
-    (setq org-contacts-files `(,(expand-file-name "contacts.org" org-directory))
-          org-contacts-icon-use-gravatar nil))
+(use-package org-contacts
+  :config
+  (setq org-contacts-files `(,(expand-file-name "contacts.org" org-directory))
+        org-contacts-icon-use-gravatar nil))
 
-  ;; https://emacs.stackexchange.com/a/17553
-  :ensure org-plus-contrib)
+;; https://emacs.stackexchange.com/a/17553
+:ensure org-plus-contrib)
 
 ;;; * Endof Org config
 
@@ -1114,3 +1171,17 @@ as the default task."
 ;;; * Invoices
 ;;; https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
 (use-package org-invoice )
+
+;;; * helm
+(use-package helm
+  :bind (("M-x" . helm-M-x)
+         ("M-<f5>" . helm-find-files)
+         ([f10] . helm-buffers-list)
+         ([S-f10] . helm-recentf))
+  :ensure t)
+
+
+
+
+;;; * Notmuch
+(autoload 'notmuch "notmuch" "notmuch mail" t)

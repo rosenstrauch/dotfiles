@@ -108,6 +108,7 @@ fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref
 
 ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
 ln -sf ~/.fresh/source/squizlabs/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
+
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
@@ -222,6 +223,8 @@ fresh lygaret/emacs.d site-lisp/org-github-links.el --file=~/.emacs.d/site-lisp/
 # helm github issues integration
 fresh syohex/emacs-helm-github-issues helm-github-issues.el --file=~/.emacs.d/site-lisp/helm-github-issues.el
 
+# helm org contacts
+fresh tmalsburg/helm-org-contacts helm-org-contacts.el --file=~/.emacs.d/site-lisp/helm-org-contacts.el
 
 #######
 # VIM #
@@ -309,10 +312,12 @@ fresh_after_build() {
 
   $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
 
-  ## update nvm
-  #cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
-
   ## update prezto
   #cd ~/.fresh/source/rosenstrauch/prezto/ && git checkout production && git pull
+
+  echo "sensitive files"
+  echo ls ~-SENSITIVE
+
+  echo "good job, thank you very much!"
 
 }
