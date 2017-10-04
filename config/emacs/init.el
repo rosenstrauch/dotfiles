@@ -873,18 +873,19 @@ as the default task."
            :section-numbers nil
            :with-toc nil
            :recursive t
+           :exclude "^_"
            :publishing-function org-latex-publish-to-pdf)
           ("orgfull-html"
            :base-directory "~/org/"
            :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
            :base-extension "org"
            :recursive t
+           :exclude "^_"
            :section-numbers t
            :with-toc t
-           :exclude "~/org/09-private/"   ;; regexp
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
+           :auto-sitemap t
+           :sitemap-filename "sitemap.org"
+           :sitemap-title "Sitemap"
            :publishing-function org-html-publish-to-html)))
 
 ;;; ** ORG Diary/Journal [#2]
@@ -977,12 +978,13 @@ as the default task."
   (use-package org-contacts
     :config
     (setq org-contacts-files `(,(expand-file-name "contacts.org" org-directory))
-          org-contacts-icon-use-gravatar nil)
+          )
 
+; Using gravatar isn't fast enough
+  (setq org-contacts-icon-use-gravatar nil)
+
+(setq org-contacts-address-property "CITY")
     )
-
-
-
   ;; https://emacs.stackexchange.com/a/17553
   :ensure org-plus-contrib)
 
@@ -1255,3 +1257,4 @@ as the default task."
 ;;; * Google maps
 
 (require 'google-maps)
+
