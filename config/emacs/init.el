@@ -1,6 +1,9 @@
 ;;; * GLOBAL Emacs Settings
 ;;; ** GLOBAL Load custom lisp from others [#1]
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+
+(let ((default-directory  "~/.emacs.d/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 ;;; ** GLOBAL Store Customizations elsewhere [#6]
 (setq custom-file "~/.emacs.d/custom.el")
 (unless (file-exists-p custom-file)
@@ -128,7 +131,7 @@
   ("C-c d" . org-refile-to-datetree)
   ("C-c is" . my-org-screenshot)
   ("C-c oc" . org-contacts)
-
+  ("C-<" . org-begin-template)
 ;;; ** ORG INIT [#1]
   :init
   (add-hook 'before-save-hook #'endless/update-includes)
@@ -216,6 +219,51 @@ BEGIN and END are regexps which define the line range to use."
 
   (add-hook 'org-blocker-hook #'org-block-wip-limit)
 
+;;; *** function to wrap blocks of text in org templates
+
+(defun org-begin-template ()
+  "Make a template at point."
+  (interactive)
+  (if (org-at-table-p)
+      (call-interactively 'org-table-rotate-recalc-marks)
+    (let* ((choices '(("s" . "SRC")
+                      ("e" . "EXAMPLE")
+                      ("q" . "QUOTE")
+                      ("v" . "VERSE")
+                      ("c" . "CENTER")
+                      ("l" . "LaTeX")
+                      ("h" . "HTML")
+                      ("a" . "ASCII")))
+           (key
+            (key-description
+             (vector
+              (read-key
+               (concat (propertize "Template type: " 'face 'minibuffer-prompt)
+                       (mapconcat (lambda (choice)
+                                    (concat (propertize (car choice) 'face 'font-lock-type-face)
+                                            ": "
+                                            (cdr choice)))
+                                  choices
+                                  ", ")))))))
+      (let ((result (assoc key choices)))
+        (when result
+          (let ((choice (cdr result)))
+            (cond
+             ((region-active-p)
+              (let ((start (region-beginning))
+                    (end (region-end)))
+                (goto-char end)
+                (insert "#+END_" choice "\n")
+                (goto-char start)
+                (insert "#+BEGIN_" choice "\n")))
+             (t
+              (insert "#+BEGIN_" choice "\n")
+              (save-excursion (insert "#+END_" choice))))))))))
+
+;;; bind to key
+;;;(define-key org-mode-map (kbd "C-<") 'org-begin-template)
+
+
 ;;; *** ORG INIT my invoices
   (defvar invoice-dir "~/org/07-needs/Invoices/")
   (defvar invoice-template-path (expand-file-name "_template.org" invoice-dir))
@@ -239,6 +287,7 @@ modulo 1000. Ex.: 2016001."
     "Make a new invoice from given file and date range."
     (interactive "forg file: ")
     (let ((invoice-number (my/invoice-next-number))
+          (current-headline (org-entry-get nil "ITEM"))
           (invoice-date (format-time-string "%m/%d/%Y" (current-time)))
           (invoice-start (org-read-date nil t nil "Choose invoice start" nil "-2Mon"))
           (invoice-end (org-read-date nil t nil "Choose invoice end" nil "-Sun")))
@@ -250,6 +299,9 @@ modulo 1000. Ex.: 2016001."
       (goto-char (point-min))
       (while (search-forward "@INVOICE_DATE@" nil t)
         (replace-match invoice-date))
+      (goto-char (point-min))
+      (while (search-forward "@current_headline@" nil t)
+        (replace-match current-headline))
       (goto-char (point-min))
       (while (search-forward "@invoice_start@" nil t)
         (replace-match (format-time-string "%Y-%m-%d" invoice-start)))
@@ -287,7 +339,9 @@ same directory as the org-buffer and insert a link to this file."
                                         ; insert into file if correctly taken
     (if (file-exists-p filename)
         (insert (concat "[[file:" filename "]]"))))
-  :config
+:config
+
+
 ;;; *** Org CONFIG Babel
   (org-babel-do-load-languages 'org-babel-load-languages
                                '(
@@ -382,7 +436,7 @@ same directory as the org-buffer and insert a link to this file."
  :ADDRESS:
  :BIRTHDAY:
  :END:")
-          
+
 ;;; **** CAPTURE: Ideas are not tasks                                            [#2]
           ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
            "* %?\nEntered on %U\n  %i\n  %a")
@@ -928,6 +982,7 @@ as the default task."
     )
 
 
+
   ;; https://emacs.stackexchange.com/a/17553
   :ensure org-plus-contrib)
 
@@ -1197,3 +1252,6 @@ as the default task."
 
 ;;; * Notmuch
 (autoload 'notmuch "notmuch" "notmuch mail" t)
+;;; * Google maps
+
+(require 'google-maps)
