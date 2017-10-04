@@ -225,6 +225,7 @@ fresh syohex/emacs-helm-github-issues helm-github-issues.el --file=~/.emacs.d/si
 
 # helm org contacts
 fresh tmalsburg/helm-org-contacts helm-org-contacts.el --file=~/.emacs.d/site-lisp/helm-org-contacts.el
+fresh jd/google-maps.el . --file=~/.emacs.d/site-lisp/google-maps/
 
 #######
 # VIM #
