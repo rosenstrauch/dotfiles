@@ -266,8 +266,7 @@ fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 # Weechat #
 ###########
 
-fresh rawdigits/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
-fresh s3rvac/weechat-notify-send notify_send.py --file=~/.weechat/python/notify_send.py
+fresh wee-slack/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
 
 
 ##########
