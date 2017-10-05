@@ -1,6 +1,9 @@
 ;;; * GLOBAL Emacs Settings
 ;;; ** GLOBAL Load custom lisp from others [#1]
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+
+(let ((default-directory  "~/.emacs.d/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 ;;; ** GLOBAL Store Customizations elsewhere [#6]
 (setq custom-file "~/.emacs.d/custom.el")
 (unless (file-exists-p custom-file)
@@ -96,7 +99,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
-;(byte-recompile-directory package-user-dir nil 'force)
+                                        ;(byte-recompile-directory package-user-dir nil 'force)
 ;;; ** BOOTSTRAP `use-package' [#1]
 (unless (package-installed-p 'use-package)
 ;;; TODO: dont run this on every start but dont not run it so we dont have outdated lists. [#4]
@@ -127,55 +130,56 @@
   ("C-c C-w" . org-refile)
   ("C-c d" . org-refile-to-datetree)
   ("C-c is" . my-org-screenshot)
-
+  ("C-c oc" . org-contacts)
+  ("C-<" . org-begin-template)
 ;;; ** ORG INIT [#1]
   :init
   (add-hook 'before-save-hook #'endless/update-includes)
 
-(defun endless/update-includes (&rest ignore)
-  "Update the line numbers of #+INCLUDE:s in current buffer.
+  (defun endless/update-includes (&rest ignore)
+    "Update the line numbers of #+INCLUDE:s in current buffer.
 Only looks at INCLUDEs that have either :range-begin or :range-end.
 This function does nothing if not in org-mode, so you can safely
 add it to `before-save-hook'."
-  (interactive)
-  (when (derived-mode-p 'org-mode)
-    (save-excursion
-      (goto-char (point-min))
-      (while (search-forward-regexp
-              "^\\s-*#\\+INCLUDE: *\"\\([^\"]+\\)\".*:range-\\(begin\\|end\\)"
-              nil 'noerror)
-        (let* ((file (expand-file-name (match-string-no-properties 1)))
-               lines begin end)
-          (forward-line 0)
-          (when (looking-at "^.*:range-begin *\"\\([^\"]+\\)\"")
-            (setq begin (match-string-no-properties 1)))
-          (when (looking-at "^.*:range-end *\"\\([^\"]+\\)\"")
-            (setq end (match-string-no-properties 1)))
-          (setq lines (endless/decide-line-range file begin end))
-          (when lines
-            (if (looking-at ".*:lines *\"\\([-0-9]+\\)\"")
-                (replace-match lines :fixedcase :literal nil 1)
-              (goto-char (line-end-position))
-              (insert " :lines \"" lines "\""))))))))
+    (interactive)
+    (when (derived-mode-p 'org-mode)
+      (save-excursion
+        (goto-char (point-min))
+        (while (search-forward-regexp
+                "^\\s-*#\\+INCLUDE: *\"\\([^\"]+\\)\".*:range-\\(begin\\|end\\)"
+                nil 'noerror)
+          (let* ((file (expand-file-name (match-string-no-properties 1)))
+                 lines begin end)
+            (forward-line 0)
+            (when (looking-at "^.*:range-begin *\"\\([^\"]+\\)\"")
+              (setq begin (match-string-no-properties 1)))
+            (when (looking-at "^.*:range-end *\"\\([^\"]+\\)\"")
+              (setq end (match-string-no-properties 1)))
+            (setq lines (endless/decide-line-range file begin end))
+            (when lines
+              (if (looking-at ".*:lines *\"\\([-0-9]+\\)\"")
+                  (replace-match lines :fixedcase :literal nil 1)
+                (goto-char (line-end-position))
+                (insert " :lines \"" lines "\""))))))))
 
 ;;; *** ORG INIT: provide command to fix includes
-(defun endless/decide-line-range (file begin end)
-  "Visit FILE and decide which lines to include.
+  (defun endless/decide-line-range (file begin end)
+    "Visit FILE and decide which lines to include.
 BEGIN and END are regexps which define the line range to use."
-  (let (l r)
-    (save-match-data
-      (with-temp-buffer
-        (insert-file file)
-        (goto-char (point-min))
-        (if (null begin)
-            (setq l "")
-          (search-forward-regexp begin)
-          (setq l (line-number-at-pos (match-beginning 0))))
-        (if (null end)
-            (setq r "")
-          (search-forward-regexp end)
-          (setq r (1+ (line-number-at-pos (match-end 0)))))
-        (format "%s-%s" l r)))))
+    (let (l r)
+      (save-match-data
+        (with-temp-buffer
+          (insert-file file)
+          (goto-char (point-min))
+          (if (null begin)
+              (setq l "")
+            (search-forward-regexp begin)
+            (setq l (line-number-at-pos (match-beginning 0))))
+          (if (null end)
+              (setq r "")
+            (search-forward-regexp end)
+            (setq r (1+ (line-number-at-pos (match-end 0)))))
+          (format "%s-%s" l r)))))
 ;;; *** ORG INIT: provide a command to show the subtasks
 ;;; *** ORG INIT: NOTE: org-agenda-dim-blocked-tasks may not be invisible [#7]
 
@@ -214,37 +218,138 @@ BEGIN and END are regexps which define the line range to use."
       t)) ; do not block
 
   (add-hook 'org-blocker-hook #'org-block-wip-limit)
-;;; *** ORG INIT add screenshot utility command http://stackoverflow.com/a/17438212
-(defun my-org-screenshot ()
-  "Take a screenshot into a time stamped unique-named file in the
-same directory as the org-buffer and insert a link to this file."
+
+;;; *** function to wrap blocks of text in org templates
+
+(defun org-begin-template ()
+  "Make a template at point."
   (interactive)
-  (org-display-inline-images)
-  (setq filename
-        (concat
-         (make-temp-name
-          (concat (file-name-nondirectory (buffer-file-name))
-                  "_imgs/"
-                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
-  (unless (file-exists-p (file-name-directory filename))
-    (make-directory (file-name-directory filename)))
-  ; take screenshot
-  (if (eq system-type 'darwin)
-      (call-process "screencapture" nil nil nil "-i" filename))
-  (if (eq system-type 'gnu/linux)
-      (call-process "import" nil nil nil filename))
-  ; insert into file if correctly taken
-  (if (file-exists-p filename)
-    (insert (concat "[[file:" filename "]]"))))
+  (if (org-at-table-p)
+      (call-interactively 'org-table-rotate-recalc-marks)
+    (let* ((choices '(("s" . "SRC")
+                      ("e" . "EXAMPLE")
+                      ("q" . "QUOTE")
+                      ("v" . "VERSE")
+                      ("c" . "CENTER")
+                      ("l" . "LaTeX")
+                      ("h" . "HTML")
+                      ("a" . "ASCII")))
+           (key
+            (key-description
+             (vector
+              (read-key
+               (concat (propertize "Template type: " 'face 'minibuffer-prompt)
+                       (mapconcat (lambda (choice)
+                                    (concat (propertize (car choice) 'face 'font-lock-type-face)
+                                            ": "
+                                            (cdr choice)))
+                                  choices
+                                  ", ")))))))
+      (let ((result (assoc key choices)))
+        (when result
+          (let ((choice (cdr result)))
+            (cond
+             ((region-active-p)
+              (let ((start (region-beginning))
+                    (end (region-end)))
+                (goto-char end)
+                (insert "#+END_" choice "\n")
+                (goto-char start)
+                (insert "#+BEGIN_" choice "\n")))
+             (t
+              (insert "#+BEGIN_" choice "\n")
+              (save-excursion (insert "#+END_" choice))))))))))
+
+;;; bind to key
+;;;(define-key org-mode-map (kbd "C-<") 'org-begin-template)
+
+
+;;; *** ORG INIT my invoices
+  (defvar invoice-dir "~/org/07-needs/Invoices/")
+  (defvar invoice-template-path (expand-file-name "_template.org" invoice-dir))
+
+  (defun my/invoice-next-number ()
+    "Get next sequential invoice number. Invoice numbers are in the format YYYYXXX,
+where YYYY is the current year and XXX is a zero-padded sequential counter
+modulo 1000. Ex.: 2016001."
+    (concat (format-time-string "%Y" (current-time))
+            (format "%03d" (% (1+ (string-to-number
+                                   (substring (car (last (directory-files
+                                                          invoice-dir
+                                                          nil
+                                                          "^[0-9]+\.org$"))) 4 7))) 1000))))
+
+  (defun my/invoice-get-path (number)
+    "Derive invoice file path from invoice NUMBER."
+    (format "%s/%s.org" invoice-dir number))
+
+  (defun my/invoice-create (scope-file)
+    "Make a new invoice from given file and date range."
+    (interactive "forg file: ")
+    (let ((invoice-number (my/invoice-next-number))
+          (current-headline (org-entry-get nil "ITEM"))
+          (invoice-date (format-time-string "%m/%d/%Y" (current-time)))
+          (invoice-start (org-read-date nil t nil "Choose invoice start" nil "-2Mon"))
+          (invoice-end (org-read-date nil t nil "Choose invoice end" nil "-Sun")))
+      (find-file (my/invoice-get-path invoice-number))
+      (insert-file-contents invoice-template-path)
+      (goto-char (point-min))
+      (while (search-forward "@INVOICE_NUMBER@" nil t)
+        (replace-match invoice-number))
+      (goto-char (point-min))
+      (while (search-forward "@INVOICE_DATE@" nil t)
+        (replace-match invoice-date))
+      (goto-char (point-min))
+      (while (search-forward "@current_headline@" nil t)
+        (replace-match current-headline))
+      (goto-char (point-min))
+      (while (search-forward "@invoice_start@" nil t)
+        (replace-match (format-time-string "%Y-%m-%d" invoice-start)))
+      (goto-char (point-min))
+      (while (search-forward "@invoice_end@" nil t)
+        (replace-match (format-time-string "%Y-%m-%d" invoice-end)))
+      (goto-char (point-min))
+      (while (search-forward "@scope_file@" nil t)
+        (replace-match scope-file))
+      (org-update-all-dblocks)))
+
+  (defun my/invoice-create-from-current-buffer-file ()
+    "Make a new invoice from current buffer's file and given date range."
+    (interactive)
+    (my/invoice-create (buffer-file-name)))
+;;; *** ORG INIT add screenshot utility command http://stackoverflow.com/a/17438212
+  (defun my-org-screenshot ()
+    "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+    (interactive)
+    (org-display-inline-images)
+    (setq filename
+          (concat
+           (make-temp-name
+            (concat (file-name-nondirectory (buffer-file-name))
+                    "_imgs/"
+                    (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+    (unless (file-exists-p (file-name-directory filename))
+      (make-directory (file-name-directory filename)))
+                                        ; take screenshot
+    (if (eq system-type 'darwin)
+        (call-process "screencapture" nil nil nil "-i" filename))
+    (if (eq system-type 'gnu/linux)
+        (call-process "import" nil nil nil filename))
+                                        ; insert into file if correctly taken
+    (if (file-exists-p filename)
+        (insert (concat "[[file:" filename "]]"))))
 :config
+
+
 ;;; *** Org CONFIG Babel
-(org-babel-do-load-languages 'org-babel-load-languages
-    '(
-        (sh . t)
-    )
-)
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '(
+                                 (sh . t)
+                                 )
+                               )
 ;;; *** ORg config: nicer org elipsis
-(setq org-ellipsis "⤵")
+  (setq org-ellipsis "⤵")
 ;;; *** ORG config: allow linking by id [#1]
   (setq org-id-link-to-org-use-id t)
 
@@ -309,6 +414,29 @@ same directory as the org-buffer and insert a link to this file."
            )
           ("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
            "* WISH %?\n  %i\n  %a")
+
+
+;;; **** ORG CONFIG Capture contacts
+          ("c" "👤 Contact" entry
+           (file+headline (expand-file-name "contacts.org" org-directory) "People")
+           "* %(org-contacts-template-name)\n:PROPERTIES:\n:EMAIL: %(org-contacts-template-email)\n:END:"
+           :clock-keep t :kill-buffer t)
+
+          ("C" "Company Contacts" entry
+           (file+headline (expand-file-name "contacts.org" org-directory) "Companies")
+           "* %(org-contacts-template-name)
+ :PROPERTIES:
+ :EMAIL: %(org-contacts-template-email)
+ :PHONE:
+ :ALIAS:
+ :NICKNAME:
+ :IGNORE:
+ :ICON:
+ :NOTE:
+ :ADDRESS:
+ :BIRTHDAY:
+ :END:")
+
 ;;; **** CAPTURE: Ideas are not tasks                                            [#2]
           ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
            "* %?\nEntered on %U\n  %i\n  %a")
@@ -516,11 +644,11 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
 ;;; **** AGENDA global prefix formats [#10]
   (setq org-agenda-prefix-format '
-                                   ((agenda . " %i %-12:c%?-12t% s")
-                                    (timeline . "  % s")
-                                    (todo . " %i %-12:c")
-                                    (tags . " %i %-12:c")
-                                    (search . " %i %-12:c")))
+        ((agenda . " %i %-12:c%?-12t% s")
+         (timeline . "  % s")
+         (todo . " %i %-12:c")
+         (tags . " %i %-12:c")
+         (search . " %i %-12:c")))
 
 ;;; **** AGENDA Tasks mit Datum in der Agenda ausblenden, wenn sie bereits erledigt sind: [#2]
   (setq org-agenda-skip-deadline-if-done t)
@@ -534,7 +662,7 @@ same directory as the org-buffer and insert a link to this file."
   ;;(setq org-agenda-start-with-follow-mode t)
 
 ;;; **** AGENDA start with sticky? [#1]
-;;  (setq org-agenda-sticky t)
+  ;;  (setq org-agenda-sticky t)
 ;;; **** AGENDA show only the parent tasks in the agenda's lists? [#9]
   ;;(setq mby-org-agenda-toggle-list-sublevels nil)
 
@@ -745,18 +873,19 @@ as the default task."
            :section-numbers nil
            :with-toc nil
            :recursive t
+           :exclude "^_"
            :publishing-function org-latex-publish-to-pdf)
           ("orgfull-html"
            :base-directory "~/org/"
            :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
            :base-extension "org"
            :recursive t
+           :exclude "^_"
            :section-numbers t
            :with-toc t
-           :exclude "~/org/09-private/"   ;; regexp
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
+           :auto-sitemap t
+           :sitemap-filename "sitemap.org"
+           :sitemap-title "Sitemap"
            :publishing-function org-html-publish-to-html)))
 
 ;;; ** ORG Diary/Journal [#2]
@@ -778,7 +907,7 @@ as the default task."
   (setq org-log-redeadline (quote time))
   (setq org-log-done (quote time))
   (setq org-enforce-todo-dependencies t)
-(setq org-log-reschedule (quote time))
+  (setq org-log-reschedule (quote time))
 ;;; *** ORG TASKS don't show tasks that are scheduled or have deadlines in the normal todo list [#2]
   (setq org-agenda-todo-ignore-deadlines (quote all))
   (setq org-agenda-todo-ignore-scheduled (quote all))
@@ -845,7 +974,18 @@ as the default task."
                                               ("1." . "-")
                                               ("1)" . "a)"))))
 
-;; https://emacs.stackexchange.com/a/17553
+  ;;; *** Org- config contacts
+  (use-package org-contacts
+    :config
+    (setq org-contacts-files `(,(expand-file-name "contacts.org" org-directory))
+          )
+
+; Using gravatar isn't fast enough
+  (setq org-contacts-icon-use-gravatar nil)
+
+(setq org-contacts-address-property "CITY")
+    )
+  ;; https://emacs.stackexchange.com/a/17553
   :ensure org-plus-contrib)
 
 ;;; * Endof Org config
@@ -870,13 +1010,13 @@ as the default task."
 
 ;;; * use package org-screenshot
 (use-package org-attach-screenshot
-     :ensure t)
+  :ensure t)
 
 ;;; * Use package emacs-fasd
 (use-package fasd
   :bind(("\C-c f" . fasd-find-file))
   :config (setq global-fasd-mode 1)
-          (setq fasd-enable-initial-prompt nil)
+  (setq fasd-enable-initial-prompt nil)
   :ensure t)
 ;;; * Use package csv-export
 (use-package org-clock-csv
@@ -995,10 +1135,10 @@ as the default task."
 ;;; ** you need make sure whether the "/jira" at the end is
 ;;; ** necessary or not, see discussion at the end of this page
 ;;; ** jiralib is not explicitly required, since org-jira will load it. [#4]
-;(use-package org-jira
-;  :config
-;  (setq jiralib-url "http://acolono.atlassian.net")
-;  :ensure t)
+                                        ;(use-package org-jira
+                                        ;  :config
+                                        ;  (setq jiralib-url "http://acolono.atlassian.net")
+                                        ;  :ensure t)
 ;;; * Use Package: Gitlab [#2]
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
@@ -1065,9 +1205,31 @@ as the default task."
 
 (server-start)
 
+;;; * Export as odt
+
+
 ;;; * Export as markdown
 (eval-after-load "org"
   '(require 'ox-md nil t))
+(setq org-odt-table-styles
+      (append org-odt-table-styles
+              '(("TableWithHeaderRowAndColumn" "Custom"
+                 ((use-first-row-styles . t)
+                  (use-first-column-styles . t)))
+                ("TableWithLastRow" "Custom"
+                 ((use-last-row-styles . t)
+                  (use-first-column-styles . t)))
+                ("TableWithFirstRow" "Custom"
+                 ((use-first-row-styles . t)
+                  (use-first-column-styles . nil)))
+                ("TableWithFirstColumn.2" "Custom"
+                 ((use-first-column-styles . t)
+                  (use-first-row-styles . nil)))
+                ("TableWithFirstRowandLastRow" "Custom"
+                 ((use-first-row-styles . t)
+                  (use-last-row-styles . t))))))
+
+
 ;;; * org-protocol for capturing from external (i.e. webbrowser) [#1]
 (require 'org-protocol)
 ;;; * Org checklists [#1]
@@ -1075,3 +1237,24 @@ as the default task."
 ;;; * Print Preview [#2]
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
+;;; * Invoices
+;;; https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
+(use-package org-invoice )
+
+;;; * helm
+(use-package helm
+  :bind (("M-x" . helm-M-x)
+         ("M-<f5>" . helm-find-files)
+         ([f10] . helm-buffers-list)
+         ([S-f10] . helm-recentf))
+  :ensure t)
+
+
+
+
+;;; * Notmuch
+(autoload 'notmuch "notmuch" "notmuch mail" t)
+;;; * Google maps
+
+(require 'google-maps)
+
