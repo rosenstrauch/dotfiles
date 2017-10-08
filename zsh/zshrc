@@ -69,11 +69,29 @@ function
 }
 
 # Adding custom locations to path
-if [[ -a ~/.nvm ]]
-then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
-fi
+
+  # This loads nvm on first use http://broken-by.me/lazy-load-nvm/
+
+nvm() {
+    unset -f nvm
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    nvm "$@"
+}
+
+node() {
+    unset -f node
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    node "$@"
+}
+
+npm() {
+    unset -f npm
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    npm "$@"
+}
 
 ## Pyenv
 if [ -d "${ZDOTDIR:-$HOME}/.pyenv/bin" ]; then
@@ -119,9 +137,14 @@ fi
 # Some handy directories
 #
 
-
+# even though we have the same data structure on all machines we need to set appropriate base paths per host.
+hash -d org=~/org
 if [[ "$HOST" == w* ]]; then
   export MYDATADIR="/mnt/DATA"
+  # https://vincent.bernat.im/en/blog/2015-zsh-directory-bookmarks#fnref-variables
+  # this should allow referencing the correct datadir path via ~-DATA
+  hash -d -- -MYDATADIR=$MYDATADIR
+  hash -d -- -SENSITIVE=$MYDATADIR/09-Private/SENSITIVE
 fi
 
 export PROJECTS_DIR=$HOME/dev

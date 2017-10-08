@@ -1,6 +1,6 @@
 [global_config]
   always_split_with_profile = True
-  enabled_plugins = ,
+  enabled_plugins = ActivityWatch,
   focus = system
   handle_size = 1
   inactive_color_offset = 0.46

@@ -21,6 +21,4 @@ xprintidle
 # for python dev
 pep8
 autopep8
-# newer version than in pacman
-docker-compose
 sortphotos

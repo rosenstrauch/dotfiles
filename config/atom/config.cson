@@ -20,7 +20,7 @@
       beautify_on_save: true
     executables:
       "elm-format":
-        path: "/home/rosenstrauch/.nvm/versions/node/v8.0.0/bin/elm-format"
+        path: "/usr/bin/elm-format"
     fortran: {}
     general:
       analytics: false
@@ -94,7 +94,7 @@
     ]
   editor:
     autoIndentOnPaste: false
-    fontSize: 11
+    fontSize: 30
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true

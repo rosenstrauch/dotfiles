@@ -16,6 +16,7 @@ php-composer
 conky
 seahorse
 #devhelp
+docker-compose
 dictd
 emacs
 firefox

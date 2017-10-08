@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -P Weboffice -no-remote
+Exec=firefox -P Authenticated -no-remote
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
@@ -9,3 +9,5 @@ Name=Firefox
 Comment[en_US]=
 Comment=
 Icon=/usr/share/icons/Azenis-Green/scalable/apps/web-browser.png
+Comment[en_US.UTF-8]=Authenticated
+GenericName[en_US.UTF-8]=Weboffice

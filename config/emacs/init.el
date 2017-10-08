@@ -134,6 +134,23 @@
   ("C-<" . org-begin-template)
 ;;; ** ORG INIT [#1]
   :init
+;;; *** Org init date insert function https://www.emacswiki.org/emacs/InsertAnyDate
+    (require 'calendar)
+  
+  (defun insdate-insert-any-date (date)
+    "Insert DATE using the current locale."
+    (interactive (list (calendar-read-date)))
+    (insert (calendar-date-string date)))
+  
+  (defun insdate-insert-date-from (&optional days)
+    "Insert date that is DAYS from current."
+    (interactive "p*")
+    (insert
+     (calendar-date-string
+      (calendar-gregorian-from-absolute
+       (+ (calendar-absolute-from-gregorian (calendar-current-date))
+	  days)))))
+  
   (add-hook 'before-save-hook #'endless/update-includes)
 
   (defun endless/update-includes (&rest ignore)
@@ -266,7 +283,7 @@ BEGIN and END are regexps which define the line range to use."
 
 ;;; *** ORG INIT my invoices
   (defvar invoice-dir "~/org/07-needs/Invoices/")
-  (defvar invoice-template-path (expand-file-name "_template.org" invoice-dir))
+  (defvar invoice-template-path (expand-file-name "_invoice_template.org" invoice-dir))
 
   (defun my/invoice-next-number ()
     "Get next sequential invoice number. Invoice numbers are in the format YYYYXXX,
@@ -284,11 +301,15 @@ modulo 1000. Ex.: 2016001."
     (format "%s/%s.org" invoice-dir number))
 
   (defun my/invoice-create (scope-file)
-    "Make a new invoice from given file and date range."
+    "Make a new invoice from given file and date range. assume you have to manually complete the invoice"
     (interactive "forg file: ")
     (let ((invoice-number (my/invoice-next-number))
           (current-headline (org-entry-get nil "ITEM"))
-          (invoice-date (format-time-string "%m/%d/%Y" (current-time)))
+          (payment-date (calendar-date-string
+      (calendar-gregorian-from-absolute
+       (+ (calendar-absolute-from-gregorian (calendar-current-date))
+	  30))))
+          (invoice-date (format-time-string "%m-%d-%Y" (current-time)))
           (invoice-start (org-read-date nil t nil "Choose invoice start" nil "-2Mon"))
           (invoice-end (org-read-date nil t nil "Choose invoice end" nil "-Sun")))
       (find-file (my/invoice-get-path invoice-number))
@@ -299,6 +320,9 @@ modulo 1000. Ex.: 2016001."
       (goto-char (point-min))
       (while (search-forward "@INVOICE_DATE@" nil t)
         (replace-match invoice-date))
+      (goto-char (point-min))
+      (while (search-forward "@PAYMENT_DATE@" nil t)
+        (replace-match payment-date))
       (goto-char (point-min))
       (while (search-forward "@current_headline@" nil t)
         (replace-match current-headline))
@@ -339,6 +363,9 @@ same directory as the org-buffer and insert a link to this file."
                                         ; insert into file if correctly taken
     (if (file-exists-p filename)
         (insert (concat "[[file:" filename "]]"))))
+
+
+
 :config
 
 
@@ -351,8 +378,14 @@ same directory as the org-buffer and insert a link to this file."
 ;;; *** ORg config: nicer org elipsis
   (setq org-ellipsis "⤵")
 ;;; *** ORG config: allow linking by id [#1]
-  (setq org-id-link-to-org-use-id t)
 
+
+
+(require 'org-id)
+(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+
+;; Update ID file on startup
+(org-id-update-id-locations)
 
 
 ;;; ** ORG CONFIG: Icons [#33]
@@ -444,7 +477,7 @@ same directory as the org-buffer and insert a link to this file."
           ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
 ;;; **** CAPTURE: calendar entries prompt for date and show up in agenda may or maynot be todos [#2]
-          ("c" "Calendar" entry (file+datetree "~/org/calendar.org")
+          ("D" "Date" entry (file+datetree "~/org/calendar.org")
            "* %?\nEntered on %^T\n  %i\n  %a")
 ;;; **** CAPTURE: Routines are repeated tasks captured to routines.org [#2]
           ("r" "Routine" entry (file "~/org/routines.org")
@@ -1257,4 +1290,5 @@ as the default task."
 ;;; * Google maps
 
 (require 'google-maps)
+
 
