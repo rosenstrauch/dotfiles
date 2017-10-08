@@ -114,11 +114,10 @@
     background_color = "#afc0ff"
     foreground_color = "#5b5700"
   [[Tests]]
-    audible_bell = True
-    background_color = "#282828"
+    background_color = "#060039"
     cursor_color = "#7eff90"
     cursor_shape = ibeam
-    foreground_color = "#ebdbb2"
+    foreground_color = "#fffdc2"
     login_shell = True
     scrollback_infinite = True
     scrollback_lines = 5000
@@ -126,8 +125,9 @@
   [[Virtual]]
     background_color = "#060039"
     cursor_color = "#d52f2f"
-    foreground_color = "#5b5700"
+    foreground_color = "#fffdc2"
     login_shell = True
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
     scrollback_infinite = True
   [[friendlimux]]
     background_color = "#060039"

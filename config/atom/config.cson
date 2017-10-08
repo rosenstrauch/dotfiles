@@ -20,7 +20,7 @@
       beautify_on_save: true
     executables:
       "elm-format":
-        path: "/usr/bin/elm-format"
+        path: "/home/rosenstrauch/.nvm/versions/node/v8.5.0/bin/elm-format"
     fortran: {}
     general:
       analytics: false
