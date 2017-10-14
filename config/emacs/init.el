@@ -209,7 +209,7 @@ BEGIN and END are regexps which define the line range to use."
 
 
 
-;;; *** ORG INIT: Provide Hook and Function to Limit amount of tasks in NEXT state per project [#27]
+;;; *** ORG INIT: Limit amount of tasks in NEXT state per project [#27]
 
   (defun org-count-todos-in-state (state)
     (let ((count 0))
@@ -367,7 +367,18 @@ same directory as the org-buffer and insert a link to this file."
 
 
 :config
+;;; *** ORG CONFIG duration
 
+(setq org-duration-format (quote h:mm))
+(setq org-time-clocksum-format
+      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+
+;;; **** add a hook function to check if this is trello file, then activate the org-trello minor mode. [#5]
+(add-hook 'org-mode-hook
+          (lambda ()
+            (let ((filename (buffer-file-name (current-buffer))))
+              (when (and filename (string= "trello" (file-name-extension filename)))
+                (org-trello-mode)))))
 
 ;;; *** Org CONFIG Babel
   (org-babel-do-load-languages 'org-babel-load-languages
@@ -655,6 +666,7 @@ same directory as the org-buffer and insert a link to this file."
            ("/mnt/DATA/exportedata/org-export/agenda.pdf"))
 ;;; Custom Agenda end [#1]
           ))
+
 ;;; *** ORG CONFIG: Agenda [#1]
 
 ;;; **** AGENDA Exporter settings [#9]
@@ -1152,17 +1164,6 @@ as the default task."
              ("b" . outline-backward-same-level)))       ; Backward - same level
 
 
-
-;;; * Use Package: Org Trello [#3]
-(use-package org-trello
-  :mode (("\\.trello$" . org-mode))
-  :ensure t)
-;;; ** add a hook function to check if this is trello file, then activate the org-trello minor mode. [#5]
-(add-hook 'org-mode-hook
-          (lambda ()
-            (let ((filename (buffer-file-name (current-buffer))))
-              (when (and filename (string= "trello" (file-name-extension filename)))
-                (org-trello-mode)))))
 ;;; * Use Package: ORG-JIRA
 ;;; ** credentials are in authinfo
 ;;; ** you need make sure whether the "/jira" at the end is
@@ -1292,3 +1293,7 @@ as the default task."
 (require 'google-maps)
 
 
+;;; *** ORG CONFIG Use Package: Org Trello [#3]
+(use-package org-trello
+  :mode (("\\.trello$" . org-mode))
+  :ensure t)
