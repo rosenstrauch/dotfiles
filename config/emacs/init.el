@@ -308,7 +308,7 @@ modulo 1000. Ex.: 2016001."
           (payment-date (calendar-date-string
       (calendar-gregorian-from-absolute
        (+ (calendar-absolute-from-gregorian (calendar-current-date))
-	  30))))
+	  14))))
           (invoice-date (format-time-string "%m-%d-%Y" (current-time)))
           (invoice-start (org-read-date nil t nil "Choose invoice start" nil "-2Mon"))
           (invoice-end (org-read-date nil t nil "Choose invoice end" nil "-Sun")))
