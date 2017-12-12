@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=firefox -P OfflineFox -no-remote
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=OfflineFox
+Name=Firefox
+Comment[en_US]=
+Comment=
+Icon=/usr/share/icons/Azenis-Green/scalable/apps/firefox.png

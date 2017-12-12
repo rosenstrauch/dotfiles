@@ -20,7 +20,7 @@
       beautify_on_save: true
     executables:
       "elm-format":
-        path: "/home/rosenstrauch/.nvm/versions/node/v8.5.0/bin/elm-format"
+        path: "/usr/bin/elm-format"
     fortran: {}
     general:
       analytics: false
@@ -47,8 +47,7 @@
       disabled: true
     puppet:
       disabled: true
-    python:
-      beautify_on_save: true
+    python: {}
     r:
       disabled: true
     riot:
@@ -60,6 +59,8 @@
     swig:
       disabled: true
     tss:
+      disabled: true
+    twig:
       disabled: true
     vala:
       disabled: true
@@ -94,7 +95,7 @@
     ]
   editor:
     autoIndentOnPaste: false
-    fontSize: 24
+    fontSize: 19
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -127,6 +128,9 @@
     doNotSaveAndRestoreOpenProjectFiles: true
   welcome:
     showOnStartup: false
+".css.source.twig":
+  editor:
+    autoIndentOnPaste: false
 ".elm.source":
   editor:
     autoIndentOnPaste: false

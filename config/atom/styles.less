@@ -14,11 +14,26 @@ html, body, .tree-view, .tab-bar .tab {
 .tree-view {
 
 }
-
-.editor {
-
+.scrollbar {
+  width: 20px
+  padding: 5px;
 }
 
+.editor {
+  scroll-behavior: smooth;
+
+}
+&-track {
+  border: 0px;
+  border-radius: 0px;
+  background-color: transparent !important;
+}
+
+&-thumb {
+  background-color: rgba(111, 111, 111, 0.2) !important;
+  border: 0px;
+  border-radius: 0px;
+}
 .editor .cursor {
 
 }

@@ -1,0 +1,8 @@
+opencounter is an api
+
+an api is not software.
+software interacts via the constraints defined by an api
+
+server implementations providing the api
+client implementations that consume the api
+
