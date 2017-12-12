@@ -95,7 +95,7 @@
     ]
   editor:
     autoIndentOnPaste: false
-    fontSize: 19
+    fontSize: 11
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true

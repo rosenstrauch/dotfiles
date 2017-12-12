@@ -44,7 +44,7 @@ fresh erichs/composure composure.sh
 # 5.0 My Shell Files
 
 ## 5.1 Prezto zsh config
-fresh rosenstrauch/prezto .  --ref=production --file=.zprezto/
+fresh rosenstrauch/prezto .  --ref=6c818153c8ef7 --file=.zprezto/
 
 ## 5.2 Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
