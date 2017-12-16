@@ -99,7 +99,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
-                                        ;(byte-recompile-directory package-user-dir nil 'force)
+;(package-refresh-contents)
+;                                        (byte-recompile-directory package-user-dir nil 'force)
 ;;; ** BOOTSTRAP `use-package' [#1]
 (unless (package-installed-p 'use-package)
 ;;; TODO: dont run this on every start but dont not run it so we dont have outdated lists. [#4]
@@ -112,7 +113,7 @@
 (use-package org
 
   :mode (("\\.org\\'" . org-mode))
-  :load-path "rosenorg-lisp/"
+  :load-path ("rosenorg-lisp/")
 ;;; ** ORG KEYBINDINGS
 ;;; C-c ^ | (org-sort)
 ;;; C-c c | capture
@@ -381,11 +382,8 @@ same directory as the org-buffer and insert a link to this file."
                 (org-trello-mode)))))
 
 ;;; *** Org CONFIG Babel
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '(
-                                 (sh . t)
-                                 )
-                               )
+(require 'ob-shell)
+
 ;;; *** ORg config: nicer org elipsis
   (setq org-ellipsis "⤵")
 ;;; *** ORG config: allow linking by id [#1]
@@ -485,16 +483,16 @@ same directory as the org-buffer and insert a link to this file."
           ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
            "* %?\nEntered on %U\n  %i\n  %a")
 ;;; **** CAPTURE: journal entries do not show up in agenda (but maybe as diary) [#2]
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
 ;;; **** CAPTURE: calendar entries prompt for date and show up in agenda may or maynot be todos [#2]
-          ("D" "Date" entry (file+datetree "~/org/calendar.org")
+          ("D" "Date" entry (file+olp+datetree "~/org/calendar.org")
            "* %?\nEntered on %^T\n  %i\n  %a")
 ;;; **** CAPTURE: Routines are repeated tasks captured to routines.org [#2]
           ("r" "Routine" entry (file "~/org/routines.org")
            "** TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
 ;;; **** CAPTURE: LinkLibrary is sorted by capture date in a date tree [#2]
-          ("l" "Link" entry (file+datetree "~/org/links.org")
+          ("l" "Link" entry (file+olp+datetree "~/org/links.org")
            "* %c %a %x %?\nEntered on %U\n  %i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
 ;;; **** CAPTURE: Snippets will need to get refiled if i capture a link it may include a snipptet [#6]
           ("x" "Firefox Capture Template" entry
@@ -1011,8 +1009,6 @@ as the default task."
     )
 
 
-
-
   (setq org-blank-before-new-entry nil)
   (setq org-list-demote-modify-bullet (quote (("+" . "-")
                                               ("*" . "-")
@@ -1034,24 +1030,6 @@ as the default task."
   :ensure org-plus-contrib)
 
 ;;; * Endof Org config
-
-(use-package org-babel
-  :init
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (python . t)
-     (shell . t)
-     (js . t)
-     (latex . t)
-     (dot . t)
-     (gnuplot . t)
-     (ruby . t)
-     (screen . nil)
-     (ledger . t)
-     (C . t)
-     (sql . t)
-     (ditaa . t))))
 
 ;;; * use package org-screenshot
 (use-package org-attach-screenshot
