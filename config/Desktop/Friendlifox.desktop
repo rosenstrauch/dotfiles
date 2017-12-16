@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -P Friendlifox -no-remote
+Exec=firefox -P -no-remote
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true

@@ -2,6 +2,8 @@
 Name=org-protocol
 Exec=emacsclient -nw %u
 Type=Application
+Icon=emacs-icon
 Terminal=false
 Categories=System;
 MimeType=x-scheme-handler/org-protocol;
+Name[en_US]=emacsclient
