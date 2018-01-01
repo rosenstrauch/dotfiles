@@ -394,7 +394,7 @@ same directory as the org-buffer and insert a link to this file."
 (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 
 ;; Update ID file on startup
-(org-id-update-id-locations)
+;;(org-id-update-id-locations)
 
 
 ;;; ** ORG CONFIG: Icons [#33]
@@ -402,6 +402,8 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-agenda-category-icon-alist
         '(("Emacs" "/usr/share/icons/Moka/16x16/apps/emacs.png" nil nil :ascent center)
           ("experiments" "/usr/share/icons/HighContrast/48x48/emotes/face-monkey.png" nil nil :ascent center)
+           ("DROID" "/mnt/DATA/DataLib/PICS/images/icons/Android.png" nil nil :ascent center)
+          
           ("LR" "~/.emacs.d/icons/LR-icon.png" nil nil :ascent center)
           ("AO" "~/.emacs.d/icons/AO_icon.png" nil nil :ascent center)
           ("[Pp]rototypes" "/usr/share/icons/HighContrast/24x24/actions/document-send.png" nil nil :ascent center)
@@ -915,15 +917,15 @@ as the default task."
            :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf"
            :section-numbers nil
            :with-toc nil
+           :exclude "//^_.org$"
            :recursive t
-           :exclude "^_"
            :publishing-function org-latex-publish-to-pdf)
           ("orgfull-html"
            :base-directory "~/org/"
            :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
            :base-extension "org"
            :recursive t
-           :exclude "^_"
+           :exclude "^_[a-z]"
            :section-numbers t
            :with-toc t
            :auto-sitemap t
@@ -1014,7 +1016,8 @@ as the default task."
                                               ("*" . "-")
                                               ("1." . "-")
                                               ("1)" . "a)"))))
-
+;;; *** Org config export
+(setq org-export-with-sub-superscripts nil)
   ;;; *** Org- config contacts
   (use-package org-contacts
     :config
@@ -1170,6 +1173,18 @@ as the default task."
 (use-package org-attach-screenshot
   :bind
   (("C-c S" . org-attach-screenshot)))
+
+;;; * Use Package: emacs-w3m
+(use-package w3m
+  :config
+  (setq browse-url-browser-function 'w3m-browse-url)
+  (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+  ;; optional keyboard short-cut
+  (global-set-key "\C-xm" 'browse-url-at-point)
+
+ 
+  :ensure t
+  )
 ;;; * Use Package: Web mode [#20]
 (use-package web-mode
   :mode (
