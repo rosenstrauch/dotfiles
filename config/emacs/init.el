@@ -462,11 +462,11 @@ same directory as the org-buffer and insert a link to this file."
 
 ;;; **** ORG CONFIG Capture contacts
           ("c" "👤 Contact" entry
-           (file+headline (expand-file-name "contacts.org" org-directory) "People")
+           (file+headline "~/contacts.org" "People")
            "* %(org-contacts-template-name)\n:PROPERTIES:\n:EMAIL: %(org-contacts-template-email)\n:END:"
            :clock-keep t :kill-buffer t)
 
-          ("C" "Company Contacts" entry
+          ("O" "Company Contacts" entry
            (file+headline (expand-file-name "contacts.org" org-directory) "Companies")
            "* %(org-contacts-template-name)
  :PROPERTIES:
@@ -498,7 +498,7 @@ same directory as the org-buffer and insert a link to this file."
            "* %c %a %x %?\nEntered on %U\n  %i\n" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
 ;;; **** CAPTURE: Snippets will need to get refiled if i capture a link it may include a snipptet [#6]
           ("x" "Firefox Capture Template" entry
-           (file+headline "~/org/capture.org" "Firefox")
+           (file+headline "~/org/capture.org" "ClippedSnippets")
            "* Snippets %a\n%i\nEntered on %U\n%c\ \nNote: %?\nLink: %l" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
 
           ))
