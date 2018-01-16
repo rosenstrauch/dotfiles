@@ -1,4 +1,12 @@
 "*":
+  "atom-autocomplete-php":
+    autoloadPaths: [
+      "vendor/autoload.php"
+      "autoload.php docroot/behat/vendor/autoload.php"
+    ]
+    binComposer: "/usr/bin/composer"
+    insertNewlinesForUseStatements: true
+    verboseErrors: true
   "atom-beautify":
     apex:
       disabled: true
@@ -45,6 +53,9 @@
       disabled: true
     pawn:
       disabled: true
+    php:
+      default_beautifier: "PHPCBF"
+      standard: "Drupal"
     puppet:
       disabled: true
     python: {}
@@ -68,6 +79,11 @@
       disabled: true
     vue:
       disabled: true
+  "atom-ide-ui":
+    "atom-ide-diagnostics-ui":
+      autoVisibility: true
+    hyperclick:
+      linuxTriggerKeys: "altKey"
   awiki: {}
   "bitbucket-issues":
     password: "whereisthisstored"
@@ -80,13 +96,17 @@
       "autocomplete-python"
       "language-emacs-lisp"
       "linter-python-pep8"
-      "php-debug"
       "python-debugger"
       "python-indent"
       "python-tools"
       "elm-navigator"
       "elm-instant"
+      "gherkin-autocomplete"
+      "autocomplete-plus"
+      "php-debug"
+      "linter"
     ]
+    packagesWithKeymapsDisabled: []
     projectHome: "/mnt/DATA/DEV/AtomProjects/"
     telemetryConsent: "no"
     themes: [
@@ -95,7 +115,7 @@
     ]
   editor:
     autoIndentOnPaste: false
-    fontSize: 11
+    fontSize: 15
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -107,13 +127,15 @@
     userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
   "find-and-replace":
     projectSearchResultsPaneSplitDirection: "right"
+  "ide-php":
+    connectionType: "stdio"
   "language-elm": {}
   linter: {}
   "linter-checkbashisms": {}
   "linter-ui-default":
     decorateOnTreeView: "Files and Directories"
     gutterPosition: "Left"
-    panelHeight: 71
+    panelHeight: 300
     statusBarPosition: "Right"
     statusBarRepresents: "Entire Project"
   "markdown-mindmap": {}
@@ -121,6 +143,14 @@
   "markdown-writer": {}
   "merge-conflicts": {}
   metrics: false
+  "php-debug":
+    PathMaps: [
+      "remotepath;localpath"
+      "/base/path/on/remote/system;C:\\base\\path\\on\\local\\system"
+    ]
+    ServerAddress: "127.0.0.1"
+    ServerPort: 9000
+    currentPanelMode: "bottom"
   pigments: {}
   "project-quick-open":
     projectPaths: "/home/rosenstrauch/ProjectCollections"
