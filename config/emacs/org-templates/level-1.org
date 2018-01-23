@@ -17,10 +17,8 @@
 #+LINK_UP: index.html
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../../org.css" />
 
-#+LaTeX_CLASS_OPTIONS: [margin=0.1in]
-#+LATEX_HEADER: \usepackage[margin=0.1in]{geometry}
-#+LATEX: \begin{landscape}
-#+ATTR_LaTeX: longtable
-#+LATEX: \scriptsize
 
-#+LATEX: \begin{landscape}
+#+LATEX_HEADER: \usepackage[margin=1.1in]{geometry}
+
+
+
