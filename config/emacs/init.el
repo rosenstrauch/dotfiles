@@ -1018,7 +1018,89 @@ as the default task."
                                               ("1)" . "a)"))))
 ;;; *** Org config export
 (setq org-export-with-sub-superscripts nil)
-  ;;; *** Org- config contacts
+(setq org-latex-classes
+        '(("beamer"
+           "\\documentclass[presentation]{beamer}"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("article"
+           "\\documentclass[12pt]{hitec}
+  [DEFAULT-PACKAGES]
+  [PACKAGES]
+  [NO-EXTRA]
+  \\settextfraction{0.95}\n"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("report"
+           "\\documentclass[11pt]{report}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("book"
+           "\\documentclass[11pt]{book}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("une-article"
+           "\\documentclass[a4paper,12pt]{scrartcl}
+  [DEFAULT-PACKAGES]
+  [PACKAGES]
+  \\usepackage[margin=1.5cm]{geometry}
+  [EXTRA]\n"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("une-logo"
+           "\\documentclass[a4paper,12pt]{scrartcl}
+  [DEFAULT-PACKAGES]
+  [PACKAGES]
+  \\usepackage[margin=1.5cm]{geometry}
+  [EXTRA]
+  \\definecolor{unegreen}{HTML}{7AB800}
+  \\definecolor{Black}{HTML}{000000}
+  \\definecolor{White}{HTML}{FFFFFF}
+  \\definecolor{dimgrey}{HTML}{696969}
+  \\makeatletter
+  \\def\\@maketitle{
+   \\noindent \\begin{minipage}[c][4cm][t]{\\linewidth}
+     \\colorbox{Black}{%
+       \\begin{minipage}[t][4cm][c]{4cm}
+       \\flushleft
+       \\includegraphics{~/.emacs.d/img/unelogo_medium.png}
+     \\end{minipage}}
+     \\colorbox{unegreen}{%
+       \\begin{minipage}[t][4cm][c]{13.5cm}
+         \\flushright
+         \\Large \\textbf{\\color{White}{\\@title}} \\\\
+          \\vspace{4pt}
+         \\small \\color{White}{\\@author} \\\\
+         \\small \\color{White}{\\@date}
+       \\end{minipage}}
+     \\end{minipage}}
+  \\makeatother\n"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("old-article" "\\documentclass[11pt]{article}"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+        )
+;;; *** Org- config contacts
   (use-package org-contacts
     :config
     (setq org-contacts-files `(,(expand-file-name "contacts.org" org-directory))
