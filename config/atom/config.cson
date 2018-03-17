@@ -43,6 +43,11 @@
       disabled: true
     java:
       disabled: true
+    js:
+      jslint_happy: true
+      keep_array_indentation: true
+      keep_function_indentation: true
+      unescape_strings: true
     marko:
       disabled: true
     nunjucks:
@@ -55,6 +60,7 @@
       disabled: true
     php:
       default_beautifier: "PHPCBF"
+      phpcbf_version: 3
       standard: "Drupal"
     puppet:
       disabled: true
@@ -104,7 +110,18 @@
       "gherkin-autocomplete"
       "autocomplete-plus"
       "php-debug"
-      "linter"
+      "linter-twig"
+      "ide-standardjs"
+      "atom-ide-ui"
+      "ide-json"
+      "ide-php"
+      "ide-python"
+      "ide-yaml"
+      "language-elm"
+      "php-twig"
+      "jslint"
+      "fast-eslint"
+      "linter-drupalcs"
     ]
     packagesWithKeymapsDisabled: []
     projectHome: "/mnt/DATA/DEV/AtomProjects/"
@@ -113,9 +130,10 @@
       "atom-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
+  drupal:
+    fileTypesPhp: "module,install,inc,test,profile"
   editor:
     autoIndentOnPaste: false
-    fontSize: 15
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -125,6 +143,10 @@
     showNotifications: true
   "exception-reporting":
     userId: "4982a2a8-99a3-93f7-f892-69a13ce69d9c"
+  "fast-eslint":
+    baseConfigExtends: [
+      "standard"
+    ]
   "find-and-replace":
     projectSearchResultsPaneSplitDirection: "right"
   "ide-php":
@@ -132,10 +154,26 @@
   "language-elm": {}
   linter: {}
   "linter-checkbashisms": {}
+  "linter-drupalcs":
+    disableWhenNoConfigFile: true
+    ignore: "*.behat.inc"
+    searchExecutablePath: true
+  "linter-eslint":
+    disableWhenNoEslintConfig: false
+    eslintrcPath: "~/.eslintrc.yml"
+    globalNodePath: "/usr"
+    rulesToDisableWhileFixing: [
+      "space-before-function-paren semi no-undef"
+    ]
+    rulesToSilenceWhileTyping: [
+      "space-before-function-paren semi no-undef"
+    ]
+    useGlobalEslint: true
   "linter-ui-default":
     decorateOnTreeView: "Files and Directories"
     gutterPosition: "Left"
-    panelHeight: 300
+    panelHeight: 71
+    showPanel: true
     statusBarPosition: "Right"
     statusBarRepresents: "Entire Project"
   "markdown-mindmap": {}
