@@ -23,7 +23,7 @@ fresh-options --bin
   fresh clvv/fasd fasd
   fresh alicraigmile/show-wip show-wip
   fresh tj/bm bm
-  fresh sivel/speedtest-cli speedtest_cli.py
+  fresh sivel/speedtest-cli speedtest.py
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh olof/Text-FileTree bin/find2tree.pl
