@@ -24,7 +24,7 @@ ps $$
 
 ## System ruby path set early for tmuxinator
 export PATH="$PATH:~/.rvm/gems/ruby/2.4.1/bin"
-## rvm http://stackoverflow.com/a/27204087
+## rvm http://stackoverflow.com/a/27204087 disable for tramp?
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 ## Ruby
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
