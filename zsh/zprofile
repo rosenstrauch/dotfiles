@@ -19,8 +19,9 @@ fi
 
 export VISUAL='emacs'
 export PAGER='less'
-# done by prezto
-export EDITOR='emacs -nw'
+export ALTERNATE_EDITOR='emacs'
+export EDITOR='emacsclient'
+export VISUAL='emacsclient'
 export USE_EDITOR="$EDITOR"
 #
 # Language
