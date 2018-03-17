@@ -155,6 +155,7 @@ fresh-options --file
   fresh gitignore
   fresh gitattributes
   fresh config/rvm/gemrc
+  fresh config/rvm/rvmrc
   fresh config/parcelliterc
   fresh config/liquidpromptrc
 fresh-options
