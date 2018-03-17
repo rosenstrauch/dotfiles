@@ -442,6 +442,11 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 ;;; *** ORG CONFIG Mobile org
+(require 'tramp)
+(setq tramp-debug-buffer t)
+(setq tramp-verbose 10)
+
+  (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 ;;; **** ORG MOBILE: the location of your Org files on your local system [#1]
   (setq org-directory "~/org")
 ;;; **** ORG MOBILE: the name of the file where new notes will be stored [#1]
