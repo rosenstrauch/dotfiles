@@ -96,11 +96,13 @@
   [[default]]
     audible_bell = True
     background_color = "#060039"
-    background_darkness = 0.83
+    background_darkness = 0.56
+    background_type = transparent
     cursor_color = "#00ff27"
+    font = Droid Sans Mono Bold 16
     foreground_color = "#204a87"
     login_shell = True
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
     scrollback_infinite = True
     use_system_font = False
     use_theme_colors = True
@@ -111,9 +113,10 @@
     palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
   [[ORG]]
     background_color = "#060039"
-    custom_command = emacs -nw ~/org/index.org
+    cursor_color = "#aaaaaa"
+    custom_command = emacs -nw ~/org/home.org
     exit_action = restart
-    foreground_color = "#fffdc2"
+    foreground_color = "#204a87"
     use_custom_command = True
   [[SSH]]
     background_color = "#060039"
@@ -142,16 +145,16 @@
     scrollback_infinite = True
   [[friendlimux]]
     background_color = "#060039"
-    cursor_color = "#00b902"
+    cursor_color = "#fffdc2"
     custom_command = tmuxinator start friendlimux
     exit_action = restart
-    foreground_color = "#fffdc2"
+    foreground_color = "#204a87"
     login_shell = True
-    scrollback_infinite = True
     use_custom_command = True
   [[friendlinux]]
     background_color = "#060039"
     background_darkness = 0.87
+    cursor_color = "#fffdc2"
     foreground_color = "#fffdc2"
     scrollback_infinite = True
     use_system_font = False
