@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -P development -no-remote
+Exec=firefox -P Dev -no-remote
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
