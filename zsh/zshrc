@@ -70,27 +70,27 @@ function
 
 # Adding custom locations to path
 
-  # This loads nvm on first use http://broken-by.me/lazy-load-nvm/
+# This loads nvm on first use http://broken-by.me/lazy-load-nvm/
 
 nvm() {
-    unset -f nvm
-    export NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    nvm "$@"
+  unset -f nvm
+  export NVM_DIR=~/.nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  nvm "$@"
 }
 
 node() {
-    unset -f node
-    export NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    node "$@"
+  unset -f node
+  export NVM_DIR=~/.nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  node "$@"
 }
 
 npm() {
-    unset -f npm
-    export NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    npm "$@"
+  unset -f npm
+  export NVM_DIR=~/.nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  npm "$@"
 }
 
 ## Pyenv
@@ -145,8 +145,13 @@ if [[ "$HOST" == w* ]]; then
   # this should allow referencing the correct datadir path via ~-DATA
   hash -d -- -MYDATADIR=$MYDATADIR
   hash -d -- -SENSITIVE=$MYDATADIR/09-Private/SENSITIVE
+  elif [[ "$HOST" == e* ]]; then
+  export MYDATADIR="/mnt/MODATA"
+  # https://vincent.bernat.im/en/blog/2015-zsh-directory-bookmarks#fnref-variables
+  # this should allow referencing the correct datadir path via ~-DATA
+  hash -d -- -MYDATADIR=$MYDATADIR
+  hash -d -- -SENSITIVE=$MYDATADIR/09-Private/SENSITIVE
 fi
-
 export PROJECTS_DIR=$HOME/dev
 export DOTFILES_DIR=$USR_DIR/.dotfiles
 export BRAINDUMP_DIR=$USR_DIR/braindump
@@ -163,8 +168,11 @@ export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/b
 
 ## NPM
 export PATH=$PATH:node_modules/.bin:/usr/local/share/npm/bin
+## yarn
+export PATH=$PATH:$HOME/.yarn/bin
 ## Composer
 export PATH=$PATH:vendor/bin:$HOME/.config/composer/vendor/bin
+export PATH=$PATH:vendor/bin:$HOME/.composer/vendor/bin
 ## Add path to go bin
 export PATH=$PATH:/usr/local/go/bin/bin
 
