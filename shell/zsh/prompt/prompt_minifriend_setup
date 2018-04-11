@@ -56,7 +56,7 @@ function prompt_minifriend_setup {
 
 
  # Set Editor parameters
- zstyle ':prezto:module:editor:info:completing' format ':::'
+ zstyle ':prezto:module:editor:info:completing' format '...'
 
   # Define prompts.
   PROMPT="
