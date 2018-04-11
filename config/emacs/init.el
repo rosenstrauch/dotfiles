@@ -368,6 +368,18 @@ same directory as the org-buffer and insert a link to this file."
 
 
 :config
+
+;;; *** ORG Config Babel
+
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (shell . t)
+   (python . t)
+   (js . t)
+   (restclient . t)
+   (emacs-lisp . t)))
 ;;; *** ORG CONFIG duration
 
 (setq org-duration-format (quote h:mm))
@@ -1193,8 +1205,25 @@ as the default task."
   :bind (("C-c C-h" . habitica-tasks))
   :ensure t
   )
+
+;;; * Use Package dockerfile-mode [#2]
+(use-package dockerfile-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+
+;;; * Use Package js2-mode [#2]
+(use-package js2-mode
+  :ensure t
+  :config
+  (setq js-indent-level 2))
+
 ;;; * Use Package Yaml Mode [#2]
 (use-package yaml-mode
+  :ensure t)
+
+;;; * Use Package Json Mode [#2]
+(use-package json-mode
   :ensure t)
 ;;; * Use Package: Restclient [#3]
 (use-package restclient
@@ -1244,6 +1273,11 @@ as the default task."
 ;;; * Use Package: Gitlab [#2]
 (unless (package-installed-p 'gitlab)
   (package-install 'gitlab))
+;;; * Use package flycheck
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+)
 ;;; * Use Package: Magit [#11]
 (use-package magit
   :ensure t
@@ -1280,6 +1314,7 @@ as the default task."
          ("\\.[agj]sp" . web-mode)
          ("\\.as[cp]x" . web-mode)
          ("\\.erb" . web-mode)
+         ("\\.js" . web-mode)
          ("\\.mustache" . web-mode)
          ("\\.djhtml" . web-mode)
          )
