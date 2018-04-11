@@ -1229,6 +1229,10 @@ as the default task."
 (use-package restclient
   :ensure t
   :defer t)
+
+(use-package ob-restclient
+  :ensure t
+  :defer t)
 ;;; * Use Package: Outshine
 ;;; - to fold my `init.el' like an org file [#31]
 
