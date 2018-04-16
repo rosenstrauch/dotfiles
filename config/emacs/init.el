@@ -377,6 +377,7 @@ same directory as the org-buffer and insert a link to this file."
  '((R . t)
    (shell . t)
    (python . t)
+   (ledger . t)
    (js . t)
    (restclient . t)
    (emacs-lisp . t)))
@@ -400,6 +401,8 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-ellipsis "⤵")
 ;;; *** ORG config: allow linking by id [#1]
 
+;;; *** Org config export backends
+(setq org-export-backends (quote (ascii html icalendar latex md odt)))
 
 
 (require 'org-id)
@@ -469,14 +472,27 @@ same directory as the org-buffer and insert a link to this file."
 ;;; *** ORG CONFIG: CAPTURE [#5]
 
   (setq org-default-notes-file (concat org-directory "/capture.org"))
-  (setq org-capture-templates
+(setq org-capture-templates
+      
         '(("s" "ScreenShot" entry (file+headline "~/org/capture.org" "ScreenShots")
            "* %?\n  %i\n  %a"
            )
           ("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
            "* WISH %?\n  %i\n  %a")
 
-
+("l" "Ledger entries")
+                ("lm" "bankcard" plain
+                 (file "~/org/07-needs/finance.ledger")
+                 "%(org-read-date) %^{Payee}
+  Liabilities:bankcard
+  Expenses:%^{Account}  %^{Amount}
+")
+                ("lc" "Cash" plain
+                (file "~/org/07-needs/finance.ledger")
+	        "%(org-read-date) * %^{Payee}
+  Expenses:Cash
+  Expenses:%^{Account}  %^{Amount}
+")
 ;;; **** ORG CONFIG Capture contacts
           ("c" "👤 Contact" entry
            (file+headline "~/contacts.org" "People")
@@ -1381,7 +1397,29 @@ as the default task."
                 ("TableWithFirstRowandLastRow" "Custom"
                  ((use-first-row-styles . t)
                   (use-last-row-styles . t))))))
+;;; * ledger-mode
 
+(use-package ledger-mode
+  :ensure t
+  :config
+      (defun ledger-add-entry (title in amount out)
+      (interactive
+       (let ((accounts (mapcar 'list (ledger-accounts))))
+         (list (read-string "Entry: " (format-time-string "%Y-%m-%d " (current-time)))
+               (let ((completion-regexp-list "^Ausgaben:"))
+                 (completing-read "What did you pay for? " accounts))
+               (read-string "How much did you pay? " "EUR ")
+               (let ((completion-regexp-list "^Vermögen:"))
+                 (completing-read "Where did the money come from? " accounts)))))
+      (insert title)
+      (newline)
+      (indent-to 4)
+      (insert in "  " amount)
+      (newline)
+      (indent-to 4)
+      (insert out))
+  :mode "\\.ledger$"
+  :commands ledger-mode)
 
 ;;; * org-protocol for capturing from external (i.e. webbrowser) [#1]
 (require 'org-protocol)
