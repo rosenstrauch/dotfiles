@@ -137,9 +137,9 @@
     use_theme_colors = True
     visible_bell = True
   [[Virtual]]
-    background_color = "#002a22"
+    background_color = "#241530"
     cursor_color = "#d52f2f"
-    foreground_color = "#e9b96e"
+    foreground_color = "#204a87"
     login_shell = True
     palette = "#fbf1c7:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"
     scrollback_infinite = True
