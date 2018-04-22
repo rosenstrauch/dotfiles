@@ -15,7 +15,6 @@ docker
 php-composer
 conky
 seahorse
-#devhelp
 docker-compose
 dictd
 emacs
@@ -75,7 +74,7 @@ keepass
 logwatch
 macchanger
 mercurial
-newsbeuter
+newsboat
 notmuch
 nodejs
 npm
@@ -96,7 +95,6 @@ thefuck
 txt2man
 vagrant
 vim
-virtualbox
 vlc
 weechat
 xclip

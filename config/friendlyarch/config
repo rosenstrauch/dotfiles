@@ -3,7 +3,7 @@
 
 # packagemanagers
 # known values are: enabled_packagemanagers=("pacman" "npm" "rvm" "fresh" "aur" "apm" "pip2" "go" "composer" "gnome_ext")
-enabled_packagemanagers=("pacman" "pip2" "composer" "aur" "apm")
+enabled_packagemanagers=("pacman")
 # Paths
 logfile_path=~/.friendlyarch/logs
 

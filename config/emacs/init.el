@@ -368,6 +368,25 @@ same directory as the org-buffer and insert a link to this file."
 
 
 :config
+;;; *** ORG config sync bookmarks
+
+;; define a datadir mapping for auxilatory host
+(defconst data-dir
+  (if (string-match-p (regexp-quote "end") (system-name))
+      "/mnt/MODATA"
+    "/mnt/DATA"))
+
+;;; function to convert absolute paths from one system to another
+(defun sync-relative-name (file)
+  (cond
+   ((file-exists-p file)
+    file)
+   ((string-path-match "^.+/DATA/\\(.+\\)" file)
+    (expand-file-name (match-string 1 file) data-dir))
+   (t file)))
+
+;;; use function to filter bookmarks
+(advice-add 'bookmark-get-filename :filter-return 'sync-relative-name)
 
 ;;; *** ORG Config Babel
 
@@ -380,6 +399,8 @@ same directory as the org-buffer and insert a link to this file."
    (js . t)
    (restclient . t)
    (emacs-lisp . t)))
+
+(setq org-coderef-label-format "//(ref:%s)")
 ;;; *** ORG CONFIG duration
 
 (setq org-duration-format (quote h:mm))
@@ -943,8 +964,11 @@ as the default task."
            :base-extension "org"
            :recursive t
            :exclude "^_[a-z]"
-           :section-numbers t
+           :section-numbers 3
            :with-toc t
+           :toc t
+           :n t
+           :H 6
            :auto-sitemap t
            :sitemap-filename "sitemap.org"
            :sitemap-title "Sitemap"

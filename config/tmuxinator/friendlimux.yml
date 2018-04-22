@@ -27,7 +27,7 @@ windows:
   #- Web: lynx
   #- Browse: mc
   - News:
-      - newsbeuter
+      - newsboat
       - #empty
   - Communication:
       panes:

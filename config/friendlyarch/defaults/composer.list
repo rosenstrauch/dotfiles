@@ -3,7 +3,7 @@
 drupal/coder
 # install codesniffer (also in freshrc bin for getting at drupal standards)
 squizlabs/php_codesniffer
-drush/drush:8.x
+drush/drush
 drush/config-extra
 asm89/twig-lint
-artursvonda/composer-updates @stable
+artursvonda/composer-updates
