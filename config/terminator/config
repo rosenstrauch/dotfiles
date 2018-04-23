@@ -12,12 +12,14 @@
   title_transmit_fg_color = "#000000"
   window_state = maximise
 [keybindings]
+  broadcast_all = <Shift><Alt>a
   close_term = <Alt>F4
   close_window = <Shift><Alt>F4
   copy = <Primary><Shift>c
   cycle_next = <Primary><Shift>n
   cycle_prev = <Primary><Shift>p
   hide_window = KP_Delete
+  layout_launcher = <Shift><Alt>l
   new_tab = <Primary><Shift>t
 [layouts]
   [[default]]
@@ -145,12 +147,13 @@
     palette = "#fbf1c7:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"
     scrollback_infinite = True
   [[friendlimux]]
-    background_color = "#060039"
+    background_color = "#fdf6e3"
     cursor_color = "#fffdc2"
     custom_command = tmuxinator start friendlimux
     exit_action = restart
-    foreground_color = "#204a87"
+    foreground_color = "#657b83"
     login_shell = True
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     use_custom_command = True
   [[friendlinux]]
     background_color = "#060039"
