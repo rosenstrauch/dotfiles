@@ -864,9 +864,13 @@ same directory as the org-buffer and insert a link to this file."
 ;;; ** ORG CONFIG Begin
   :config
   (setq org-yank-adjusted-subtrees t)
-  (setq org-fontify-whole-heading-line t)
+(setq org-fontify-whole-heading-line t)
+;;; *** ORG Config: cleanup after export
+(setq-default org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+(setq-default org-latex-remove-logfiles t)
 
-:config
+
+
 ;;; *** ORG config sync bookmarks
 
 ;; define a datadir mapping for auxilatory host
@@ -1058,10 +1062,10 @@ same directory as the org-buffer and insert a link to this file."
           ("i" "Idea" entry (file+headline "~/org/ideas.org" "IdeaInbox")
            "* %?\nEntered on %U\n  %i\n  %a")
 ;;; **** CAPTURE: journal entries do not show up in agenda (but maybe as diary) [#2]
-          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+          ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
 ;;; **** CAPTURE: calendar entries prompt for date and show up in agenda may or maynot be todos [#2]
-          ("D" "Date" entry (file+olp+datetree "~/org/calendar.org")
+          ("D" "Date" entry (file+datetree "~/org/calendar.org")
            "* %?\nEntered on %^T\n  %i\n  %a")
 ;;; **** CAPTURE: Routines are repeated tasks captured to routines.org [#2]
           ("r" "Routine" entry (file "~/org/routines.org")
@@ -1455,8 +1459,9 @@ same directory as the org-buffer and insert a link to this file."
           (org-cut-subtree)
           (if file (find-file file))
           (org-datetree-find-date-create date)
+          
           (org-narrow-to-subtree)
-          (outline-show-subtree)
+          (show-subtree)
           (org-end-of-subtree t)
           (newline)
           (goto-char (point-max))
