@@ -1,9 +1,5 @@
 "*":
-  core:
-    telemetryConsent: "no"
   drupal:
     fileTypesPhp: "module,install,inc,test,profile"
   "exception-reporting":
-    userId: "139d5fcb-6168-46fb-8eec-a2302e9b3b46"
-  welcome:
-    showOnStartup: false
+    userId: "d1b218fb-e012-4db7-bc28-09a3607973c8"

@@ -31,6 +31,7 @@
   'alt-up': 'pane:split-up'
   'alt-down': 'pane:split-down'
   'alt-left': 'pane:split-left'
+
 '.platform-win32, .platform-linux':
   'ctrl-k ctrl-b': 'tree-view:toggle'
   'ctrl-k ctrl-.': 'tree-view:reveal-active-file'
