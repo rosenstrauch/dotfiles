@@ -10,8 +10,15 @@
 
 #+LINK_UP: ../index.html
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../../../org.css" />
+#+OPTIONS:   H:6 num:2 toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:nil
 
 #+LaTeX_CLASS_OPTIONS: [margin=0.1in]
+#+latex_header: \usepackage{titlesec}
+#+latex_header: \setcounter{secnumdepth}{4}
+#+latex_header: \titleformat{\paragraph}
+#+latex_header: {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+#+latex_header: \titlespacing*{\paragraph}
+#+latex_header: {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 #+LATEX_HEADER: \usepackage[margin=0.1in]{geometry}
 #+LATEX: \begin{landscape}
 #+ATTR_LaTeX: longtable
