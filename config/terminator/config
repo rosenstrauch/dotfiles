@@ -95,17 +95,16 @@
 [profiles]
   [[default]]
     audible_bell = True
-    background_color = "#060039"
+    background_color = "#300a24"
     background_darkness = 0.56
     background_type = transparent
     cursor_color = "#00ff27"
     font = Droid Sans Mono Bold 16
-    foreground_color = "#204a87"
+    foreground_color = "#ffffff"
     login_shell = True
-    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
     scrollback_infinite = True
     use_system_font = False
-    use_theme_colors = True
     visible_bell = True
   [[FrontEnd]]
     cursor_color = "#aaaaaa"
