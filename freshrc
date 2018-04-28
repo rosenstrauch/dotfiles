@@ -33,6 +33,7 @@ fresh-options --bin
   fresh albfan/git-changemail git-changemail
   fresh hechoendrupal/drupal-console-launcher bin/drupal.php
   fresh hechoendrupal/drupal-console-launcher bin/drupal
+  fresh simonwhitaker/gibo gibo
 fresh-options
 
 
