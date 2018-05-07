@@ -163,6 +163,7 @@ fresh-options
 
 # Config files subfolders of $HOME
 fresh config/friendlyarch --file=~/.friendlyarch/
+fresh config/systemd --file=~/.config/systemd
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
