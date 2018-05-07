@@ -852,6 +852,14 @@ same directory as the org-buffer and insert a link to this file."
     (if (file-exists-p my-myscreenshot_filename)
         (insert (concat "[[file:" my-myscreenshot_filename "]]"))))
 
+;;; *** ORG init tangle and add to agenda on save
+  ;; Tangle Org files when we save them
+(defun tangle-on-save-org-mode-file()
+  (when (string= (message "%s" major-mode) "org-mode")
+    (org-babel-tangle)))
+
+(add-hook 'after-save-hook 'tangle-on-save-org-mode-file)
+
 
 ;;; ** ORG CONFIG Begin
   :config
