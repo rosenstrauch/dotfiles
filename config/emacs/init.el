@@ -50,6 +50,7 @@
 
 ;;; *** STYLE: Display existing tabs as 2 characters wide [#19]
 (setq-default tab-width 2)
+(setq-default c-basic-offset 2)
 (load-theme 'tsdh-dark)
 
 (set-frame-font "9x15")
@@ -365,7 +366,8 @@
         ("<C-return>" . html-newline-dwim))
   :config
   (setq web-mode-enable-auto-quoting nil
-        web-mode-enable-current-element-highlight t)
+        web-mode-enable-current-element-highlight t
+        web-mode-markup-indent-offset 2)
   :ensure t)
 
 ;;(setq org-sync-id-in-headline 1)
