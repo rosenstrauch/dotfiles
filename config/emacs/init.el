@@ -988,9 +988,27 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-directory "~/org")
 ;;; **** ORG MOBILE: the name of the file where new notes will be stored [#1]
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
-;;; **** ORG MOBILE: Set to <your Dropbox root directory>/MobileOrg. [#2]
+;;; **** ORG MOBILE: configuration. [#2]
   (setq org-mobile-directory "/rosen_sync@files.rosenstrauch.com:/home/rosen_sync/roSynxcBox/MobileOrg")
 
+;; Automatically sync mobileorg when idle
+(defvar org-mobile-sync-timer nil)
+(defvar org-mobile-sync-idle-secs (* 60 10))
+(defun org-mobile-sync ()
+  (interactive)
+  (org-mobile-pull)
+  (org-mobile-push))
+(defun org-mobile-sync-enable ()
+  "enable mobile org idle sync"
+  (interactive)
+  (setq org-mobile-sync-timer
+        (run-with-idle-timer org-mobile-sync-idle-secs t
+                             'org-mobile-sync)));
+(defun org-mobile-sync-disable ()
+  "disable mobile org idle sync"
+  (interactive)
+  (cancel-timer org-mobile-sync-timer))
+(org-mobile-sync-enable)
 ;;; *** ORG CONFIG: CAPTURE [#5]
 
   (setq org-default-notes-file (concat org-directory "/capture.org"))
