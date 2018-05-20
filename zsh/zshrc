@@ -116,7 +116,7 @@ autoload -U colors
 colors
 
 # Setting various variables
-export EDITOR='emacs -nw'
+export EDITOR='emacs'
 export CHEATCOLORS=true
 # enable colored output from ls, etc
 export CLICOLOR=1
