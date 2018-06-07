@@ -1,49 +1,20 @@
 "*":
-  "atom-beautify":
-    php:
-      default_beautifier: "PHPCBF"
-      standard: "DRUPAL"
-  "atom-ide-ui":
-    use: {}
-  core:
-    disabledPackages: [
-      "linter"
-      "atom-easy-jsdoc"
-      "atom-ide-ui"
-      "autocomplete-python"
-      "elm-format"
-      "elm-instant"
-      "elm-navigator"
-      "fast-eslint"
-      "ide-json"
-      "ide-python"
-      "ide-standardjs"
-      "ide-yaml"
-      "jslint"
-      "language-elm"
-      "language-emacs-lisp"
-      "linter-drupalcs"
-      "linter-eslint"
-      "linter-python-pep8"
-      "linter-twig"
-      "linter-ui-default"
-      "mocha-test-runner"
-      "php-twig"
-      "python-debugger"
-      "python-indent"
-      "python-tools"
-      "teletype"
-    ]
-    telemetryConsent: "no"
   drupal:
     fileTypesPhp: "module,install,inc,test,profile"
+  editor:
+    fontSize: 12
   "exception-reporting":
     userId: "d1b218fb-e012-4db7-bc28-09a3607973c8"
   "linter-ui-default":
-    panelHeight: 225
+    panelHeight: 71
+  "markdown-preview":
+    useGitHubStyle: true
   "php-debug":
-    showWelcome: false
-    xdebug:
-      pathMaps: "[{\"remotePath\":\"/var/www/web\",\"localPath\":\"/mnt/DATA/03-TribeProjects/AVGULAS/omniverse_PROJECT/omniverse_CODENVS/omniaverse_docksal/web\"}]"
+    PathMaps: [
+      "/var/www/;/mnt/MODATA/03-EXTERNAL/Avgulas/rosenomnia_docksal/"
+    ]
+    ServerAddress: "192.168.64.1"
+    currentPanelMode: "side"
+    currentPanelWidth: "348.984px"
   welcome:
     showOnStartup: false
