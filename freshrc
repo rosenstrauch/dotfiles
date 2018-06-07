@@ -153,6 +153,10 @@ fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~
 # Config #
 ##########
 
+# SENSITIVE config - make sure sensitive exists
+ln -sf ~/SENSITIVE/mbrc/mbsyncrc ~/.mbsyncrc
+ln -sf ~/SENSITIVE/mbrc/msmtprc ~/.msmtprc
+
 # Files which land in a subfolder of the default $XDG_CONFIG_HOME
 
 # zim colors
