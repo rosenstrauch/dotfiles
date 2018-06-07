@@ -1,7 +1,6 @@
 conky.config = {
   -- Comments start with a double dash
   alignment = 'top_right',
-  gap_X = 840,
   background = true,
   own_window = true,
   own_window_type = 'desktop'
