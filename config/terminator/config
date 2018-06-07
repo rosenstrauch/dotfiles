@@ -98,14 +98,14 @@
   [[default]]
     allow_bold = False
     audible_bell = True
-    background_color = "#060039"
+    background_color = "#014c00"
     background_darkness = 0.56
     background_type = transparent
     cursor_color = "#00ff27"
     font = Liberation Mono 16
-    foreground_color = "#204a87"
+    foreground_color = "#eeeeec"
     login_shell = True
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
+    palette = "#fbf1c7:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"
     scrollback_infinite = True
     use_system_font = False
     visible_bell = True

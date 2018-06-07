@@ -1,3 +1,4 @@
+ #!/bin/bash
 sleep 20s
 killall conky
 #cd "~/.conky/TeejeeTech"
