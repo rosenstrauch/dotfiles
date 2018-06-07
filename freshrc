@@ -321,7 +321,6 @@ mkdir -p $HOME/.cheat
 ln -sf ~/.dotfiles/manual/cheat/*  ~/.cheat/
 
 ## Terminator
-mkdir -p $HOME/.config/terminator/config
 ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
 
 ## Atom Editor
