@@ -56,3 +56,10 @@ Super+l${tab 40}Lock Screen
 Super+u${tab 40}System Update
 Super+v${tab 40}Volume
 Super+x${tab 40}Logout
+
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>Favourite Zsh commands<==
+$font$color${exec cat ~/.zhistory | awk 'BEGIN {FS="[ \t]+|\\|"} {print $1, $2}' | sort | uniq -c | sort -nr | head}
+
+${font Verdana:style=Bold:size=10}$color${alignc}==>Favourite Bash commands<==
+$font$color${exec cat ~/.bash_history | awk 'BEGIN {FS="[ \t]+|\\|"} {print $1, $2}' | sort | uniq -c | sort -nr | head}

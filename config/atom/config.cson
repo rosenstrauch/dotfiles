@@ -28,7 +28,6 @@
       "linter-twig"
       "linter-ui-default"
       "mocha-test-runner"
-      "php-debug"
       "php-twig"
       "python-debugger"
       "python-indent"
@@ -42,5 +41,9 @@
     userId: "d1b218fb-e012-4db7-bc28-09a3607973c8"
   "linter-ui-default":
     panelHeight: 225
+  "php-debug":
+    showWelcome: false
+    xdebug:
+      pathMaps: "[{\"remotePath\":\"/var/www/web\",\"localPath\":\"/mnt/DATA/03-TribeProjects/AVGULAS/omniverse_PROJECT/omniverse_CODENVS/omniaverse_docksal/web\"}]"
   welcome:
     showOnStartup: false

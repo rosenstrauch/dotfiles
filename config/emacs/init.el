@@ -4,6 +4,11 @@
 ;;; * GLOBAL Emacs Settings
 ;;; ** GLOBAL Load custom Lisp from others [#1]
 
+
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 (let ((default-directory  "~/.emacs.d/site-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
 
@@ -46,11 +51,13 @@
 ;;; *** STYLE: highlight Matching parenthesis
 (show-paren-mode 1)
 ;;; *** STYLE: Make tabs into spaces when you type them
-(setq-default indent-tabs-mode nil)
+;;(setq-default indent-tabs-mode nil)
 
 ;;; *** STYLE: Display existing tabs as 2 characters wide [#19]
 (setq-default tab-width 2)
 (setq-default c-basic-offset 2)
+
+
 (load-theme 'tsdh-dark)
 
 (set-frame-font "9x15")
@@ -63,11 +70,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(cursor ((((background light)) (:background "black")) (((background dark)) (:background "white"))))
- '(org-level-1 ((t (:inherit outline-1 :background "blue" :foreground "lavender blush" :box nil :height 1.2))))
- '(org-level-2 ((t (:inherit outline-2 :foreground "orange" :box nil :height 1.1))))
- '(org-level-3 ((t (:inherit outline-3 :foreground "magenta" :box nil :height 1.0))))
- '(org-level-4 ((t (:inherit outline-4 :foreground "khaki" :box nil :height 0.9))))
- '(org-level-5 ((t (:inherit outline-5 :foreground "orchid1" :box nil :height 0.8)))))
+ '(org-level-1 ((t (:inherit outline-1 :background "blue" :foreground "lavender blush" :box nil :height 1.4))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "orange" :box nil :height 1.2))))
+ '(org-level-3 ((t (:inherit outline-3 :foreground "magenta" :box nil :height 0.9))))
+ '(org-level-4 ((t (:inherit outline-4 :foreground "khaki" :box nil :height 0.7))))
+ '(org-level-5 ((t (:inherit outline-5 :foreground "orchid1" :box nil :height 0.5)))))
 
 ;;; ** CUSTOM functions
 ;;; *** CUSTOM open emacs config
@@ -182,27 +189,27 @@
 
 ;;; * Use package org-invoice
 ;;; https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
-(use-package org-invoice )
+  (use-package org-invoice )
 
 ;;; * use package: helm
-(use-package helm
-  :bind (("M-x" . helm-M-x)
-         ("M-<f5>" . helm-find-files)
-         ([f10] . helm-buffers-list)
-         ([S-f10] . helm-recentf))
-  :ensure t)
+  (use-package helm
+    :bind (("M-x" . helm-M-x)
+           ("M-<f5>" . helm-find-files)
+           ([f10] . helm-buffers-list)
+           ([S-f10] . helm-recentf))
+    :ensure t)
 
 
 ;;; * Use package tramp
 
-(use-package tramp
-  :config
-  (setq tramp-default-method "ssh")
-  (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
-  (setq tramp-chunksize 500)
-  (setq tramp-default-method "ssh")
-  (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash")
-))
+  (use-package tramp
+    :config
+    (setq tramp-default-method "ssh")
+    (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
+    (setq tramp-chunksize 500)
+    (setq tramp-default-method "ssh")
+    (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash")
+                     ))
 
 ;;; * Use Package: ORG-JIRA
 ;;; ** credentials are in authinfo, you need make sure whether the "/jira" at the end is necessary or not jiralib is not explicitly required, since org-jira will load it. [#4]
@@ -211,21 +218,21 @@
                                         ;  (setq jiralib-url "http://acolono.atlassian.net")
                                         ;  :ensure t)
 ;;; * Package: Gitlab [#2]
-(unless (package-installed-p 'gitlab)
-  (package-install 'gitlab))
+  (unless (package-installed-p 'gitlab)
+    (package-install 'gitlab))
 
 ;;; * Use Package: Magit [#11]
-(use-package magit
-  :ensure t
-  :bind ("C-x g" . magit-status)
-  :config
-  (progn
-    (setenv "GIT_PAGER" "")
-    (add-hook 'magit-log-edit-mode-hook
-              '(lambda ()
-                 (auto-fill-mode)
-                 (flyspell-mode)
-                 (set-fill-column 80)))))
+  (use-package magit
+    :ensure t
+    :bind ("C-x g" . magit-status)
+    :config
+    (progn
+      (setenv "GIT_PAGER" "")
+      (add-hook 'magit-log-edit-mode-hook
+                '(lambda ()
+                   (auto-fill-mode)
+                   (flyspell-mode)
+                   (set-fill-column 80)))))
   ;; optional keyboard short-cut
   (global-set-key "\C-xm" 'browse-url-at-point)
   :ensure t)
@@ -249,6 +256,7 @@
   :config
   (setq js-indent-level 2))
 
+
 ;;; * Use Package Elm Mode [#2]
 (use-package elm-mode
   :ensure t)
@@ -259,6 +267,15 @@
 
 ;;; * Use Package Json Mode [#2]
 (use-package json-mode
+  :ensure t)
+
+;;; * Use Package Makefile ob [#2]
+(use-package ob-makefile
+  :config
+  (setq org-src-preserve-indentation t))
+
+;;; * Use Package Make Mode [#2]
+(use-package make-mode
   :ensure t)
 ;;; * Use Package: Restclient [#3]
 (use-package restclient
@@ -444,8 +461,6 @@
              ("f" . outline-forward-same-level)        ; Forward - same level
              ("b" . outline-backward-same-level)))       ; Backward - same level
 
-
-
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
   :mode ("\\.jl\\'" . org-mode)
@@ -473,32 +488,32 @@
 ;;; ** ORG INIT [#1]
   :init
 ;;; *** ORG INIT github issue new url
-(defun gh-issue-new-url (project title body)
-  "Create url for new issue.  PROJECT is the repo.  TITLE is the name of the issue.  BODY describes the issue."
-  (concat "https://github.com/"
-          project
-          "/issues/new?title="
-          (url-hexify-string title)
-          "&body="
-          (url-hexify-string body)))
+  (defun gh-issue-new-url (project title body)
+    "Create url for new issue.  PROJECT is the repo.  TITLE is the name of the issue.  BODY describes the issue."
+    (concat "https://github.com/"
+            project
+            "/issues/new?title="
+            (url-hexify-string title)
+            "&body="
+            (url-hexify-string body)))
 
-(defun gh-issue-new-browse (project title body)
-  "Browse to url of new issue.  PROJECT is the repo.  TITLE is the name of the issue.  BODY describes the issue."
-  (browse-url (gh-issue-new-url project title body)))
+  (defun gh-issue-new-browse (project title body)
+    "Browse to url of new issue.  PROJECT is the repo.  TITLE is the name of the issue.  BODY describes the issue."
+    (browse-url (gh-issue-new-url project title body)))
 
-(defun gh-issue-get-project ()
-  "Read project from property."
-  (org-entry-get (point) "GH-PROJECT" t))
+  (defun gh-issue-get-project ()
+    "Read project from property."
+    (org-entry-get (point) "GH-PROJECT" t))
 
 
-(defun gh-issue-create ()
-  "Interactively create a new issue."
-  (interactive)
-  (gh-issue-new-browse (gh-issue-get-project)
-                       (org-get-heading)
-                       (org-export-as 'md t)))
+  (defun gh-issue-create ()
+    "Interactively create a new issue."
+    (interactive)
+    (gh-issue-new-browse (gh-issue-get-project)
+                         (org-get-heading)
+                         (org-export-as 'md t)))
 
-(global-set-key (kbd "C-x c g i") 'gh-issue-create)
+  (global-set-key (kbd "C-x c g i") 'gh-issue-create)
 
 ;;; *** ORG INIT Clocking
 
@@ -610,7 +625,7 @@ as the default task."
             (when bh/keep-clock-running
               (bh/clock-in-default-task)))))))
 
-  (defvar bh/organization-task-id "a7f3b0f6-77b4-4434-8d03-06a267dc1cc6")
+  (defvar bh/organization-task-id "d4dcfc17-e1c5-462c-9c9c-b92013e92915")
 
   (defun bh/clock-in-organization-task-as-default ()
     (interactive)
@@ -860,32 +875,43 @@ same directory as the org-buffer and insert a link to this file."
 
 (add-hook 'after-save-hook 'tangle-on-save-org-mode-file)
 
+;; Enable the auto-revert mode globally. This is quite useful when you have
+;; multiple buffers opened that Org-mode can update after tangling.
+;; All the buffers will be updated with what changed on the disk.
+(global-auto-revert-mode)
+
+;; Add Org files to the agenda when we save them
+(defun to-agenda-on-save-org-mode-file()
+  (when (string= (message "%s" major-mode) "org-mode")
+    (org-agenda-file-to-front)))
+
+(add-hook 'after-save-hook 'to-agenda-on-save-org-mode-file)
 
 ;;; ** ORG CONFIG Begin
   :config
   (setq org-yank-adjusted-subtrees t)
   (setq org-fontify-whole-heading-line t)
 
-:config
+
 ;;; *** ORG config sync bookmarks
 
-;; define a datadir mapping for auxilatory host
-(defconst data-dir
-  (if (string-match-p (regexp-quote "end") (system-name))
-      "/mnt/MODATA"
-    "/mnt/DATA"))
+  ;; define a datadir mapping for auxilatory host
+  (defconst data-dir
+    (if (string-match-p (regexp-quote "end") (system-name))
+        "/mnt/MODATA"
+      "/mnt/DATA"))
 
 ;;; function to convert absolute paths from one system to another
-(defun sync-relative-name (file)
-  (cond
-   ((file-exists-p file)
-    file)
-   ((string-path-match "^.+/DATA/\\(.+\\)" file)
-    (expand-file-name (match-string 1 file) data-dir))
-   (t file)))
+  (defun sync-relative-name (file)
+    (cond
+     ((file-exists-p file)
+      file)
+     ((string-path-match "^.+/DATA/\\(.+\\)" file)
+      (expand-file-name (match-string 1 file) data-dir))
+     (t file)))
 
 ;;; use function to filter bookmarks
-(advice-add 'bookmark-get-filename :filter-return 'sync-relative-name)
+  (advice-add 'bookmark-get-filename :filter-return 'sync-relative-name)
 
 ;;; *** ORG Config Babel
 
@@ -894,6 +920,7 @@ same directory as the org-buffer and insert a link to this file."
    'org-babel-load-languages
    '((R . t)
      (shell . t)
+     (makefile . t)
      (dot . t)
      (python . t)
      (ledger . t)
@@ -911,12 +938,98 @@ same directory as the org-buffer and insert a link to this file."
 ;;; *** Org CONFIG Babel
   (require 'ob-shell)
 
+
 ;;; *** ORg config: nicer org elipsis
   (setq org-ellipsis "⤵")
 
 ;;; *** Org config export backends
   (setq org-export-backends (quote (ascii html icalendar latex md odt)))
 
+;;; *** Org config export
+  (setq org-export-in-background t)
+  (setq org-export-with-sub-superscripts nil)
+  (setq org-latex-classes
+        '(("beamer"
+           "\\documentclass[presentation]{beamer}"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("article"
+           "\\documentclass[12pt]{hitec}
+  [DEFAULT-PACKAGES]
+  [PACKAGES]
+  [NO-EXTRA]
+  \\settextfraction{0.95}\n"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("report"
+           "\\documentclass[11pt]{report}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("book"
+           "\\documentclass[11pt]{book}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("une-article"
+           "\\documentclass[a4paper,12pt]{scrartcl}
+  [DEFAULT-PACKAGES]
+  [PACKAGES]
+  \\usepackage[margin=1.5cm]{geometry}
+  [EXTRA]\n"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("une-logo"
+           "\\documentclass[a4paper,12pt]{scrartcl}
+  [DEFAULT-PACKAGES]
+  [PACKAGES]
+  \\usepackage[margin=1.5cm]{geometry}
+  [EXTRA]
+  \\definecolor{unegreen}{HTML}{7AB800}
+  \\definecolor{Black}{HTML}{000000}
+  \\definecolor{White}{HTML}{FFFFFF}
+  \\definecolor{dimgrey}{HTML}{696969}
+  \\makeatletter
+  \\def\\@maketitle{
+   \\noindent \\begin{minipage}[c][4cm][t]{\\linewidth}
+     \\colorbox{Black}{%
+       \\begin{minipage}[t][4cm][c]{4cm}
+       \\flushleft
+       \\includegraphics{~/org/07-needs/data/e2/d93aae-bf9f-4f84-9cbb-d58618144046/luis_rosenstrauch_s.png}
+     \\end{minipage}}
+     \\colorbox{unegreen}{%
+       \\begin{minipage}[t][4cm][c]{13.5cm}
+         \\flushright
+         \\Large \\textbf{\\color{White}{\\@title}} \\\\
+          \\vspace{4pt}
+         \\small \\color{White}{\\@author} \\\\
+         \\small \\color{White}{\\@date}
+       \\end{minipage}}
+     \\end{minipage}}
+  \\makeatother\n"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("old-article" "\\documentclass[11pt]{article}"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+        )
 
 ;;; *** ORG config: allow linking by id [#1]
 
@@ -933,7 +1046,6 @@ same directory as the org-buffer and insert a link to this file."
         '(("Emacs" "/usr/share/icons/Moka/16x16/apps/emacs.png" nil nil :ascent center)
           ("experiments" "/usr/share/icons/HighContrast/48x48/emotes/face-monkey.png" nil nil :ascent center)
           ("DROID" "/mnt/DATA/DataLib/PICS/images/icons/Android.png" nil nil :ascent center)
-
           ("LR" "~/.emacs.d/icons/LR-icon.png" nil nil :ascent center)
           ("AO" "~/.emacs.d/icons/AO_icon.png" nil nil :ascent center)
           ("[Pp]rototypes" "/usr/share/icons/HighContrast/24x24/actions/document-send.png" nil nil :ascent center)
@@ -955,9 +1067,6 @@ same directory as the org-buffer and insert a link to this file."
           ("OpenStack" "~/.emacs.d/icons/org/openstack.png" nil nil :ascent center)
           ("\\(Holidays\\|Vacation\\)" "~/.emacs.d/icons/org/holidays.png" nil nil :ascent center)
           (".*" '(space . (:width (16))))))
-
-
-
 
   ;; configure wip limit to 2 next tasks
   (setq org-wip-limit 2)
@@ -1009,25 +1118,23 @@ same directory as the org-buffer and insert a link to this file."
   (interactive)
   (cancel-timer org-mobile-sync-timer))
 (org-mobile-sync-enable)
+
 ;;; *** ORG CONFIG: CAPTURE [#5]
 
   (setq org-default-notes-file (concat org-directory "/capture.org"))
   (setq org-capture-templates
-
         '(("s" "ScreenShot" entry (file+headline "~/org/capture.org" "ScreenShots")
-           "* %?\n  %i\n  %a"
-           )
+           "* %?\n  %i\n  %a")
           ("t" "Todo" entry (file+headline "~/org/capture.org" "Tasks")
            "* WISH %?\n  %i\n  %a")
-
-          ("l" "Ledger entries")
-          ("lm" "bankcard" plain
+          ("f" "Financial entries")
+          ("fm" "bankcard" plain
            (file "~/org/07-needs/finance.ledger")
            "%(org-read-date) %^{Payee}
   Liabilities:bankcard
   Expenses:%^{Account}  %^{Amount}
 ")
-          ("lc" "Cash" plain
+          ("fc" "Cash" plain
            (file "~/org/07-needs/finance.ledger")
            "%(org-read-date) * %^{Payee}
   Expenses:Cash
@@ -1072,17 +1179,72 @@ same directory as the org-buffer and insert a link to this file."
 ;;; **** CAPTURE: Snippets will need to get refiled if i capture a link it may include a snipptet [#6]
           ("x" "Firefox Capture Template" entry
            (file+headline "~/org/capture.org" "ClippedSnippets")
-           "* Snippets %a\n%i\nEntered on %U\n%c\ \nNote: %?\nLink: %l" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)
-
-          ))
+           "* Snippets %a\n%i\nEntered on %U\n%c\ \nNote: %?\nLink: %l" :prepend t :jump-to-captured t :empty-lines-after 1 :unnarrowed t)))
 
 ;;; *** ORG CUSTOM AGENDA Views [#3]
 
   (setq org-agenda-custom-commands
         '(
+
+          ("S" . "Status")
+          ("I" . "Inventory")
+
+          ("D" . "Data")
+          ("M" . "Misc")
 ;;; **** CUSTOM AGENDA: Review Views [#29]
           ("R" . "Review" )
+          ("Rw" "Week in review"
+           agenda ""
+           ((org-agenda-span 'week)
+            (org-agenda-start-on-weekday 0)
+            (org-agenda-overriding-header "Week in Review"))
+           ("/mnt/DATA/exportedata/org-export/review/week.html"))
+          ("Rd" "Day in review"
+           agenda ""
+           ((org-agenda-span 'day)
+            (org-agenda-overriding-header "Week in Review"))
+           ("/mnt/DATA/exportedata/org-export/review/day.html"))
 
+          ("Rm" "Month in review"
+           agenda ""
+           ((org-agenda-span 'month)
+            (org-agenda-start-day "01")
+            (org-read-date-prefer-future nil)
+            (org-agenda-overriding-header "Month in Review"))
+           ("/mnt/DATA/exportedata/org-export/review/month.html"))
+
+;;; **** CUSTOM AGENDA: Priority views [#24]
+          ("c" . "Priority views")
+          ("ca" "#A"  ((tags "PRIORITY=\"A\""
+                             ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                              (org-agenda-overriding-header "High-priority unfinished tasks:")))
+                       (alltodo ""
+                                ((org-agenda-entry-types '(:scheduled))
+                                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+                                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                                                      "\\[#A\\]"))))))
+          ("cb" "#B" alltodo ""
+           ((org-agenda-entry-types '(:scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                                 "\\[#B\\]"))))
+          ("cc" "#C" alltodo ""
+           ((org-agenda-entry-types '(:scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp
+                                                                 "\\[#C\\]"))))
+          ("h" "Habits" tags-todo "STYLE=\"habit\""
+           ((org-agenda-overriding-header "Habits")
+            (org-agenda-sorting-strategy
+             '(todo-state-down effort-up category-keep))))
+
+          ("S" . "Status")
+          ("I" . "Inventory")
+          ("Q" . "Quests")
+          ("D" . "Data")
+          ("M" . "Misc")
+;;; **** CUSTOM AGENDA: Review Views [#29]
+          ("R" . "Review" )
           ("Rw" "Week in review"
            agenda ""
            ((org-agenda-span 'week)
@@ -1135,21 +1297,10 @@ same directory as the org-buffer and insert a link to this file."
            ((org-agenda-overriding-header "Habits")
             (org-agenda-sorting-strategy
              '(todo-state-down effort-up category-keep))))
-;;; **** CUSTOM AGENDA: Issues [#2]
-
-          ("I" . "Issues") ;;; gives label to "I"
-;;; ***** shows open tasks from .issue files [#2]
-          ("Io" "Todos tagged as Issues" tags-todo "-SCHEDULED={.+}/!+ISSUE")
-;;; **** CUSTOM AGENDA: Boards [#1]
-          ;;          ("B" . "Boards") ;;; gives label to "I"
-;;; ***** TODO show only assigned [#7]
-
-          ;;         ("Bs" "[s]chedule next Trello Tasks" tags-todo "-SCHEDULED={.+}/!+NEXT" ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
-          ;;("Ba" "Assigned Trello Tasks" tags "orgtrello\\-users={rosenstrauch}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"           ((org-agenda-files	     (file-expand-wildcards "~/org/boards/*.trello")	     )))
-          ;;          ("Bi" "[i]nserted unscheduled Tasks" todo "-SCHEDULED={.+}/!+TODO|+WISH|+NEXT|+HOLD|+INSERTED"           ((org-agenda-files (file-expand-wildcards "~/org/boards/*.trello"))))
 
 ;;; **** CUSTOM AGENDA: Quests [#1]
           ("Q" . "Quests") ;;; gives label to "Q"
+          ("Qo" "Todos tagged as Issues" tags-todo "-SCHEDULED={.+}/!+ISSUE")
 ;;; ***** quests dont contain issues and boards
 ;;; ***** quests that are estimated, are not scheduled, are not DONE.
 ;;; ***** quests to estimate next [#1]
@@ -1240,8 +1391,6 @@ same directory as the org-buffer and insert a link to this file."
 
 ;;; *** ORG CONFIG: Agenda [#1]
 
-
-
 ;;; **** AGENDA Exporter settings [#9]
   (setq org-agenda-exporter-settings '(
                                        (org-agenda-write-buffer-name "Todays Agenda")
@@ -1250,7 +1399,6 @@ same directory as the org-buffer and insert a link to this file."
                                         ;      (org-agenda-add-entry-text-maxlines 5)
                                         ;      (htmlize-output-type 'css)
                                        (ps-print-color-p 'black-white)))
-
 
 ;;; **** AGENDA open in current window [#1]
   (setq org-agenda-window-setup (quote current-window))
@@ -1319,17 +1467,17 @@ same directory as the org-buffer and insert a link to this file."
 
 
   (setq-default org-clock-history-length 23
-      org-clock-in-resume t
-      org-clock-into-drawer t
-      org-clock-out-remove-zero-time-clocks t
-      org-clock-out-when-done t
-      org-clock-persist 'history
-      org-clock-persist-query-resume nil
-      org-log-done 'time
-      org-timer-default-timer 25
-      org-drawers (quote ("PROPERTIES" "LOGBOOK"))
-      org-clock-auto-clock-resolution (quote when-no-clock-is-running)
-      )
+                org-clock-in-resume t
+                org-clock-into-drawer t
+                org-clock-out-remove-zero-time-clocks t
+                org-clock-out-when-done t
+                org-clock-persist 'history
+                org-clock-persist-query-resume nil
+                org-log-done 'time
+                org-timer-default-timer 25
+                org-drawers (quote ("PROPERTIES" "LOGBOOK"))
+                org-clock-auto-clock-resolution (quote when-no-clock-is-running)
+                )
 ;;; **** CLOCKING Resume clocking task on clock-in if the clock is open [#1]
 
   (setq org-agenda-log-mode-items '(state closed clock))
@@ -1354,7 +1502,7 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-publish-use-timestamps-flag nil)
   (setq org-publish-project-alist
         '(
-          ("org" :components ("orgfull-html" "org-styles" "orgfull-pdf"))
+          ("org" :components ("orgsystem-html" "org-styles" "orgsystem-pdf"))
 
           ("org-styles"
            :base-directory "~/org/styles"
@@ -1362,18 +1510,18 @@ same directory as the org-buffer and insert a link to this file."
            :base-extension "css\\|js"
            :publishing-directory "/mnt/DATA/exportedata/org_published/"
            :publishing-function org-publish-attachment)
-          ("orgfull-pdf"
-           :base-directory "~/org/"
+          ("orgsystem-pdf"
+           :base-directory "~/org/08-system"
            :base-extension "org"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf/system"
            :section-numbers nil
            :with-toc nil
            :exclude "//^_.org$"
            :recursive t
            :publishing-function org-latex-publish-to-pdf)
-          ("orgfull-html"
-           :base-directory "~/org/"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/html"
+          ("orgsystem-html"
+           :base-directory "~/org/08-system"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/full/html/system"
            :base-extension "org"
            :recursive t
            :exclude "^_[a-z]"
@@ -1393,16 +1541,16 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-agenda-diary-file "~/org/journal.org")
 
 ;;; ** ORG Tags [#11]
-  (setq org-tag-alist '((:startgroup . nil)
-                        ("@work" . ?w) ("@home" . ?h)
-                        ("@errands" . ?t)
-                        ("@BUY" . ?t)
-                        ("@meeting" . ?m)
-                        ("@phone" . ?c)
-                        (:endgroup . nil)
-                        ("PRJ" . ?e)
-                        ("TEAM" . ?g)
-                        ("@laptop" . ?l) ("@pc" . ?p)))
+  ;(setq org-tag-alist '((:startgroup . nil)
+  ;                      ("@work" . ?w) ("@home" . ?h)
+  ;                      ("@errands" . ?t)
+  ;                      ("@BUY" . ?t)
+  ;                      ("@meeting" . ?m)
+  ;                      ("@phone" . ?c)
+  ;                      (:endgroup . nil)
+  ;                      ("PRJ" . ?e)
+  ;                      ("TEAM" . ?g)
+  ;                      ("@laptop" . ?l) ("@pc" . ?p)))
 
 ;;; ** ORG Tasks [#4]
   (setq org-log-redeadline (quote time))
@@ -1417,9 +1565,8 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-todo-keywords
         (quote (
                 (sequence "WISH(w)"  "TODO(t)" "HOLD(h@/!)" "NEXT(n)" "|" "CANCELED(c)" "DONE(d)")
-                (sequence "INSERT(i)" "OPEN(o)" "|" "DONE(d)")
                 ;;; do we treat ideas as special type of task
-                (sequence "RESEARCH(r)" "DESCRIBE(f)" "|" "KNOWLEDGE(k)")
+                (sequence "RESEARCH(r)" "DEFINE(f)" "|" "KNOWLEDGE(k)")
                 )))
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "red" :weight bold)
@@ -1472,90 +1619,6 @@ same directory as the org-buffer and insert a link to this file."
                                               ("*" . "-")
                                               ("1." . "-")
                                               ("1)" . "a)"))))
-;;; *** Org config export
-  (setq org-export-with-sub-superscripts nil)
-  (setq org-latex-classes
-        '(("beamer"
-           "\\documentclass[presentation]{beamer}"
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-          ("article"
-           "\\documentclass[12pt]{hitec}
-  [DEFAULT-PACKAGES]
-  [PACKAGES]
-  [NO-EXTRA]
-  \\settextfraction{0.95}\n"
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-          ("report"
-           "\\documentclass[11pt]{report}"
-           ("\\part{%s}" . "\\part*{%s}")
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-          ("book"
-           "\\documentclass[11pt]{book}"
-           ("\\part{%s}" . "\\part*{%s}")
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-          ("une-article"
-           "\\documentclass[a4paper,12pt]{scrartcl}
-  [DEFAULT-PACKAGES]
-  [PACKAGES]
-  \\usepackage[margin=1.5cm]{geometry}
-  [EXTRA]\n"
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-          ("une-logo"
-           "\\documentclass[a4paper,12pt]{scrartcl}
-  [DEFAULT-PACKAGES]
-  [PACKAGES]
-  \\usepackage[margin=1.5cm]{geometry}
-  [EXTRA]
-  \\definecolor{unegreen}{HTML}{7AB800}
-  \\definecolor{Black}{HTML}{000000}
-  \\definecolor{White}{HTML}{FFFFFF}
-  \\definecolor{dimgrey}{HTML}{696969}
-  \\makeatletter
-  \\def\\@maketitle{
-   \\noindent \\begin{minipage}[c][4cm][t]{\\linewidth}
-     \\colorbox{Black}{%
-       \\begin{minipage}[t][4cm][c]{4cm}
-       \\flushleft
-       \\includegraphics{~/org/07-needs/data/e2/d93aae-bf9f-4f84-9cbb-d58618144046/luis_rosenstrauch_s.png}
-     \\end{minipage}}
-     \\colorbox{unegreen}{%
-       \\begin{minipage}[t][4cm][c]{13.5cm}
-         \\flushright
-         \\Large \\textbf{\\color{White}{\\@title}} \\\\
-          \\vspace{4pt}
-         \\small \\color{White}{\\@author} \\\\
-         \\small \\color{White}{\\@date}
-       \\end{minipage}}
-     \\end{minipage}}
-  \\makeatother\n"
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-          ("old-article" "\\documentclass[11pt]{article}"
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-        )
 
 ;;; * Endof Org config
   )
