@@ -1,0 +1,4 @@
+conky.text = [[
+$USER
+${evaluated USER}
+]]

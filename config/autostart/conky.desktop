@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Exec=sh "/home/rosenstrauch/.conky/conky-startup.sh"
+Exec=sh "~/.conky/conky-startup.sh"
 Hidden=false
 NoDisplay=false
-X-GNOME-Autostart-enabled=false
+X-GNOME-Autostart-enabled=true
 Name[en_IN]=Conky
 Name=Conky
 Comment[en_IN]=

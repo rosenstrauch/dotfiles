@@ -1,3 +1,13 @@
+
+backup_files_existing_before_symlinking() {
+  echo "will backup relevant folders and files that arent symlinks"
+  if [[ ! -L "$1" ]] && [[ -d "$1" || -f "$1" ]]; then
+     echo "=> $1 exists and is not a symlink backing up so you can symlink correct file"
+       mv $1 $1.bak
+  fi
+}
+
+
 # 1.0 My Functions
 # sourced to /home/rosenstrauch/.fresh/build/shell.sh
 # <https://github.com/freshshell/fresh#shell-files>
@@ -34,6 +44,7 @@ fresh-options --bin
   fresh hechoendrupal/drupal-console-launcher bin/drupal.php
   fresh hechoendrupal/drupal-console-launcher bin/drupal
   fresh simonwhitaker/gibo gibo
+  fresh nella/victor bin/victor
 fresh-options
 
 
@@ -91,10 +102,13 @@ fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 
 # Desktop  #
+backup_files_existing_before_symlinking $HOME/Desktop
 ln -sf ~/.dotfiles/config/Desktop ~/
 # Autostart
+backup_files_existing_before_symlinking $HOME/.config/autostart
 ln -sf ~/.dotfiles/config/autostart ~/.config
 # Mimetype associations
+backup_files_existing_before_symlinking $HOME/.config/mimeapps.list
 ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 ############
@@ -113,7 +127,7 @@ ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
 fresh creationix/nvm . --file=~/.nvm/
 
 ## liquidprompt
-fresh nojhan/liquidprompt . --file=~/.liquidprompt/
+fresh nojhan/liquidprompt liquidprompt
 
 ## sack stuff - https://github.com/sampson-chen/sack
 fresh sampson-chen/sack sack --bin
@@ -125,8 +139,9 @@ fresh sampson-chen/sack .sackrc --file
 # Scripts  #
 ############
 # only meant to be used by other scripts
-
+ln -sf ~/.dotfiles/local/composure ~/.local/
 ## utilities library
+mkdir -p $HOME/scripts
 ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
 
 ## Zim  custom tools and plugins
@@ -164,22 +179,25 @@ fresh-options
 # Config files subfolders of $HOME
 fresh config/friendlyarch --file=~/.friendlyarch/
 fresh config/systemd --file=~/.config/systemd
+fresh config/composer/config.json --file=~/.config/composer/config.json
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
-fresh config/conky --file=~/.conky/
+fresh config/conky --file=~/.config/conky/
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
-######################
-# BASH-IT Extensions #
-######################
+##########################
+# BASH-IT and Extensions #
+##########################
 
-fresh bash-it/custom.aliases.bash --file=~/.bash_it/aliases/custom.aliases.bash
-fresh bash-it/custom.bash --file=~/.bash_it/lib/custom.bash
-fresh bash-it/custom.plugins.bash --file=~/.bash_it/plugins/custom.plugins.bash
-fresh bash-it/drush.bash --file=bash_it/lib/custom.bash
-fresh bash-it/drush.aliases.bash --file=bash_it/aliases/custom.aliases.bash
+ln -sf Bash-it/bash-it/ $HOME/.config/bash_it
+# fresh bash-it/custom.aliases.bash --file=~/.config/bash_it/aliases/custom.aliases.bash
+# fresh bash-it/custom.bash --file=~/.config/bash_it/lib/custom.bash
+# fresh bash-it/custom.plugins.bash --file=~/.config/bash_it/plugins/custom.plugins.bash
+# fresh bash-it/drush.bash --file=~/.config/bash_it/lib/custom.bash
+# fresh bash-it/drush.aliases.bash --file=/.config/bash_it/aliases/custom.aliases.bash
 
+mkdir .bash_it/custom/ -p
 ln -sf ~/.dotfiles/bash-it/custom/plugins/ ~/.bash_it/custom/
 
 ## additional bash completions via bashit
@@ -276,7 +294,7 @@ fresh wee-slack/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_sla
 ##########
 
 ## use a minimal .bashrc that loads bash-it and knows about fresh
-
+backup_files_existing_before_symlinking $HOME/.bashrc
 fresh-options --file='~/.bashrc' --marker
   fresh shell/bash/bashrc
   fresh freshshell/fresh contrib/source-build.sh
@@ -287,18 +305,23 @@ fresh-options
 #########################
 
 ## Tmuxinator projects
+mkdir -p $HOME/.tmuxinator
 ln -sf ~/.dotfiles/config/tmuxinator/* ~/.tmuxinator/
 
 ## Boom Links
+mkdir -p $HOME/.boom
 ln -sf ~/.dotfiles/manual/boom/boom ~/.boom
 
 ## Cheatsheets
+mkdir -p $HOME/.cheat
 ln -sf ~/.dotfiles/manual/cheat/*  ~/.cheat/
 
 ## Terminator
+mkdir -p $HOME/.config/terminator/config
 ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
 
 ## Atom Editor
+mkdir -p $HOME/.atom
 ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
 ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
 ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
@@ -313,6 +336,12 @@ fresh_after_build() {
   chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
 
   $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
+
+
+  if [[ ! $(type bash_it &>/dev/null) && -d ~/.config/bash_it ]]; then
+    ~/.config/bash_it/install.sh
+  fi
+
 
   ## update prezto
   #cd ~/.fresh/source/rosenstrauch/prezto/ && git checkout production && git pull

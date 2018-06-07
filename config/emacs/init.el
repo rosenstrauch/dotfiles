@@ -118,8 +118,7 @@
 
 ;;; - use-package is available from here on [#1]
 
-;;; * Org checklists [#1]
-(require 'org-checklist)
+
 ;;; * Print Preview [#2]
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
