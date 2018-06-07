@@ -138,9 +138,9 @@ fresh sampson-chen/sack .sackrc --file
 ############
 # Scripts  #
 ############
-# only meant to be used by other scripts
-ln -sf ~/.dotfiles/local/composure ~/.local/
-## utilities library
+ln -sf ~/.dotfiles/local/composure ~/.local/share
+
+## utilities library only meant to be used by other scripts
 mkdir -p $HOME/scripts
 ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
 

@@ -8,10 +8,10 @@ killall conky
 #conky -c "~/.conky/TeejeeTech/Network Panel" &
 #cd "~/.conky/TeejeeTech"
 #conky -c "~/.conky/TeejeeTech/Process Panel" &
-cd "~/.conky"
+
 #conky -c "~/.conky/conkyrc" &
-conky -c "~/.conky/conky_username" &
-cd "~/.conky"
+conky -c "~/.config/conky/conky_username" &
+
 #conky -c "~/.conky/temps.conkyrc" &
 #conky -c "~/.conky/conky-preexec" &
 #conky -c "~/.conky/conky_network" &
