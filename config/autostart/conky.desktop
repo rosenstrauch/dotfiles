@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=sh "~/.conky/conky-startup.sh"
+Exec=conky --daemonize --pause=5 -c ~/.config/conky/conky_username
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
@@ -8,3 +8,5 @@ Name[en_IN]=Conky
 Name=Conky
 Comment[en_IN]=
 Comment=
+StartupNotify=false
+Terminal=false
