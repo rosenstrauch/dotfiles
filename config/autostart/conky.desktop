@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Exec=conky --daemonize --pause=5 -c ~/.config/conky/conky_username
+Exec=sleep 10 && /usr/bin/conky --daemonize --pause=5 -c $HOME/.config/conky/conky_username
+X-GNOME-Autostart-enabled=true
 Hidden=false
 NoDisplay=false
-X-GNOME-Autostart-enabled=true
 Name[en_IN]=Conky
 Name=Conky
 Comment[en_IN]=

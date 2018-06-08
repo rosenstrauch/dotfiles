@@ -88,6 +88,7 @@
       type = Terminal
       uuid = 624722e4-e0d6-4a24-a4b7-023ad3eed581
     [[[terminal3]]]
+      command = ""
       order = 1
       parent = child1
       profile = friendlinux
@@ -153,7 +154,6 @@
     foreground_color = "#657b83"
     login_shell = True
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    use_custom_command = True
   [[friendlinux]]
     background_color = "#060039"
     background_darkness = 0.87
