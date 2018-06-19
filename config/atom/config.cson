@@ -1,5 +1,33 @@
 "*":
+  "atom-beautify":
+    js: {}
+  core:
+    disabledPackages: [
+      "php-debug"
+      "autocomplete-python"
+      "behat-atom"
+      "drupal"
+      "language-elm"
+      "linter-csslint"
+      "linter-eslint"
+      "linter-python-pep8"
+      "python-debugger"
+      "platformio-ide-terminal"
+      "python-indent"
+      "python-tools"
+    ]
+    telemetryConsent: "no"
   drupal:
     fileTypesPhp: "module,install,inc,test,profile"
+  editor:
+    fontSize: 11
   "exception-reporting":
     userId: "0012fc16-c596-4daa-9a17-cb67c8eca355"
+  "linter-eslint": {}
+  "linter-ui-default":
+    panelHeight: 153
+    showPanel: true
+  "linter-xo":
+    fixOnSave: true
+  welcome:
+    showOnStartup: false
