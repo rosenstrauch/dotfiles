@@ -473,6 +473,15 @@
              ("f" . outline-forward-same-level)        ; Forward - same level
              ("b" . outline-backward-same-level)))       ; Backward - same level
 
+
+;;; * use package mocha
+
+(use-package mocha
+	:bind(
+				     ("C-c m P" . mocha-test-project)
+     ("C-c m f" . mocha-test-file)
+("C-c m p" . mocha-test-at-point))
+	:ensure t)
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
   :mode ("\\.jl\\'" . org-mode)
