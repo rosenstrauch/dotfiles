@@ -61,7 +61,7 @@
 (load-theme 'tsdh-dark)
 
 (set-frame-font "9x15")
-(line-number-mode 1)
+(global-display-line-numbers-mode t)
 (column-number-mode 1)
 (setq line-spacing '0.25)
 (custom-set-faces
@@ -119,7 +119,12 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
-
+(use-package auto-package-update
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t
+        auto-package-update-interval 4)
+  (auto-package-update-maybe))
 
 ;;; * Packages
 
@@ -222,7 +227,6 @@
 
 ;;; * Use Package: Magit [#11]
   (use-package magit
-    :ensure t
     :bind ("C-x g" . magit-status)
     :config
     (progn
@@ -236,7 +240,8 @@
   (global-set-key "\C-xm" 'browse-url-at-point)
   :ensure t)
 
-
+(use-package ghub
+	:ensure t)
 ;;; * Use package: git timemachine
 
 (use-package git-timemachine
@@ -251,12 +256,46 @@
 
 ;;; * Use Package js2-mode [#2]
 (use-package js2-mode
+	:mode
+  (("\\.js$" . js2-mode)
+	 ("\\.jsx$" . js2-jsx-mode))
   :ensure t
-  :config
-  (setq js-indent-level 2))
+	:hook ((js2-mode . (lambda ()
+                       (flycheck-mode)
+))
+         (js2-jsx-mode . (lambda ()
+                           (flycheck-mode)
+)))
+	:config
+	;; have 2 space indentation by default
+  (setq js-indent-level 2
+        js2-basic-offset 2
+				js-chain-indent t)
+	)
+;; indium: javascript awesome development environment
+;; https://github.com/NicolasPetton/indium
+(use-package indium
+	:ensure t
+  :after js2-mode
+  :bind (:map js2-mode-map
 
+              ("C-c C-l" . indium-eval-buffer)
+              ("C-c C-n" . indium-run-node)
+              ("C-c b l" . indium-list-breakpoints)
+              ("C-c b K" . indium-remove-all-breakpoints-from-buffer)
+              ("C-c b t" . indium-toggle-breakpoint)
+							)
+  :hook ((js2-mode . indium-interaction-mode)))
+
+
+(use-package js-auto-beautify
+  :ensure t)
+
+(use-package js-import
+  :ensure t)
 
 ;;; * Use Package Elm Mode [#2]
+
 (use-package elm-mode
   :ensure t)
 
@@ -324,17 +363,17 @@
   :init (global-flycheck-mode)
 	:config
 	;; use local eslint from node_modules before global
-;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-(defun my/use-eslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root
-                      (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                        root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))))
-(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+	;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+	(defun my/use-eslint-from-node-modules ()
+		(let* ((root (locate-dominating-file
+									(or (buffer-file-name) default-directory)
+									"node_modules"))
+					 (eslint (and root
+												(expand-file-name "node_modules/eslint/bin/eslint.js"
+																					root))))
+			(when (and eslint (file-executable-p eslint))
+				(setq-local flycheck-javascript-eslint-executable eslint))))
+	(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
   )
 ;;; * Use Package php Mode [#2]
@@ -344,7 +383,7 @@
 (use-package phpcbf
   :ensure t
   :init
-   (setq phpcbf-executable "~/bin/phpcbf")
+  (setq phpcbf-executable "~/bin/phpcbf")
   :config
   (add-hook 'php-mode-hook 'phpcbf-enable-on-save)
   (setq phpcbf-standard "Drupal")
@@ -385,7 +424,7 @@
          ("\\.[agj]sp" . web-mode)
          ("\\.as[cp]x" . web-mode)
          ("\\.erb" . web-mode)
-         ("\\.js" . web-mode)
+;         ("\\.js" . web-mode)
          ("\\.mustache" . web-mode)
          ("\\.djhtml" . web-mode)
          )
@@ -478,9 +517,9 @@
 
 (use-package mocha
 	:bind(
-				     ("C-c m P" . mocha-test-project)
-     ("C-c m f" . mocha-test-file)
-("C-c m p" . mocha-test-at-point))
+				("C-c m P" . mocha-test-project)
+				("C-c m f" . mocha-test-file)
+				("C-c m p" . mocha-test-at-point))
 	:ensure t)
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
@@ -499,7 +538,7 @@
          ("C-k" . org-cut-subtree)
          ("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
-         ("C-c b" . org-iswitchb)
+         ("C-c s b" . org-iswitchb)
          ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
          ("C-c C-w" . org-refile)
          ("C-c d" . org-refile-to-datetree)
@@ -890,31 +929,31 @@ same directory as the org-buffer and insert a link to this file."
 
 ;;; *** ORG init tangle and add to agenda on save
   ;; Tangle Org files when we save them
-(defun tangle-on-save-org-mode-file()
-  (when (string= (message "%s" major-mode) "org-mode")
-    (org-babel-tangle)))
+	(defun tangle-on-save-org-mode-file()
+		(when (string= (message "%s" major-mode) "org-mode")
+			(org-babel-tangle)))
 
-(add-hook 'after-save-hook 'tangle-on-save-org-mode-file)
+	(add-hook 'after-save-hook 'tangle-on-save-org-mode-file)
 
-;; Enable the auto-revert mode globally. This is quite useful when you have
-;; multiple buffers opened that Org-mode can update after tangling.
-;; All the buffers will be updated with what changed on the disk.
-(global-auto-revert-mode)
+	;; Enable the auto-revert mode globally. This is quite useful when you have
+	;; multiple buffers opened that Org-mode can update after tangling.
+	;; All the buffers will be updated with what changed on the disk.
+	(global-auto-revert-mode)
 
-;; Add Org files to the agenda when we save them
-(defun to-agenda-on-save-org-mode-file()
-  (when (string= (message "%s" major-mode) "org-mode")
-    (org-agenda-file-to-front)))
+	;; Add Org files to the agenda when we save them
+	(defun to-agenda-on-save-org-mode-file()
+		(when (string= (message "%s" major-mode) "org-mode")
+			(org-agenda-file-to-front)))
 
-(add-hook 'after-save-hook 'to-agenda-on-save-org-mode-file)
+	(add-hook 'after-save-hook 'to-agenda-on-save-org-mode-file)
 
 ;;; ** ORG CONFIG Begin
   :config
   (setq org-yank-adjusted-subtrees t)
-(setq org-fontify-whole-heading-line t)
+	(setq org-fontify-whole-heading-line t)
 ;;; *** ORG Config: cleanup after export
-(setq-default org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
-(setq-default org-latex-remove-logfiles t)
+	(setq-default org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+	(setq-default org-latex-remove-logfiles t)
 
 
 
@@ -1126,24 +1165,24 @@ same directory as the org-buffer and insert a link to this file."
 ;;; **** ORG MOBILE: configuration. [#2]
   (setq org-mobile-directory "/rosen_sync@files.rosenstrauch.com:/home/rosen_sync/roSynxcBox/MobileOrg")
 
-;; Automatically sync mobileorg when idle
-(defvar org-mobile-sync-timer nil)
-(defvar org-mobile-sync-idle-secs (* 60 10))
-(defun org-mobile-sync ()
-  (interactive)
-  (org-mobile-pull)
-  (org-mobile-push))
-(defun org-mobile-sync-enable ()
-  "enable mobile org idle sync"
-  (interactive)
-  (setq org-mobile-sync-timer
-        (run-with-idle-timer org-mobile-sync-idle-secs t
-                             'org-mobile-sync)));
-(defun org-mobile-sync-disable ()
-  "disable mobile org idle sync"
-  (interactive)
-  (cancel-timer org-mobile-sync-timer))
-(org-mobile-sync-enable)
+	;; Automatically sync mobileorg when idle
+	(defvar org-mobile-sync-timer nil)
+	(defvar org-mobile-sync-idle-secs (* 60 10))
+	(defun org-mobile-sync ()
+		(interactive)
+		(org-mobile-pull)
+		(org-mobile-push))
+	(defun org-mobile-sync-enable ()
+		"enable mobile org idle sync"
+		(interactive)
+		(setq org-mobile-sync-timer
+					(run-with-idle-timer org-mobile-sync-idle-secs t
+															 'org-mobile-sync)));
+	(defun org-mobile-sync-disable ()
+		"disable mobile org idle sync"
+		(interactive)
+		(cancel-timer org-mobile-sync-timer))
+	(org-mobile-sync-enable)
 
 ;;; *** ORG CONFIG: CAPTURE [#5]
 
@@ -1567,16 +1606,16 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-agenda-diary-file "~/org/journal.org")
 
 ;;; ** ORG Tags [#11]
-  ;(setq org-tag-alist '((:startgroup . nil)
-  ;                      ("@work" . ?w) ("@home" . ?h)
-  ;                      ("@errands" . ?t)
-  ;                      ("@BUY" . ?t)
-  ;                      ("@meeting" . ?m)
-  ;                      ("@phone" . ?c)
-  ;                      (:endgroup . nil)
-  ;                      ("PRJ" . ?e)
-  ;                      ("TEAM" . ?g)
-  ;                      ("@laptop" . ?l) ("@pc" . ?p)))
+																				;(setq org-tag-alist '((:startgroup . nil)
+																				;                      ("@work" . ?w) ("@home" . ?h)
+																				;                      ("@errands" . ?t)
+																				;                      ("@BUY" . ?t)
+																				;                      ("@meeting" . ?m)
+																				;                      ("@phone" . ?c)
+																				;                      (:endgroup . nil)
+																				;                      ("PRJ" . ?e)
+																				;                      ("TEAM" . ?g)
+																				;                      ("@laptop" . ?l) ("@pc" . ?p)))
 
 ;;; ** ORG Tasks [#4]
   (setq org-log-redeadline (quote time))
