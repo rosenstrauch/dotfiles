@@ -195,6 +195,57 @@
 ;;; https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
   (use-package org-invoice )
 
+	;;; * use package yasnippet
+	(use-package yasnippet
+		:ensure t
+		:init (add-hook 'prog-mode-hook #'yas-minor-mode)
+		:config (yas-reload-all))
+
+	;;; * use package yasnippet-mocha
+	(use-package mocha-snippets
+		:ensure t)
+;;; * use package company
+	(use-package company
+		:ensure t
+		:config
+		(global-company-mode)
+		(setq company-tooltip-limit 10)
+		(setq company-dabbrev-downcase 0)
+		(setq company-idle-delay 0)
+		(setq company-echo-delay 0)
+		(setq company-minimum-prefix-length 2)
+		(setq company-require-match nil)
+		(setq company-selection-wrap-around t)
+		(setq company-tooltip-align-annotations t)
+		;; (setq company-tooltip-flip-when-above t)
+		(setq company-transformers '(company-sort-by-occurrence)) ; weight by frequency
+		(define-key company-active-map (kbd "M-n") nil)
+		(define-key company-active-map (kbd "M-p") nil)
+		(define-key company-active-map (kbd "C-n") 'company-select-next)
+		(define-key company-active-map (kbd "C-p") 'company-select-previous)
+		(define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+		(define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+		(define-key company-active-map (kbd "S-TAB") 'company-select-previous)
+		(define-key company-active-map (kbd "<backtab>") 'company-select-previous)
+		)
+	(use-package helm-company
+		:ensure t
+		:config
+		;; http://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names
+		;; Add yasnippet support for all company backends
+		;; https://github.com/syl20bnr/spacemacs/pull/179
+		(defvar company-mode/enable-yas t
+			"Enable yasnippet for all backends.")
+
+		(defun company-mode/backend-with-yas (backend)
+			(if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+					backend
+				(append (if (consp backend) backend (list backend))
+								'(:with company-yasnippet))))
+
+		(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+		)
 ;;; * use package: helm
   (use-package helm
     :bind (("M-x" . helm-M-x)
@@ -262,16 +313,19 @@
   :ensure t
 	:hook ((js2-mode . (lambda ()
                        (flycheck-mode)
-))
+											 ))
          (js2-jsx-mode . (lambda ()
                            (flycheck-mode)
-)))
+													 )))
 	:config
 	;; have 2 space indentation by default
   (setq js-indent-level 2
         js2-basic-offset 2
 				js-chain-indent t)
 	)
+
+(use-package js-doc
+	:ensure t)
 ;; indium: javascript awesome development environment
 ;; https://github.com/NicolasPetton/indium
 (use-package indium
@@ -301,6 +355,7 @@
 
 ;;; * Use Package Yaml Mode [#2]
 (use-package yaml-mode
+	:defer t
   :ensure t)
 
 ;;; * Use Package Json Mode [#2]
@@ -424,7 +479,7 @@
          ("\\.[agj]sp" . web-mode)
          ("\\.as[cp]x" . web-mode)
          ("\\.erb" . web-mode)
-;         ("\\.js" . web-mode)
+																				;         ("\\.js" . web-mode)
          ("\\.mustache" . web-mode)
          ("\\.djhtml" . web-mode)
          )
