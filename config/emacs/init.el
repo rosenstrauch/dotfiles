@@ -51,8 +51,13 @@
 ;;; *** STYLE: highlight Matching parenthesis
 (show-paren-mode 1)
 ;;; *** STYLE: Make tabs into spaces when you type them
-;;(setq-default indent-tabs-mode nil)
 
+(progn
+  ;; make indentation commands use space only (never tab character)
+  (setq-default indent-tabs-mode nil)
+  ;; emacs 23.1, 24.2, default to t
+  ;; if indent-tabs-mode is t, it means it may use tab, resulting mixed space and tab
+  )
 ;;; *** STYLE: Display existing tabs as 2 characters wide [#19]
 (setq-default tab-width 2)
 (setq-default c-basic-offset 2)
@@ -207,13 +212,16 @@
 ;;; * Use package tramp
 
   (use-package tramp
+		:ensure t
     :config
+    
     (setq tramp-default-method "ssh")
-    (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
+;;;		(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+  (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
     (setq tramp-chunksize 500)
-    (setq tramp-default-method "ssh")
-    (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash")
-                     ))
+
+    (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash") )
+    )
 
 ;;; * Use Package: ORG-JIRA
 ;;; ** credentials are in authinfo, you need make sure whether the "/jira" at the end is necessary or not jiralib is not explicitly required, since org-jira will load it. [#4]
@@ -262,10 +270,10 @@
   :ensure t
 	:hook ((js2-mode . (lambda ()
                        (flycheck-mode)
-))
+                       ))
          (js2-jsx-mode . (lambda ()
                            (flycheck-mode)
-)))
+                           )))
 	:config
 	;; have 2 space indentation by default
   (setq js-indent-level 2
@@ -301,7 +309,24 @@
 
 ;;; * Use Package Yaml Mode [#2]
 (use-package yaml-mode
-  :ensure t)
+  :ensure t
+	:defer t
+	:init
+	(defun yaml-mode-syntax-propertize-function (beg end)
+    (save-excursion
+      (goto-char beg)
+      (while (search-forward "#" end t)
+        (save-excursion
+          (forward-char -1)
+          (if (bolp)
+              (put-text-property (point) (1+ (point))
+                                 'syntax-table (string-to-syntax "<"))
+            (forward-char -1)
+            (when (looking-at "[ \t]")
+              (forward-char 1)
+              (put-text-property (point) (1+ (point))
+                                 'syntax-table (string-to-syntax "<"))))))))
+  )
 
 ;;; * Use Package Json Mode [#2]
 (use-package json-mode
@@ -424,7 +449,7 @@
          ("\\.[agj]sp" . web-mode)
          ("\\.as[cp]x" . web-mode)
          ("\\.erb" . web-mode)
-;         ("\\.js" . web-mode)
+                                        ;         ("\\.js" . web-mode)
          ("\\.mustache" . web-mode)
          ("\\.djhtml" . web-mode)
          )
@@ -1160,10 +1185,12 @@ same directory as the org-buffer and insert a link to this file."
 
 ;;; **** ORG MOBILE: the location of your Org files on your local system [#1]
   (setq org-directory "~/org")
-;;; **** ORG MOBILE: the name of the file where new notes will be stored [#1]
-  (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;;; **** ORG MOBILE: configuration. [#2]
-  (setq org-mobile-directory "/rosen_sync@files.rosenstrauch.com:/home/rosen_sync/roSynxcBox/MobileOrg")
+  (setq org-mobile-directory "/ssh:rosen_sync@files.rosenstrauch.com:/home/rosen_sync/roSynxcBox/MobileOrg/")
+  
+;;; **** ORG MOBILE: the name of the file where new notes will be stored [#1]
+  (setq org-mobile-inbox-for-pull (concat org-directory "/flagged.org"))
+
 
 	;; Automatically sync mobileorg when idle
 	(defvar org-mobile-sync-timer nil)
@@ -1567,7 +1594,7 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-publish-use-timestamps-flag nil)
   (setq org-publish-project-alist
         '(
-          ("org" :components ("orgsystem-html" "org-styles" "orgsystem-pdf"))
+          ("org" :components ("invoices-pdf" "orgsystem-html" "org-styles" "orgsystem-pdf"))
 
           ("org-styles"
            :base-directory "~/org/styles"
@@ -1579,6 +1606,15 @@ same directory as the org-buffer and insert a link to this file."
            :base-directory "~/org/08-system"
            :base-extension "org"
            :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf/system"
+           :section-numbers nil
+           :with-toc nil
+           :exclude "//^_.org$"
+           :recursive t
+           :publishing-function org-latex-publish-to-pdf)
+          ("invoices-pdf"
+           :base-directory "~/org/07-needs"
+           :base-extension "org"
+           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf/invoices"
            :section-numbers nil
            :with-toc nil
            :exclude "//^_.org$"

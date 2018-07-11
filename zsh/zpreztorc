@@ -53,6 +53,16 @@ zstyle ':prezto:load' pmodule \
 'autosuggestions' \
 'prompt'
 
+
+
+#
+# Autosuggestions
+#
+
+# Set the query found color.
+zstyle ':prezto:module:autosuggestions:color' found ''
+zstyle ':prezto:module:autosuggestions' color 'yes'
+
 #
 # alias-tips
 # keyboard shortcut: alt + ß
@@ -121,6 +131,7 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'random'
+zstyle ':prezto:module:prompt' pwd-length 'short'
 
 #
 # Ruby
@@ -187,3 +198,5 @@ zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
 # Auto start a session when Zsh is launched in a SSH connection.
  zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+
+

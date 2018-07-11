@@ -60,6 +60,8 @@ fresh rosenstrauch/prezto .  --ref=6c818153c8ef7 --file=.zprezto/
 
 ## 5.2 Prezto Submodules
 ## :instead of relying on git submodules load external components using fresh
+
+# the autosuggestions are nice and can also be used without prezto 
 fresh zsh-users/zsh-autosuggestions . --file=.zprezto/modules/autosuggestions/external/
 fresh samirahmed/fu . --file=.zprezto/modules/fu/external/
 fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
@@ -73,6 +75,7 @@ fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/pro
 fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
 fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
 fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
+fresh mafredri/zsh-async  	async.zsh --file=.zprezto/modules/prompt/functions/async
 
 # 5.4 Finalize Prezto setup
 ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
