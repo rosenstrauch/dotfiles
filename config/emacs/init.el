@@ -143,7 +143,7 @@
 
 ;;; * irc
 (use-package erc
-  :commands (erc erc-next-channel-buffer my-erc-md-all-but-emacs)
+  :commands (erc-tls erc-next-channel-buffer my-erc-md-all-but-emacs)
   :init
   (setq
    erc-hide-list '("JOIN" "PART" "QUIT")
@@ -155,9 +155,8 @@
 		(setq erc-autojoin-channels-alist
 				'(("freenode.net" "#emacs" "#wiki" "#nethack" "##rosenchat")
 					("oftc.net" "#bitlbee")))
-	(erc :server "irc.freenode.net" :port 6667 :nick "rosenstrauch")
-	(erc :server "irc.oftc.net" :port 6667 :nick "rosenstrauch")
-
+	(erc-tls :server "irc.freenode.net" :port 6697 :nick "rosenstrauch")
+	(erc-tls :server "irc.oftc.net" :port 6697 :nick "rosenstrauch")
 
   ;; Kill buffers for channels after /part
   (setq erc-kill-buffer-on-part t)
