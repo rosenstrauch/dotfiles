@@ -145,6 +145,58 @@
 (use-package erc
   :commands (erc-tls erc-next-channel-buffer my-erc-md-all-but-emacs)
   :init
+
+
+
+;;; minimal distraction everywhere except my own channel
+  (defun my-erc-md-all-but-emacs ()
+    "Minimal distraction for all channels except #emacs"
+    (interactive)
+    (setq erc-track-priority-faces-only
+          (remove "##rosenchat" (my-erc-joined-channels))))
+
+  (defun my-erc-joined-channels ()
+    "Return all the channels you're in as a list.  This does not include queries."
+    (save-excursion
+      ;; need to get out of ERC mode so we can have *all* channels returned
+      (set-buffer "*scratch*")
+      (mapcar #'(lambda (chanbuf)
+                  (with-current-buffer chanbuf (erc-default-target)))
+              (erc-channel-list erc-process))))
+
+
+;;; Number of members in a channel
+
+  (define-minor-mode ncm-mode "" nil
+    (:eval
+     (let ((ops 0)
+           (voices 0)
+           (members 0))
+       (maphash (lambda (key value)
+                  (when (erc-channel-user-op-p key)
+                    (setq ops (1+ ops)))
+                  (when (erc-channel-user-voice-p key)
+                    (setq voices (1+ voices)))
+                  (setq members (1+ members)))
+                erc-channel-users)
+       (format " %S/%S/%S" ops voices members))))
+
+
+;;; but allow cycling
+
+  (defvar erc-channels-to-visit nil
+    "Channels that have not yet been visited by erc-next-channel-buffer")
+  (defun erc-next-channel-buffer ()
+    "Switch to the next unvisited channel. See erc-channels-to-visit"
+    (interactive)
+    (when (null erc-channels-to-visit)
+      (setq erc-channels-to-visit 
+	          (remove (current-buffer) (erc-channel-list nil))))
+    (let ((target (pop erc-channels-to-visit)))
+      (if target 
+	        (switch-to-buffer target))))
+
+  :config
   (setq
    erc-hide-list '("JOIN" "PART" "QUIT")
    erc-insert-timestamp-function 'erc-insert-timestamp-left
@@ -152,7 +204,7 @@
    erc-timestamp-only-if-changed-flag nil
    erc-truncate-mode t)		
 
-		(setq erc-autojoin-channels-alist
+	(setq erc-autojoin-channels-alist
 				'(("freenode.net" "#emacs" "#wiki" "#nethack" "##rosenchat")
 					("oftc.net" "#bitlbee")))
 	(erc-tls :server "irc.freenode.net" :port 6697 :nick "rosenstrauch")
@@ -163,83 +215,34 @@
 
   ;; Kill buffers for private queries after quitting the server
   (setq erc-kill-queries-on-quit t)
-
   ;; Kill buffers for server messages after quitting the server
   (setq erc-kill-server-buffer-on-quit t)
 
   ;; open query buffers in the current window
 	(setq erc-query-display 'buffer)
 
-
-;;; minimal distraction everywhere except my own channel
-    (defun my-erc-md-all-but-emacs ()
-      "Minimal distraction for all channels except #emacs"
-      (interactive)
-      (setq erc-track-priority-faces-only
-            (remove "##rosenchat" (my-erc-joined-channels))))
-
-    (defun my-erc-joined-channels ()
-      "Return all the channels you're in as a list.  This does not include queries."
-      (save-excursion
-        ;; need to get out of ERC mode so we can have *all* channels returned
-        (set-buffer "*scratch*")
-        (mapcar #'(lambda (chanbuf)
-                    (with-current-buffer chanbuf (erc-default-target)))
-                (erc-channel-list erc-process))))
-;;; but allow cycling
-
-  (defvar erc-channels-to-visit nil
-    "Channels that have not yet been visited by erc-next-channel-buffer")
-  (defun erc-next-channel-buffer ()
-    "Switch to the next unvisited channel. See erc-channels-to-visit"
-    (interactive)
-    (when (null erc-channels-to-visit)
-      (setq erc-channels-to-visit 
-	    (remove (current-buffer) (erc-channel-list nil))))
-    (let ((target (pop erc-channels-to-visit)))
-      (if target 
-	  (switch-to-buffer target))))
-
-
 ;;; * logging
-(setq erc-log-insert-log-on-open nil)
-(setq erc-log-channels t)
-(setq erc-log-channels-directory "~/.irclogs/")
-(setq erc-save-buffer-on-part t)
-(setq erc-hide-timestamps nil)
-(add-hook 'erc-insert-post-hook 'erc-save-buffer-in-logs)
+  (setq erc-log-insert-log-on-open nil)
+  (setq erc-log-channels t)
+  (setq erc-log-channels-directory "~/.irclogs/")
+    (if (not (file-exists-p erc-log-channels-directory))
+      (mkdir erc-log-channels-directory t))
 
-(if (not (file-exists-p erc-log-channels-directory))
-    (mkdir erc-log-channels-directory t))
+  (setq erc-save-buffer-on-part t)
+  (setq erc-hide-timestamps nil)
+  (add-hook 'erc-insert-post-hook 'erc-save-buffer-in-logs)
+
 ;;; * erc-match
 
 
-(setq erc-keywords '("resolve" "rosenstrauch"))
-(erc-match-mode 1)
+  (setq erc-keywords '("resolve" "rosenstrauch"))
+  (erc-match-mode 1)
 
 
-;;; Number of members in a channel
-
-(define-minor-mode ncm-mode "" nil
-  (:eval
-   (let ((ops 0)
-         (voices 0)
-         (members 0))
-     (maphash (lambda (key value)
-                (when (erc-channel-user-op-p key)
-                  (setq ops (1+ ops)))
-                (when (erc-channel-user-voice-p key)
-                  (setq voices (1+ voices)))
-                (setq members (1+ members)))
-              erc-channel-users)
-     (format " %S/%S/%S" ops voices members))))
-
-
-
-:bind (
-       :map erc-mode-map
-("C-c C-a" . erc-next-channel-buffer)
-   )
+  :bind (
+         :map erc-mode-map
+         ("C-c C-a" . erc-next-channel-buffer)
+         )
   )
 
 ;;; * Notmuch
@@ -369,7 +372,7 @@
 
     (setq tramp-default-method "ssh")
 ;;;		(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
-  (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
+    (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
     (setq tramp-chunksize 500)
 
     (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash") )

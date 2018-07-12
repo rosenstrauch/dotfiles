@@ -4,3 +4,5 @@ include "~/SENSITIVE/newsboat/config"
 show-read-articles no
 show-read-feeds no
 cache-file "~/AppData/newsboat/cachedFeeds"
+cleanup-on-quit no
+ttrss-flag-star "s"
