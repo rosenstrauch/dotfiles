@@ -135,9 +135,67 @@
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
 
+
+;;; * irc
+(use-package erc
+  :commands erc
+  :init
+
+
+  (setq
+   erc-hide-list '("JOIN" "PART" "QUIT")
+   erc-insert-timestamp-function 'erc-insert-timestamp-left
+   erc-timestamp-format "[%H:%M] "
+   erc-timestamp-only-if-changed-flag nil
+   erc-truncate-mode t)
+  :config
+		
+(setq erc-modules '(
+  autojoin
+  button
+  completion
+  fill
+  irccontrols
+  list
+  log
+  match
+  menu
+  move-to-prompt
+  netsplit
+  networks
+  noncommands
+  notifications
+	notify
+  readonly
+  ring
+  stamp
+  track))
+
+(erc-update-modules)
+
+		(setq erc-autojoin-channels-alist
+				'(("freenode.net" "#emacs" "#wiki" "#nethack" "##rosenchat")
+					("oftc.net" "#bitlbee")))
+	(erc :server "irc.freenode.net" :port 6667 :nick "rosenstrauch")
+	(erc :server "irc.oftc.net" :port 6667 :nick "rosenstrauch")
+
+
+  ;; Kill buffers for channels after /part
+  (setq erc-kill-buffer-on-part t)
+
+  ;; Kill buffers for private queries after quitting the server
+  (setq erc-kill-queries-on-quit t)
+
+  ;; Kill buffers for server messages after quitting the server
+  (setq erc-kill-server-buffer-on-quit t)
+
+  ;; open query buffers in the current window
+	(setq erc-query-display 'buffer)
+
+  )
+
 ;;; * Notmuch
 (autoload 'notmuch "notmuch" "notmuch mail" t)
-
 
 ;;; * Use package: babel restclient
 (use-package ob-restclient
