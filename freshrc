@@ -28,6 +28,7 @@ fresh-options
 # 3.0 Commands from others
 # :installed to ~/bin
 fresh-options --bin
+
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
