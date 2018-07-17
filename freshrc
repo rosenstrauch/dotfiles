@@ -234,6 +234,7 @@ fresh-options
 
 ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
 ln -sf ~/.dotfiles/config/emacs/ercrc.el ~/.emacs.d/.ercrc.el
+ln -sf ~/.dotfiles/config/emacs/notmuch-config.el ~/.emacs.d/notmuch-config.el
 
 # org js
 # fresh http://orgmode.org/worg/code/org-info-js/org-info.js
