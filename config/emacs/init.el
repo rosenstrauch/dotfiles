@@ -276,7 +276,22 @@
   )
 
 ;;; * Notmuch
-(autoload 'notmuch "notmuch" "notmuch mail" t)
+(use-package notmuch
+  :command "notmuch" "notmuch mail"
+  :bind (("C-. m" . notmuch)
+         :map notmuch-search-mode-map
+         ;; bind 'r' to reply-all, and 'R' to reply
+         ("r" . notmuch-search-reply-to-thread)
+         ("R" . notmuch-search-reply-to-thread-sender)
+         ("d" . notmuch-search-filter-by-date))
+         :config
+  (progn
+    (setq notmuch-archive-tags '("-inbox" "-unread" "+archive"))
+    (setq notmuch-message-headers '("To" "Cc" "Subject" "Date")))
+  
+  )
+
+
 
 ;;; * Use package: babel restclient
 (use-package ob-restclient
