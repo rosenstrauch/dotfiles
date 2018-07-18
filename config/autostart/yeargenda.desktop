@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=YearAgendaFile
+GenericName=emacs batch agenda file
+Comment=Write year agenda to file
+Exec=emacs --batch --user $USER --eval "(progn (org-agenda-list nil nil 'year) (org-icalendar-combine-agenda-files))"
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

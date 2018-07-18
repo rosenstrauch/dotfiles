@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Exec=terminator -l friendlimux -p friendlimux
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=friendliMuxinator
+Name=friendlinux terminator
+Comment[en_US]=borderless fullsize with profile
+Comment=borderless fullsize with profile
+Icon=/usr/share/icons/Azenis-Green/scalable/apps/Terminal.png
+Comment[en_US.UTF-8]=autostarts
+GenericName[en_US.UTF-8]=tmuxinated terminator
