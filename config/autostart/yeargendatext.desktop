@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=YearAgenda
+GenericName=emacs batch agenda
+Comment=Write year agenda to file
+Exec=sleep 30 && emacs --batch --user $USER --eval "(progn (org-agenda-list nil nil 'year) (write-file \"cal.ics\"))"
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
