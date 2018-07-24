@@ -277,7 +277,7 @@
 
 ;;; * Notmuch
 (use-package notmuch
-  :command "notmuch" "notmuch mail"
+  :commands (notmuch)
   :bind (("C-. m" . notmuch)
          :map notmuch-search-mode-map
          ;; bind 'r' to reply-all, and 'R' to reply
@@ -461,11 +461,7 @@
 
 (provide 'init-git-timemachine)
 
-;;; * use package toggle-quotes
 
-(use-package toggle-quotes
-  :ensure t
-  :bind (("C-'")))
 ;;; * Use Package js2-mode [#2]
 (use-package js2-mode
 	:mode
