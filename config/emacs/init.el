@@ -1,10 +1,10 @@
-;;; package --- Summary
+;;; package --- RosenEmacsInit
 ;;; Commentary:
+;;; --- i actually keep my Emacs config in a single file
+
 ;;; Code:
 ;;; * GLOBAL Emacs Settings
-;;; ** GLOBAL Load custom Lisp from others [#1]
-
-
+;;; ** GLOBAL Load custom Lisp from others [#1] placed there by fresh
 (require 'server)
 (unless (server-running-p)
   (server-start))
@@ -110,6 +110,7 @@
 
 
 ;;; * BOOTSTRAP Package Management
+
 ;;; ** BOOTSTRAP package.el [#5]
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -145,7 +146,6 @@
 (use-package erc
   :commands (erc-tls erc-next-channel-buffer my-erc-md-all-but-emacs bitlbee)
   :init
-
             (defun bitlbee ()
               (interactive)
               (if (get-buffer "&bitlbee")
@@ -178,7 +178,6 @@
   ;; Enable the netrc authentication function for &biblbee channels.
   (add-hook 'erc-join-hook 'bitlbee-netrc-identify)
 
-;;; minimal distraction everywhere except my own channel
   (defun my-erc-md-all-but-emacs ()
     "Minimal distraction for all channels except #emacs"
     (interactive)
@@ -195,8 +194,6 @@
               (erc-channel-list erc-process))))
 
 
-;;; Number of members in a channel
-
   (define-minor-mode ncm-mode "" nil
     (:eval
      (let ((ops 0)
@@ -211,8 +208,6 @@
                 erc-channel-users)
        (format " %S/%S/%S" ops voices members))))
 
-
-;;; but allow cycling
 
   (defvar erc-channels-to-visit nil
     "Channels that have not yet been visited by erc-next-channel-buffer")
@@ -250,8 +245,6 @@
 
   ;; open query buffers in the current window
 	(setq erc-query-display 'buffer)
-
-;;; * logging
   (setq erc-log-insert-log-on-open nil)
   (setq erc-log-channels t)
   (setq erc-log-channels-directory "~/.irclogs/")
@@ -262,20 +255,14 @@
   (setq erc-hide-timestamps nil)
   (add-hook 'erc-insert-post-hook 'erc-save-buffer-in-logs)
 
-;;; * erc-match
-
-
   (setq erc-keywords '("resolve" "rosenstrauch"))
   (erc-match-mode 1)
-
-
   :bind (
          :map erc-mode-map
          ("C-c C-a" . erc-next-channel-buffer)
-         )
-  )
+         ))
 
-;;; * Notmuch
+;;; * Use Package: Notmuch
 (use-package notmuch
   :commands (notmuch)
   :bind (("C-. m" . notmuch)
@@ -287,11 +274,7 @@
          :config
   (progn
     (setq notmuch-archive-tags '("-inbox" "-unread" "+archive"))
-    (setq notmuch-message-headers '("To" "Cc" "Subject" "Date")))
-  
-  )
-
-
+    (setq notmuch-message-headers '("To" "Cc" "Subject" "Date"))))
 
 ;;; * Use package: babel restclient
 (use-package ob-restclient
@@ -358,6 +341,7 @@
 	;;; * use package yasnippet-mocha
 	(use-package mocha-snippets
 		:ensure t)
+
 ;;; * use package company
 	(use-package company
 		:ensure t
@@ -410,7 +394,6 @@
 
 
 ;;; * Use package tramp
-
   (use-package tramp
 		:ensure t
     :config
@@ -450,8 +433,8 @@
 
 (use-package ghub
 	:ensure t)
-;;; * Use package: git timemachine
 
+;;; * Use package: git timemachine
 (use-package git-timemachine
   :ensure t
   :commands (git-timemachine-toggle
@@ -481,10 +464,9 @@
 				js-chain-indent t)
 	)
 
-(use-package js-doc
-	:ensure t)
-;; indium: javascript awesome development environment
-;; https://github.com/NicolasPetton/indium
+
+;;; indium: javascript awesome development environment
+;;; https://github.com/NicolasPetton/indium
 (use-package indium
 	:ensure t
   :after js2-mode
@@ -543,6 +525,7 @@
 ;;; * Use Package Make Mode [#2]
 (use-package make-mode
   :ensure t)
+
 ;;; * Use Package: Restclient [#3]
 (use-package restclient
   :ensure t
@@ -604,6 +587,7 @@
 	(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
   )
+
 ;;; * Use Package php Mode [#2]
 (use-package php-mode
   :ensure t)
@@ -667,8 +651,7 @@
 
 ;;(setq org-sync-id-in-headline 1)
 
-;;; * Use package: ledger-mode
-
+;;; * Use Package: ledger-mode
 (use-package ledger-mode
   :ensure t
   :config
@@ -693,11 +676,8 @@
 
 
 ;;; * Use Package: Outshine
-;;; :PROPERTIES:
-;;;  :CUSTOM_ID: use_outshine.init.el
-;;;  :END:
-;;;
-
+;;; - to fold my `init.el' like an org file [#31]
+;;;   Use Package: Outline
 (use-package outshine
   :ensure t
   :diminish outline-minor-mode
@@ -708,9 +688,6 @@
   :config
   (setq outshine-use-speed-commands t))
 
-
-;;; * Use Package: Outshine
-;;; - to fold my `init.el' like an org file [#31]
 
 (use-package outline
   :ensure t
@@ -740,14 +717,14 @@
              ("b" . outline-backward-same-level)))       ; Backward - same level
 
 
-;;; * use package mocha
-
+;;; * Use Package: mocha
 (use-package mocha
 	:bind(
 				("C-c m P" . mocha-test-project)
 				("C-c m f" . mocha-test-file)
 				("C-c m p" . mocha-test-at-point))
 	:ensure t)
+
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
   :mode ("\\.jl\\'" . org-mode)
