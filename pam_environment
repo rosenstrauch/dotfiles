@@ -14,9 +14,10 @@ XDG_DATA_HOME    DEFAULT=@{HOME}/.local/share
 
 # you can even use recently defined variables
 RCRC             DEFAULT=${XDG_CONFIG_HOME}/rcrc
-BROWSER=firefox
-#BROWSER         DEFAULT=firefox # same as above
+
+BROWSER         DEFAULT=xdg-open
 EDITOR=emacs
 
 MYDATADIR DEFAULT=/mnt/DATA
 GPODDER_DOWNLOAD_DIR DEFAULT=${MYDATADIR}/TEMPORARY/Downloads/Gpodder
+NOTMUCH_CONFIG   DEFAULT=${XDG_CONFIG_HOME}/notmuch/notmuch-config
