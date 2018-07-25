@@ -88,6 +88,11 @@ fresh shell/zsh/aliases/\*
 ## our own zsh runcoms files forked from prezto
 fresh zsh/\* --file
 
+# automation via systemd timers
+backup_files_existing_before_fresh ~/.config/systemd
+ln -sf ~/.dotfiles/config/systemd ~/.config
+
+
 ##############
 # ZSH Prompt #
 ##############

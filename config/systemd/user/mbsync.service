@@ -1,0 +1,13 @@
+[Unit]
+Description=Mailbox synchronization service
+After=network.target network-online.target dbus.socket
+RefuseManualStart=no
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mbsync -Va --debug
+ExecStartPost=/usr/bin/notmuch new
+TimeoutStartSec=90s
+StandardOutput=syslog
+StandardError=syslog
