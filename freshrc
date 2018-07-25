@@ -89,7 +89,7 @@ fresh shell/zsh/aliases/\*
 fresh zsh/\* --file
 
 # automation via systemd timers
-backup_files_existing_before_fresh ~/.config/systemd
+backup_files_existing_before_symlinking ~/.config/systemd
 ln -sf ~/.dotfiles/config/systemd ~/.config
 
 
