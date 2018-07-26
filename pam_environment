@@ -21,4 +21,4 @@ EDITOR=emacs
 MYDATADIR DEFAULT=/mnt/DATA
 GPODDER_DOWNLOAD_DIR DEFAULT=${MYDATADIR}/TEMPORARY/Downloads/Gpodder
 NOTMUCH_CONFIG   DEFAULT=${XDG_CONFIG_HOME}/notmuch/notmuch-config
-MAILDIR          DEFAULT=@{HOME}/placemarks/Maildirs
+MAILDIR          DEFAULT=@{HOME}/placemarks/Maildir
