@@ -163,8 +163,8 @@ fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~
 ##########
 
 # SENSITIVE config - make sure sensitive exists
-ln -sf ~/SENSITIVE/mbrc/mbsyncrc ~/.mbsyncrc
-ln -sf ~/SENSITIVE/mbrc/msmtprc ~/.msmtprc
+ln -sf ~/SENSITIVE/mbsyncrc ~/.mbsyncrc
+ln -sf ~/SENSITIVE/msmtprc ~/.msmtprc
 
 # Files which land in a subfolder of the default $XDG_CONFIG_HOME
 
