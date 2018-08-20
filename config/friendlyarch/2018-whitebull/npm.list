@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Global Npm packages
+# ls `npm root -g`
+atom-package-manager
+docco
+elm
+elm-format
+elm-live
+elm-new
+elm-test
+elm-version-manager
+eslint
+eslint-config-standard
+eslint-plugin-import
+eslint-plugin-node
+eslint-plugin-promise
+eslint-plugin-standard
+foundation-cli
+generator-elmlang
+generator-gulp-init
+generator-hedley
+grunt
+grunt-cli
+gulp
+gulp-cli
+node-gyp
+npm
+npm-check-updates
+semver
+stylelint
+stylelint-config-standard
+swagger-elm
+yarn
+yo
