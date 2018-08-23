@@ -777,6 +777,38 @@
 				("C-c m p" . mocha-test-at-point))
 	:ensure t)
 
+;;; * Use package slack
+(use-package slack
+  :commands (slack-start)
+  :init
+  (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
+  (setq slack-prefer-current-team t)
+  :config
+
+  ;; (slack-register-team
+  ;;  :name "emacs-slack"
+  ;;  :default t
+  ;;  :client-id "aaaaaaaaaaa.00000000000"
+  ;;  :client-secret "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  ;;  :token "xoxs-sssssssssss-88888888888-hhhhhhhhhhh-jjjjjjjjjj"
+  ;;  :subscribed-channels '(test-rename rrrrr)
+  ;;  :full-and-display-names t)
+
+  ;; (slack-register-team
+  ;;  :name "test"
+  ;;  :client-id "3333333333.77777777777"
+  ;;  :client-secret "cccccccccccccccccccccccccccccccc"
+  ;;  :token "xoxs-yyyyyyyyyy-zzzzzzzzzzz-hhhhhhhhhhh-llllllllll"
+  ;;  :subscribed-channels '(hoge fuga))
+)
+
+(use-package alert
+  :commands (alert)
+  :init
+  (setq alert-default-style 'notifier))
+
+
+
 ;;; * Use Package: ORG MODE [#4]
 (use-package org
   :mode ("\\.jl\\'" . org-mode)
@@ -1264,7 +1296,9 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-ellipsis "⤵")
 
 ;;; *** Org config export backends
-  (setq org-export-backends (quote (ascii html icalendar latex md odt)))
+(use-package ox-reveal)
+  
+  (setq org-export-backends (quote (reveal ascii html icalendar latex md odt)))
 
 ;;; *** Org config export
   (setq org-export-in-background t)
