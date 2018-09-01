@@ -188,12 +188,13 @@ fresh-options --file
   fresh config/parcelliterc
   fresh config/liquidpromptrc
   fresh Xresources
-  fresh config/i3/config
+  
 fresh-options
 
 # Config files subfolders of $HOME
 fresh config/friendlyarch --file=~/.friendlyarch/
 #fresh config/systemd --file=~/.config/systemd
+fresh config/i3/config --file=~/.config/i3/config
 fresh config/composer/config.json --file=~/.config/composer/config.json
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
