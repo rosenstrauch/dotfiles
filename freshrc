@@ -188,6 +188,7 @@ fresh-options --file
   fresh config/parcelliterc
   fresh config/liquidpromptrc
   fresh Xresources
+  fresh config/i3/config
 fresh-options
 
 # Config files subfolders of $HOME
