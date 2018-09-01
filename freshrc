@@ -174,7 +174,7 @@ fresh config/zim/style.conf --file=~/.config/zim/style.conf
 fresh config/newsboat/config --file=~/.config/newsboat/config
 
 # Our own  Our own config files directly linked to home
-
+backup_files_existing_before_symlinking $HOME/.Xresources
 fresh-options --file
   fresh inputrc
   fresh pam_environment
