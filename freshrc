@@ -187,6 +187,7 @@ fresh-options --file
   fresh config/rvm/rvmrc
   fresh config/parcelliterc
   fresh config/liquidpromptrc
+  fresh Xressources
 fresh-options
 
 # Config files subfolders of $HOME
