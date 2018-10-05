@@ -8,7 +8,7 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
+(require 'org-protocol)
 (let ((default-directory  "~/.emacs.d/site-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
 
@@ -64,6 +64,9 @@
 
 
 (load-theme 'tsdh-dark)
+          (add-to-list 'default-frame-alist
+                       '(font . "DejaVu Sans Mono-20"))
+
 
 (set-frame-font "9x15")
 (global-display-line-numbers-mode t)
