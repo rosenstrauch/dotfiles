@@ -126,12 +126,14 @@ ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 ## Pareview
 fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
-fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalSecure/
-fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=8.x-3.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/Drupal/
-fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=8.x-3.x --file=src/PHP_CodeSniffer/CodeSniffer/Standards/DrupalPractice/
 
-ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs ~/bin/phpcs
-ln -sf ~/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf ~/bin/phpcbf
+fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalSecure/
+
+fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/Drupal/
+fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalPractice/
+
+ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcs ~/bin/phpcs
+ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf ~/bin/phpcbf
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
@@ -348,13 +350,13 @@ ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
 fresh_after_build() {
   ## :make some things executable
-  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs
-  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcbf
+  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs
+  chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf
   chmod +w $HOME/.fresh/build/src/PHP_CodeSniffer/CodeSniffer.conf.dist
   chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips.py
   chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
 
-  $HOME/.fresh/build/src/PHP_CodeSniffer/scripts/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/CodeSniffer/Standards
+ $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/code_sniffer/Standards
 
 
   if [[ ! $(type bash_it &>/dev/null) && -d ~/.config/bash_it ]]; then
