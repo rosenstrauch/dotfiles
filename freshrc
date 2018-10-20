@@ -129,6 +129,7 @@ fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
 
 fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalSecure/
 
+fresh FloeDesignTechnologies/phpcs-security-audit Security  --file=src/PHP_CodeSniffer/code_sniffer/Standards/Security/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/Drupal/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalPractice/
 

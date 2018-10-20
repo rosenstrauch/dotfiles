@@ -437,6 +437,18 @@
 
 
 ;;; * Use Package js2-mode [#2]
+(use-package prettier-js
+  :config
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (setq prettier-js-args '(
+  "--trailing-comma" "all"
+  "--bracket-spacing" "false"
+  "--no-semi"
+  "--single-quote"
+))
+:ensure t
+)
 (use-package js2-mode
 	:mode
   (("\\.js$" . js2-mode)
