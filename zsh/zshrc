@@ -169,7 +169,9 @@ export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/b
 ## NPM
 export PATH=$PATH:node_modules/.bin:/usr/local/share/npm/bin
 ## yarn
-export PATH=$PATH:$HOME/.yarn/bin
+
+export PATH="$(yarn global bin):$PATH"
+
 ## Composer
 export PATH=$PATH:vendor/bin:$HOME/.config/composer/vendor/bin
 export PATH=$PATH:vendor/bin:$HOME/.composer/vendor/bin

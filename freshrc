@@ -1,3 +1,6 @@
+#
+# Helper Functions
+#
 
 backup_files_existing_before_symlinking() {
   echo "will backup relevant folders and files that arent symlinks"
@@ -7,28 +10,111 @@ backup_files_existing_before_symlinking() {
   fi
 }
 
+#
+# Bootstrap fresh
+#
 
-# 1.0 My Functions
-# sourced to /home/rosenstrauch/.fresh/build/shell.sh
-# <https://github.com/freshshell/fresh#shell-files>
+fresh freshshell/fresh bin/fresh --bin
+ln -sf ~/.dotfiles/freshrc ~/.freshrc
 
-fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
-fresh shell/zsh/functions/alls --file=zsh/functions/alls
-fresh shell/zsh/functions/ralias --file=zsh/functions/ralias
-fresh shell/zsh/functions/a --file=zsh/functions/a
-fresh shell/zsh/functions/zman --file=zsh/functions/zman
+#
+# xdg
+#
 
-# 2.0 My Commands and scripts
-# :installed to ~/bin
-fresh-options --bin
-  fresh bin/\*
-  fresh scripts/\*
+backup_files_existing_before_fresh ~/.config/user-dirs.dirs
+ln -sf ~/.dotfiles/config/user-dirs.dirs ~/.config/
+
+#
+# i3
+#
+
+backup_files_existing_before_symlinking $HOME/.config/i3/config
+fresh config/i3/config --file=~/.config/i3/config
+
+#
+# systemd
+#   :automation via systemd timers
+
+backup_files_existing_before_symlinking ~/.config/systemd
+ln -sf ~/.dotfiles/config/systemd ~/.config
+
+
+#
+# Desktop
+#
+
+backup_files_existing_before_symlinking $HOME/Desktop
+ln -sf ~/.dotfiles/config/Desktop ~/
+
+#
+# Autostart
+#
+
+backup_files_existing_before_symlinking $HOME/.config/autostart
+ln -sf ~/.dotfiles/config/autostart ~/.config
+
+#
+# Mimetype associations
+#
+
+backup_files_existing_before_symlinking $HOME/.config/mimeapps.list
+ln -sf config/mimeapps.list ~/.config/mimeapps.list
+
+#
+# git
+#
+
+fresh-options --file=~/.gitconfig
+  fresh git/gitconfig.$(hostname -s)
+  fresh git/gitconfig
 fresh-options
 
-# 3.0 Commands from others
-# :installed to ~/bin
-fresh-options --bin
+#
+# scripting
+#
 
+fresh erichs/composure composure.sh
+ln -sf ~/.dotfiles/local/composure ~/.local/
+ln -sf ~/.dotfiles/scripts ~/
+
+#
+# Php Pareview
+#
+
+fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
+fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalSecure/
+fresh FloeDesignTechnologies/phpcs-security-audit Security  --file=src/PHP_CodeSniffer/code_sniffer/Standards/Security/
+fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/Drupal/
+fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalPractice/
+ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcs ~/bin/phpcs
+ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf ~/bin/phpcbf
+
+#
+# Our own  Our own config files directly linked to home
+#
+
+backup_files_existing_before_fresh "${HOME}/.xinitrc"
+backup_files_existing_before_symlinking $HOME/.Xresources
+fresh-options --file
+  fresh xinitrc
+  fresh inputrc
+  fresh pam_environment
+  fresh tmux.conf
+  fresh gitignore
+  fresh gitattributes
+  fresh config/rvm/gemrc
+  fresh config/rvm/rvmrc
+  fresh config/parcelliterc
+  fresh config/liquidpromptrc
+  fresh Xresources  
+fresh-options
+
+#
+# Commands from others
+# :installed to ~/bin
+#
+
+fresh-options --bin
   fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
@@ -49,10 +135,28 @@ fresh-options --bin
 fresh-options
 
 
+
+# 1.0 My Functions
+# sourced to /home/rosenstrauch/.fresh/build/shell.sh
+# <https://github.com/freshshell/fresh#shell-files>
+
+fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
+fresh shell/zsh/functions/alls --file=zsh/functions/alls
+fresh shell/zsh/functions/ralias --file=zsh/functions/ralias
+fresh shell/zsh/functions/a --file=zsh/functions/a
+fresh shell/zsh/functions/zman --file=zsh/functions/zman
+
+# 2.0 My Commands and scripts
+# :installed to ~/bin
+fresh-options --bin
+  fresh bin/\*
+  fresh scripts/\*
+fresh-options
+
+
+
 # 4.0 External Functions loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
-fresh erichs/composure composure.sh
-
 
 # 5.0 My Shell Files
 
@@ -88,9 +192,6 @@ fresh shell/zsh/aliases/\*
 ## our own zsh runcoms files forked from prezto
 fresh zsh/\* --file
 
-# automation via systemd timers
-backup_files_existing_before_symlinking ~/.config/systemd
-ln -sf ~/.dotfiles/config/systemd ~/.config
 
 
 ##############
@@ -110,31 +211,11 @@ fresh shell/zsh/prompt/prompt_minifriend_setup --file=zsh/prompt/prompt_minifrie
 fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
 fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
 
-# Desktop  #
-backup_files_existing_before_symlinking $HOME/Desktop
-ln -sf ~/.dotfiles/config/Desktop ~/
-# Autostart
-backup_files_existing_before_symlinking $HOME/.config/autostart
-ln -sf ~/.dotfiles/config/autostart ~/.config
-# Mimetype associations
-backup_files_existing_before_symlinking $HOME/.config/mimeapps.list
-ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
 ############
 # CLI Apps #
 ############
 
-## Pareview
-fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
-
-fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalSecure/
-
-fresh FloeDesignTechnologies/phpcs-security-audit Security  --file=src/PHP_CodeSniffer/code_sniffer/Standards/Security/
-fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/Drupal/
-fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalPractice/
-
-ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcs ~/bin/phpcs
-ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf ~/bin/phpcbf
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
@@ -150,7 +231,6 @@ fresh sampson-chen/sack .sackrc --file
 ############
 # Scripts  #
 ############
-ln -sf ~/.dotfiles/local/composure ~/.local/share
 
 ## utilities library only meant to be used by other scripts
 mkdir -p $HOME/scripts
@@ -173,34 +253,17 @@ ln -sf ~/SENSITIVE/msmtprc ~/.msmtprc
 
 # zim colors
 fresh config/zim/style.conf --file=~/.config/zim/style.conf
+
 # Newsboat non sensitive settings
 fresh config/newsboat/config --file=~/.config/newsboat/config
 
-# Our own  Our own config files directly linked to home
-backup_files_existing_before_symlinking $HOME/.Xresources
-fresh-options --file
-  fresh inputrc
-  fresh pam_environment
-  #fresh freshrc
-  fresh tmux.conf
-  fresh gitconfig
-  fresh gitignore
-  fresh gitattributes
-  fresh config/rvm/gemrc
-  fresh config/rvm/rvmrc
-  fresh config/parcelliterc
-  fresh config/liquidpromptrc
-  fresh Xresources
-  
-fresh-options
 
 # Config files subfolders of $HOME
 fresh config/friendlyarch --file=~/.friendlyarch/
 #fresh config/systemd --file=~/.config/systemd
 
-backup_files_existing_before_symlinking $HOME/.config/i3/config
-fresh config/i3/config --file=~/.config/i3/config
-fresh config/composer/config.json --file=~/.config/composer/config.json
+
+#fresh config/composer/config.json --file=~/.config/composer/config.json
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
 fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
