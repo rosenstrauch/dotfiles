@@ -372,6 +372,7 @@ ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
 ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
 fresh_after_build() {
+  systemctl --user enable --now emacs ssh-agent
   ## :make some things executable
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf
