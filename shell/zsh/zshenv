@@ -1,0 +1,6 @@
+# zsh env
+
+#  #+NAME: tangle-zshenv
+
+typeset -U path
+path=(~/.local/bin ~/bin $path[@])

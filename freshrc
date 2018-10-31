@@ -1,5 +1,5 @@
 #
-# Helper Functions
+# Fresh Helper Functions
 #
 
 backup_files_existing_before_symlinking() {
@@ -11,22 +11,60 @@ backup_files_existing_before_symlinking() {
 }
 
 #
-# Bootstrap fresh
+# Bootstrap freshshell package manager
 #
 
 fresh freshshell/fresh bin/fresh --bin
 ln -sf ~/.dotfiles/freshrc ~/.freshrc
 
+
 #
-# xdg
+# My aliases
+#
+fresh shell/aliases.sh
+
+#
+# My config files
 #
 
-backup_files_existing_before_fresh ~/.config/user-dirs.dirs
+backup_files_existing_before_symlinking "${HOME}/.xinitrc"
+backup_files_existing_before_symlinking $HOME/.Xresources
+fresh-options --file
+  fresh xinitrc
+  fresh inputrc
+  fresh pam_environment
+  fresh tmux.conf
+  fresh config/git/\*
+  fresh config/rvm/gemrc
+  fresh config/rvm/rvmrc
+  fresh config/parcelliterc
+  fresh config/liquidpromptrc
+  fresh Xresources  
+fresh-options
+
+#
+# My xdg environment
+#
+
+backup_files_existing_before_symlinking ~/.config/user-dirs.dirs
 ln -sf ~/.dotfiles/config/user-dirs.dirs ~/.config/
 
 #
-# i3
+# My friendly liquidprompt
 #
+fresh nojhan/liquidprompt liquidprompt
+
+#
+# scripting with a chainsaw
+#
+
+fresh erichs/composure composure.sh
+ln -sf ~/.dotfiles/local/composure ~/.local/
+#ln -sf ~/.dotfiles/scripts ~/
+
+#
+# i3
+#   :a window manager that can be dotfiled
 
 backup_files_existing_before_symlinking $HOME/.config/i3/config
 fresh config/i3/config --file=~/.config/i3/config
@@ -60,22 +98,6 @@ ln -sf ~/.dotfiles/config/autostart ~/.config
 backup_files_existing_before_symlinking $HOME/.config/mimeapps.list
 ln -sf config/mimeapps.list ~/.config/mimeapps.list
 
-#
-# git
-#
-
-fresh-options --file=~/.gitconfig
-  fresh git/gitconfig.$(hostname -s)
-  fresh git/gitconfig
-fresh-options
-
-#
-# scripting
-#
-
-fresh erichs/composure composure.sh
-ln -sf ~/.dotfiles/local/composure ~/.local/
-ln -sf ~/.dotfiles/scripts ~/
 
 #
 # Php Pareview
@@ -90,55 +112,78 @@ ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcs ~/bin/phpcs
 ln -sf ~/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf ~/bin/phpcbf
 
 #
-# Our own  Our own config files directly linked to home
-#
-
-backup_files_existing_before_fresh "${HOME}/.xinitrc"
-backup_files_existing_before_symlinking $HOME/.Xresources
-fresh-options --file
-  fresh xinitrc
-  fresh inputrc
-  fresh pam_environment
-  fresh tmux.conf
-  fresh gitignore
-  fresh gitattributes
-  fresh config/rvm/gemrc
-  fresh config/rvm/rvmrc
-  fresh config/parcelliterc
-  fresh config/liquidpromptrc
-  fresh Xresources  
-fresh-options
-
-#
 # Commands from others
 # :installed to ~/bin
 #
 
 fresh-options --bin
-  fresh freshshell/fresh bin/fresh
   fresh freshshell/fresh-open bin/fresh-open
   fresh clvv/fasd fasd
+  fresh simonwhitaker/gibo gibo
+  fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
   fresh alicraigmile/show-wip show-wip
+  fresh holman/dotfiles bin/git-wtf
+  fresh albfan/git-changemail git-changemail
   fresh tj/bm bm
   fresh sivel/speedtest-cli speedtest.py
-  fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
   fresh https://gist.github.com/8d32e448708d5ed1f116.git new_script.sh
   fresh olof/Text-FileTree bin/find2tree.pl
   fresh https://gist.github.com/8511861.git keybindings.pl
   fresh docksal/docksal bin/fin --ref=v1.10.1
-  fresh holman/dotfiles bin/git-wtf
-  fresh albfan/git-changemail git-changemail
   fresh hechoendrupal/drupal-console-launcher bin/drupal.php
   fresh hechoendrupal/drupal-console-launcher bin/drupal
-  fresh simonwhitaker/gibo gibo
   fresh nella/victor bin/victor
 fresh-options
 
 
 
-# 1.0 My Functions
-# sourced to /home/rosenstrauch/.fresh/build/shell.sh
-# <https://github.com/freshshell/fresh#shell-files>
+##########
+# BASHRC #
+##########
+
+
+backup_files_existing_before_symlinking "${HOME}/.bashrc"
+backup_files_existing_before_symlinking "${HOME}/.bash_profile"
+backup_files_existing_before_symlinking "${HOME}/.bashrc_settings"
+backup_files_existing_before_symlinking "${HOME}/.bashrc_plugins"
+fresh shell/bash/bash_profile --file='~/.bash_profile'
+fresh shell/bash/bashrc_settings --file='~/.bashrc_settings'
+fresh shell/bash/bashrc --file='~/.bashrc'
+fresh Bash-it/bash-it plugins/available/fasd.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh freshshell/fresh contrib/completion/fresh-completion.bash --file='~/.bashrc_plugins' --marker='# bash completion plugins'
+fresh Bash-it/bash-it completion/available/composer.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh Bash-it/bash-it completion/available/docker-compose.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh Bash-it/bash-it completion/available/docker.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh Bash-it/bash-it completion/available/git.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh Bash-it/bash-it completion/available/ssh.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh Bash-it/bash-it plugins/available/dirs.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh Bash-it/bash-it plugins/available/docker-compose.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh Bash-it/bash-it plugins/available/docker.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh Bash-it/bash-it plugins/available/git.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh Bash-it/bash-it plugins/available/percol.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh Bash-it/bash-it plugins/available/alias-completion.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+
+fresh Bash-it/bash-it plugins/available/extract.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+
+fresh shell/bash/snippets/\* --file='~/.bashrc_plugins' --marker='# my-bash-plugins'
+
+#########
+# ZSHRC #
+#########
+
+fresh shell/zsh/zshenv --file
+
+fresh-options  --file=~/.zshrc --marker
+  fresh shell/zsh/zshrc_settings
+  fresh freshshell/fresh contrib/source-build.sh
+  fresh sorin-ionescu/prezto modules/history/init.zsh
+  fresh shell/zsh/plugins/\*
+fresh-options
+
+fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=vendor/zsh-syntax-highlighting.zsh
+fresh zsh-users/zsh-syntax-highlighting highlighters --file=vendor/highlighters/
+fresh zsh-users/zsh-autosuggestions zsh-autosuggestions.zsh --file=vendor/zsh-autosuggestions.zsh
+fresh djui/alias-tips . --file=vendor/alias-tips/
 
 fresh sgeb/dotfiles zsh/functions/habits --file=zsh/functions/habits
 fresh shell/zsh/functions/alls --file=zsh/functions/alls
@@ -158,41 +203,6 @@ fresh-options
 # 4.0 External Functions loaded into shell.sh
 fresh twe4ked/dotfiles shell/functions/pubkey.sh
 
-# 5.0 My Shell Files
-
-## 5.1 Prezto zsh config
-fresh rosenstrauch/prezto .  --ref=6c818153c8ef7 --file=.zprezto/
-
-## 5.2 Prezto Submodules
-## :instead of relying on git submodules load external components using fresh
-
-# the autosuggestions are nice and can also be used without prezto 
-fresh zsh-users/zsh-autosuggestions . --file=.zprezto/modules/autosuggestions/external/
-fresh samirahmed/fu . --file=.zprezto/modules/fu/external/
-fresh zsh-users/zsh-history-substring-search . --file=.zprezto/modules/history-substring-search/external/
-fresh zsh-users/zsh-syntax-highlighting . --file=.zprezto/modules/syntax-highlighting/external/
-fresh rosenstrauch/alias-tips . --file=.zprezto/modules/alias-tips/external/
-fresh Tarrasch/zsh-bd . --file=.zprezto/modules/bd/external/
-
-## 5.3 Prezto themes
-fresh sindresorhus/pure async.zsh --file=.zprezto/modules/prompt/functions/async
-fresh el1t/statusline prezto/prompt_statusline_setup --file=.zprezto/modules/prompt/functions/prompt_statusline_setup
-fresh sindresorhus/pure pure.zsh --file=.zprezto/modules/prompt/functions/prompt_pure_setup
-fresh davidjrice/prezto_powerline prompt_powerline_setup --file=.zprezto/modules/prompt/functions/prompt_powerline_setup
-fresh chauncey-garrett/zsh-prompt-garrett prompt_garrett_setup --file=.zprezto/modules/prompt/functions/prompt_garrett_setup
-fresh mafredri/zsh-async  	async.zsh --file=.zprezto/modules/prompt/functions/async
-
-# 5.4 Finalize Prezto setup
-ln -sf ~/.fresh/build/.zprezto/ ~/.zprezto
-
-## Aliases
-## : many aliases are set by prezto modules. some custom ones will be sourced here though.
-fresh shell/zsh/aliases/\*
-
-## our own zsh runcoms files forked from prezto
-fresh zsh/\* --file
-
-
 
 ##############
 # ZSH Prompt #
@@ -204,14 +214,6 @@ fresh shell/zsh/prompt/prompt_minifriend_setup --file=zsh/prompt/prompt_minifrie
 
 
 
-#################
-# Gedit plugins #
-#################
-
-fresh oliver/gedit-file-search . --file=~/.local/share/gedit/plugins/gedit-file-search/
-fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/share/gedit/plugins/open-uri-context-menu/
-
-
 ############
 # CLI Apps #
 ############
@@ -219,8 +221,6 @@ fresh jpfleury/open-uri-context-menu  . --ref=7232cdb805f95 --file=~/.local/shar
 ## NVM - node version manager (NVM) in your $HOME
 fresh creationix/nvm . --file=~/.nvm/
 
-## liquidprompt
-fresh nojhan/liquidprompt liquidprompt
 
 ## sack stuff - https://github.com/sampson-chen/sack
 fresh sampson-chen/sack sack --bin
@@ -233,13 +233,13 @@ fresh sampson-chen/sack .sackrc --file
 ############
 
 ## utilities library only meant to be used by other scripts
-mkdir -p $HOME/scripts
-ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
+#mkdir -p $HOME/scripts
+#ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
 
 ## Zim  custom tools and plugins
-fresh https://gist.github.com/8e49f6bb3c26674d6d47.git zim2mindmap --bin=~/scripts/zim2map.py
-fresh https://gist.github.com/403600a1c1fe691c39ba.git ShowFolderTree.py --bin=~/scripts/ShowFolderTree.py
-fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~/.local/share/zim/plugins/treemapeditor.py
+#fresh https://gist.github.com/8e49f6bb3c26674d6d47.git zim2mindmap --bin=~/scripts/zim2map.py
+#fresh https://gist.github.com/403600a1c1fe691c39ba.git ShowFolderTree.py --bin=~/scripts/ShowFolderTree.py
+#fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~/.local/share/zim/plugins/treemapeditor.py
 
 ##########
 # Config #
@@ -269,40 +269,6 @@ fresh config/drush/drush.ini --file=~/.drush/drush.ini
 fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
 fresh config/conky --file=~/.config/conky/
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
-
-##########################
-# BASH-IT and Extensions #
-##########################
-
-ln -sf Bash-it/bash-it/ $HOME/.config/bash_it
-# fresh bash-it/custom.aliases.bash --file=~/.config/bash_it/aliases/custom.aliases.bash
-# fresh bash-it/custom.bash --file=~/.config/bash_it/lib/custom.bash
-# fresh bash-it/custom.plugins.bash --file=~/.config/bash_it/plugins/custom.plugins.bash
-# fresh bash-it/drush.bash --file=~/.config/bash_it/lib/custom.bash
-# fresh bash-it/drush.aliases.bash --file=/.config/bash_it/aliases/custom.aliases.bash
-
-mkdir .bash_it/custom/ -p
-ln -sf ~/.dotfiles/bash-it/custom/plugins/ ~/.bash_it/custom/
-
-## additional bash completions via bashit
-
-fresh-options --file=~/.bash_it/completion/custom.completion.bash --marker
-  fresh freshshell/fresh contrib/completion/fresh-completion.bash
-  fresh bobthecow/git-flow-completion git-flow-completion.bash
-  fresh tmuxinator/tmuxinator completion/tmuxinator.bash
-fresh-options
-
-#########
-# ZSHRC #
-#########
-
-# Adding on to existing prezto runcom
-fresh-options --file=~/.zshrc --marker
-  # @see https://github.com/freshshell/fresh/wiki/Loading-Zsh-Completions
-  fresh freshshell/fresh contrib/completion/fresh-completion.zsh
-  # no need to add this line using fresh. doing this directly in my own zshrc
-  #fresh freshshell/fresh contrib/source-build.sh
-fresh-options
 
 #########
 # EMACS #
@@ -374,18 +340,6 @@ fresh config/rvm/gemsets/global.gems --file=~/.rvm/gemsets/global.gems
 
 fresh wee-slack/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_slack.py
 
-
-##########
-# BASHRC #
-##########
-
-## use a minimal .bashrc that loads bash-it and knows about fresh
-backup_files_existing_before_symlinking $HOME/.bashrc
-fresh-options --file='~/.bashrc' --marker
-  fresh shell/bash/bashrc
-  fresh freshshell/fresh contrib/source-build.sh
-fresh-options
-
 #########################
 # Editable config files #
 #########################
@@ -398,38 +352,34 @@ ln -sf ~/.dotfiles/config/tmuxinator/* ~/.tmuxinator/
 mkdir -p $HOME/.boom
 ln -sf ~/.dotfiles/manual/boom/boom ~/.boom
 
-## Cheatsheets
+#
+# Cheatsheets
+#
 mkdir -p $HOME/.cheat
 ln -sf ~/.dotfiles/manual/cheat/*  ~/.cheat/
 
-## Terminator
+#
+# Terminator
+#
 ln -sf ~/.dotfiles/config/terminator/config ~/.config/terminator/config
 
-## Atom Editor
+#
+# Atom Editor
+#
 mkdir -p $HOME/.atom
 ln -sf ~/.dotfiles/config/atom/keymap.cson ~/.atom/keymap.cson
 ln -sf ~/.dotfiles/config/atom/styles.less ~/.atom/styles.less
 ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
-
 
 fresh_after_build() {
   ## :make some things executable
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf
   chmod +w $HOME/.fresh/build/src/PHP_CodeSniffer/CodeSniffer.conf.dist
-  chmod +x $HOME/.fresh/build/.zprezto/modules/alias-tips/external/alias-tips.py
-  chmod +x $HOME/.fresh/build/.zprezto/modules/fu/external/fu
-
- $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/code_sniffer/Standards
 
 
-  if [[ ! $(type bash_it &>/dev/null) && -d ~/.config/bash_it ]]; then
-    ~/.config/bash_it/install.sh
-  fi
+  $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs --config-set installed_paths ~/.fresh/build/src/PHP_CodeSniffer/code_sniffer/Standards
 
-
-  ## update prezto
-  #cd ~/.fresh/source/rosenstrauch/prezto/ && git checkout production && git pull
 
   echo "sensitive files"
   echo ls ~-SENSITIVE

@@ -1,9 +1,0 @@
-### ~/.gitignore-boilerplates/Global/Linux.gitignore
-
-!.gitignore
-*~
-
-
-### ~/.gitignore-boilerplates/Jekyll.gitignore
-
-_site/

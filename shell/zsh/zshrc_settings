@@ -1,0 +1,10 @@
+# zshrc_settings
+
+# enable autocompletion
+autoload -Uz compinit
+compinit
+
+# autocompletion with an arrow-key
+zstyle ':completion:*' menu select
+# autocompletion of command line switches for aliases
+setopt COMPLETE_ALIASES

@@ -1,37 +1,25 @@
-#!/usr/bin/env bash
-# Using minimal version loading bash-it.
-# try not to directly add to this bashrc but use bash-it customization instead
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# bashrc
 
-# Path to the bash it configuration
-export BASH_IT="$HOME/.bash_it"
+#      the shell we usually get is bash. since we want to be able to move around in bash we start by configuring the bash environment for this user
+#      we are letting freshrc compile a single file for us
 
-# Lock and Load a custom theme file
-# location /.bash_it/themes/
-export BASH_IT_THEME='bobby'
 
-# Your place for hosting Git repos. I use this for private repos.
-export GIT_HOSTING='git@git.domain.com'
+# Use the system config if it exists
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc        # --> Read /etc/bashrc, if present.
+elif [ -f /etc/bash.bashrc ]; then
+    . /etc/bash.bashrc   # --> Read /etc/bash.bashrc, if present.
+fi
 
-# Don't check mail when opening terminal.
-unset MAILCHECK
+[[ -f ~/.bashrc_settings ]] && source ~/.bashrc_settings && echo "loaded bash settings"
 
-# Change this to your console based IRC client of choice.
-export IRC_CLIENT='irssi'
 
-# Set this to the command you use for todo.txt-cli
-export TODO="t"
 
-# Set this to false to turn off version control status checking within the prompt for all themes
-export SCM_CHECK=true
+# The following lines are only for interactive shells
+[[ $- = *i* ]] || return
 
-# Set vcprompt executable path for scm advance info in prompt (demula theme)
-# https://github.com/xvzf/vcprompt
-#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+# shared shell
+source ~/.fresh/build/shell.sh && echo "loaded common shell"
 
-# Load Bash It
-source $BASH_IT/bash_it.sh
-
-#########CUSTOMIZE BELOW OR USE BASHIT PLUGINS AND CUSTOM ###################
+# bash customizations and extensions
+[[ -f ~/.bashrc_plugins ]] && source ~/.bashrc_plugins && echo "loaded bash plugins"
