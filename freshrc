@@ -29,6 +29,7 @@ fresh shell/aliases.sh
 
 backup_files_existing_before_symlinking "${HOME}/.xinitrc"
 backup_files_existing_before_symlinking $HOME/.Xresources
+backup_files_existing_before_symlinking $HOME/.Xdefault
 fresh-options --file
   fresh xinitrc
   fresh inputrc
@@ -39,7 +40,8 @@ fresh-options --file
   fresh config/rvm/rvmrc
   fresh config/parcelliterc
   fresh config/liquidpromptrc
-  fresh Xresources  
+  fresh Xresources
+  fresh Xdefault
 fresh-options
 
 #

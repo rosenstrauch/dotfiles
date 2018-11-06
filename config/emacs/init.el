@@ -40,6 +40,22 @@
 (global-set-key (kbd "C-c I") 'find-user-init-file)
 ;;; *** KEYMAP TODO quick access to home.org
 ;;; ** STYLE
+;;; *** STYLE background color
+
+
+(if (display-graphic-p)
+    (setq initial-frame-alist
+          '(
+            (tool-bar-lines . 0)
+            (width . 106)
+            (height . 60)
+            (background-color . "DarkGreen")
+            (left . 50)
+            (top . 50)))
+  (setq initial-frame-alist '( (tool-bar-lines . 0))))
+
+(setq default-frame-alist initial-frame-alist)
+
 
 ;;; *** STYLE: Autorecognize Page Breaks [#6]
 (setq page-delimiter
