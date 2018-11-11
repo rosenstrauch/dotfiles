@@ -1,0 +1,10 @@
+[Unit]
+Description=Run my org export service
+
+[Timer]
+OnCalendar=*-*-* 23:00:00
+Persistent=true
+Unit=my-org-export.service
+
+[Install]
+WantedBy=timers.target

@@ -27,7 +27,7 @@ function git_show_wip {
       if [[ "$CD_WORKING_DIR" != "$PROJECT_ROOT" ]]; then
 
         # Runs Show wip command for current git repo
-        show-wip -f "$PROJECT_ROOT" -v && export CD_WORKING_DIR="$PROJECT_ROOT"
+        show-wip -f "$PROJECT_ROOT" && export CD_WORKING_DIR="$PROJECT_ROOT"
 
       fi
     elif [[ -n $CD_WORKING_DIR && -n $WORKING_DIR ]]; then

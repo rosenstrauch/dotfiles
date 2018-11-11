@@ -1,4 +1,4 @@
-# autosuggestions
+# suggestions
 # this requires a package from the repos [fn:36:https://www.archlinux.org/packages/community/any/zsh-autosuggestions/]
 
 

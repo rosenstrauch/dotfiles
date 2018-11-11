@@ -4,3 +4,4 @@
 
 typeset -U path
 path=(~/.local/bin ~/bin $path[@])
+export EDITOR="emacsclient -t -a=\"\""

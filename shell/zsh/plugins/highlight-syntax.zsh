@@ -1,4 +1,5 @@
-# syntax-highlight
+# highlight
+
 
 # works if you installed https://www.archlinux.org/packages/?name=zsh-syntax-highlighting
 # via pacman or fresh

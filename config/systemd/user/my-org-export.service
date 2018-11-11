@@ -1,0 +1,5 @@
+[Unit]
+Description=Exports dotfiles org
+
+[Service]
+ExecStart=/home/green/scripts/emacs-publish-dotfiles.sh

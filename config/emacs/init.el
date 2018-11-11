@@ -1915,7 +1915,7 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-publish-use-timestamps-flag nil)
   (setq org-publish-project-alist
         '(
-          ("org" :components ("invoices-pdf" "orgsystem-html" "org-styles" "orgsystem-pdf"))
+          ("org" :components ("invoices-pdf" "orgfull-html" "org-styles" "orgfull-pdf"))
 
           ("org-styles"
            :base-directory "~/org/styles"
@@ -1923,10 +1923,10 @@ same directory as the org-buffer and insert a link to this file."
            :base-extension "css\\|js"
            :publishing-directory "/mnt/DATA/exportedata/org_published/"
            :publishing-function org-publish-attachment)
-          ("orgsystem-pdf"
-           :base-directory "~/org/08-system"
+          ("orgfull-pdf"
+           :base-directory "~/org"
            :base-extension "org"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf/system"
+           :publishing-directory "~/org_published/full/pdf/system"
            :section-numbers nil
            :with-toc nil
            :exclude "//^_.org$"
@@ -1941,9 +1941,9 @@ same directory as the org-buffer and insert a link to this file."
            :exclude "//^_.org$"
            :recursive t
            :publishing-function org-latex-publish-to-pdf)
-          ("orgsystem-html"
+          ("orgfull-html"
            :base-directory "~/org/08-system"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/html/system"
+           :publishing-directory "~/placemarks/org_published/full/html/system"
            :base-extension "org"
            :recursive t
            :exclude "^_[a-z]"

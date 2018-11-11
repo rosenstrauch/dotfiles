@@ -19,5 +19,5 @@ cdParentKey() {
 
 zle -N                 cdParentKey
 zle -N                 cdUndoKey
-bindkey '^[[1;5A'      cdParentKey
-bindkey '^[[1;5D'      cdUndoKey
+bindkey '^[[1;3A'      cdParentKey
+bindkey '^[[1;3D'      cdUndoKey

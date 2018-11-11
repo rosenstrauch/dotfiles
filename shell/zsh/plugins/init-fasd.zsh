@@ -1,4 +1,4 @@
-# fasd in zsh
+# init fasd in zsh
 
 eval "$(fasd --init auto)"
 #
