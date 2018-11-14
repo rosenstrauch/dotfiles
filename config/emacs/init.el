@@ -161,16 +161,16 @@
                   (switch-to-buffer (get-buffer "&bitlbee"))
                 (let ((default-directory "~"))
                   (erc :server "localhost" :port 6667 :nick "rosenstrauch"))))
-            
+
   (defun bitlbee-netrc-identify ()
     "Auto-identify for Bitlbee channels using authinfo or netrc.
-    
+
     The entries that we look for in netrc or authinfo files have
     their 'port' set to 'bitlbee', their 'login' or 'user' set to
     the current nickname and 'server' set to the current IRC
     server's name.  A sample value that works for authenticating
     as user 'keramida' on server 'localhost' is:
-    
+
     machine localhost port bitlbee login keramida password supersecret"
     (interactive)
     (when (string= (buffer-name) "&bitlbee")
@@ -183,7 +183,7 @@
 			   (funcall secret)
 			 secret)))
 	(erc-message "PRIVMSG" (concat (erc-default-target) " " "identify" " " password) nil))))
-  
+
   ;; Enable the netrc authentication function for &biblbee channels.
   (add-hook 'erc-join-hook 'bitlbee-netrc-identify)
 
@@ -224,10 +224,10 @@
     "Switch to the next unvisited channel. See erc-channels-to-visit"
     (interactive)
     (when (null erc-channels-to-visit)
-      (setq erc-channels-to-visit 
+      (setq erc-channels-to-visit
 	          (remove (current-buffer) (erc-channel-list nil))))
     (let ((target (pop erc-channels-to-visit)))
-      (if target 
+      (if target
 	        (switch-to-buffer target))))
 
   :config
@@ -236,7 +236,7 @@
    erc-insert-timestamp-function 'erc-insert-timestamp-left
    erc-timestamp-format "[%H:%M] "
    erc-timestamp-only-if-changed-flag nil
-   erc-truncate-mode t)		
+   erc-truncate-mode t)
 
 	(setq erc-autojoin-channels-alist
 				'(("freenode.net" "#emacs" "#wiki" "#nethack" "##rosenchat")
@@ -1353,7 +1353,7 @@ same directory as the org-buffer and insert a link to this file."
 
 ;;; *** Org config export backends
 (use-package ox-reveal)
-  
+
   (setq org-export-backends (quote (reveal ascii html icalendar latex md odt)))
 
 ;;; *** Org config export
@@ -1366,7 +1366,7 @@ same directory as the org-buffer and insert a link to this file."
            ("\\subsection{%s}" . "\\subsection*{%s}")
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
           ("article"
-           "\\documentclass[12pt]{hitec}
+           "\\documentclass[12pt]{article}
   [DEFAULT-PACKAGES]
   [PACKAGES]
   [NO-EXTRA]
@@ -1915,18 +1915,34 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-publish-use-timestamps-flag nil)
   (setq org-publish-project-alist
         '(
-          ("org" :components ("invoices-pdf" "orgfull-html" "org-styles" "orgfull-pdf"))
-
+          ("org" :components ("invoices-pdf" "orgfull-html" "org-styles" "orgfull-pdf" "green-dotfiles-html"))
+          ("green-dotfiles-html"
+           :base-directory "~/.dotfiles"
+           :publishing-directory "~/placemarks/org_published/dotfiles/html"
+           :base-extension "org"
+           :recursive t
+           :exclude "^_[a-z]"
+           :section-numbers 3
+           :with-toc t
+           :toc t
+           :n t
+           :H 6
+           :auto-sitemap t
+           :h 6
+           :toc 6
+           :sitemap-filename "sitemap.org"
+           :sitemap-title "Sitemap"
+           :publishing-function org-html-publish-to-html)
           ("org-styles"
            :base-directory "~/org/styles"
            :recursive t
            :base-extension "css\\|js"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/"
+           :publishing-directory "~/placemarks/org_published/"
            :publishing-function org-publish-attachment)
           ("orgfull-pdf"
-           :base-directory "~/org"
+           :base-directory "~/org/"
            :base-extension "org"
-           :publishing-directory "~/org_published/full/pdf/system"
+           :publishing-directory "~/placemarks/org_published/full/pdf"
            :section-numbers nil
            :with-toc nil
            :exclude "//^_.org$"
@@ -1935,7 +1951,7 @@ same directory as the org-buffer and insert a link to this file."
           ("invoices-pdf"
            :base-directory "~/org/07-needs"
            :base-extension "org"
-           :publishing-directory "/mnt/DATA/exportedata/org_published/full/pdf/invoices"
+           :publishing-directory "~/placemarks/org_published/full/pdf/invoices"
            :section-numbers nil
            :with-toc nil
            :exclude "//^_.org$"
@@ -1943,7 +1959,7 @@ same directory as the org-buffer and insert a link to this file."
            :publishing-function org-latex-publish-to-pdf)
           ("orgfull-html"
            :base-directory "~/org/08-system"
-           :publishing-directory "~/placemarks/org_published/full/html/system"
+           :publishing-directory "~/placemarks/org_published/full/html"
            :base-extension "org"
            :recursive t
            :exclude "^_[a-z]"
