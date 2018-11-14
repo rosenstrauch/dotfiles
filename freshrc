@@ -172,14 +172,14 @@ fresh shell/bash/snippets/\* --file='~/.bashrc_plugins' --marker='# my-bash-plug
 #########
 # ZSHRC #
 #########
-
-fresh shell/zsh/zshenv --file
+fresh zsh/zshenv --file
 
 fresh-options  --file=~/.zshrc --marker
   fresh shell/zsh/zshrc_settings
   fresh freshshell/fresh contrib/source-build.sh
   fresh sorin-ionescu/prezto modules/history/init.zsh
   fresh shell/zsh/plugins/\*
+  fresh mamuz/dotfiles home/.oh-my-zsh/custom/phptools.zsh
 fresh-options
 
 fresh zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting.zsh --file=vendor/zsh-syntax-highlighting.zsh
