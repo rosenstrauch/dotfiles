@@ -713,7 +713,12 @@ X-Message-SMTP-Method: sendmail
 	(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
   )
-
+(use-package flycheck-pos-tip
+  :ensure t
+  :config
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
+  )
 ;;; * Use Package php Mode [#2]
 (use-package php-mode
   :ensure t)
@@ -747,6 +752,19 @@ X-Message-SMTP-Method: sendmail
 ;; ;; "Generic.CodeAnalysis.VariableAnalysis.UnusedVariable" in an unused
 ;; ;; variable warning)
 ;; (setq flymake-phpcs-show-rule t))
+
+(use-package flycheck-phpstan
+  :ensure t
+  :init
+ (defun my-php-mode-hook ()
+  "My PHP-mode hook."
+
+  (flycheck-mode t)
+  (flycheck-select-checker 'phpstan))
+
+(add-hook 'php-mode-hook 'my-php-mode-hook) 
+  )
+
 
 ;;; * Use Package: Org Trello [#3]
 (use-package org-trello

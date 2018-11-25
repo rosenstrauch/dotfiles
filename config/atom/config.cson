@@ -3,6 +3,14 @@
     js: {}
     php:
       default_beautifier: "PHPCBF"
+    scss: {}
+  "atom-debug-ui":
+    display: {}
+    gutters:
+      gutterPosition: "Left"
+  "atom-ide-ui":
+    "atom-ide-debugger": {}
+    "debugger-exceptionBreakpointsCollapsed": true
   core:
     disabledPackages: [
       "autocomplete-python"
@@ -15,8 +23,7 @@
       "platformio-ide-terminal"
       "python-indent"
       "python-tools"
-      "atom-debug-ui"
-      "php-debug"
+      "atom-ide-ui"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
@@ -25,7 +32,7 @@
   drupal:
     fileTypesPhp: "module,install,inc,test,profile"
   editor:
-    fontSize: 19
+    fontSize: 22
   "exception-reporting":
     userId: "0012fc16-c596-4daa-9a17-cb67c8eca355"
   "linter-eslint": {}
@@ -34,13 +41,24 @@
   "linter-xo":
     fixOnSave: true
   "php-debug":
+    display:
+      arraySort: true
+    exceptions: {}
+    noPackageInstallPrompt: [
+      "atom-ide-ui"
+    ]
+    pathMapsSearchIgnore: [
+      "!**/.git/**"
+      "!**/.*/**"
+      "!**/assets/**"
+    ]
     server:
       keepAlive: true
-      serverAddress: "omniverse8.docksal"
+      serverPort: 9001
     showWelcome: false
     xdebug:
-      pathMaps: "[{\"remotePath\":\"/var/www/vendor/behat/behat/bin\",\"localPath\":\"\"},{\"remotePath\":\"/var/www/web\",\"localPath\":\"\"}]"
-  "tree-view":
-    hideVcsIgnoredFiles: true
+      multipleSessions: false
+      pathMaps: "[{\"remotePath\":\"/application\",\"localPath\":\"/mnt/DATA/02-BilledWork/APPGURU_crypster/crypster_worclones/admin-dashboard/app\"}]"
+  "tree-view": {}
   welcome:
     showOnStartup: false
