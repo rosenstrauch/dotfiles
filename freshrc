@@ -250,7 +250,7 @@ fresh sampson-chen/sack .sackrc --file
 # SENSITIVE config - make sure sensitive exists
 ln -sf ~/SENSITIVE/mbsync/mbsyncrc ~/.mbsyncrc
 ln -sf ~/SENSITIVE/mbsync/msmtprc ~/.msmtprc
-ln -sf ~/SENSITIVE/notmuch/notmuch-config ~/.config/notmuch/notmuch-config
+ln -sf ~/SENSITIVE/notmuch ~/.config/
 # Files which land in a subfolder of the default $XDG_CONFIG_HOME
 
 # zim colors
