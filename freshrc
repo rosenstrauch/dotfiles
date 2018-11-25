@@ -172,7 +172,7 @@ fresh shell/bash/snippets/\* --file='~/.bashrc_plugins' --marker='# my-bash-plug
 #########
 # ZSHRC #
 #########
-fresh zsh/zshenv --file
+fresh shell/zsh/zshenv --file
 
 fresh-options  --file=~/.zshrc --marker
   fresh shell/zsh/zshrc_settings
