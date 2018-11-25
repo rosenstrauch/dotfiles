@@ -464,7 +464,8 @@
   :ensure t)
 
 (use-package ghub
-	:ensure t)
+	:ensure t
+  :disabled t)
 
 ;;; * Use package: git timemachine
 (use-package git-timemachine
@@ -476,6 +477,21 @@
 
 (provide 'init-git-timemachine)
 
+;;; * Use Package message-mode
+        (use-package message-mode
+          :commands message-mode
+          :disabled nil
+          :no-require t
+          :config
+          (message-default-mail-headers "
+Cc:
+X-Message-SMTP-Method: sendmail
+")
+          (setq message-kill-buffer-on-exit t)
+          (setq message-alternative-emails
+                (regexp-opt '("green@endeavour.localdomain" "luis.rosenstrauch@gmail.com")))
+
+          (add-hook 'message-mode-hook 'turn-on-flyspell 'append))
 
 ;;; * Use Package js2-mode [#2]
 (use-package prettier-js
@@ -490,6 +506,8 @@
 ))
 :ensure t
 )
+
+
 (use-package js2-mode
 	:mode
   (("\\.js$" . js2-mode)
@@ -1352,7 +1370,8 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-ellipsis "⤵")
 
 ;;; *** Org config export backends
-(use-package ox-reveal)
+  (use-package ox-reveal
+    :ensure t)
 
   (setq org-export-backends (quote (reveal ascii html icalendar latex md odt)))
 
@@ -1484,21 +1503,8 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-wip-state "NEXT")
 ;;; *** ORG CONFIG: Directories [#8]
   (setq org-default-notes-file "~/org/home.org")
-  (setq org-agenda-files "~/org")
-  (setq org-agenda-files (append '("~/org")
-                                 ;;(file-expand-wildcards "~/org/boards/*.trello")
-                                 (file-expand-wildcards "~/org/01-internal/*/*.org")
-                                 (file-expand-wildcards "~/org/02-clients/*/*.org")
-                                 (file-expand-wildcards "~/org/03-TribeProjects/*/*.org")
-                                 (file-expand-wildcards "~/org/05-start/*/*.org")
-                                 (file-expand-wildcards "~/org/06-teams/*/*.org")
-                                 (file-expand-wildcards "~/org/07-needs/*/*.org")
-                                 (file-expand-wildcards "~/org/08-system/*/*.org")
-                                 ;;(file-expand-wildcards "~/org/09-private/*/*.org")
+  (setq org-agenda-files "~/org/**/*.org")
 
-                                 (file-expand-wildcards "~/org/*/*.org")
-                                 ;;(file-expand-wildcards "~/org/*/*/*.org")
-                                 ))
   (setq org-archive-location "~/org/04-archive/%s_archive::")
 
 ;;; *** ORG CONFIG Mobile org
