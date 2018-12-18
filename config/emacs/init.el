@@ -1521,7 +1521,7 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-wip-state "NEXT")
 ;;; *** ORG CONFIG: Directories [#8]
   (setq org-default-notes-file "~/org/home.org")
-  (setq org-agenda-files "~/org/*.org")
+  (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 
   (setq org-archive-location "~/org/04-archive/%s_archive::")
 
