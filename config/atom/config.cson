@@ -4,7 +4,7 @@
     php:
       default_beautifier: "PHPCBF"
     scss:
-      default_beautifier: "Prettier"
+      beautify_on_save: true
   "atom-debug-ui":
     display: {}
     gutters:
