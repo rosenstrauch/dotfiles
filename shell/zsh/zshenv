@@ -3,5 +3,5 @@
 #  #+NAME: tangle-zshenv
 
 typeset -U path
-path=(~/.local/bin ~/bin $path[@])
+path=(~/.local/bin ~/bin ~/.config/composer/vendor/bin $path[@])
 export EDITOR="emacsclient -t -a=\"\""

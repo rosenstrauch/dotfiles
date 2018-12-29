@@ -1,8 +1,15 @@
 "*":
   "atom-beautify":
+    executables:
+      "php-cs-fixer":
+        path: "/home/green/.config/composer/vendor/bin/php-cs-fixer"
+      phpcbf:
+        path: "~/bin/phpcbf "
     js: {}
     php:
+      beautify_on_save: true
       default_beautifier: "PHPCBF"
+      phpcbf_version: 3
     scss:
       beautify_on_save: true
   "atom-debug-ui":
@@ -25,6 +32,7 @@
       "python-indent"
       "python-tools"
       "atom-ide-ui"
+      "nav-panel-plus"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
@@ -34,11 +42,14 @@
     fileTypesPhp: "module,install,inc,test,profile"
   editor:
     fontSize: 22
+    preferredLineLength: 1
+    showIndentGuide: true
+    tabType: "soft"
   "exception-reporting":
-    userId: "0012fc16-c596-4daa-9a17-cb67c8eca355"
+    userId: "c3531a3d-3a0e-4510-9d36-554e9c454b0b"
   "linter-eslint": {}
   "linter-ui-default":
-    panelHeight: 298
+    panelHeight: 384
     showPanel: true
   "linter-xo":
     fixOnSave: true
@@ -60,7 +71,7 @@
     showWelcome: false
     xdebug:
       multipleSessions: false
-      pathMaps: "[{\"remotePath\":\"/application\",\"localPath\":\"/mnt/DATA/02-BilledWork/APPGURU_crypster/crypster_worclones/admin-dashboard/app\"}]"
+      pathMaps: "[{\"remotePath\":\"/application\",\"localPath\":\"/mnt/DATA/02-BilledWork/APPGURU_crypster/crypster_worclones/admin-dashboard/app\"},{\"remotePath\":\"/var/www/web\",\"localPath\":\"/mnt/DATA/02-BilledWork/APPGURU_OMNIA/omniaverse_docksal/web\"},{\"remotePath\":\"/usr/local/bin\",\"localPath\":\"\"}]"
   "tree-view": {}
   welcome:
     showOnStartup: false

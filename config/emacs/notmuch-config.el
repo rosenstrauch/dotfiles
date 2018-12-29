@@ -4,7 +4,7 @@
 
 
 ;;; Code:
-(setq notmuch-archive-tags '("-unread" "+archive" "-inbox"))
+(setq-default notmuch-archive-tags '("-unread" "+archive" "-inbox"))
 
 
 (provide 'notmuch-config)
