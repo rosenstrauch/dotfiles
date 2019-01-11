@@ -49,7 +49,7 @@
     userId: "c3531a3d-3a0e-4510-9d36-554e9c454b0b"
   "linter-eslint": {}
   "linter-ui-default":
-    panelHeight: 384
+    panelHeight: 298
     showPanel: true
   "linter-xo":
     fixOnSave: true

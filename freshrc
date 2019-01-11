@@ -65,6 +65,12 @@ ln -sf ~/.dotfiles/local/composure ~/.local/
 #ln -sf ~/.dotfiles/scripts ~/
 
 #
+# python with zen
+#
+fresh pyenv/pyenv.git ~/.pyenv
+
+
+#
 # i3
 #   :a window manager that can be dotfiled
 
@@ -77,7 +83,6 @@ fresh config/i3/config --file=~/.config/i3/config
 
 backup_files_existing_before_symlinking ~/.config/systemd
 ln -sf ~/.dotfiles/config/systemd ~/.config
-
 
 #
 # Desktop
