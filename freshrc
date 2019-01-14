@@ -64,11 +64,6 @@ fresh erichs/composure composure.sh
 ln -sf ~/.dotfiles/local/composure ~/.local/
 #ln -sf ~/.dotfiles/scripts ~/
 
-#
-# python with zen
-#
-fresh pyenv/pyenv.git ~/.pyenv
-
 
 #
 # i3
@@ -128,7 +123,7 @@ fresh-options --bin
   fresh clvv/fasd fasd
   fresh simonwhitaker/gibo gibo
   fresh klausi/pareviewsh pareview.sh --ref=7.x-1.x
-  fresh alicraigmile/show-wip show-wip
+  fresh rosenstrauch/show-wip show-wip
   fresh holman/dotfiles bin/git-wtf
   fresh albfan/git-changemail git-changemail
   fresh tj/bm bm
@@ -156,21 +151,21 @@ backup_files_existing_before_symlinking "${HOME}/.bashrc_plugins"
 fresh shell/bash/bash_profile --file='~/.bash_profile'
 fresh shell/bash/bashrc_settings --file='~/.bashrc_settings'
 fresh shell/bash/bashrc --file='~/.bashrc'
-fresh Bash-it/bash-it plugins/available/fasd.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it plugins/available/fasd.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
 fresh freshshell/fresh contrib/completion/fresh-completion.bash --file='~/.bashrc_plugins' --marker='# bash completion plugins'
-fresh Bash-it/bash-it completion/available/composer.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
-fresh Bash-it/bash-it completion/available/docker-compose.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
-fresh Bash-it/bash-it completion/available/docker.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
-fresh Bash-it/bash-it completion/available/git.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
-fresh Bash-it/bash-it completion/available/ssh.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
-fresh Bash-it/bash-it plugins/available/dirs.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
-fresh Bash-it/bash-it plugins/available/docker-compose.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
-fresh Bash-it/bash-it plugins/available/docker.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
-fresh Bash-it/bash-it plugins/available/git.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
-fresh Bash-it/bash-it plugins/available/percol.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
-fresh Bash-it/bash-it plugins/available/alias-completion.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it completion/available/composer.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh bash-it/bash-it completion/available/docker-compose.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh bash-it/bash-it completion/available/docker.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh bash-it/bash-it completion/available/git.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh bash-it/bash-it completion/available/ssh.completion.bash --file='~/.bashrc_plugins' --marker='# completion plugins'
+fresh bash-it/bash-it plugins/available/dirs.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it plugins/available/docker-compose.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it plugins/available/docker.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it plugins/available/git.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it plugins/available/percol.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it plugins/available/alias-completion.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
 
-fresh Bash-it/bash-it plugins/available/extract.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
+fresh bash-it/bash-it plugins/available/extract.plugin.bash --file='~/.bashrc_plugins' --marker='# extra-bash-plugins'
 
 fresh shell/bash/snippets/\* --file='~/.bashrc_plugins' --marker='# my-bash-plugins'
 
