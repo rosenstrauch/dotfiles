@@ -1,0 +1,13 @@
+ * %? [/] %^G
+ :PROPERTIES:
+ :CREATED: %U
+ :SOURCE: %:link
+ :END:
+%^{TYPE}p
+%^{CATEGORY}p
+
+#+BEGIN_QUOTE
+%i
+#+END_QUOTE
+
+originated from %:from  %f %a

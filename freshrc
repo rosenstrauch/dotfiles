@@ -282,6 +282,18 @@ ln -sf ~/.dotfiles/config/emacs/notmuch-config.el ~/.emacs.d/notmuch-config.el
 ln -sf ~/.dotfiles/config/emacs/elisp/ ~/.emacs.d/
 ln -sf ~/.dotfiles/config/emacs/global-settings.el ~/.emacs.d/global-settings.el
 ln -sf ~/.dotfiles/config/emacs/greenmacs-keymaps.el ~/.emacs.d/greenmacs-keymaps.el
+ln -sf ~/.dotfiles/config/emacs/org-capture-settings.el ~/.emacs.d/org-capture-settings.el
+ln -sf ~/.dotfiles/config/emacs/my-org-capture-templates ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/org-agenda-settings.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/org-init-functions.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/org-mobile-sync.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/org-clock-settings.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/org-publish-settings.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/org-export-settings.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/setup-js-ide.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/setup-php-ide.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/setup-python-ide.el ~/.emacs.d/
+
 
 # org js
 # fresh http://orgmode.org/worg/code/org-info-js/org-info.js
