@@ -256,8 +256,7 @@ X-Message-SMTP-Method: sendmail
 
 ;;; * Use Package org-invoice
 ;;;;   - https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
-(use-package org-invoice 
-  :ensure t)
+(use-package org-invoice)
 
 ;;; * Use Package: csv-export
 (use-package org-clock-csv
