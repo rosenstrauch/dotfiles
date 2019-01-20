@@ -302,7 +302,7 @@ X-Message-SMTP-Method: sendmail
 (use-package w3m
   :config
   (setq browse-url-browser-function 'w3m-browse-url)
-  (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+  (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t))
 
 ;;; * Use Package Makefile ob [#2]
   (use-package ob-makefile
@@ -626,7 +626,7 @@ X-Message-SMTP-Method: sendmail
     (setq erc-keywords '("resolve" "rosenstrauch"))
     (erc-match-mode 1)
     :bind ( :map erc-mode-map
-           ("C-c C-a" . erc-next-channel-buffer) ))
+                 ("C-c C-a" . erc-next-channel-buffer) ))
 
 ;;; * Use Package flycheck
   (use-package flycheck
@@ -647,7 +647,7 @@ X-Message-SMTP-Method: sendmail
     (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)  )
 
 ;;;   Use Package: Org id
- (use-package org-id
+  (use-package org-id
     :config
     (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
     (org-id-update-id-locations))
