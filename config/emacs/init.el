@@ -15,7 +15,7 @@
 (load custom-file)
 
 ;;; ** GLOBAL KEYMAPs
-(load "~/.emacs.d/greenmacs-keymaps")
+(load "~/.emacs.d/greenmacs-keymaps.el")
 
 ;;; ** GLOBAL Configure Settings
 (load-file "~/.emacs.d/global-settings.el")
@@ -29,8 +29,8 @@
 
 ;;; ** STYLE
 (load-theme 'green-emacs)
-          (add-to-list 'default-frame-alist
-                       '(font . "DejaVu Sans Mono-20"))
+(add-to-list 'default-frame-alist
+             '(font . "DejaVu Sans Mono-20"))
 
 ;;; *** STYLE background color
 
@@ -123,17 +123,16 @@
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
 
-
 ;;; * Use Package irc
 (use-package erc
   :commands (erc-tls erc-next-channel-buffer my-erc-md-all-but-emacs bitlbee)
   :init
-            (defun bitlbee ()
-              (interactive)
-              (if (get-buffer "&bitlbee")
-                  (switch-to-buffer (get-buffer "&bitlbee"))
-                (let ((default-directory "~"))
-                  (erc :server "localhost" :port 6667 :nick "rosenstrauch"))))
+  (defun bitlbee ()
+    (interactive)
+    (if (get-buffer "&bitlbee")
+        (switch-to-buffer (get-buffer "&bitlbee"))
+      (let ((default-directory "~"))
+        (erc :server "localhost" :port 6667 :nick "rosenstrauch"))))
 
   (defun bitlbee-netrc-identify ()
     "Auto-identify for Bitlbee channels using authinfo or netrc.
@@ -198,10 +197,10 @@
     (interactive)
     (when (null erc-channels-to-visit)
       (setq erc-channels-to-visit
-	          (remove (current-buffer) (erc-channel-list nil))))
+	    (remove (current-buffer) (erc-channel-list nil))))
     (let ((target (pop erc-channels-to-visit)))
       (if target
-	        (switch-to-buffer target))))
+	  (switch-to-buffer target))))
 
   :config
   (setq
@@ -211,11 +210,11 @@
    erc-timestamp-only-if-changed-flag nil
    erc-truncate-mode t)
 
-	(setq erc-autojoin-channels-alist
-				'(("freenode.net" "#emacs" "#wiki" "#nethack" "##rosenchat")
-					("oftc.net" "#bitlbee")))
-	(erc-tls :server "irc.freenode.net" :port 6697 :nick "rosenstrauch")
-	(erc-tls :server "irc.oftc.net" :port 6697 :nick "rosenstrauch")
+  (setq erc-autojoin-channels-alist
+	'(("freenode.net" "#emacs" "#wiki" "#nethack" "##rosenchat")
+	  ("oftc.net" "#bitlbee")))
+  (erc-tls :server "irc.freenode.net" :port 6697 :nick "rosenstrauch")
+  (erc-tls :server "irc.oftc.net" :port 6697 :nick "rosenstrauch")
 
   ;; Kill buffers for channels after /part
   (setq erc-kill-buffer-on-part t)
@@ -226,11 +225,11 @@
   (setq erc-kill-server-buffer-on-quit t)
 
   ;; open query buffers in the current window
-	(setq erc-query-display 'buffer)
+  (setq erc-query-display 'buffer)
   (setq erc-log-insert-log-on-open nil)
   (setq erc-log-channels t)
   (setq erc-log-channels-directory "~/.irclogs/")
-    (if (not (file-exists-p erc-log-channels-directory))
+  (if (not (file-exists-p erc-log-channels-directory))
       (mkdir erc-log-channels-directory t))
 
   (setq erc-save-buffer-on-part t)
@@ -256,23 +255,23 @@
 
   )
 
-;;; * Use package: babel restclient
+;;; * Use Package: babel restclient
 (use-package ob-restclient
   :ensure t
   :defer t)
 
-;;; * use package: org-screenshot
+;;; * Use Package: org-screenshot
 (use-package org-attach-screenshot
   :ensure t)
 
-;;; * Use package: emacs-fasd
+;;; * Use Package: emacs-fasd
 (use-package fasd
   :bind(("\C-c f" . fasd-find-file))
   :config (setq global-fasd-mode 1)
   (setq fasd-enable-initial-prompt nil)
   :ensure t)
 
-;;; * Use package: csv-export
+;;; * Use Package: csv-export
 (use-package org-clock-csv
   :ensure t)
 
@@ -286,13 +285,13 @@
   :ensure t)
 
 
-;;; * use Package: Xclip
-;;; - for integrating emacs kill-ring with gnome clipboard [#4]
+;;; * Use Package: Xclip
+;;;;   - for integrating emacs kill-ring with gnome clipboard [#4]
 (use-package xclip
   :ensure t
   :init (xclip-mode 1))
 
-;;; * TODO Use Package: habits [#4]
+;;; * Use Package: habits [#4]
 (use-package habitica
   :bind (("C-c C-h" . habitica-tasks))
   :ensure t)
@@ -308,63 +307,61 @@
   (setq browse-url-browser-function 'w3m-browse-url)
   (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 
-;;; * Use package org-invoice
-;;; https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
+;;; * Use Package org-invoice
+;;;;   - https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
   (use-package org-invoice )
 
-	;;; * use package yasnippet
-	(use-package yasnippet
-		:ensure t
-		:init (add-hook 'prog-mode-hook #'yas-minor-mode)
-		:config (yas-reload-all))
+;;; * Use Package yasnippet
+  (use-package yasnippet
+    :ensure t
+    :init (add-hook 'prog-mode-hook #'yas-minor-mode)
+    :config (yas-reload-all))
 
-	;;; * use package yasnippet-mocha
-	(use-package mocha-snippets
-		:ensure t)
+;;; * Use Package yasnippet-mocha
+  (use-package mocha-snippets
+    :ensure t)
 
-;;; * use package company
-	(use-package company
-		:ensure t
-		:config
-		(global-company-mode)
-		(setq company-tooltip-limit 10)
-		(setq company-dabbrev-downcase 0)
-		(setq company-idle-delay 0)
-		(setq company-echo-delay 0)
-		(setq company-minimum-prefix-length 2)
-		(setq company-require-match nil)
-		(setq company-selection-wrap-around t)
-		(setq company-tooltip-align-annotations t)
-		;; (setq company-tooltip-flip-when-above t)
-		(setq company-transformers '(company-sort-by-occurrence)) ; weight by frequency
-		(define-key company-active-map (kbd "M-n") nil)
-		(define-key company-active-map (kbd "M-p") nil)
-		(define-key company-active-map (kbd "C-n") 'company-select-next)
-		(define-key company-active-map (kbd "C-p") 'company-select-previous)
-		(define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-		(define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
-		(define-key company-active-map (kbd "S-TAB") 'company-select-previous)
-		(define-key company-active-map (kbd "<backtab>") 'company-select-previous)
-		)
-	(use-package helm-company
-		:ensure t
-		:config
-		;; http://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names
-		;; Add yasnippet support for all company backends
-		;; https://github.com/syl20bnr/spacemacs/pull/179
-		(defvar company-mode/enable-yas t
-			"Enable yasnippet for all backends.")
+;;; * Use Package company
+  (use-package company
+    :ensure t
+    :config
+    (global-company-mode)
+    (setq company-tooltip-limit 10)
+    (setq company-dabbrev-downcase 0)
+    (setq company-idle-delay 0)
+    (setq company-echo-delay 0)
+    (setq company-minimum-prefix-length 2)
+    (setq company-require-match nil)
+    (setq company-selection-wrap-around t)
+    (setq company-tooltip-align-annotations t)
+    ;; (setq company-tooltip-flip-when-above t)
+    (setq company-transformers '(company-sort-by-occurrence)) ; weight by frequency
+    (define-key company-active-map (kbd "M-n") nil)
+    (define-key company-active-map (kbd "M-p") nil)
+    (define-key company-active-map (kbd "C-n") 'company-select-next)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous)
+    (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+    (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+    (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
+    (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
-		(defun company-mode/backend-with-yas (backend)
-			(if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-					backend
-				(append (if (consp backend) backend (list backend))
-								'(:with company-yasnippet))))
+  (use-package helm-company
+    :ensure t
+    :config
+    ;; http://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names
+    ;; Add yasnippet support for all company backends
+    ;; https://github.com/syl20bnr/spacemacs/pull/179
+    (defvar company-mode/enable-yas t
+      "Enable yasnippet for all backends.")
 
-		(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+    (defun company-mode/backend-with-yas (backend)
+      (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+	  backend
+	(append (if (consp backend) backend (list backend))
+		'(:with company-yasnippet))))
+    (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)))
 
-		)
-;;; * use package: helm
+;;; * Use Package: helm
   (use-package helm
     :bind (("M-x" . helm-M-x)
            ("M-<f5>" . helm-find-files)
@@ -372,10 +369,9 @@
            ([S-f10] . helm-recentf))
     :ensure t)
 
-
-;;; * Use package tramp
+;;; * Use Package tramp
   (use-package tramp
-		:ensure t
+    :ensure t
     :config
 
     (setq tramp-default-method "ssh")
@@ -383,64 +379,56 @@
     (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
     (setq tramp-chunksize 500)
 
-    (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash") )
-    )
+    (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash") )    )
 
-;;; * Use Package: ORG-JIRA
-;;; ** credentials are in authinfo, you need make sure whether the "/jira" at the end is necessary or not jiralib is not explicitly required, since org-jira will load it. [#4]
-                                        ;(use-package org-jira
-                                        ;  :config
-                                        ;  (setq jiralib-url "http://acolono.atlassian.net")
-                                        ;  :ensure t)
 ;;; * Package: Gitlab [#2]
   (unless (package-installed-p 'gitlab)
     (package-install 'gitlab))
 
 ;;; * Use Package: Magit [#11]
-(use-package magit
-  :commands (magit-status magit-blame magit-mode)
-  :ensure t
-  :bind (("C-x g" . magit-status)
-         ("C-c C-g l" . magit-file-log)
-         ("C-c C-g c" . magit-commit)
-         ("C-c C-g f" . magit-grep))
-  :config
-  (progn
-    ;; Set `magit-status' fullscreen
-    (setq magit-post-display-buffer-hook
-          #'(lambda ()
-              (when (derived-mode-p 'magit-status-mode)
-                (delete-other-windows))))
+  (use-package magit
+    :commands (magit-status magit-blame magit-mode)
+    :ensure t
+    :bind (("C-x g" . magit-status)
+           ("C-c C-g l" . magit-file-log)
+           ("C-c C-g c" . magit-commit)
+           ("C-c C-g f" . magit-grep))
+    :config
+    (progn
+      ;; Set `magit-status' fullscreen
+      (setq magit-post-display-buffer-hook
+            #'(lambda ()
+		(when (derived-mode-p 'magit-status-mode)
+                  (delete-other-windows))))
 
-    (setenv "GIT_PAGER" "")
-    (add-hook 'magit-log-edit-mode-hook
-              '(lambda ()
-                 (auto-fill-mode)
-                 (flyspell-mode)
-                 (set-fill-column 80))))
-  (use-package magit-blame
-    :bind ("C-c C-g b" . magit-blame-mode))
- )
+      (setenv "GIT_PAGER" "")
+      (add-hook 'magit-log-edit-mode-hook
+		'(lambda ()
+                   (auto-fill-mode)
+                   (flyspell-mode)
+                   (set-fill-column 80))))
+    (use-package magit-blame
+      :bind ("C-c C-g b" . magit-blame-mode)) )
 
-(use-package magit-gh-pulls
-  :diminish magit-gh-pulls-mode
-  :ensure t
-  :disabled t
-  ;;:hook       ('magit-mode-hook 'turn-on-magit-gh-pulls)
-  :commands (magit-gh-pulls-mode turn-on-magit-gh-pulls))
-(use-package magithub
-  :after magit
-  :ensure t
-  :disabled t
-  :config (magithub-feature-autoinject t))
+  (use-package magit-gh-pulls
+    :diminish magit-gh-pulls-mode
+    :ensure t
+    :disabled t
+    ;;:hook       ('magit-mode-hook 'turn-on-magit-gh-pulls)
+    :commands (magit-gh-pulls-mode turn-on-magit-gh-pulls))
+  (use-package magithub
+    :after magit
+    :ensure t
+    :disabled t
+    :config (magithub-feature-autoinject t))
 
   :ensure t)
 
 (use-package ghub
-	:ensure t
+  :ensure t
   :disabled t)
 
-;;; * Use package: git timemachine
+;;; * Use Package: git timemachine
 (use-package git-timemachine
   :ensure t
   :commands (git-timemachine-toggle
@@ -451,33 +439,33 @@
 (provide 'init-git-timemachine)
 
 ;;; * Use Package message-mode
-        (use-package message-mode
-          :commands message-mode
-          :disabled nil
-          :no-require t
-          :config
-          (message-default-mail-headers "
+(use-package message-mode
+  :commands message-mode
+  :disabled nil
+  :no-require t
+  :config
+  (message-default-mail-headers "
 Cc:
 X-Message-SMTP-Method: sendmail
 ")
-          ;; This is needed to allow msmtp to do its magic:
-(setq message-sendmail-f-is-evil 't)
+  ;; This is needed to allow msmtp to do its magic:
+  (setq message-sendmail-f-is-evil 't)
 
-;;need to tell msmtp which account we're using
-(setq message-sendmail-extra-arguments '("--read-envelope-from"))
-(setq mail-specify-envelope-from t)
-(setq mail-envelope-from 'header)
-(setq message-sendmail-envelope-from 'header)
-(setq message-send-mail-function 'message-send-mail-with-sendmail)
+  ;;need to tell msmtp which account we're using
+  (setq message-sendmail-extra-arguments '("--read-envelope-from"))
+  (setq mail-specify-envelope-from t)
+  (setq mail-envelope-from 'header)
+  (setq message-sendmail-envelope-from 'header)
+  (setq message-send-mail-function 'message-send-mail-with-sendmail)
 
-;;use msmtp instead of sendmail
-(setq sendmail-program "/usr/bin/msmtp")
+  ;;use msmtp instead of sendmail
+  (setq sendmail-program "/usr/bin/msmtp")
 
-          (setq message-kill-buffer-on-exit t)
-          (setq message-alternative-emails
-                (regexp-opt '("green@endeavour.localdomain" "luis.rosenstrauch@gmail.com")))
+  (setq message-kill-buffer-on-exit t)
+  (setq message-alternative-emails
+        (regexp-opt '("green@endeavour.localdomain" "luis.rosenstrauch@gmail.com")))
 
-          (add-hook 'message-mode-hook 'turn-on-flyspell 'append))
+  (add-hook 'message-mode-hook 'turn-on-flyspell 'append))
 
 ;;; * Use Package js2-mode [#2]
 (use-package prettier-js
@@ -485,49 +473,44 @@ X-Message-SMTP-Method: sendmail
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (setq prettier-js-args '(
-  "--trailing-comma" "all"
-  "--bracket-spacing" "false"
-  "--no-semi"
-  "--single-quote"
-))
-:ensure t
-)
+			   "--trailing-comma" "all"
+			   "--bracket-spacing" "false"
+			   "--no-semi"
+			   "--single-quote"
+			   ))
+  :ensure t  )
 
 
 (use-package js2-mode
-	:mode
+  :mode
   (("\\.js$" . js2-mode)
-	 ("\\.jsx$" . js2-jsx-mode))
+   ("\\.jsx$" . js2-jsx-mode))
   :ensure t
-	:hook ((js2-mode . (lambda ()
+  :hook ((js2-mode . (lambda ()
                        (flycheck-mode)
-											 ))
+		       ))
          (js2-jsx-mode . (lambda ()
                            (flycheck-mode)
                            )))
-	:config
-	;; have 2 space indentation by default
+  :config
+  ;; have 2 space indentation by default
   (setq js-indent-level 2
         js2-basic-offset 2
-				js-chain-indent t)
-	)
+	js-chain-indent t))
 
 
-;;; indium: javascript awesome development environment
-;;; https://github.com/NicolasPetton/indium
+;;; * Use Package indium: javascript awesome development environment
+;;;;   - https://github.com/NicolasPetton/indium
 (use-package indium
-	:ensure t
+  :ensure t
   :after js2-mode
   :bind (:map js2-mode-map
-
               ("C-c C-l" . indium-eval-buffer)
               ("C-c C-n" . indium-run-node)
               ("C-c b l" . indium-list-breakpoints)
               ("C-c b K" . indium-remove-all-breakpoints-from-buffer)
-              ("C-c b t" . indium-toggle-breakpoint)
-							)
+              ("C-c b t" . indium-toggle-breakpoint))
   :hook ((js2-mode . indium-interaction-mode)))
-
 
 (use-package js-auto-beautify
   :ensure t)
@@ -576,15 +559,15 @@ X-Message-SMTP-Method: sendmail
 (use-package pyenv-mode
   :ensure t
   :config
-    (defun projectile-pyenv-mode-set ()
-      "Set pyenv version matching project name."
-      (let ((project (projectile-project-name)))
-        (if (member project (pyenv-mode-versions))
-            (pyenv-mode-set project)
-          (pyenv-mode-unset))))
+  (defun projectile-pyenv-mode-set ()
+    "Set pyenv version matching project name."
+    (let ((project (projectile-project-name)))
+      (if (member project (pyenv-mode-versions))
+          (pyenv-mode-set project)
+        (pyenv-mode-unset))))
 
-    (add-hook 'projectile-switch-project-hook 'projectile-pyenv-mode-set)
-    (add-hook 'python-mode-hook 'pyenv-mode))
+  (add-hook 'projectile-switch-project-hook 'projectile-pyenv-mode-set)
+  (add-hook 'python-mode-hook 'pyenv-mode))
 (use-package pyenv-mode-auto
   :ensure t)
 (use-package jedi
@@ -607,9 +590,9 @@ X-Message-SMTP-Method: sendmail
 ;;; * Use Package Yaml Mode [#2]
 (use-package yaml-mode
   :ensure t
-	:defer t
-	:init
-	(defun yaml-mode-syntax-propertize-function (beg end)
+  :defer t
+  :init
+  (defun yaml-mode-syntax-propertize-function (beg end)
     (save-excursion
       (goto-char beg)
       (while (search-forward "#" end t)
@@ -622,8 +605,7 @@ X-Message-SMTP-Method: sendmail
             (when (looking-at "[ \t]")
               (forward-char 1)
               (put-text-property (point) (1+ (point))
-                                 'syntax-table (string-to-syntax "<"))))))))
-  )
+                                 'syntax-table (string-to-syntax "<")))))))) )
 
 ;;; * Use Package Json Mode [#2]
 (use-package json-mode
@@ -644,7 +626,7 @@ X-Message-SMTP-Method: sendmail
   :defer t)
 
 ;;; * Use Package org-contacts
-;;; - https://emacs.stackexchange.com/a/17553
+;;;;  - https://emacs.stackexchange.com/a/17553
 (use-package org-contacts
   :config
   (setq org-contacts-files `(,(expand-file-name "contacts.org" org-directory)))
@@ -653,13 +635,12 @@ X-Message-SMTP-Method: sendmail
   :ensure org-plus-contrib)
 
 ;;; * Use Package Sh-script
-;;; - for editing shell files [#9]
+;;;;  - for editing shell files [#9]
 (use-package sh-script
   :mode (("\\.*bashrc$" . sh-mode)
          ("\\.*bash_profile" . sh-mode)
          ("\\.zsh" . sh-mode)
-         ("\\.bash" . sh-mode)
-         )
+         ("\\.bash" . sh-mode)         )
   :config
   (setq-default sh-indentation 2
                 sh-basic-offset 2))
@@ -680,31 +661,30 @@ X-Message-SMTP-Method: sendmail
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 
-;;; * Use package flycheck
+;;; * Use Package flycheck
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
-	:config
-	;; use local eslint from node_modules before global
-	;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-	(defun my/use-eslint-from-node-modules ()
-		(let* ((root (locate-dominating-file
-									(or (buffer-file-name) default-directory)
-									"node_modules"))
-					 (eslint (and root
-												(expand-file-name "node_modules/eslint/bin/eslint.js"
-																					root))))
-			(when (and eslint (file-executable-p eslint))
-				(setq-local flycheck-javascript-eslint-executable eslint))))
-	(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+  :config
+  ;; use local eslint from node_modules before global
+  ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+  (defun my/use-eslint-from-node-modules ()
+    (let* ((root (locate-dominating-file
+		  (or (buffer-file-name) default-directory)
+		  "node_modules"))
+	   (eslint (and root
+			(expand-file-name "node_modules/eslint/bin/eslint.js"
+					  root))))
+      (when (and eslint (file-executable-p eslint))
+	(setq-local flycheck-javascript-eslint-executable eslint))))
+  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)  )
 
-  )
 (use-package flycheck-pos-tip
   :ensure t
   :config
-(with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode))
-  )
+  (with-eval-after-load 'flycheck
+    (flycheck-pos-tip-mode))  )
+
 ;;; * Use Package php Mode [#2]
 (use-package php-mode
   :ensure t)
@@ -715,8 +695,7 @@ X-Message-SMTP-Method: sendmail
   (setq phpcbf-executable "~/bin/phpcbf")
   :config
   (add-hook 'php-mode-hook 'phpcbf-enable-on-save)
-  (setq phpcbf-standard "Drupal")
-  )
+  (setq phpcbf-standard "Drupal")  )
 
 ;; (use-package flymake-php
 ;;   :ensure t
@@ -742,14 +721,13 @@ X-Message-SMTP-Method: sendmail
 (use-package flycheck-phpstan
   :ensure t
   :init
- (defun my-php-mode-hook ()
-  "My PHP-mode hook."
+  (defun my-php-mode-hook ()
+    "My PHP-mode hook."
 
-  (flycheck-mode t)
-  (flycheck-select-checker 'phpstan))
+    (flycheck-mode t)
+    (flycheck-select-checker 'phpstan))
 
-(add-hook 'php-mode-hook 'my-php-mode-hook) 
-  )
+  (add-hook 'php-mode-hook 'my-php-mode-hook)   )
 
 
 ;;; * Use Package: Org Trello [#3]
@@ -812,7 +790,7 @@ X-Message-SMTP-Method: sendmail
   :ensure t
   :diminish outline-minor-mode
   :init
-  (defvar outline-minor-mode-prefix "C-o")
+  (defvar outline-minor-mode-prefix "C-ß")
 
 
   (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
@@ -827,7 +805,7 @@ X-Message-SMTP-Method: sendmail
   :config
   (bind-keys :map outline-mode-map
              :prefix-map my-outline-prefix
-             :prefix "\C-o"
+             :prefix "\C-ß"
              :menu-name "Outline:Show [a]ll ch[i] [e]ntry [s/k]| Hide [t]body [o]ther [c]entry [l/d] | Move [u/n/p/f/b]"
              :prefix-docstring "Prefix map for convenient folding"
              ("q" . outshine-hide-sublevels)    ; Hide everything but the top-level headings
@@ -850,11 +828,11 @@ X-Message-SMTP-Method: sendmail
 
 ;;; * Use Package: mocha
 (use-package mocha
-	:bind(
-				("C-c m P" . mocha-test-project)
-				("C-c m f" . mocha-test-file)
-				("C-c m p" . mocha-test-at-point))
-	:ensure t)
+  :bind(
+	("C-c m P" . mocha-test-project)
+	("C-c m f" . mocha-test-file)
+	("C-c m p" . mocha-test-at-point))
+  :ensure t)
 
 ;;; * Use Package slack
 (use-package slack
@@ -879,7 +857,7 @@ X-Message-SMTP-Method: sendmail
   ;;  :client-secret "cccccccccccccccccccccccccccccccc"
   ;;  :token "xoxs-yyyyyyyyyy-zzzzzzzzzzz-hhhhhhhhhhh-llllllllll"
   ;;  :subscribed-channels '(hoge fuga))
-)
+  )
 
 (use-package alert
   :commands (alert)
@@ -909,8 +887,8 @@ X-Message-SMTP-Method: sendmail
          ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
          ("C-c C-w" . org-refile)
          ("C-c d" . org-refile-to-datetree)
-         ("C-c i s" . my-org-screenshot)
-         ("C-c o c" . org-contacts)
+         ("C-c is" . my-org-screenshot)
+         ;;("C-c oc" . org-contacts)
          ("C-<" . org-begin-template))
 ;;; ** ORG INIT [#1]
   :init
@@ -1035,7 +1013,7 @@ as the default task."
   (defun bh/clock-in-default-task ()
     (save-excursion
       (org-with-point-at org-clock-default-task
-        (org-clock-in))))
+			 (org-clock-in))))
 
   (defun bh/clock-in-parent-task ()
     "Move point to the parent (project) task if any and clock in"
@@ -1048,7 +1026,7 @@ as the default task."
               (setq parent-task (point))))
           (if parent-task
               (org-with-point-at parent-task
-                (org-clock-in))
+				 (org-clock-in))
             (when bh/keep-clock-running
               (bh/clock-in-default-task)))))))
 
@@ -1057,7 +1035,7 @@ as the default task."
   (defun bh/clock-in-organization-task-as-default ()
     (interactive)
     (org-with-point-at (org-id-find bh/organization-task-id 'marker)
-      (org-clock-in '(16))))
+		       (org-clock-in '(16))))
 
   (defun bh/clock-out-maybe ()
     (when (and bh/keep-clock-running
@@ -1296,31 +1274,31 @@ same directory as the org-buffer and insert a link to this file."
 
 ;;; *** ORG init tangle and add to agenda on save
   ;; Tangle Org files when we save them
-	(defun tangle-on-save-org-mode-file()
-		(when (string= (message "%s" major-mode) "org-mode")
-			(org-babel-tangle)))
+  (defun tangle-on-save-org-mode-file()
+    (when (string= (message "%s" major-mode) "org-mode")
+      (org-babel-tangle)))
 
-	(add-hook 'after-save-hook 'tangle-on-save-org-mode-file)
+  (add-hook 'after-save-hook 'tangle-on-save-org-mode-file)
 
-	;; Enable the auto-revert mode globally. This is quite useful when you have
-	;; multiple buffers opened that Org-mode can update after tangling.
-	;; All the buffers will be updated with what changed on the disk.
-	(global-auto-revert-mode)
+  ;; Enable the auto-revert mode globally. This is quite useful when you have
+  ;; multiple buffers opened that Org-mode can update after tangling.
+  ;; All the buffers will be updated with what changed on the disk.
+  (global-auto-revert-mode)
 
-	;; Add Org files to the agenda when we save them
-	(defun to-agenda-on-save-org-mode-file()
-		(when (string= (message "%s" major-mode) "org-mode")
-			(org-agenda-file-to-front)))
+  ;; Add Org files to the agenda when we save them
+  (defun to-agenda-on-save-org-mode-file()
+    (when (string= (message "%s" major-mode) "org-mode")
+      (org-agenda-file-to-front)))
 
-	(add-hook 'after-save-hook 'to-agenda-on-save-org-mode-file)
+  (add-hook 'after-save-hook 'to-agenda-on-save-org-mode-file)
 
 ;;; ** ORG CONFIG Begin
   :config
   (setq org-yank-adjusted-subtrees t)
-	(setq org-fontify-whole-heading-line t)
+  (setq org-fontify-whole-heading-line t)
 ;;; *** ORG Config: cleanup after export
-	(setq-default org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
-	(setq-default org-latex-remove-logfiles t)
+  (setq-default org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+  (setq-default org-latex-remove-logfiles t)
 
 
 
@@ -1524,24 +1502,24 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-mobile-inbox-for-pull (concat org-directory "/flagged.org"))
 
 
-	;; Automatically sync mobileorg when idle
-	(defvar org-mobile-sync-timer nil)
-	(defvar org-mobile-sync-idle-secs (* 60 10))
-	(defun org-mobile-sync ()
-		(interactive)
-		(org-mobile-pull)
-		(org-mobile-push))
-	(defun org-mobile-sync-enable ()
-		"enable mobile org idle sync"
-		(interactive)
-		(setq org-mobile-sync-timer
-					(run-with-idle-timer org-mobile-sync-idle-secs t
-															 'org-mobile-sync)));
-	(defun org-mobile-sync-disable ()
-		"disable mobile org idle sync"
-		(interactive)
-		(cancel-timer org-mobile-sync-timer))
-	(org-mobile-sync-enable)
+  ;; Automatically sync mobileorg when idle
+  (defvar org-mobile-sync-timer nil)
+  (defvar org-mobile-sync-idle-secs (* 60 10))
+  (defun org-mobile-sync ()
+    (interactive)
+    (org-mobile-pull)
+    (org-mobile-push))
+  (defun org-mobile-sync-enable ()
+    "enable mobile org idle sync"
+    (interactive)
+    (setq org-mobile-sync-timer
+	  (run-with-idle-timer org-mobile-sync-idle-secs t
+			       'org-mobile-sync)));
+  (defun org-mobile-sync-disable ()
+    "disable mobile org idle sync"
+    (interactive)
+    (cancel-timer org-mobile-sync-timer))
+  (org-mobile-sync-enable)
 
 ;;; *** ORG CONFIG: CAPTURE [#5]
 
@@ -1990,16 +1968,16 @@ same directory as the org-buffer and insert a link to this file."
   (setq org-agenda-diary-file "~/org/journal.org")
 
 ;;; ** ORG Tags [#11]
-																				;(setq org-tag-alist '((:startgroup . nil)
-																				;                      ("@work" . ?w) ("@home" . ?h)
-																				;                      ("@errands" . ?t)
-																				;                      ("@BUY" . ?t)
-																				;                      ("@meeting" . ?m)
-																				;                      ("@phone" . ?c)
-																				;                      (:endgroup . nil)
-																				;                      ("PRJ" . ?e)
-																				;                      ("TEAM" . ?g)
-																				;                      ("@laptop" . ?l) ("@pc" . ?p)))
+					;(setq org-tag-alist '((:startgroup . nil)
+					;                      ("@work" . ?w) ("@home" . ?h)
+					;                      ("@errands" . ?t)
+					;                      ("@BUY" . ?t)
+					;                      ("@meeting" . ?m)
+					;                      ("@phone" . ?c)
+					;                      (:endgroup . nil)
+					;                      ("PRJ" . ?e)
+					;                      ("TEAM" . ?g)
+					;                      ("@laptop" . ?l) ("@pc" . ?p)))
 
 ;;; ** ORG Tasks [#4]
   (setq org-log-redeadline (quote time))
