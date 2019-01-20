@@ -4,12 +4,8 @@
 
 ;;; Code:
 ;;; * GLOBAL Emacs Settings
-;;; ** GLOBAL Load custom Lisp from others [#1] placed there by fresh
-(require 'server)
-(unless (server-running-p)
-  (server-start))
 
-(require 'org-protocol)
+;;; ** GLOBAL Load custom Lisp from others [#1] placed there by fresh
 (let ((default-directory  "~/.emacs.d/site-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
 
@@ -18,17 +14,24 @@
 (unless (file-exists-p custom-file) (with-temp-buffer (write-file custom-file)))
 (load custom-file)
 
-;;; ** GLOBAL Configure Backups [#5]
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-(setq delete-old-versions -1)
-(setq version-control t)
-(setq vc-make-backup-files t)
-(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 ;;; ** GLOBAL KEYMAPs
-(load-file "~/.emacs.d/elisp/green-keymaps.el")
+(load "~/.emacs.d/greenmacs-keymaps")
+
+;;; ** GLOBAL Configure Settings
+(load-file "~/.emacs.d/global-settings.el")
+
+(defun load-directory (dir)
+  (let ((load-it (lambda (f) (load-file (concat (file-name-as-directory dir) f)))))
+    (mapc load-it (directory-files dir nil "\\.el$"))))
+(load-directory "~/.emacs.d/elisp/")
+
 
 
 ;;; ** STYLE
+(load-theme 'green-emacs)
+          (add-to-list 'default-frame-alist
+                       '(font . "DejaVu Sans Mono-20"))
+
 ;;; *** STYLE background color
 
 
@@ -55,28 +58,9 @@
 ;; "^;;;[^#].*\n\\(?:[[:blank:]]*\\(?:;.*\\)?\n\\)*"
 ;;; *** STYLE: highlight Matching parenthesis
 (show-paren-mode 1)
-;;; *** STYLE: Make tabs into spaces when you type them
-
-(progn
-  ;; make indentation commands use space only (never tab character)
-  (setq-default indent-tabs-mode nil)
-  ;; emacs 23.1, 24.2, default to t
-  ;; if indent-tabs-mode is t, it means it may use tab, resulting mixed space and tab
-  )
-;;; *** STYLE: Display existing tabs as 2 characters wide [#19]
-(setq-default tab-width 2)
-(setq-default c-basic-offset 2)
-
-
-(load-theme 'tsdh-dark)
-          (add-to-list 'default-frame-alist
-                       '(font . "DejaVu Sans Mono-20"))
-
-
 (set-frame-font "9x15")
-(global-display-line-numbers-mode t)
-(column-number-mode 1)
 (setq line-spacing '0.25)
+(column-number-mode 1)
 
 
 ;;; ** CUSTOM functions
