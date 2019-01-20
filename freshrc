@@ -293,6 +293,7 @@ ln -sf ~/.dotfiles/config/emacs/org-export-settings.el ~/.emacs.d/
 ln -sf ~/.dotfiles/config/emacs/setup-js-ide.el ~/.emacs.d/
 ln -sf ~/.dotfiles/config/emacs/setup-php-ide.el ~/.emacs.d/
 ln -sf ~/.dotfiles/config/emacs/setup-python-ide.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/setup-git-ide.el ~/.emacs.d/
 
 
 # org js
