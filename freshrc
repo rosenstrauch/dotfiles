@@ -279,6 +279,7 @@ fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xcha
 ln -sf ~/.dotfiles/config/emacs/init.el ~/.emacs.d/init.el
 ln -sf ~/.dotfiles/config/emacs/ercrc.el ~/.emacs.d/.ercrc.el
 ln -sf ~/.dotfiles/config/emacs/notmuch-config.el ~/.emacs.d/notmuch-config.el
+ln -sf ~/.dotfiles/emacs.d/elisp/* ~/.emacs.d/elisp/
 
 # org js
 # fresh http://orgmode.org/worg/code/org-info-js/org-info.js

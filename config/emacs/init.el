@@ -8,6 +8,7 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
+
 (require 'org-protocol)
 (let ((default-directory  "~/.emacs.d/site-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
@@ -24,21 +25,9 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 ;;; ** GLOBAL KEYMAPs
-;;; *** Match parenthesis with % [#9]
+(load-file "~/.emacs.d/elisp/green-keymaps.el")
 
-(global-set-key "%" 'match-paren)
 
-;;; *** KEYMAP Next and previous page [#2]
-(define-key prog-mode-map "\C-x\C-n" #'forward-page)
-(define-key prog-mode-map "\C-x\C-p" #'backward-page)
-;;; *** KEYMAP Duplicate line C-d [#10]
-
-(global-set-key (kbd "C-d") 'duplicate-line)
-
-;;; *** KEYMAP quick access to init file C-c I
-
-(global-set-key (kbd "C-c I") 'find-user-init-file)
-;;; *** KEYMAP TODO quick access to home.org
 ;;; ** STYLE
 ;;; *** STYLE background color
 
@@ -151,7 +140,7 @@
 (setq ps-print-color-p nil)
 
 
-;;; * irc
+;;; * Use Package irc
 (use-package erc
   :commands (erc-tls erc-next-channel-buffer my-erc-md-all-but-emacs bitlbee)
   :init
@@ -670,7 +659,7 @@ X-Message-SMTP-Method: sendmail
   :ensure t
   :defer t)
 
-;;; * use package org-contacts
+;;; * Use Package org-contacts
 ;;; - https://emacs.stackexchange.com/a/17553
 (use-package org-contacts
   :config
@@ -833,14 +822,15 @@ X-Message-SMTP-Method: sendmail
 
 
 ;;; * Use Package: Outshine
-;;; - to fold my `init.el' like an org file [#31]
+;;;   > to fold my `init.el' like an org file [#31]
 ;;;   Use Package: Outline
 (use-package outshine
   :ensure t
   :diminish outline-minor-mode
   :init
   (defvar outline-minor-mode-prefix "C-o")
-  (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+
+
   (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
   :config
   (setq outshine-use-speed-commands t))
@@ -882,7 +872,7 @@ X-Message-SMTP-Method: sendmail
 				("C-c m p" . mocha-test-at-point))
 	:ensure t)
 
-;;; * Use package slack
+;;; * Use Package slack
 (use-package slack
   :commands (slack-start)
   :init
