@@ -25,11 +25,11 @@
   (setq org-agenda-log-mode-items '(state closed clock))
 
 ;;; **** CLOCKING auto start tracking default task [#3]
-  (run-with-idle-timer 25 nil 'bh/clock-in-organization-task-as-default)
+  ;;(run-with-idle-timer 25 nil 'bh/clock-in-organization-task-as-default)
 
 
 ;;; **** CLOCKING Resume clocking task when emacs is restarted [#2]
-  (org-clock-persistence-insinuate)
+  ;;(org-clock-persistence-insinuate)
 
 ;;; **** CLOCKING Change tasks to NEXT when clocking in [#1]
   (setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
@@ -37,5 +37,5 @@
 ;;; **** CLOCKING Include current clocking task in clock reports [#128]
   (setq org-clock-report-include-clocking-task t)
 
-  (setq bh/keep-clock-running nil)
+  ;;(setq bh/keep-clock-running nil)
 
