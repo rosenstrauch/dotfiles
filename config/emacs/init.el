@@ -30,7 +30,7 @@
 
 
 ;;; ** STYLE
-(load-theme 'green-emacs)
+
 (add-to-list 'default-frame-alist
              '(font . "DejaVu Sans Mono-20"))
 
@@ -123,9 +123,6 @@
 ;;; * Print Preview [#2]
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
-;;; * Use Package Elm Mode [#2]
-(use-package elm-mode
-  :ensure t)
 
 ;;; * Use Package Json Mode [#2]
 (use-package json-mode
@@ -675,7 +672,7 @@ X-Message-SMTP-Method: sendmail
            ("C-c d" . org-refile-to-datetree)
            ("C-c is" . my-org-screenshot)
            ;;("C-c oc" . org-contacts)
-           ("C-<" . org-begin-template))
+           ("C-<" . org-insert-structure-template))
 ;;; ** ORG INIT [#1]
     :init
 ;;; *** Org mode INIT github issue new url
@@ -695,7 +692,7 @@ X-Message-SMTP-Method: sendmail
 ;;; *** Org mode Config: nicer org elipsis
     (setq org-ellipsis "⤵")
 ;;; *** Org mode Config: Directories [#8]
-    (setq org-default-notes-file "~/org/home.org")
+    (setq org-default-notes-file "~/org/capture.org")
     (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
     (setq org-archive-location "~/org/04-archive/%s_archive::")
     (setq org-directory "~/org")

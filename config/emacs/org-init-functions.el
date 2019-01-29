@@ -280,46 +280,6 @@ BEGIN and END are regexps which define the line range to use."
 
 (add-hook 'org-blocker-hook #'org-block-wip-limit)
 
-;;; *** ORG INIT function to wrap blocks of text in org templates
-(defun org-begin-template ()
-  "Make a template at point."
-  (if (org-at-table-p)
-      (call-interactively 'org-table-rotate-recalc-marks)
-    (let* ((choices '(("s" . "SRC")
-                      ("e" . "EXAMPLE")
-                      ("q" . "QUOTE")
-                      ("v" . "VERSE")
-                      ("c" . "CENTER")
-                      ("l" . "LaTeX")
-                      ("h" . "HTML")
-                      ("a" . "ASCII")))
-           (key
-            (key-description
-             (vector
-              (read-key
-               (concat (propertize "Template type: " 'face 'minibuffer-prompt)
-                       (mapconcat (lambda (choice)
-                                    (concat (propertize (car choice) 'face 'font-lock-type-face)
-                                            ": "
-                                            (cdr choice)))
-                                  choices
-                                  ", ")))))))
-      (let ((result (assoc key choices)))
-        (when result
-          (let ((choice (cdr result)))
-            (cond
-             ((region-active-p)
-              (let ((start (region-beginning))
-                    (end (region-end)))
-                (goto-char end)
-                (insert "#+END_" choice "\n")
-                (goto-char start)
-                (insert "#+BEGIN_" choice "\n")))
-             (t
-              (insert "#+BEGIN_" choice "\n")
-              (save-excursion (insert "#+END_" choice))))))))))
-
-
 
 ;;; *** ORG INIT my invoices
 (defvar invoice-dir "~/org/07-needs/Invoices/")
