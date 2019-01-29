@@ -32,7 +32,7 @@
   ;;(org-clock-persistence-insinuate)
 
 ;;; **** CLOCKING Change tasks to NEXT when clocking in [#1]
-  (setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
+  ;;(setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
 
 ;;; **** CLOCKING Include current clocking task in clock reports [#128]
   (setq org-clock-report-include-clocking-task t)

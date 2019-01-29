@@ -5,11 +5,10 @@
          (file "~/.emacs.d/my-org-capture-templates/capture-link.org"))
         ("p" "capture text from website through org protocol" entry
          (file+olp+datetree "" "REFILE")
-
          (file "~/.emacs.d/my-org-capture-templates/capture-link.org"))
         ("cc" "Capture Entry" entry
          (file+olp+datetree "" "REFILE")
-         (file "~/.emacs.d/my-org-capture-templates/capture-entry.org") :prepend t)))
+         (file "~/.emacs.d/my-org-capture-templates/capture-entry.org"))))
 
 ;;   (setq org-capture-templates
 ;;         '(("s" "ScreenShot" entry (file+headline "~/org/capture.org" "ScreenShots")
