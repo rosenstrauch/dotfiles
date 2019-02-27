@@ -12,6 +12,8 @@
       phpcbf_version: 3
     scss:
       beautify_on_save: true
+    vue:
+      jslint_happy: true
   "atom-debug-ui":
     display: {}
     gutters:
@@ -33,6 +35,11 @@
       "python-tools"
       "atom-ide-ui"
       "nav-panel-plus"
+      "linter-sass-lint"
+      "languageserver-vue"
+      "vue-format"
+      "linter-scss-lint"
+      "linter-scalac"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
@@ -41,16 +48,17 @@
   drupal:
     fileTypesPhp: "module,install,inc,test,profile"
   editor:
-    fontSize: 22
+    fontSize: 19
     preferredLineLength: 1
     showIndentGuide: true
     tabType: "soft"
   "exception-reporting":
     userId: "c3531a3d-3a0e-4510-9d36-554e9c454b0b"
   "linter-eslint": {}
+  "linter-scalastyle":
+    sourceDir: "source/app"
   "linter-ui-default":
-    panelHeight: 298
-    showPanel: true
+    panelHeight: 384
   "linter-xo":
     fixOnSave: true
   "php-debug":

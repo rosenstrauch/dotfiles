@@ -250,6 +250,8 @@ X-Message-SMTP-Method: sendmail
 (load-file "~/.emacs.d/setup-python-ide.el")
 ;;; * Load Ide for git
 (load-file "~/.emacs.d/setup-git-ide.el")
+;;; * Load Ide for vuejs
+(load-file "~/.emacs.d/setup-vue-ide.el")
 
 ;;; * Use Package org-invoice
 ;;;;   - https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
