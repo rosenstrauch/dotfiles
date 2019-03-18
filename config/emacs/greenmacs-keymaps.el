@@ -19,9 +19,9 @@
 (global-set-key "\C-xf" 'fasd-find-file)
 
 ;; Status
-(global-set-key "\C-cSi" 'ifconfig)
+;;(global-set-key "\C-cSi" 'ifconfig)
 
-(global-set-key "\C-cSr" 'route)
+;;(global-set-key "\C-cSr" 'route)
 
 (global-unset-key "\C-xz")
 

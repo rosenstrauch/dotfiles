@@ -172,7 +172,7 @@
 ;;; * Use Package message-mode
 (use-package message-mode
   :commands message-mode
-  :disabled nil
+
   :no-require t
   :config
   (message-default-mail-headers "
@@ -220,6 +220,7 @@ X-Message-SMTP-Method: sendmail
 
 ;;; * Use Package: ledger-mode
 (use-package ledger-mode
+  :disabled t
   :ensure t
   :config
   (defun ledger-add-entry (title in amount out)
@@ -288,7 +289,7 @@ X-Message-SMTP-Method: sendmail
 ;;; * Use Package: org-attach-screenshot [#3]
 (use-package org-attach-screenshot
   :bind
-  (("C-c S" . org-attach-screenshot)))
+  (("C-c C-s" . org-attach-screenshot)))
 
 ;;; * Use Package yasnippet
 (use-package yasnippet
@@ -668,7 +669,7 @@ X-Message-SMTP-Method: sendmail
            ("C-k" . org-cut-subtree)
            ("C-c l" . org-store-link)
            ("C-c a" . org-agenda)
-           ("C-c s b" . org-iswitchb)
+
            ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
            ("C-c C-w" . org-refile)
            ("C-c d" . org-refile-to-datetree)
