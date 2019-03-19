@@ -24,18 +24,6 @@
     :bind
     ("C-c C-g b" . magit-blame-mode)))
 
-(use-package magit-gh-pulls
-  :diminish magit-gh-pulls-mode
-  :ensure t
-  :disabled t
-  :commands (magit-gh-pulls-mode turn-on-magit-gh-pulls))
-
-(use-package magithub
-  :after magit
-  :ensure t
-  :disabled t
-  :config (magithub-feature-autoinject t))
-
 (use-package git-gutter
   :defer 0.3
   :diminish
