@@ -123,6 +123,7 @@
 ;;; * Print Preview [#2]
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
+
 ;;; * Use Package Elm Mode [#2]
 (use-package elm-mode
   :ensure t)
@@ -244,6 +245,8 @@ X-Message-SMTP-Method: sendmail
   :mode "\\.ledger$"
   :commands ledger-mode)
 
+;;; * Load Ide for git
+(load-file "~/.emacs.d/setup-git-ide.el")
 
 ;;; * Load Ide for php
 (load-file "~/.emacs.d/setup-php-ide.el")
@@ -251,8 +254,8 @@ X-Message-SMTP-Method: sendmail
 (load-file "~/.emacs.d/setup-js-ide.el")
 ;;; * Load Ide for python
 (load-file "~/.emacs.d/setup-python-ide.el")
-;;; * Load Ide for git
-(load-file "~/.emacs.d/setup-git-ide.el")
+;;; * Load Ide for java
+(load-file "~/.emacs.d/setup-java-ide.el")
 
 ;;; * Use Package org-invoice
 ;;;;   - https://github.com/jbranso/.emacs.d/blob/master/lisp/init-org.org#org-invoice
@@ -697,7 +700,8 @@ X-Message-SMTP-Method: sendmail
 ;;; *** Org mode Config: Directories [#8]
     (setq org-default-notes-file "~/org/home.org")
     (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
-    (setq org-archive-location "~/org/04-archive/%s_archive::")
+
+    (setq org-archive-location "~/org/archive.org::* From %s") ;; http://doc.endlessparentheses.com/Var/org-archive-location.html
     (setq org-directory "~/org")
     (setq org-default-notes-file (concat org-directory "/capture.org"))
 ;;; ** Org mode Config Diary/Journal [#2]
