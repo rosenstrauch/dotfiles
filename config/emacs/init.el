@@ -30,7 +30,7 @@
 
 
 ;;; ** STYLE
-(load-theme 'green-emacs)
+
 (add-to-list 'default-frame-alist
              '(font . "DejaVu Sans Mono-20"))
 
@@ -123,7 +123,6 @@
 ;;; * Print Preview [#2]
 (setq ps-lpr-command "print_preview")
 (setq ps-print-color-p nil)
-
 ;;; * Use Package Elm Mode [#2]
 (use-package elm-mode
   :ensure t)
@@ -176,7 +175,7 @@
 ;;; * Use Package message-mode
 (use-package message-mode
   :commands message-mode
-  :disabled nil
+
   :no-require t
   :config
   (message-default-mail-headers "
@@ -224,6 +223,7 @@ X-Message-SMTP-Method: sendmail
 
 ;;; * Use Package: ledger-mode
 (use-package ledger-mode
+  :disabled t
   :ensure t
   :config
   (defun ledger-add-entry (title in amount out)
@@ -254,6 +254,10 @@ X-Message-SMTP-Method: sendmail
 (load-file "~/.emacs.d/setup-js-ide.el")
 ;;; * Load Ide for python
 (load-file "~/.emacs.d/setup-python-ide.el")
+;;; * Load Ide for git
+(load-file "~/.emacs.d/setup-git-ide.el")
+;;; * Load Ide for vuejs
+(load-file "~/.emacs.d/setup-vue-ide.el")
 ;;; * Load Ide for java
 (load-file "~/.emacs.d/setup-java-ide.el")
 
@@ -292,7 +296,7 @@ X-Message-SMTP-Method: sendmail
 ;;; * Use Package: org-attach-screenshot [#3]
 (use-package org-attach-screenshot
   :bind
-  (("C-c S" . org-attach-screenshot)))
+  (("C-c C-s" . org-attach-screenshot)))
 
 ;;; * Use Package yasnippet
 (use-package yasnippet
@@ -672,13 +676,13 @@ X-Message-SMTP-Method: sendmail
            ("C-k" . org-cut-subtree)
            ("C-c l" . org-store-link)
            ("C-c a" . org-agenda)
-           ("C-c s b" . org-iswitchb)
+
            ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
            ("C-c C-w" . org-refile)
            ("C-c d" . org-refile-to-datetree)
            ("C-c is" . my-org-screenshot)
            ;;("C-c oc" . org-contacts)
-           ("C-<" . org-begin-template))
+           ("C-<" . org-insert-structure-template))
 ;;; ** ORG INIT [#1]
     :init
 ;;; *** Org mode INIT github issue new url
@@ -698,7 +702,7 @@ X-Message-SMTP-Method: sendmail
 ;;; *** Org mode Config: nicer org elipsis
     (setq org-ellipsis "⤵")
 ;;; *** Org mode Config: Directories [#8]
-    (setq org-default-notes-file "~/org/home.org")
+    (setq org-default-notes-file "~/org/capture.org")
     (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 
     (setq org-archive-location "~/org/archive.org::* From %s") ;; http://doc.endlessparentheses.com/Var/org-archive-location.html

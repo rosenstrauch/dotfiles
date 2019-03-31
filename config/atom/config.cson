@@ -7,6 +7,9 @@
         path: "/home/green/.config/composer/vendor/bin/php-cs-fixer"
       phpcbf:
         path: "~/bin/phpcbf "
+    java:
+      beautify_on_save: true
+      configPath: "uncrustify.cfg"
     js: {}
     php:
       beautify_on_save: true
@@ -14,13 +17,18 @@
       phpcbf_version: 3
     scss:
       beautify_on_save: true
+    vue:
+      jslint_happy: true
   "atom-debug-ui":
     display: {}
     gutters:
       gutterPosition: "Left"
   "atom-ide-ui":
     "atom-ide-debugger": {}
+    "atom-ide-diagnostics-ui":
+      autoVisibility: true
     "debugger-exceptionBreakpointsCollapsed": true
+    use: {}
   core:
     disabledPackages: [
       "autocomplete-python"
@@ -33,7 +41,6 @@
       "platformio-ide-terminal"
       "python-indent"
       "python-tools"
-      "atom-ide-ui"
       "nav-panel-plus"
       "Ensime"
       "atom-debug-ui"
@@ -46,6 +53,37 @@
       "language-coffee-script"
       "lint-sass-vue"
       "linter-scalac"
+      "linter-sass-lint"
+      "languageserver-vue"
+      "vue-format"
+      "linter-scss-lint"
+      "linter-scalac"
+      "atom-php-navigation"
+      "ide-php"
+      "ide-vue"
+      "java-importer"
+      "language-emacs-lisp"
+      "language-vue"
+      "language-vue-component"
+      "lint-sass-vue"
+      "linter"
+      "linter-htmlhint"
+      "linter-javac"
+      "linter-scalastyle"
+      "php-debug"
+      "php-refactoring"
+      "sbt"
+      "vue-autocomplete"
+      "vue-hyperclick"
+      "vue-template-beautify"
+      "js-hyperclick"
+      "language-lisp"
+      "language-scala"
+      "atom-debug-ui"
+      "autocomplete-java"
+      "hyperclick"
+      "language-org-checkboxes"
+      "org-mode"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
@@ -54,21 +92,18 @@
   drupal:
     fileTypesPhp: "module,install,inc,test,profile"
   editor:
-    fontSize: 20
+    fontSize: 22
     preferredLineLength: 1
     showIndentGuide: true
     tabType: "soft"
   "exception-reporting":
     userId: "c3531a3d-3a0e-4510-9d36-554e9c454b0b"
-  "git-diff":
-    showIconsInEditorGutter: true
-  github:
-    showDiffIconGutter: true
-    viewChangesForCurrentFileDiffPaneSplitDirection: "down"
+  "linter-checkstyle":
+    checkstyleExecutablePath: "/usr/bin/checkstyle"
   "linter-eslint": {}
   "linter-scalac": {}
   "linter-ui-default":
-    panelHeight: 298
+    panelHeight: 384
     showPanel: true
   "linter-xo":
     fixOnSave: true
