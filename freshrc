@@ -106,7 +106,7 @@ ln -sf config/mimeapps.list ~/.config/mimeapps.list
 #
 
 fresh squizlabs/PHP_CodeSniffer . --file=src/PHP_CodeSniffer/
-fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalSecure/
+#fresh git://git.drupal.org/sandbox/coltrane/1921926.git DrupalSecure --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalSecure/
 fresh FloeDesignTechnologies/phpcs-security-audit Security  --file=src/PHP_CodeSniffer/code_sniffer/Standards/Security/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/Drupal --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/Drupal/
 fresh http://git.drupal.org/project/coder.git coder_sniffer/DrupalPractice --ref=29a25627e7148b31 --file=src/PHP_CodeSniffer/code_sniffer/Standards/DrupalPractice/
@@ -268,7 +268,7 @@ fresh config/friendlyarch --file=~/.friendlyarch/
 #fresh config/composer/config.json --file=~/.config/composer/config.json
 fresh config/drush/drushrc.php --file=~/.drush/drushrc.php
 fresh config/drush/drush.ini --file=~/.drush/drush.ini
-fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
+#fresh http://git.drupal.org/sandbox/coltrane/1921926.git secure_cs.drush.inc --file=~/.drush/secure_cs.drush.inc
 fresh config/conky --file=~/.config/conky/
 fresh solarized/xchat-colors-solarized solarized-dark-colors.conf --file=~/.xchat2/colors.conf
 
@@ -294,6 +294,7 @@ ln -sf ~/.dotfiles/config/emacs/setup-js-ide.el ~/.emacs.d/
 ln -sf ~/.dotfiles/config/emacs/setup-php-ide.el ~/.emacs.d/
 ln -sf ~/.dotfiles/config/emacs/setup-python-ide.el ~/.emacs.d/
 ln -sf ~/.dotfiles/config/emacs/setup-git-ide.el ~/.emacs.d/
+ln -sf ~/.dotfiles/config/emacs/setup-java-ide.el ~/.emacs.d/
 
 
 # org js

@@ -1,4 +1,6 @@
 "*":
+  Ensime:
+    sbtExec: "/usr/bin/sbt"
   "atom-beautify":
     executables:
       "php-cs-fixer":
@@ -33,6 +35,17 @@
       "python-tools"
       "atom-ide-ui"
       "nav-panel-plus"
+      "Ensime"
+      "atom-debug-ui"
+      "behat-atom"
+      "browser-plus"
+      "ide-php"
+      "language-scala"
+      "php-debug"
+      "git-diff"
+      "language-coffee-script"
+      "lint-sass-vue"
+      "linter-scalac"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
@@ -41,13 +54,19 @@
   drupal:
     fileTypesPhp: "module,install,inc,test,profile"
   editor:
-    fontSize: 22
+    fontSize: 20
     preferredLineLength: 1
     showIndentGuide: true
     tabType: "soft"
   "exception-reporting":
     userId: "c3531a3d-3a0e-4510-9d36-554e9c454b0b"
+  "git-diff":
+    showIconsInEditorGutter: true
+  github:
+    showDiffIconGutter: true
+    viewChangesForCurrentFileDiffPaneSplitDirection: "down"
   "linter-eslint": {}
+  "linter-scalac": {}
   "linter-ui-default":
     panelHeight: 298
     showPanel: true
@@ -79,6 +98,9 @@
   editor:
     showIndentGuide: true
     tabType: "soft"
+".git-commit.text":
+  editor:
+    preferredLineLength: 72
 ".sass.source":
   editor:
     showIndentGuide: true
