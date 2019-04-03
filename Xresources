@@ -1,6 +1,6 @@
 !URxvt.font: xft:monaco:size=20
 !URxvt.font: xft:Terminus:size=18
-URxvt.font: xft:Inconsolata:style=Medium:size=29:antialias=true
+URxvt.font: xft:Inconsolata:style=Medium:size=55:antialias=true
 URxvt.letterSpace: -2
 Xft.dpi:       96
 Xft.antialias: true
@@ -64,8 +64,7 @@ Xcursor.size:                     0
 !URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
 
 ! alternative font settings with 'terminus':
-!URxvt.font: -xos4-terminus-medium-r-normal--32-320-72-72-c-160-iso10646-1:size=20
-
+!URxvt.font: -xos4-terminus-medium-r-normal--32-320-72-72-c-160-iso10646-1:size=31
 !URxvt.bold.font: -xos4-terminus-bold-r-normal--16-160-72-72-c-80-iso10646-1
 !! terminus names see end of file!
 
@@ -75,7 +74,7 @@ URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
 URxvt*cursorBlink:                true
 ! URxvt*background:                 black
-URxvt*foreground:                 grey
+URxvt*foreground:                 white
 URxvt*saveLines:                  5000
 
 ! for 'fake' transparency (without Compton) uncomment the following three lines
