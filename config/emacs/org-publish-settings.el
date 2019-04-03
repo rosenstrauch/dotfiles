@@ -2,10 +2,28 @@
 ;;;; Switches off use of time-stamps when publishing. I would prefer to publish everything every time
 (setq org-publish-use-timestamps-flag nil)
 (setq org-publish-project-alist
-      '( ("org" :components ("invoices-pdf" "orgfull-html" "org-styles" "orgfull-pdf" "green-dotfiles-html"))
-         ("green-dotfiles-html"
-          :base-directory "~/.dotfiles"
-          :publishing-directory "~/placemarks/org_published/dotfiles/html"
+      '( ("org" :components ("invoices-pdf" "orgfull-html" "org-styles" "orgfull-pdf" "green-internal-html" "green-system-html"))
+
+         ("green-internal-html"
+          :base-directory "~/org/01-internal/"
+          :publishing-directory "~/placemarks/org_published/internal/html"
+          :base-extension "org"
+          :recursive t
+          :exclude "^_[a-z]"
+          :section-numbers 3
+          :with-toc t
+          :toc t
+          :n t
+          :H 6
+          :auto-sitemap t
+          :h 6
+          :toc 6
+          :sitemap-filename "sitemap.org"
+          :sitemap-title "Sitemap"
+          :publishing-function org-html-publish-to-html)
+         ("green-system-html"
+          :base-directory "~/org/08-system/"
+          :publishing-directory "~/placemarks/org_published/system/html"
           :base-extension "org"
           :recursive t
           :exclude "^_[a-z]"
