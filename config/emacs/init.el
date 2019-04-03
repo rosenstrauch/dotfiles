@@ -673,21 +673,38 @@ X-Message-SMTP-Method: sendmail
 ;;; C-c c | capture
 ;;; C-c +  | toggle sublevels (needs reload) [#4]
 ;;;  C-c k | Cut Subtree
-    :bind (("C-c r" . org-sort)
-           ("C-c c" . org-capture)
+    :bind (
+("C-c c" . orca)
+   ("C-c a" . orga)
+   ("C-c l" . oril)
+   ("C-c rs" . orsort)
+   ("C-c C-w" . org-refile)
+   ("C-c rw" . orefile)
+   ("C-c rd" . oreday)
+   ("C-c $" . coarse)
+   ("C-c r" . org-sort)
            ("C-c +" . mby-org-agenda-toggle-list-sublevels)
            ("C-k" . org-cut-subtree)
-           ("C-c l" . org-store-link)
-           ("C-c a" . org-agenda)
 
            ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
-           ("C-c C-w" . org-refile)
+   
            ("C-c d" . org-refile-to-datetree)
            ("C-c is" . my-org-screenshot)
            ;;("C-c oc" . org-contacts)
            ("C-<" . org-insert-structure-template))
 ;;; ** ORG INIT [#1]
     :init
+;;; *** Org mode init custom command aliases
+
+  (defalias 'oreday #'org-refile-to-datetree)
+  (defalias 'orefile #'org-refile)
+  (defalias 'orsort #'org-sort)
+  (defalias 'orca #'org-capture)
+  (defalias 'orga #'org-agenda)
+  (defalias 'coarse #'org-archive-subtree)
+  (defalias 'oril #'org-insert-link)
+  (defalias 'orcus #'org-cut-subtree)
+
 ;;; *** Org mode INIT github issue new url
 
     (load-file "~/.emacs.d/org-init-functions.el")
@@ -718,7 +735,7 @@ X-Message-SMTP-Method: sendmail
     (setq org-wip-limit 2)
     (setq org-wip-state "NEXT")
     ;; clean up logfiles on export
-    (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+    (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
     (setq org-latex-remove-logfiles t)
 
   ;;; Refile
