@@ -392,7 +392,8 @@ X-Message-SMTP-Method: sendmail
     (setq org-contacts-files `(,(expand-file-name "contacts.org" org-directory)))
     (setq org-contacts-icon-use-gravatar nil)
     (setq org-contacts-address-property "CITY")
-    :ensure org-plus-contrib)
+    ;;:ensure org-plus-contrib
+)
 
 ;;; * Use Package Sh-script
 ;;;;  - for editing shell files [#9]
@@ -433,7 +434,8 @@ X-Message-SMTP-Method: sendmail
 
 ;;; * Use Package: helm
   (use-package helm
-    :bind (("M-x" . helm-M-x)
+    :bind (
+           ("M-x" . helm-M-x)
            ("M-<f5>" . helm-find-files)
            ([f10] . helm-buffers-list)
            ([S-f10] . helm-recentf))
@@ -715,6 +717,9 @@ X-Message-SMTP-Method: sendmail
     ;; configure wip limit to 2 next tasks
     (setq org-wip-limit 2)
     (setq org-wip-state "NEXT")
+    ;; clean up logfiles on export
+    (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+    (setq org-latex-remove-logfiles t)
 
   ;;; Refile
     (setq org-reverse-note-order t)
