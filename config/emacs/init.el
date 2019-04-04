@@ -676,7 +676,8 @@ X-Message-SMTP-Method: sendmail
   :bind (
          ("C-c c" . orca)
          ("C-c a" . orga)
-         ("C-c l" . oril)
+         ("C-c C-l" . orilsert)
+         ("C-c l" . orilsore)
          ("\C-c 0s" . orsort)
          ("C-c C-w" . org-refile)
          ("C-c 0w" . orefile)
@@ -685,9 +686,7 @@ X-Message-SMTP-Method: sendmail
 
          ("C-c +" . mby-org-agenda-toggle-list-sublevels)
          ("C-k" . org-cut-subtree)
-
-         ("C-c j" . org-clock-goto) ;;; jump to current task from anywhere
-         
+         ("C-c j" . org-clock-goto) ;;; jump to current task from anywh     
          ("C-c d" . org-refile-to-datetree)
          ("C-c is" . my-org-screenshot)
          ;;("C-c oc" . org-contacts)
@@ -702,7 +701,8 @@ X-Message-SMTP-Method: sendmail
   (defalias 'orca #'org-capture)
   (defalias 'orga #'org-agenda)
   (defalias 'coarse #'org-archive-subtree)
-  (defalias 'oril #'org-insert-link)
+  (defalias 'orilsert #'org-insert-link)
+  (defalias 'orilsore #'org-store-link)
   (defalias 'orcus #'org-cut-subtree)
 
 ;;; *** Org mode INIT github issue new url

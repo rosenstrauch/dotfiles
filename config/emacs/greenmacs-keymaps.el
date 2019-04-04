@@ -12,9 +12,9 @@
 
 
 ;; use org links anywhere
-(global-set-key "\C-cL" 'org-insert-link-global)
+;;(global-set-key "\C-cL" 'org-insert-link-global)
 (global-set-key "\C-co" 'org-open-at-point-global)
-(global-set-key "\C-cl" 'org-store-link)
+;;(global-set-key "\C-cl" 'org-store-link)
 
 (global-set-key "\C-xf" 'fasd-find-file)
 
