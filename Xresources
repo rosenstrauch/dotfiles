@@ -1,7 +1,7 @@
 !URxvt.font: xft:monaco:size=20
 !URxvt.font: xft:Terminus:size=18
-URxvt.font: xft:Inconsolata:style=Medium:size=55:antialias=true
-URxvt.letterSpace: -2
+URxvt.font: xft:Inconsolata:style=Medium:size=45:antialias=true
+!URxvt.letterSpace: -2
 Xft.dpi:       96
 Xft.antialias: true
 Xft.hinting:   true
