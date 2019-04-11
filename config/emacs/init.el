@@ -98,10 +98,12 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("elpa" . "http://elpa.org/packages/"))
+
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
-                                        ;(package-refresh-contents)
-                                        ;                                        (byte-recompile-directory package-user-dir nil 'force)
+
+;;(byte-recompile-directory package-user-dir nil 'force)
 ;;; ** BOOTSTRAP `use-package' [#1]
 (unless (package-installed-p 'use-package)
 ;;; TODO: dont run this on every start but dont not run it so we dont have outdated lists. [#4]
@@ -309,7 +311,7 @@ X-Message-SMTP-Method: sendmail
 (use-package w3m
   :ensure t
   :config
-  (setq browse-url-browser-function 'w3m-browse-url)
+  ;;(setq browse-url-browser-function 'w3m-browse-url)
   (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t))
 
 ;;; * Use Package Makefile ob [#2]
@@ -413,22 +415,9 @@ X-Message-SMTP-Method: sendmail
   (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
   (setq slack-prefer-current-team t)
   :config
+;;(load-file (expand-file-name"~/.emacs.d/secret-load-slack-teams.el"))
 
-  ;; (slack-register-team
-  ;;  :name "emacs-slack"
-  ;;  :default t
-  ;;  :client-id "aaaaaaaaaaa.00000000000"
-  ;;  :client-secret "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-  ;;  :token "xoxs-sssssssssss-88888888888-hhhhhhhhhhh-jjjjjjjjjj"
-  ;;  :subscribed-channels '(test-rename rrrrr)
-  ;;  :full-and-display-names t)
 
-  ;; (slack-register-team
-  ;;  :name "test"
-  ;;  :client-id "3333333333.77777777777"
-  ;;  :client-secret "cccccccccccccccccccccccccccccccc"
-  ;;  :token "xoxs-yyyyyyyyyy-zzzzzzzzzzz-hhhhhhhhhhh-llllllllll"
-  ;;  :subscribed-channels '(hoge fuga))
   )
 
 
@@ -852,3 +841,4 @@ X-Message-SMTP-Method: sendmail
   )
 (provide 'init)
 ;;; init.el ends here
+
