@@ -363,7 +363,8 @@ fresh wee-slack/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_sla
 #########################
 # Editable config files #
 #########################
-
+backup_files_existing_before_symlinking 
+ln -sf ~/.dotfiles/config/weechat/logger.conf ~/.weechat/
 ## Tmuxinator projects
 mkdir -p $HOME/.tmuxinator
 ln -sf ~/.dotfiles/config/tmuxinator/* ~/.tmuxinator/
