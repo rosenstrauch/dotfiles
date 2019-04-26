@@ -3,7 +3,7 @@
 ##########################
 
 backup_files_existing_before_symlinking() {
-  echo "will backup relevant folders and files that arent symlinks"
+  echo "will backup $1 if it exists and is not a symlink"
   if [[ ! -L "$1" ]] && [[ -d "$1" || -f "$1" ]]; then
      echo "=> $1 exists and is not a symlink backing up so you can symlink correct file"
        mv $1 $1.bak
@@ -230,18 +230,6 @@ fresh sampson-chen/sack sag --bin
 fresh sampson-chen/sack sgrep --bin
 fresh sampson-chen/sack .sackrc --file
 
-############
-# Scripts  #
-############
-
-## utilities library only meant to be used by other scripts
-#mkdir -p $HOME/scripts
-#ln -sf ~/.dotfiles/shell/lib/ ~/scripts/
-
-## Zim  custom tools and plugins
-#fresh https://gist.github.com/8e49f6bb3c26674d6d47.git zim2mindmap --bin=~/scripts/zim2map.py
-#fresh https://gist.github.com/403600a1c1fe691c39ba.git ShowFolderTree.py --bin=~/scripts/ShowFolderTree.py
-#fresh https://gist.github.com/e1721df8312bddf25a7a.git treemapeditor.py --file=~/.local/share/zim/plugins/treemapeditor.py
 
 ##########
 # Config #
@@ -253,12 +241,8 @@ ln -sf ~/SENSITIVE/mbsync/msmtprc ~/.msmtprc
 ln -sf ~/SENSITIVE/notmuch ~/.config/
 # Files which land in a subfolder of the default $XDG_CONFIG_HOME
 
-# zim colors
-fresh config/zim/style.conf --file=~/.config/zim/style.conf
-
 # Newsboat non sensitive settings
 fresh config/newsboat/config --file=~/.config/newsboat/config
-
 
 # Config files subfolders of $HOME
 fresh config/friendlyarch --file=~/.friendlyarch/
@@ -363,8 +347,11 @@ fresh wee-slack/wee-slack wee_slack.py --file=~/.weechat/python/autoload/wee_sla
 #########################
 # Editable config files #
 #########################
+
+## Weechat
 backup_files_existing_before_symlinking ~/.weechat/logger.conf
 ln -sf ~/.dotfiles/config/weechat/logger.conf ~/.weechat/
+
 ## Tmuxinator projects
 mkdir -p $HOME/.tmuxinator
 ln -sf ~/.dotfiles/config/tmuxinator/* ~/.tmuxinator/
@@ -394,6 +381,7 @@ ln -sf ~/.dotfiles/config/atom/config.cson ~/.atom/config.cson
 
 fresh_after_build() {
   systemctl --user enable --now emacs ssh-agent
+
   ## :make some things executable
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcs
   chmod +x $HOME/.fresh/build/src/PHP_CodeSniffer/bin/phpcbf
@@ -404,7 +392,7 @@ fresh_after_build() {
 
 
   echo "sensitive files"
-  echo ls ~-SENSITIVE
+  echo $(ls ~-SENSITIVE)
 
   echo "good job, thank you very much!"
 
